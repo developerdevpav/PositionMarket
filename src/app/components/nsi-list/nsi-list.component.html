@@ -1,0 +1,17 @@
+<span>List types:</span>
+
+<br>
+
+<div *ngFor="let type of types | async">
+  id: {{type.id}}
+  <br>
+  values: <div *ngFor="let value of type.values">
+    value: {{value.value}}
+    language: {{value.language}}
+    <br>
+  </div>
+</div>
+
+<br>
+<button (click)="createType()">Create type</button>
+<button (click)="loadEntities('[Type] Load API Types')">Load types</button>
