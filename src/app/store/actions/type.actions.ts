@@ -12,7 +12,12 @@ export enum TypeActionTypes {
   UpdateTypes = '[Type] Update Types',
   DeleteType = '[Type] Delete Type',
   DeleteTypes = '[Type] Delete Types',
-  ClearTypes = '[Type] Clear Types'
+  ClearTypes = '[Type] Clear Types',
+  LoadTypesApi = '[Type] Load API Types'
+}
+
+export class LoadTypesApi implements Action {
+  readonly type = TypeActionTypes.LoadTypesApi;
 }
 
 export class LoadTypes implements Action {

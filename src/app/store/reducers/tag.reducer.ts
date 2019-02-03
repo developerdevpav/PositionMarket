@@ -13,7 +13,7 @@ export const initialState: State = adapter.getInitialState({
   // additional entity state properties
 });
 
-export function tagReducer (
+export function tagReducer(
   state = initialState,
   action: TagActions
 ): State {

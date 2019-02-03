@@ -9,9 +9,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {NsiModule} from './components/nsi.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import * as storeReducers from './store';
-import {TypeService} from './store/services/type.service';
 import {EffectsModule} from '@ngrx/effects';
 import {TypeEffects} from './store/effects/type.effects';
+import {NsiAbstractService} from './store/services/nsi.abstract.service';
+import {AngularSvgIconModule} from 'angular-svg-icon';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {TypeEffects} from './store/effects/type.effects';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
+    AngularSvgIconModule,
     EffectsModule.forRoot([TypeEffects]),
     NsiModule,
     HttpClientModule
@@ -35,6 +37,6 @@ import {TypeEffects} from './store/effects/type.effects';
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [TypeService]
+  providers: [NsiAbstractService]
 })
 export class AppModule { }

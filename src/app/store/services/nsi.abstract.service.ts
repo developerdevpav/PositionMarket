@@ -1,33 +1,36 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
 
-
-export abstract class NsiAbstractService {
+@Injectable({
+  providedIn: 'root'
+})
+export class NsiAbstractService<T> {
 
   protected headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
-  protected service: string;
 
-  constructor(protected http: HttpClient) {}
-
-  getAll() {
-    return this.http.get(`/api/${this.service}`, {headers: this.headers});
+  constructor(protected http: HttpClient) {
   }
 
-  getById(uuid: string) {
-    return this.http.get(`/api/${this.service}/${uuid}`, {headers: this.headers});
+
+  getAll(service: string) {
+    return this.http.get(`/api/${service}`, {headers: this.headers});
   }
 
-  create(obj: any) {
-    return this.http.post(`/api/${this.service}`, obj, {headers: this.headers});
+  getById(service: string, uuid: string) {
+    return this.http.get(`/api/${service}/${uuid}`, {headers: this.headers});
   }
 
-  public update(uuid: string, obj: any) {
-    return this.http.put(`/api/${this.service}/${uuid}`, obj, {headers: this.headers});
+  create(service: string, obj: T) {
+    return this.http.post(`/api/${service}`, obj, {headers: this.headers});
   }
 
-  public delete(uuid: string) {
-    return this.http.delete(`/api/${this.service}/${uuid}`, {headers: this.headers});
+  public update(service: string, uuid: string, obj: T) {
+    return this.http.put(`/api/${service}/${uuid}`, obj, {headers: this.headers});
+  }
+
+  public delete(service: string, uuid: string) {
+    return this.http.delete(`/api/${service}/${uuid}`, {headers: this.headers});
   }
 
 }

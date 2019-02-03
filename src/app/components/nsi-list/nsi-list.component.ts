@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Type} from '../../store/models/type.model';
 import {Store} from '@ngrx/store';
 import * as fromType from '../../store/reducers/type.reducer';
-import {AddType} from '../../store/actions/type.actions';
+import {AddType, TypeActionTypes} from '../../store/actions/type.actions';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -19,6 +19,7 @@ export class NsiListComponent implements OnInit {
 
   ngOnInit() {
     this.types = this.store.select(fromType.selectAll);
+    this.store.dispatch({type: '[Type] load api' });
   }
 
   createType() {
@@ -36,7 +37,6 @@ export class NsiListComponent implements OnInit {
   }
 
   loadEntities(action: string) {
-    this.store.dispatch({type: action});
-    this.types = this.store.select(fromType.selectAll);
+    this.store.dispatch({type: '[Type] load api' });
   }
 }

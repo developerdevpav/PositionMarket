@@ -13,7 +13,13 @@ export enum TagActionTypes {
   UpdateTags = '[Tag] Update Tags',
   DeleteTag = '[Tag] Delete Tag',
   DeleteTags = '[Tag] Delete Tags',
-  ClearTags = '[Tag] Clear Tags'
+  ClearTags = '[Tag] Clear Tags',
+  LoadTagsApi = '[Tag] Load API Tags'
+}
+
+
+export class LoadTagsApi implements Action {
+  readonly type = TagActionTypes.LoadTagsApi;
 }
 
 export class LoadTags implements Action {

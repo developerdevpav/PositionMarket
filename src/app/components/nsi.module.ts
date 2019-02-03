@@ -5,11 +5,17 @@ import {StoreModule} from '@ngrx/store';
 import {typeReducer} from '../store/reducers/type.reducer';
 import {tagReducer} from '../store/reducers/tag.reducer';
 import { NsiEditorComponent } from './nsi-editor/nsi-editor.component';
+import { HomeComponent } from './home/home.component';
+import { CatalogComponent } from './catalog/catalog.component';
+import { EditorEntityComponent } from './editor-entity/editor-entity.component';
 
 @NgModule({
   declarations: [
     NsiListComponent,
-    NsiEditorComponent
+    NsiEditorComponent,
+    HomeComponent,
+    CatalogComponent,
+    EditorEntityComponent
   ],
   imports: [
     CommonModule,

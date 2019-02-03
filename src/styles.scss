@@ -4,3 +4,9 @@
 @import "~bootstrap/scss/mixins";
 // Import Roboot
 @import "~bootstrap/scss/reboot";
+
+body {
+  font-family: Roboto,sans-serif;
+  background-color: #f3f4f6;
+}
+

@@ -4,22 +4,22 @@ import {LoadTypes, TypeActionTypes} from '../actions/type.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {Type} from '../models/type.model';
 import {EMPTY} from 'rxjs';
-import {TagService} from '../services/tag.service';
 import {selectAll} from '../reducers/tag.reducer';
 import {LoadTags, TagActionTypes} from '../actions/tag.actions';
 import {Tag} from '../models/tag.model';
+import {NsiAbstractService} from '../services/nsi.abstract.service';
 
 
 @Injectable()
 export class TagEffects {
 
-  constructor(private actions$: Actions, private tagService: TagService) {}
+  constructor(private actions$: Actions, private service: NsiAbstractService<Tag>) {}
 
   @Effect()
   loadTags$ = this.actions$
     .pipe(
-      ofType(TagActionTypes.LoadTags),
-      mergeMap(() => this.tagService.getAll()
+      ofType(TagActionTypes.LoadTagsApi),
+      mergeMap(() => this.service.getAll('tags')
         .pipe(
           map((array: Tag[]) => ( new LoadTags({ tags: array }) )),
           catchError(() => EMPTY)
