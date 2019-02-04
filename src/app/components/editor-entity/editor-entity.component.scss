@@ -14,34 +14,3 @@
     cursor: pointer;
   }
 }
-
-.content-entity {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  .menu-action {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    justify-content: flex-end;
-    padding-bottom: 5px;
-    border-bottom: 1px #bfbfbf solid;
-
-    > a {
-      color: black;
-      padding: 5px 10px;
-      width: 100px;
-      text-align: center;
-    }
-
-    > a:hover {
-      background: #000098;
-      color: white;
-      cursor: pointer;
-    }
-  }
-
-  .list-entities {
-    width: 100%;
-  }
-}

@@ -7,9 +7,13 @@
       <div class="button-bar">
         <a routerLink="/home" routerLinkActive="active">Home</a>
         <a routerLink="/catalog" routerLinkActive="active">Catalog</a>
-        <a routerLink="/administration/editor/entities" routerLinkActive="active">Administration</a>
-        <a>
+        <a>RU</a>
+        <a>EN</a>
+        <a class="setting-button" routerLink="shopping-cart">
           <svg-icon src="../assets/icon/shopping-cart.svg" [svgStyle]="{ 'width.px':25, 'height.px':25 }"></svg-icon>
+        </a>
+        <a routerLink="/settings" class="setting-button" routerLinkActive="active">
+          <svg-icon src="../assets/icon/settings.svg" [svgStyle]="{ 'width.px':25, 'height.px':25 }"></svg-icon>
         </a>
       </div>
     </div>
