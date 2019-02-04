@@ -8,7 +8,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { EditorEntityComponent } from './editor-entity/editor-entity.component';
 import { SettingComponent } from './setting/setting.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { EntityListComponent } from './entity-list/entity-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     CatalogComponent,
     EditorEntityComponent,
     SettingComponent,
-    ShoppingCartComponent
+    EntityListComponent
   ],
   imports: [
     CommonModule,
