@@ -1,4 +1,4 @@
-$color: #000098;
+$color: #008dcd;
 
 header {
   position: fixed;
@@ -25,19 +25,17 @@ header {
         align-content: center;
         justify-content: flex-end;
 
-        .setting-button {
-          @extend .active;
-          svg-icon {
-            fill: white;
-          }
-        }
-
         .active {
-          background: $color;
-          color: white;
+          border-bottom: 2px $color solid;
+          color: black;
         }
 
-        .language {
+        .language:after {
+          margin-right: 100px;
+        }
+
+
+        /*.language {
           border-radius: 20px 20px 20px 20px;
           margin: 5px 10px 5px 10px;
           width: 40px;
@@ -52,7 +50,7 @@ header {
           background: blue;
           color: white;
         }
-
+*/
         > a {
           cursor: pointer;
           font-weight: inherit;
@@ -68,7 +66,26 @@ header {
 
         }
 
-        > a:nth-last-child(3) {
+        .shop-cart {
+          background: $color;
+          color: white;
+
+          svg-icon {
+            fill: white;
+          }
+        }
+
+        .language {
+          background: #00a4ee;
+          color: white;
+        }
+
+        .language-active {
+          border-bottom: 2px white solid;
+          color: white;
+        }
+
+        /*> a:nth-last-child(3) {
           background: $color;
           padding-left: 20px;
           padding-right: 20px;
@@ -76,9 +93,9 @@ header {
           svg-icon {
             fill: white;
           }
-        }
+        }*/
 
-        > a:nth-last-child(3):hover {
+        /*> a:nth-last-child(3):hover {
           background: $color;
           margin-right: 0;
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -87,7 +104,7 @@ header {
         > a:hover {
           background: $color;
           color: white;
-        }
+        }*/
       }
     }
 

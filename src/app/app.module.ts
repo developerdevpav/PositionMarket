@@ -14,7 +14,6 @@ import {TypeEffects} from './store/effects/type.effects';
 import {NsiAbstractService} from './store/services/nsi.abstract.service';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {HttpLoaderFactory} from './ui/translate.service';
 import {TagEffects} from './store/effects/tag.effects';
 
