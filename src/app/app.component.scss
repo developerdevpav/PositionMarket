@@ -37,16 +37,30 @@ header {
           color: white;
         }
 
+        .language {
+          border-radius: 20px 20px 20px 20px;
+          margin: 5px 10px 5px 10px;
+          width: 40px;
+          background: white;
+          color: black;
+          border: 1px black solid;
+          padding-left: 10px;
+          padding-top: 10px;
+        }
+
+        .language:hover {
+          background: blue;
+          color: white;
+        }
+
         > a {
-          padding: 14px 0;
           cursor: pointer;
           font-weight: inherit;
           font-size: 14px;
           text-decoration: none;
           border-right: 1px white solid;
           color: black;
-          padding-left: 20px;
-          padding-right: 20px;
+          padding: 14px 20px;
 
           svg-icon {
             fill: black;
@@ -54,7 +68,7 @@ header {
 
         }
 
-        > a:last-child {
+        > a:nth-last-child(3) {
           background: $color;
           padding-left: 20px;
           padding-right: 20px;
@@ -64,8 +78,9 @@ header {
           }
         }
 
-        > a:last-child:hover {
+        > a:nth-last-child(3):hover {
           background: $color;
+          margin-right: 0;
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
@@ -128,7 +143,7 @@ header {
     padding-top: 40px;
     .container {
       margin: 30px 70px 0;
-      background: white;
+      //background: white;
       padding-top: 20px;
     }
   }
