@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-setting',
@@ -7,9 +8,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingComponent implements OnInit {
 
-  constructor() { }
+  menu = [];
+  menuListPrivate = [];
+  menuListDataBase = [];
+
+  constructor(public router: Router) { }
 
   ngOnInit() {
+    this.menuListPrivate = [
+      {
+        label: 'Login and password',
+        link: '/settings/private/login-and-password'
+      },
+      {
+        label: 'Design',
+        link: '/settings/private/design'
+      }
+    ];
+
+    this.menuListDataBase = [
+      {
+        label: 'Tags',
+        link: '/settings/database/tag'
+      },
+      {
+        label: 'Types',
+        link: '/settings/database/type'
+      },
+      {
+        label: 'Type Services',
+        link: '/settings/database/type-service'
+      },
+      {
+        label: 'Products',
+        link: '/settings/database/product'
+      },
+      {
+        label: 'Attractions',
+        link: '/settings/database/attraction'
+      }
+    ];
+    this.menu = this.menuListPrivate;
+  }
+
+  public selectedTab(e) {
+    console.log(e);
+    switch (e.index) {
+      case 0:
+        this.router.navigateByUrl('/settings/private');
+        this.menu = this.menuListPrivate;
+        break;
+      case 1:
+        this.router.navigateByUrl('/settings/users');
+        this.menu = [];
+        break;
+      case 2:
+        this.router.navigateByUrl('/settings/database');
+        this.menu = this.menuListDataBase;
+        break;
+
+      default:
+        console.log('material-design-mdtabs-with-router');
+        break;
+    }
+  }
+
+
+  selectItem(e) {
+    this.router.navigateByUrl(e.link);
   }
 
 }

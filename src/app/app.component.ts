@@ -15,11 +15,17 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const language = localStorage.getItem('language');
+    if ( language ) {
+      this.translate.use(language);
+      this.currentLanguage = language;
+    }
   }
 
   switchLanguage(language: string) {
     this.translate.use(language);
-    this.currentLanguage = this.translate.store.currentLang;
+    this.currentLanguage = language;
+    localStorage.setItem('language', this.translate.store.currentLang);
   }
 
 }

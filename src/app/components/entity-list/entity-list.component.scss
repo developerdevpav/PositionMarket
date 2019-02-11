@@ -2,19 +2,22 @@
   display: flex;
   flex-wrap: wrap;
   opacity: 1.0;
+  margin: 20px 10px 10px 10px;
   .entity {
     display: flex;
     background: red;
-    height: 40px;
+    height: 50px;
     width: 100%;
     flex-wrap: wrap;
     margin-bottom: 10px;
+    align-items: center;
+    cursor: context-menu;
 
     .title {
       background: white;
       width: 60%;
       height: 100%;
-      padding-top: 8px;
+      padding-top: 14px;
       padding-left: 10px;
       color: black;
     }
@@ -25,28 +28,36 @@
       display: flex;
       background: white;
       justify-content: flex-end;
+      align-items: center;
 
-
-      > a {
-        color: white;
-        padding-top: 9px;
-        background: #000098;
-        padding-left: 15px;
-        padding-right: 15px;
-        cursor: pointer;
-      }
-
-      > a:last-child {
-        margin-left: 0;
+      button {
+        width: 100px;
+        height: 40px;
+        margin-right: 10px;
       }
     }
   }
 
   .entity:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.19);
   }
 
   .entity:nth-last-child(1) {
-    margin-bottom: 0px;
+    margin-bottom: 0;
+  }
+}
+
+.header-list {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin: 20px 0 10px 0;
+  justify-content: flex-end;
+  align-items: center;
+
+  button {
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
   }
 }

@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {NsiUI} from '../../store/models/ui.model';
-import {LoadTagsApi} from '../../store/actions/tag.actions';
-import {selectNsiByLanguage} from '../../store/reducers/tag.reducer';
+import {selectAll, State} from 'src/app/store/reducers/type.reducer';
+import {LoadTypesApi} from '../../store/actions/type.actions';
+import {Type} from '../../store/models/type.model';
+import {Nsi} from '../../store/models/abstract.model';
 
 @Component({
   selector: 'app-entity-list',
@@ -13,16 +14,12 @@ import {selectNsiByLanguage} from '../../store/reducers/tag.reducer';
 })
 export class EntityListComponent implements OnInit {
 
-  list$: Observable<NsiUI[]>;
+  @Input()
+  list$: Observable<{uuid: string, value: string}[]>;
 
-  constructor(private translate: TranslateService, private store: Store<any>) {
+  constructor() {
   }
 
-
-  ngOnInit() {
-    this.store.dispatch(new LoadTagsApi());
-    this.list$ = this.store.select(selectNsiByLanguage,
-      {language: this.translate.store.currentLang});
-  }
+  ngOnInit() {}
 
 }

@@ -1,8 +1,24 @@
-<div class="setting-body">
-  <div class="menu-tab">
-    <a routerLink="/entities">
+<mat-tab-group (focusChange)="selectedTab($event)">
+  <mat-tab label="Private">
+    <ng-template mat-tab-label>
+      Private
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Users">
+    <ng-template mat-tab-label>
+      Users
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Data Base"></mat-tab>
+</mat-tab-group>
 
-    </a>
-   <!-- <svg-icon src="../assets/icon/setting.svg" [svgStyle]="{ 'width.px':25, 'height.px':25 }"></svg-icon>-->
+<div class="setting-body">
+  <mat-list class="left-menu" role="list">
+    <mat-list-item *ngFor="let it of menu" role="listitem" [routerLink]="[it.link]" routerLinkActive="active">
+       {{it.label}}
+    </mat-list-item>
+  </mat-list>
+  <div class="place-component">
+    <router-outlet></router-outlet>
   </div>
 </div>

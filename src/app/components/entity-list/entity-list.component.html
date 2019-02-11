@@ -1,12 +1,16 @@
+<div class="header-list">
+  <button mat-stroked-button color="primary">Create</button>
+</div>
+
 <div class="list-entity">
   <div class="entity" *ngFor="let item of list$ | async">
     <div class="title">
       {{item.value}}
     </div>
     <div class="actions">
-      <a>Edit</a>
-      <a>Delete</a>
-      <a>Edit</a>
+      <button mat-stroked-button color="primary">View</button>
+      <button mat-stroked-button color="primary">Edit</button>
+      <button mat-stroked-button color="primary">Remove</button>
     </div>
   </div>
 </div>

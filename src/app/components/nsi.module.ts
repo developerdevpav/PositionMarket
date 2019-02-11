@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {StoreModule} from '@ngrx/store';
 import {typeReducer} from '../store/reducers/type.reducer';
@@ -10,6 +10,12 @@ import { SettingComponent } from './setting/setting.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import { EntityListComponent } from './entity-list/entity-list.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import {AppRoutingModule} from '../app-routing.module';
+import {MatButtonModule, MatDialogModule, MatDividerModule, MatIconModule, MatListModule, MatTabsModule} from '@angular/material';
+import {RouterModule} from '@angular/router';
+import { TagComponent } from './entities-ui/tag/tag.component';
+import { TypeComponent } from './entities-ui/type/type.component';
+import { TypeServiceComponent } from './entities-ui/type-service/type-service.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +24,26 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     EditorEntityComponent,
     SettingComponent,
     EntityListComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    TagComponent,
+    TypeComponent,
+    TypeServiceComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    AppRoutingModule,
     AngularSvgIconModule,
     StoreModule.forFeature('types', typeReducer),
-    StoreModule.forFeature('tags', tagReducer)
+    StoreModule.forFeature('tags', tagReducer),
+
+    MatButtonModule,
+    MatTabsModule,
+    MatListModule,
+    MatDividerModule,
+    MatIconModule,
+    MatDialogModule
   ],
-  exports: []
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NsiModule { }

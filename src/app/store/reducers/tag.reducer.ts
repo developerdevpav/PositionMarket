@@ -4,6 +4,7 @@ import { TagActions, TagActionTypes } from '../actions/tag.actions';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {Value} from '../models/abstract.model';
 import {Language} from '../models/language.model';
+import {NsiUI} from '../models/ui.model';
 
 export interface State extends EntityState<Tag> {
   // additional entities state properties
@@ -79,15 +80,16 @@ export const {
 export const selectNsiByLanguage = createSelector(
   selectAll,
   (array: Tag[], props) => {
-    if ( array.length === 1 ) {
-      console.log(array.length);
+    console.log(array);
+    if ( array === undefined || array.length === 0 ) {
       return [];
     }
 
     return array.map(value => {
+      console.log(props); // undefined
       let valueNsi = value.values.find(val => val.language === props.language);
       console.log(valueNsi);
-      if ( valueNsi && array.length !== 0 ) {
+      if ( !valueNsi ) {
         valueNsi = props.language === Language.RU ?
           {
             language: Language.RU,
@@ -97,9 +99,8 @@ export const selectNsiByLanguage = createSelector(
             value: 'Undefined (En)'
           };
       }
-
-      return {
-        id: value.id,
+      return  {
+        uuid: value.id,
         value: valueNsi.value
       };
     });

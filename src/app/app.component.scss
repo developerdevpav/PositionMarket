@@ -4,9 +4,10 @@ header {
   position: fixed;
   width: 100%;
   background: #f3f4f6;
+  z-index: 1000;
 
   .container {
-    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+    //box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
     .navbar {
       background: #fff;
       height: 50px;

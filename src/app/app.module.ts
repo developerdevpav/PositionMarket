@@ -16,6 +16,8 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {HttpLoaderFactory} from './ui/translate.service';
 import {TagEffects} from './store/effects/tag.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule, MatDividerModule, MatIconModule, MatTabsModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -40,13 +42,26 @@ import {TagEffects} from './store/effects/tag.effects';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule
   ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [NsiAbstractService]
+  providers: [NsiAbstractService],
+  exports: [
+    AppRoutingModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatDividerModule,
+    BrowserModule,
+    MatIconModule
+  ]
 })
 export class AppModule { }

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {LoadTypes, TypeActions, TypeActionTypes} from '../actions/type.actions';
+import {LoadTypes, LoadTypesApi, TypeActions, TypeActionTypes} from '../actions/type.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {EMPTY} from 'rxjs';
 import {Type} from '../models/type.model';
 import {NsiAbstractService} from '../services/nsi.abstract.service';
-import {LoadTags} from '../actions/tag.actions';
 
 
 @Injectable()
@@ -17,7 +16,7 @@ export class TypeEffects {
   @Effect()
   loadTypes$ = this.actions$
     .pipe(
-      ofType('[Type] load api'),
+      ofType(TypeActionTypes.LoadTypesApi),
       mergeMap(() => this.service.getAll('types')
         .pipe(
           map((array: Type[]) => ( new LoadTypes({ types: array }) )),

@@ -1,7 +1,9 @@
 import {EntityState, EntityAdapter, createEntityAdapter} from '@ngrx/entity';
 import {Type} from '../models/type.model';
 import {TypeActions, TypeActionTypes} from '../actions/type.actions';
-import {createFeatureSelector} from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
+import {Tag} from '../models/tag.model';
+import {Language} from '../models/language.model';
 
 export interface State extends EntityState<Type> {}
 
@@ -65,3 +67,32 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors(getTypeSelectorState);
+
+export const selectNsiByLanguage = createSelector(
+  selectAll,
+  (array: Tag[], props) => {
+    console.log(array);
+    if ( array === undefined || array.length === 0 ) {
+      return [];
+    }
+    return array.map(value => {
+      console.log(props); // undefined
+      let valueNsi = value.values.find(val => val.language === props.language);
+      console.log(valueNsi);
+      if ( !valueNsi ) {
+        valueNsi = props.language === Language.RU ?
+          {
+            language: Language.RU,
+            value: 'Неопределено (Ру)'
+          } : {
+            language: Language.EN,
+            value: 'Undefined (En)'
+          };
+      }
+      return  {
+        uuid: value.id,
+        value: valueNsi.value
+      };
+    });
+  }
+);
