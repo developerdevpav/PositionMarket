@@ -11,11 +11,23 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
 import { EntityListComponent } from './entity-list/entity-list.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import {AppRoutingModule} from '../app-routing.module';
-import {MatButtonModule, MatDialogModule, MatDividerModule, MatIconModule, MatListModule, MatTabsModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatIconModule,
+  MatListModule,
+  MatTabsModule
+} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import { TagComponent } from './entities-ui/tag/tag.component';
 import { TypeComponent } from './entities-ui/type/type.component';
 import { TypeServiceComponent } from './entities-ui/type-service/type-service.component';
+import {languageReducer} from '../store/reducers/language.reducer';
+import { ProductComponent } from './entities-ui/product/product.component';
+import { AttractionComponent } from './entities-ui/attraction/attraction.component';
+import {typeServiceReducer} from '../store/reducers/type-service.reducer';
 
 @NgModule({
   declarations: [
@@ -27,7 +39,9 @@ import { TypeServiceComponent } from './entities-ui/type-service/type-service.co
     ShoppingCartComponent,
     TagComponent,
     TypeComponent,
-    TypeServiceComponent
+    TypeServiceComponent,
+    ProductComponent,
+    AttractionComponent
   ],
   imports: [
     CommonModule,
@@ -36,13 +50,16 @@ import { TypeServiceComponent } from './entities-ui/type-service/type-service.co
     AngularSvgIconModule,
     StoreModule.forFeature('types', typeReducer),
     StoreModule.forFeature('tags', tagReducer),
+    StoreModule.forFeature('language', languageReducer),
+    StoreModule.forFeature('typeservises', typeServiceReducer),
 
     MatButtonModule,
     MatTabsModule,
     MatListModule,
     MatDividerModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

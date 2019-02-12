@@ -17,9 +17,32 @@ export class EntityListComponent implements OnInit {
   @Input()
   list$: Observable<{uuid: string, value: string}[]>;
 
+  selected: string[] = [];
+
   constructor() {
   }
 
+  addToSelecteList(uuid: string) {
+    this.selected.push(uuid);
+    console.log(this.selected);
+  }
+
+  removeFromSelected(uuid: string) {
+    this.selected = this.selected.filter(it => it !== uuid);
+    console.log(this.selected);
+  }
+
+
+  checkboxEvent($event, uuid: string) {
+    switch ($event.checked) {
+      case true: {
+        return this.addToSelecteList(uuid);
+      }
+      case false: {
+        return this.removeFromSelected(uuid);
+      }
+    }
+  }
   ngOnInit() {}
 
 }

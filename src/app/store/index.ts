@@ -4,8 +4,12 @@ import {
 
 import * as type from './reducers/type.reducer';
 import * as tag from './reducers/tag.reducer';
+import * as language from './reducers/language.reducer';
+import {typeServiceReducer} from './reducers/type-service.reducer';
 
 export const reducers: ActionReducerMap<any> = {
   types: type.typeReducer,
-  tags: tag.tagReducer
+  tags: tag.tagReducer,
+  typeservises: typeServiceReducer,
+  language: language.languageReducer
 };

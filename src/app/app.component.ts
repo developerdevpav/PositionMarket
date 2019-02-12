@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import {Store} from '@ngrx/store';
+import {SetLanguage} from './store/actions/language.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ export class AppComponent implements OnInit {
 
   currentLanguage = 'ru';
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private store: Store<any>) {
     this.translate.setDefaultLang('ru');
   }
 
@@ -19,12 +21,16 @@ export class AppComponent implements OnInit {
     if ( language ) {
       this.translate.use(language);
       this.currentLanguage = language;
+      this.store.dispatch(new SetLanguage(language));
+    } else {
+      localStorage.setItem('language', this.translate.store.currentLang);
     }
   }
 
   switchLanguage(language: string) {
     this.translate.use(language);
     this.currentLanguage = language;
+    this.store.dispatch(new SetLanguage(language));
     localStorage.setItem('language', this.translate.store.currentLang);
   }
 

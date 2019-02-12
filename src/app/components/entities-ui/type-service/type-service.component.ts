@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {selectNsiByLanguage} from '../../../store/reducers/type.reducer';
-import {Language} from '../../../store/models/language.model';
 import {Store} from '@ngrx/store';
+import {selectTypeServicesByLanguage} from '../../../store/selectors/selectors';
+import {ApiLoadTypeServices} from '../../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-type-service',
@@ -11,10 +11,12 @@ import {Store} from '@ngrx/store';
 })
 export class TypeServiceComponent implements OnInit {
 
+  $typeservices: Observable<{uuid: string, value: string}[]> = this.store.select(selectTypeServicesByLanguage);
 
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
+    this.store.dispatch(new ApiLoadTypeServices());
   }
 
 }

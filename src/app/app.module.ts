@@ -18,6 +18,7 @@ import {HttpLoaderFactory} from './ui/translate.service';
 import {TagEffects} from './store/effects/tag.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatDividerModule, MatIconModule, MatTabsModule} from '@angular/material';
+import {TypeServiceEffects} from './store/effects/type-service.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {MatButtonModule, MatDividerModule, MatIconModule, MatTabsModule} from '@
       maxAge: 25
     }),
     AngularSvgIconModule,
-    EffectsModule.forRoot([TypeEffects, TagEffects]),
+    EffectsModule.forRoot([TypeEffects, TagEffects, TypeServiceEffects]),
     NsiModule,
     HttpClientModule,
     TranslateModule.forRoot({

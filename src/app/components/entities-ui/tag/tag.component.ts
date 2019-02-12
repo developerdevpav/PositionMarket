@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {Tag} from '../../../store/models/tag.model';
-import {selectAll, selectNsiByLanguage} from 'src/app/store/reducers/tag.reducer';
-import {LoadTags, LoadTagsApi} from '../../../store/actions/tag.actions';
+import {LoadTagsApi} from '../../../store/actions/tag.actions';
 import {Language} from '../../../store/models/language.model';
+import {selectTagsByLanguage} from '../../../store/selectors/selectors';
 
 @Component({
   selector: 'app-tag',
@@ -13,7 +12,7 @@ import {Language} from '../../../store/models/language.model';
 })
 export class TagComponent implements OnInit {
 
-  $tags: Observable<{uuid: string, value: string}[]> = this.store.select(selectNsiByLanguage, {language: Language.EN});
+  $tags: Observable<{uuid: string, value: string}[]> = this.store.select(selectTagsByLanguage);
 
   constructor(private store: Store<any>) {}
 
