@@ -1,13 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {selectAll, State} from 'src/app/store/reducers/type.reducer';
-import {LoadTypesApi} from '../../store/actions/type.actions';
-import {Type} from '../../store/models/type.model';
-import {Nsi} from '../../store/models/abstract.model';
 import {DialogEditEntityComponent} from '../dialog-edit-entity/dialog-edit-entity.component';
-import {DialogPosition, MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
+import {Action, Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-entity-list',
@@ -25,23 +20,24 @@ export class EntityListComponent implements OnInit {
   @Output() changeChange = new EventEmitter();
   @Output() deleteChange = new EventEmitter();
 
-  view = false;
+  @Output() getElementById = new EventEmitter<Action>();
+
   edit = false;
   create = false;
 
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog, public store: Store<any>) {}
 
   openDialog(action: string): void {
     const dialogRef = this.dialog.open(DialogEditEntityComponent, {
       hasBackdrop: true,
       width: '650px',
-      height: '150px',
-      data: {change: 'view', object: this.selected.shift()}
+      height: '270px',
+      data: { change: action, object: this.selected[0] }
     });
 
     dialogRef.afterClosed().subscribe(data => {
       if ( data && data.change && data.entity ) {
+        console.log(data + ' ' + data.change + ' ' + data.entity);
         switch (data.change) {
           case 'create': {
             return this.createChange.emit(data.entity);
@@ -58,6 +54,7 @@ export class EntityListComponent implements OnInit {
 
   deleteFunction() {
     this.deleteChange.emit(this.selected);
+    this.selected = [];
   }
 
   addToSelectList(uuid: string) {

@@ -1,91 +1,107 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { TypeService } from '../models/type-service.model';
+import {APIAction} from './abstarct.actions';
+import {TypeService} from '../models/type-service.model';
+import {TypeActionTypes} from './type.actions';
 
-export enum TypeServiceActionTypes {
-  LoadTypeServices = '[TypeService] Load TypeServices',
-  AddTypeService = '[TypeService] Add TypeService',
-  UpsertTypeService = '[TypeService] Upsert TypeService',
-  AddTypeServices = '[TypeService] Add TypeServices',
-  UpsertTypeServices = '[TypeService] Upsert TypeServices',
-  UpdateTypeService = '[TypeService] Update TypeService',
-  UpdateTypeServices = '[TypeService] Update TypeServices',
-  DeleteTypeService = '[TypeService] Delete TypeService',
-  DeleteTypeServices = '[TypeService] Delete TypeServices',
-  ClearTypeServices = '[TypeService] Clear TypeServices'
+export class ApiTypeServiceLoadAll implements Action {
+  readonly type = APIAction.LOAD_ALL + '[TypeService]';
 }
 
-export class ApiLoadTypeServices implements Action {
-  readonly type = '[TypeService] load all api';
+export class ApiTypeServiceLoadById implements Action {
+  readonly type = APIAction.LOAD_BY_ID + '[TypeService]';
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ApiTypeServiceCreate implements Action {
+  readonly type = APIAction.CREATE + '[TypeService]';
+
+  constructor(public payload: TypeService) {
+  }
+}
+
+export class ApiTypeServiceUpdate implements Action {
+  readonly type = APIAction.UPDATE + '[TypeService]';
+
+  constructor(public payload: TypeService) {
+  }
+}
+
+export class ApiTypeServiceDelete implements Action {
+  readonly type = APIAction.DELETE + '[TypeService]';
+
+  constructor(public payload: string[]) {
+  }
+}
+
+export enum TypeServiceAction {
+  LOAD_SUCCESS_TYPE_SERVICES = '[TYPE_SERVICE] LOAD TYPE_SERVICES',
+  LOAD_SUCCESS_TYPE_SERVICE = '[TYPE_SERVICE] LOAD TYPE_SERVICE',
+  ADD_SUCCESS_TYPE_SERVICE = '[TYPE_SERVICE] ADD TYPE_SERVICE',
+  ADD_SUCCESS_TYPE_SERVICES = '[TYPE_SERVICE] ADD TYPE_SERVICES',
+  UPDATE_SUCCESS_TYPE_SERVICE = '[TYPE_SERVICE] UPDATE TYPE_SERVICE',
+  DELETE_SUCCESS_TYPE_SERVICE = '[TYPE_SERVICE] DELETE TYPE_SERVICE',
+  DELETE_SUCCESS_TYPE_SERVICES = '[TYPE_SERVICE] DELETE TYPE_SERVICES',
 }
 
 
-export class LoadTypeServices implements Action {
-  readonly type = TypeServiceActionTypes.LoadTypeServices;
+export class LoadSuccessTypeServices implements Action {
+  readonly type = TypeServiceAction.LOAD_SUCCESS_TYPE_SERVICES;
 
-  constructor(public payload: { typeServices: TypeService[] }) {}
+  constructor(public payload: { typeServices: TypeService[] }) {
+  }
 }
+
+export class GetTypeServiceById implements Action {
+  readonly type = TypeServiceAction.LOAD_SUCCESS_TYPE_SERVICE;
+
+  constructor(public payload: string) {
+  }
+}
+
 
 export class AddTypeService implements Action {
-  readonly type = TypeServiceActionTypes.AddTypeService;
+  readonly type = TypeServiceAction.ADD_SUCCESS_TYPE_SERVICE;
 
-  constructor(public payload: { typeService: TypeService }) {}
-}
-
-export class UpsertTypeService implements Action {
-  readonly type = TypeServiceActionTypes.UpsertTypeService;
-
-  constructor(public payload: { typeService: TypeService }) {}
+  constructor(public payload: { typeService: TypeService }) {
+  }
 }
 
 export class AddTypeServices implements Action {
-  readonly type = TypeServiceActionTypes.AddTypeServices;
+  readonly type = TypeServiceAction.ADD_SUCCESS_TYPE_SERVICES;
 
-  constructor(public payload: { typeServices: TypeService[] }) {}
-}
-
-export class UpsertTypeServices implements Action {
-  readonly type = TypeServiceActionTypes.UpsertTypeServices;
-
-  constructor(public payload: { typeServices: TypeService[] }) {}
+  constructor(public payload: { typeServices: TypeService[] }) {
+  }
 }
 
 export class UpdateTypeService implements Action {
-  readonly type = TypeServiceActionTypes.UpdateTypeService;
+  readonly type = TypeServiceAction.UPDATE_SUCCESS_TYPE_SERVICE;
 
-  constructor(public payload: { typeService: Update<TypeService> }) {}
-}
-
-export class UpdateTypeServices implements Action {
-  readonly type = TypeServiceActionTypes.UpdateTypeServices;
-
-  constructor(public payload: { typeServices: Update<TypeService>[] }) {}
+  constructor(public payload: { typeService: Update<TypeService> }) {
+  }
 }
 
 export class DeleteTypeService implements Action {
-  readonly type = TypeServiceActionTypes.DeleteTypeService;
+  readonly type = TypeServiceAction.DELETE_SUCCESS_TYPE_SERVICE;
 
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { id: string }) {
+  }
 }
 
 export class DeleteTypeServices implements Action {
-  readonly type = TypeServiceActionTypes.DeleteTypeServices;
+  readonly type = TypeServiceAction.DELETE_SUCCESS_TYPE_SERVICES;
 
-  constructor(public payload: { ids: string[] }) {}
+  constructor(public payload: { ids: string[] }) {
+  }
 }
 
-export class ClearTypeServices implements Action {
-  readonly type = TypeServiceActionTypes.ClearTypeServices;
-}
 
 export type TypeServiceActions =
- LoadTypeServices
- | AddTypeService
- | UpsertTypeService
- | AddTypeServices
- | UpsertTypeServices
- | UpdateTypeService
- | UpdateTypeServices
- | DeleteTypeService
- | DeleteTypeServices
- | ClearTypeServices;
+  LoadSuccessTypeServices |
+  AddTypeService |
+  AddTypeServices |
+  UpdateTypeService |
+  DeleteTypeService |
+  DeleteTypeServices;

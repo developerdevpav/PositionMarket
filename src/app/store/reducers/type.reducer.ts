@@ -13,44 +13,28 @@ export const initialState: State = adapter.getInitialState({});
 
 export function typeReducer(state = initialState, action: TypeActions): State {
   switch (action.type) {
-    case TypeActionTypes.AddType: {
+    case TypeActionTypes.ADD_SUCCESS_TYPE: {
       return adapter.addOne(action.payload.type, state);
     }
 
-    case TypeActionTypes.UpsertType: {
-      return adapter.upsertOne(action.payload.type, state);
-    }
-
-    case TypeActionTypes.AddTypes: {
+    case TypeActionTypes.ADD_SUCCESS_TYPES: {
       return adapter.addMany(action.payload.types, state);
     }
 
-    case TypeActionTypes.UpsertTypes: {
-      return adapter.upsertMany(action.payload.types, state);
-    }
-
-    case TypeActionTypes.UpdateType: {
+    case TypeActionTypes.UPDATE_SUCCESS_TYPE: {
       return adapter.updateOne(action.payload.type, state);
     }
 
-    case TypeActionTypes.UpdateTypes: {
-      return adapter.updateMany(action.payload.types, state);
-    }
-
-    case TypeActionTypes.DeleteType: {
+    case TypeActionTypes.DELETE_SUCCESS_TYPE: {
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case TypeActionTypes.DeleteTypes: {
+    case TypeActionTypes.DELETE_SUCCESS_TYPES: {
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case TypeActionTypes.LoadTypes: {
+    case TypeActionTypes.LOAD_SUCCESS_TYPES: {
       return adapter.addAll(action.payload.types, state);
-    }
-
-    case TypeActionTypes.ClearTypes: {
-      return adapter.removeAll(state);
     }
 
     default: {
@@ -67,32 +51,3 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors(getTypeSelectorState);
-
-export const selectNsiByLanguage = createSelector(
-  selectAll,
-  (array: Tag[], props) => {
-    console.log(array);
-    if ( array === undefined || array.length === 0 ) {
-      return [];
-    }
-    return array.map(value => {
-      console.log(props); // undefined
-      let valueNsi = value.values.find(val => val.language === props.language);
-      console.log(valueNsi);
-      if ( !valueNsi ) {
-        valueNsi = props.language === Language.RU ?
-          {
-            language: Language.RU,
-            value: 'Неопределено (Ру)'
-          } : {
-            language: Language.EN,
-            value: 'Undefined (En)'
-          };
-      }
-      return  {
-        uuid: value.id,
-        value: valueNsi.value
-      };
-    });
-  }
-);

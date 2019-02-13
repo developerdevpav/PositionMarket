@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { TypeService } from '../models/type-service.model';
-import { TypeServiceActions, TypeServiceActionTypes } from '../actions/type-service.actions';
+import {TypeServiceAction, TypeServiceActions} from '../actions/type-service.actions';
 import {createFeatureSelector} from '@ngrx/store';
 
 export interface State extends EntityState<TypeService> {
@@ -18,44 +18,28 @@ export function typeServiceReducer(
   action: TypeServiceActions
 ): State {
   switch (action.type) {
-    case TypeServiceActionTypes.AddTypeService: {
+    case TypeServiceAction.ADD_SUCCESS_TYPE_SERVICE: {
       return adapter.addOne(action.payload.typeService, state);
     }
 
-    case TypeServiceActionTypes.UpsertTypeService: {
-      return adapter.upsertOne(action.payload.typeService, state);
-    }
-
-    case TypeServiceActionTypes.AddTypeServices: {
+    case TypeServiceAction.ADD_SUCCESS_TYPE_SERVICES: {
       return adapter.addMany(action.payload.typeServices, state);
     }
 
-    case TypeServiceActionTypes.UpsertTypeServices: {
-      return adapter.upsertMany(action.payload.typeServices, state);
-    }
-
-    case TypeServiceActionTypes.UpdateTypeService: {
+    case TypeServiceAction.UPDATE_SUCCESS_TYPE_SERVICE: {
       return adapter.updateOne(action.payload.typeService, state);
     }
 
-    case TypeServiceActionTypes.UpdateTypeServices: {
-      return adapter.updateMany(action.payload.typeServices, state);
-    }
-
-    case TypeServiceActionTypes.DeleteTypeService: {
+    case TypeServiceAction.DELETE_SUCCESS_TYPE_SERVICE: {
       return adapter.removeOne(action.payload.id, state);
     }
 
-    case TypeServiceActionTypes.DeleteTypeServices: {
+    case TypeServiceAction.DELETE_SUCCESS_TYPE_SERVICES: {
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case TypeServiceActionTypes.LoadTypeServices: {
+    case TypeServiceAction.LOAD_SUCCESS_TYPE_SERVICES: {
       return adapter.addAll(action.payload.typeServices, state);
-    }
-
-    case TypeServiceActionTypes.ClearTypeServices: {
-      return adapter.removeAll(state);
     }
 
     default: {

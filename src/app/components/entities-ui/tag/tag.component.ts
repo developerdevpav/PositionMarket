@@ -1,9 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {Action, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {AddTag, DeleteTag, DeleteTags, LoadTagsApi, UpdateTag} from '../../../store/actions/tag.actions';
-import {Language} from '../../../store/models/language.model';
 import {selectTagsByLanguage} from '../../../store/selectors/selectors';
+import {
+  ApiTagCreate,
+  ApiTagDelete,
+  ApiTagLoadAll,
+  ApiTagUpdate
+} from '../../../store/actions/tag.actions';
+import {GetTypeById} from '../../../store/actions/type.actions';
 
 @Component({
   selector: 'app-tag',
@@ -13,22 +18,26 @@ import {selectTagsByLanguage} from '../../../store/selectors/selectors';
 export class TagComponent implements OnInit {
 
   $tags: Observable<{uuid: string, value: string}[]> = this.store.select(selectTagsByLanguage);
-
+  getById$: Action = new GetTypeById( '');
   constructor(private store: Store<any>) {}
 
   ngOnInit() {
-    this.store.dispatch(new LoadTagsApi());
+    this.store.dispatch(new ApiTagLoadAll());
   }
 
   create($event) {
-    this.store.dispatch(new AddTag($event));
+    this.store.dispatch(new ApiTagCreate($event));
   }
 
   change($event) {
-    this.store.dispatch(new UpdateTag($event));
+    this.store.dispatch(new ApiTagUpdate($event));
   }
 
   delete($event) {
-    this.store.dispatch(new DeleteTags($event));
+    this.store.dispatch(new ApiTagDelete($event));
+  }
+
+  getById($event) {
+    this.store.dispatch(new ApiTagDelete($event));
   }
 }

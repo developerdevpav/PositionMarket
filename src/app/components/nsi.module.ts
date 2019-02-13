@@ -30,6 +30,7 @@ import { AttractionComponent } from './entities-ui/attraction/attraction.compone
 import {typeServiceReducer} from '../store/reducers/type-service.reducer';
 import { EntitiesEditComponent } from './entities-edit/entities-edit.component';
 import { DialogEditEntityComponent } from './dialog-edit-entity/dialog-edit-entity.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,8 @@ import { DialogEditEntityComponent } from './dialog-edit-entity/dialog-edit-enti
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     AppRoutingModule,
     AngularSvgIconModule,

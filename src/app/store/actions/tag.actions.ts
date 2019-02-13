@@ -1,93 +1,106 @@
-import { Action } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
-import { Tag } from '../models/tag.model';
-import {TypeActionTypes} from './type.actions';
+import {Action} from '@ngrx/store';
+import {Update} from '@ngrx/entity';
+import {Tag} from '../models/tag.model';
+import {APIAction} from './abstarct.actions';
+
+
+export class ApiTagLoadAll implements Action {
+  readonly type = APIAction.LOAD_ALL + '[Tag]';
+}
+
+export class ApiTagLoadById implements Action {
+  readonly type = APIAction.LOAD_BY_ID + '[Tag]';
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ApiTagCreate implements Action {
+  readonly type = APIAction.CREATE + '[Tag]';
+
+  constructor(public payload: Tag) {
+  }
+}
+
+export class ApiTagUpdate implements Action {
+  readonly type = APIAction.UPDATE + '[Tag]';
+
+  constructor(public payload: Tag) {
+  }
+}
+
+export class ApiTagDelete implements Action {
+  readonly type = APIAction.DELETE + '[Tag]';
+
+  constructor(public payload: string[]) {
+  }
+}
 
 export enum TagActionTypes {
-  LoadTags = '[Tag] Load Tags',
-  AddTag = '[Tag] Add Tag',
-  UpsertTag = '[Tag] Upsert Tag',
-  AddTags = '[Tag] Add Tags',
-  UpsertTags = '[Tag] Upsert Tags',
-  UpdateTag = '[Tag] Update Tag',
-  UpdateTags = '[Tag] Update Tags',
-  DeleteTag = '[Tag] Delete Tag',
-  DeleteTags = '[Tag] Delete Tags',
-  ClearTags = '[Tag] Clear Tags',
-  LoadTagsApi = '[Tag] Load API Tags'
+  LOAD_SUCCESS_TAGS = '[TAG] LOAD TAGS',
+  LOAD_SUCCESS_TAG = '[TAG] LOAD TAG',
+  ADD_SUCCESS_TAG = '[TAG] ADD TAG',
+  ADD_SUCCESS_TAGS = '[TAG] ADD TAGS',
+  UPDATE_SUCCESS_TAG = '[TAG] UPDATE TAG',
+  DELETE_SUCCESS_TAG = '[TAG] DELETE TAG',
+  DELETE_SUCCESS_TAGS = '[TAG] DELETE TAGS',
 }
 
 
-export class LoadTagsApi implements Action {
-  readonly type = TagActionTypes.LoadTagsApi;
-}
+export class LoadSuccessTags implements Action {
+  readonly type = TagActionTypes.LOAD_SUCCESS_TAGS;
 
-export class LoadTags implements Action {
-  readonly type = TagActionTypes.LoadTags;
-
-  constructor(public payload: { tags: Tag[] }) {}
+  constructor(public payload: { tags: Tag[] }) {
+  }
 }
 
 export class AddTag implements Action {
-  readonly type = TagActionTypes.AddTag;
+  readonly type = TagActionTypes.ADD_SUCCESS_TAG;
 
-  constructor(public payload: { tag: Tag }) {}
+  constructor(public payload: { tag: Tag }) {
+  }
 }
 
-export class UpsertTag implements Action {
-  readonly type = TagActionTypes.UpsertTag;
+export class LoadTagById implements Action {
+  readonly type = TagActionTypes.LOAD_SUCCESS_TAG;
 
-  constructor(public payload: { tag: Tag }) {}
+  constructor(public payload: { tag: Tag }) {
+  }
 }
 
 export class AddTags implements Action {
-  readonly type = TagActionTypes.AddTags;
+  readonly type = TagActionTypes.ADD_SUCCESS_TAGS;
 
-  constructor(public payload: { tags: Tag[] }) {}
-}
-
-export class UpsertTags implements Action {
-  readonly type = TagActionTypes.UpsertTags;
-
-  constructor(public payload: { tags: Tag[] }) {}
+  constructor(public payload: { tags: Tag[] }) {
+  }
 }
 
 export class UpdateTag implements Action {
-  readonly type = TagActionTypes.UpdateTag;
+  readonly type = TagActionTypes.UPDATE_SUCCESS_TAG;
 
-  constructor(public payload: { tag: Update<Tag> }) {}
-}
-
-export class UpdateTags implements Action {
-  readonly type = TagActionTypes.UpdateTags;
-
-  constructor(public payload: { tags: Update<Tag>[] }) {}
+  constructor(public payload: { tag: Update<Tag> }) {
+  }
 }
 
 export class DeleteTag implements Action {
-  readonly type = TagActionTypes.DeleteTag;
+  readonly type = TagActionTypes.DELETE_SUCCESS_TAG;
 
-  constructor(public payload: { id: string }) {}
+  constructor(public payload: { id: string }) {
+  }
 }
 
 export class DeleteTags implements Action {
-  readonly type = TagActionTypes.DeleteTags;
+  readonly type = TagActionTypes.DELETE_SUCCESS_TAGS;
 
-  constructor(public payload: { ids: string[] }) {}
+  constructor(public payload: { ids: string[] }) {
+  }
 }
 
-export class ClearTags implements Action {
-  readonly type = TagActionTypes.ClearTags;
-}
 
 export type TagActions =
- LoadTags
- | AddTag
- | UpsertTag
- | AddTags
- | UpsertTags
- | UpdateTag
- | UpdateTags
- | DeleteTag
- | DeleteTags
- | ClearTags;
+  LoadSuccessTags |
+  AddTag |
+  AddTags |
+  UpdateTag |
+  DeleteTag |
+  DeleteTags;

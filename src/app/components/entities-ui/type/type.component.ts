@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {AddTag, DeleteTag, DeleteTags, LoadTagsApi, UpdateTag} from '../../../store/actions/tag.actions';
-import {AddType, DeleteType, DeleteTypes, LoadTypesApi, UpdateType} from '../../../store/actions/type.actions';
 import {selectTypesByLanguage} from '../../../store/selectors/selectors';
+import {
+  ApiTypeCreate,
+  ApiTypeDelete,
+  ApiTypeLoadAll,
+  ApiTypeUpdate
+} from '../../../store/actions/type.actions';
 
 @Component({
   selector: 'app-type',
@@ -17,19 +21,19 @@ export class TypeComponent implements OnInit {
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTypesApi());
+    this.store.dispatch(new ApiTypeLoadAll());
   }
 
   create($event) {
-    this.store.dispatch(new AddType($event));
+    this.store.dispatch(new ApiTypeCreate($event));
   }
 
   change($event) {
-    this.store.dispatch(new UpdateType($event));
+    this.store.dispatch(new ApiTypeUpdate($event));
   }
 
   delete($event) {
-    this.store.dispatch(new DeleteTypes($event));
+    this.store.dispatch(new ApiTypeDelete($event));
   }
 
 }
