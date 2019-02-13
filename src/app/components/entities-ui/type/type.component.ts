@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {selectNsiByLanguage} from '../../../store/reducers/type.reducer';
-import {Language} from '../../../store/models/language.model';
 import {Store} from '@ngrx/store';
-import {LoadTagsApi} from '../../../store/actions/tag.actions';
-import {LoadTypesApi} from '../../../store/actions/type.actions';
+import {AddTag, DeleteTag, DeleteTags, LoadTagsApi, UpdateTag} from '../../../store/actions/tag.actions';
+import {AddType, DeleteType, DeleteTypes, LoadTypesApi, UpdateType} from '../../../store/actions/type.actions';
 import {selectTypesByLanguage} from '../../../store/selectors/selectors';
 
 @Component({
@@ -20,6 +18,18 @@ export class TypeComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadTypesApi());
+  }
+
+  create($event) {
+    this.store.dispatch(new AddType($event));
+  }
+
+  change($event) {
+    this.store.dispatch(new UpdateType($event));
+  }
+
+  delete($event) {
+    this.store.dispatch(new DeleteTypes($event));
   }
 
 }

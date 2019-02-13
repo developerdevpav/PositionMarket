@@ -28,6 +28,8 @@ import {languageReducer} from '../store/reducers/language.reducer';
 import { ProductComponent } from './entities-ui/product/product.component';
 import { AttractionComponent } from './entities-ui/attraction/attraction.component';
 import {typeServiceReducer} from '../store/reducers/type-service.reducer';
+import { EntitiesEditComponent } from './entities-edit/entities-edit.component';
+import { DialogEditEntityComponent } from './dialog-edit-entity/dialog-edit-entity.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import {typeServiceReducer} from '../store/reducers/type-service.reducer';
     TypeComponent,
     TypeServiceComponent,
     ProductComponent,
-    AttractionComponent
+    AttractionComponent,
+    EntitiesEditComponent,
+    DialogEditEntityComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +56,7 @@ import {typeServiceReducer} from '../store/reducers/type-service.reducer';
     StoreModule.forFeature('tags', tagReducer),
     StoreModule.forFeature('language', languageReducer),
     StoreModule.forFeature('typeservises', typeServiceReducer),
-
+    MatDialogModule,
     MatButtonModule,
     MatTabsModule,
     MatListModule,
@@ -61,6 +65,7 @@ import {typeServiceReducer} from '../store/reducers/type-service.reducer';
     MatDialogModule,
     MatCheckboxModule
   ],
+  entryComponents: [DialogEditEntityComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NsiModule { }

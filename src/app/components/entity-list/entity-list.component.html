@@ -1,9 +1,9 @@
 <div class="header-list-fixed">
   <div class="header-list">
-    <button mat-stroked-button color="primary">Create</button>
-    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary">View</button>
-    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary">Edit</button>
-    <button [hidden]="selected.length === 0" mat-stroked-button color="primary">Remove</button>
+    <button mat-stroked-button color="primary" (click)="openDialog('create')">Create</button>
+    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary" (click)="openDialog('view')">View</button>
+    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary" (click)="openDialog('edit')">Edit</button>
+    <button [hidden]="selected.length === 0" mat-stroked-button color="primary" (click)="deleteFunction()">Remove</button>
   </div>
 </div>
 

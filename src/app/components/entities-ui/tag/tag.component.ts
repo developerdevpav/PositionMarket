@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {LoadTagsApi} from '../../../store/actions/tag.actions';
+import {AddTag, DeleteTag, DeleteTags, LoadTagsApi, UpdateTag} from '../../../store/actions/tag.actions';
 import {Language} from '../../../store/models/language.model';
 import {selectTagsByLanguage} from '../../../store/selectors/selectors';
 
@@ -20,4 +20,15 @@ export class TagComponent implements OnInit {
     this.store.dispatch(new LoadTagsApi());
   }
 
+  create($event) {
+    this.store.dispatch(new AddTag($event));
+  }
+
+  change($event) {
+    this.store.dispatch(new UpdateTag($event));
+  }
+
+  delete($event) {
+    this.store.dispatch(new DeleteTags($event));
+  }
 }

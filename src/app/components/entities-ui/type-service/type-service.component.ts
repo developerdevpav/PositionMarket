@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {selectTypeServicesByLanguage} from '../../../store/selectors/selectors';
-import {ApiLoadTypeServices} from '../../../store/actions/type-service.actions';
+import {AddTypeService, ApiLoadTypeServices, DeleteTypeService, UpdateTypeService} from '../../../store/actions/type-service.actions';
+import {AddTag, DeleteTag, UpdateTag} from '../../../store/actions/tag.actions';
+import {AddType, DeleteType, UpdateType} from '../../../store/actions/type.actions';
 
 @Component({
   selector: 'app-type-service',
@@ -17,6 +19,18 @@ export class TypeServiceComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new ApiLoadTypeServices());
+  }
+
+  create($event) {
+    this.store.dispatch(new AddTypeService($event));
+  }
+
+  change($event) {
+    this.store.dispatch(new UpdateTypeService($event));
+  }
+
+  delete($event) {
+    this.store.dispatch(new DeleteTypeService($event));
   }
 
 }
