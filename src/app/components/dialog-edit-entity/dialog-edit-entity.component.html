@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>Create</h2>
+<h2 mat-dialog-title>{{data.action === 'create' ? 'Create' : data.action === 'view' ? 'View' : 'Change'}}</h2>
 <mat-dialog-content class="content-dialog">
-  <input type="text" [(ngModel)]="nsi.values[1].value" placeholder="Значение на русском">
-  <input type="text" [(ngModel)]="nsi.values[0].value" placeholder="Value in English">
+  <input type="text" [(ngModel)]="nsi.values[0].value" placeholder="Значение на русском">
+  <input type="text" [(ngModel)]="nsi.values[1].value" placeholder="Value in English">
 </mat-dialog-content>
-<mat-dialog-actions align="end" *ngIf="data.change !== 'view'">
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="add()" cdkFocusInitial>{{data.change === 'create' ? 'Create' : 'Save'}}</button>
+<mat-dialog-actions align="end" *ngIf="data.action !== 'view'">
+  <button mat-button  [mat-dialog-close]="true">Cancel</button>
+  <button mat-button (click)="add()" cdkFocusInitial>{{data.action === 'create' ? 'Create' : 'Save'}}</button>
 </mat-dialog-actions>

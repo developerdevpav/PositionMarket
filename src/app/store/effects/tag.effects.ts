@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
-import {EMPTY, Observable} from 'rxjs';
+import {EMPTY, Observable, of} from 'rxjs';
 import {
   AddTag,
   ApiTagCreate,
   ApiTagDelete,
   ApiTagLoadAll,
-  ApiTagLoadById,
+  ApiTagLoadById, ApiTagUpdate,
   DeleteTag,
   DeleteTags,
   LoadSuccessTags,
   LoadTagById,
-  TagActionTypes
+  TagActionTypes, UpdateTag
 } from '../actions/tag.actions';
 import {Tag} from '../models/tag.model';
 import {NsiAbstractService} from '../services/nsi.abstract.service';
@@ -53,14 +53,33 @@ export class TagEffects {
   create$: Observable<Action> = this.actions$
     .pipe(
       ofType(APIAction.CREATE + '[Tag]'),
-      map((action: ApiTagCreate) => {
-        console.log('Deleted: ' + action.payload);
+      map((action: ApiTagCreate) => action.payload),
+      switchMap((data) => this.service.create('tags', data).pipe(
+          map((loadTag: Tag) => {
+            console.log('load ' + loadTag);
+            return new AddTag({tag: loadTag});
+          }),
+          catchError(error => EMPTY)
+        ),
+      ),
+    );
+
+  @Effect()
+  update$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(APIAction.UPDATE + '[Tag]'),
+      map((action: ApiTagUpdate) => {
         return action.payload;
       }),
       switchMap(
-        (object: Tag) => this.service.create('tags', object)
+        (object: Tag) => this.service.update('tags', object)
           .pipe(
-            map(() => new AddTag({tag: object}))
+            map(() => new UpdateTag({
+              tag: {
+                id: object.id,
+                changes: object
+              }
+            }))
           )
       )
     );

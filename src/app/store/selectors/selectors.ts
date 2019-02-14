@@ -24,6 +24,13 @@ export const selectTagsByLanguage = createSelector(
   }
 );
 
+export const selectTagById = createSelector(
+  tag.selectEntities,
+  (array, props) => {
+    return array[props.id];
+  }
+);
+
 export const selectTypesByLanguage = createSelector(
   selectLanguage,
   type.selectAll,

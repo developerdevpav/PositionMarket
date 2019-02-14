@@ -25,8 +25,8 @@ export class NsiAbstractService<T> {
     return this.http.post(`/api/${service}`, obj, {headers: this.headers});
   }
 
-  public update(service: string, uuid: string, obj: T) {
-    return this.http.put(`/api/${service}/${uuid}`, obj, {headers: this.headers});
+  public update(service: string, obj: T) {
+    return this.http.put(`/api/${service}`, obj, {headers: this.headers});
   }
 
   public delete(service: string, uuid: string) {
@@ -34,7 +34,7 @@ export class NsiAbstractService<T> {
   }
 
   public deleteAll(service: string, uuid: string[]) {
-    return this.http.delete(`/api/${service}/${uuid}`, {headers: this.headers});
+    return this.http.post(`/api/${service}/multiple/delete`, JSON.stringify(uuid), {headers: this.headers});
   }
 }
 

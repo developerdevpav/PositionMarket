@@ -1,5 +1,5 @@
 <app-entity-list [list$]="$tags"
-                 [selector$] = "getById$"
-                 (changeChange)="change($event)"
+                 (changeChange)="changeOrView($event, 'change')"
+                 (viewChange)="changeOrView($event, 'view')"
                  (createChange)="create($event)"
                  (deleteChange)="delete($event)"></app-entity-list>

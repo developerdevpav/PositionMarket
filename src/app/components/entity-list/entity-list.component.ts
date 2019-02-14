@@ -18,53 +18,44 @@ export class EntityListComponent implements OnInit {
 
   @Output() createChange = new EventEmitter();
   @Output() changeChange = new EventEmitter();
+  @Output() viewChange = new EventEmitter();
   @Output() deleteChange = new EventEmitter();
 
   @Output() getElementById = new EventEmitter<Action>();
 
-  edit = false;
-  create = false;
+  constructor(public store: Store<any>) {}
 
-  constructor(public dialog: MatDialog, public store: Store<any>) {}
+  create() {
+    console.log('create EntityListComponent');
+    this.createChange.emit(undefined);
+  }
 
-  openDialog(action: string): void {
-    const dialogRef = this.dialog.open(DialogEditEntityComponent, {
-      hasBackdrop: true,
-      width: '650px',
-      height: '270px',
-      data: { change: action, object: this.selected[0] }
-    });
+  change() {
+    console.log('change EntityListComponent');
+    this.changeChange.emit(this.selected[0]);
+  }
 
-    dialogRef.afterClosed().subscribe(data => {
-      if ( data && data.change && data.entity ) {
-        console.log(data + ' ' + data.change + ' ' + data.entity);
-        switch (data.change) {
-          case 'create': {
-            return this.createChange.emit(data.entity);
-          }
-          case 'change': {
-            return this.changeChange.emit(data.entity);
-          }
-          default:
-            return;
-        }
-      }
-    });
+  historySelect(id: string) {
+    return this.selected.find(value => id === value) !== undefined;
+  }
+
+  view() {
+    console.log('view EntityListComponent');
+    this.viewChange.emit(this.selected[0]);
   }
 
   deleteFunction() {
+    console.log('delete EntityListComponent');
     this.deleteChange.emit(this.selected);
     this.selected = [];
   }
 
   addToSelectList(uuid: string) {
     this.selected.push(uuid);
-    console.log(this.selected);
   }
 
   removeFromSelected(uuid: string) {
     this.selected = this.selected.filter(it => it !== uuid);
-    console.log(this.selected);
   }
 
   checkboxEvent($event, uuid: string) {
@@ -79,6 +70,8 @@ export class EntityListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('load listEntity');
+    this.selected = [];
   }
 
 }

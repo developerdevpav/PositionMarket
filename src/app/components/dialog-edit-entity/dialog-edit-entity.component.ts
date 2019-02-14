@@ -12,31 +12,37 @@ import {Language} from '../../store/models/language.model';
 export class DialogEditEntityComponent implements OnInit {
 
   nsi: Nsi = {
-    id: this.data.object,
+    id: null,
     values: [
       {
-        language: Language.EN,
+        language: Language.RU,
         value: ''
       },
       {
-        language: Language.RU,
+        language: Language.EN,
         value: ''
       }
     ]
   };
 
   constructor(public dialogRef: MatDialogRef<DialogEditEntityComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: {change: string, object: string}, public store: Store<any>) {}
-
-  onNoClick(): void {
-    // this.dialogRef.close({ change: this.data.change, entity: this.nsi });
+              @Inject(MAT_DIALOG_DATA) public data: { action: string, object: Nsi }, public store: Store<any>) {
   }
 
   ngOnInit(): void {
-    this.nsi.id = this.data.object;
+    if (this.data.object) {
+      console.log(this.data.object);
+      this.nsi.id = this.data.object.id;
+      this.nsi.values.forEach(valueThis => {
+        const findValue = this.data.object.values.find(value => value.language === valueThis.language);
+        if (findValue) {
+          valueThis.value = findValue.value;
+        }
+      });
+    }
   }
 
   add() {
-    this.dialogRef.close({ change: this.data.change, entity: this.nsi });
+    this.dialogRef.close({ action: this.data.action, entity: this.nsi });
   }
 }

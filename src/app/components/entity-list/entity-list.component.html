@@ -1,8 +1,8 @@
 <div class="header-list-fixed">
   <div class="header-list">
-    <button mat-stroked-button color="primary" (click)="openDialog('create')">Create</button>
-    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary" (click)="openDialog('view')">View</button>
-    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary" (click)="openDialog('edit')">Edit</button>
+    <button mat-stroked-button color="primary" (click)="create()">Create</button>
+    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary" (click)="view()">View</button>
+    <button [hidden]="selected.length > 1 || selected.length === 0" mat-stroked-button color="primary" (click)="change()">Edit</button>
     <button [hidden]="selected.length === 0" mat-stroked-button color="primary" (click)="deleteFunction()">Remove</button>
   </div>
 </div>
@@ -13,7 +13,7 @@
       {{item.value}}
     </div>
     <div class="actions">
-      <mat-checkbox (change)="checkboxEvent($event, item.uuid)" color="primary"></mat-checkbox>
+      <mat-checkbox (change)="checkboxEvent($event, item.uuid)" [checked]="historySelect(item.uuid)" color="primary"></mat-checkbox>
     </div>
   </div>
 </div>
