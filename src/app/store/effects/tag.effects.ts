@@ -46,7 +46,7 @@ export class TagEffects {
     ofType(APIAction.LOAD_BY_ID + '[Tag]'),
     map((action: ApiTagLoadById) => action.payload),
     switchMap((id) => this.service.getById('tags', id)),
-    map((tag: Tag) => new LoadTagById({tag: tag}))
+    map((tagLoad: Tag) => new LoadTagById({tag: tagLoad}))
   );
 
   @Effect()

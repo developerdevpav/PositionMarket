@@ -3,6 +3,7 @@ import { Update } from '@ngrx/entity';
 import { Type } from '../models/type.model';
 import {APIAction} from './abstarct.actions';
 import {TagActionTypes} from './tag.actions';
+import {Tag} from '../models/tag.model';
 
 export class ApiTypeLoadAll implements Action {
   readonly type = APIAction.LOAD_ALL + '[Type]';
@@ -61,10 +62,10 @@ export class AddType implements Action {
   }
 }
 
-export class GetTypeById implements Action {
+export class LoadTypeById implements Action {
   readonly type = TypeActionTypes.LOAD_SUCCESS_TYPE;
 
-  constructor(public payload: string) {
+  constructor(public payload: { type: Type }) {
   }
 }
 
@@ -99,6 +100,7 @@ export class DeleteTypes implements Action {
 
 export type TypeActions =
   LoadSuccessTypes |
+  LoadTypeById |
   AddType |
   AddTypes |
   UpdateType |

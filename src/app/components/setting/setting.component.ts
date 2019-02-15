@@ -15,16 +15,6 @@ export class SettingComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-    this.menuListPrivate = [
-      {
-        label: 'Login and password',
-        link: '/settings/private/login-and-password'
-      },
-      {
-        label: 'Design',
-        link: '/settings/private/design'
-      }
-    ];
 
     this.menuListDataBase = [
       {
@@ -55,14 +45,10 @@ export class SettingComponent implements OnInit {
     console.log(e);
     switch (e.index) {
       case 0:
-        this.router.navigateByUrl('/settings/private');
-        this.menu = this.menuListPrivate;
-        break;
-      case 1:
         this.router.navigateByUrl('/settings/users');
         this.menu = [];
         break;
-      case 2:
+      case 1:
         this.router.navigateByUrl('/settings/database');
         this.menu = this.menuListDataBase;
         break;

@@ -11,6 +11,7 @@ import {TypeComponent} from './components/entities-ui/type/type.component';
 import {TypeServiceComponent} from './components/entities-ui/type-service/type-service.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent, pathMatch: 'full'},
   {path: 'catalog', component: CatalogComponent, pathMatch: 'full'},
   {
@@ -21,10 +22,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'private',
         pathMatch: 'full'
-      },
-      {
-        path: 'private',
-        component: EntityListComponent
       },
       {
         path: 'users',

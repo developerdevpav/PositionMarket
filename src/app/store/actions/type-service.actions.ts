@@ -54,10 +54,10 @@ export class LoadSuccessTypeServices implements Action {
   }
 }
 
-export class GetTypeServiceById implements Action {
+export class LoadTypeServiceById implements Action {
   readonly type = TypeServiceAction.LOAD_SUCCESS_TYPE_SERVICE;
 
-  constructor(public payload: string) {
+  constructor(public payload: { typeServices: TypeService }) {
   }
 }
 

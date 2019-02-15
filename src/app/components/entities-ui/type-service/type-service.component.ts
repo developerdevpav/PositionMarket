@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {selectTypeServicesByLanguage} from '../../../store/selectors/selectors';
+import {selectTypeServicesByLanguage, selectTypeServiceById} from '../../../store/selectors/selectors';
 import {
   ApiTypeServiceCreate, ApiTypeServiceDelete,
   ApiTypeServiceLoadAll, ApiTypeServiceUpdate,
   DeleteTypeServices,
   UpdateTypeService
 } from '../../../store/actions/type-service.actions';
+import { MatDialog } from '@angular/material';
+import { TypeService } from 'src/app/store/models/type-service.model';
+import { DialogEditEntityComponent } from '../../dialog-edit-entity/dialog-edit-entity.component';
 
 @Component({
   selector: 'app-type-service',
@@ -16,24 +19,62 @@ import {
 })
 export class TypeServiceComponent implements OnInit {
 
-  $typeservices: Observable<{uuid: string, value: string}[]> = this.store.select(selectTypeServicesByLanguage);
+  $typeservices: Observable<{ uuid: string, value: string }[]> = this.store.select(selectTypeServicesByLanguage);
+  value: TypeService;
 
-  constructor(private store: Store<any>) { }
+  constructor(public dialog: MatDialog, private store: Store<any>) {}
+
+  openDialog(actionRef: string, typeService: TypeService): void {
+    const dialogRef = this.dialog.open(DialogEditEntityComponent, {
+      hasBackdrop: true,
+      width: '650px',
+      height: '270px',
+      data: {
+        action: actionRef,
+        object: typeService
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data && data.action && data.entity) {
+        console.log(data + ' ' + data.change + ' ' + data.entity);
+        switch (data.action) {
+          case 'create': {
+
+            this.store.dispatch(new ApiTypeServiceCreate(data.entity));
+            break;
+          }
+          case 'change': {
+            this.store.dispatch(new ApiTypeServiceUpdate(data.entity));
+            break;
+          }
+          default: return;
+        }
+      }
+    });
+  }
 
   ngOnInit() {
+    this.$typeservices.subscribe(value1 => {
+      console.log('load list tags');
+    });
     this.store.dispatch(new ApiTypeServiceLoadAll());
   }
 
   create($event) {
-    this.store.dispatch(new ApiTypeServiceCreate($event));
+    console.log('create');
+    this.openDialog('create', $event);
   }
 
-  change($event) {
-    this.store.dispatch(new ApiTypeServiceUpdate($event));
+  changeOrView($event, action: string) {
+    this.store.select(selectTypeServiceById, {id: $event}).subscribe(value => {
+      this.value = value;
+    });
+    this.openDialog(action, this.value);
   }
 
   delete($event) {
+    console.log(`delete: ${$event}`);
     this.store.dispatch(new ApiTypeServiceDelete($event));
   }
-
 }

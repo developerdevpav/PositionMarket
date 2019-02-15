@@ -31,6 +31,20 @@ export const selectTagById = createSelector(
   }
 );
 
+export const selectTypeById = createSelector(
+  type.selectEntities,
+  (array, props) => {
+    return array[props.id];
+  }
+);
+
+export const selectTypeServiceById = createSelector(
+  typeservices.selectEntities,
+  (array, props) => {
+    return array[props.id];
+  }
+);
+
 export const selectTypesByLanguage = createSelector(
   selectLanguage,
   type.selectAll,
