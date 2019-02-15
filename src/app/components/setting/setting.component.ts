@@ -15,7 +15,6 @@ export class SettingComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
-
     this.menuListDataBase = [
       {
         label: 'Tags',
@@ -30,29 +29,19 @@ export class SettingComponent implements OnInit {
         link: '/settings/database/type-service'
       },
       {
-        label: 'Products',
-        link: '/settings/database/product'
-      },
-      {
         label: 'Attractions',
         link: '/settings/database/attraction'
       }
     ];
-    this.menu = this.menuListPrivate;
+    this.menu = this.menuListDataBase;
   }
 
   public selectedTab(e) {
-    console.log(e);
     switch (e.index) {
       case 0:
-        this.router.navigateByUrl('/settings/users');
-        this.menu = [];
-        break;
-      case 1:
         this.router.navigateByUrl('/settings/database');
         this.menu = this.menuListDataBase;
         break;
-
       default:
         console.log('material-design-mdtabs-with-router');
         break;

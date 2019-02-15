@@ -1,0 +1,11 @@
+.list-attractions {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .item-attraction {
+    display: flex;
+    width: 100%;
+    background: white;
+  }
+}

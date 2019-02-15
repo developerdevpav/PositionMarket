@@ -5,10 +5,11 @@ import {CatalogComponent} from './components/catalog/catalog.component';
 import {EntityListComponent} from './components/entity-list/entity-list.component';
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
 import {SettingComponent} from './components/setting/setting.component';
-import {EditorEntityComponent} from './components/editor-entity/editor-entity.component';
 import {TagComponent} from './components/entities-ui/tag/tag.component';
 import {TypeComponent} from './components/entities-ui/type/type.component';
 import {TypeServiceComponent} from './components/entities-ui/type-service/type-service.component';
+import {UserListComponent} from './components/user-list/user-list.component';
+import {AttractionComponent} from './components/entities-ui/attraction/attraction.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -20,12 +21,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'private',
+        redirectTo: 'database',
         pathMatch: 'full'
       },
       {
         path: 'users',
-        component: EditorEntityComponent
+        component: UserListComponent
       },
       {
         path: 'database',
@@ -38,6 +39,10 @@ const routes: Routes = [
           {
             path: 'tag',
             component: TagComponent
+          },
+          {
+            path: 'attraction',
+            component: AttractionComponent
           },
           {
             path: 'type',

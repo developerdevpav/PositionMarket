@@ -1,10 +1,5 @@
 <mat-tab-group (focusChange)="selectedTab($event)">
-  <mat-tab label="Users">
-    <ng-template mat-tab-label>
-      Users
-    </ng-template>
-  </mat-tab>
-  <mat-tab label="Data Base"></mat-tab>
+  <mat-tab label="Data Base" [routerLink]="'/settings/database'"></mat-tab>
 </mat-tab-group>
 
 <div class="setting-body">

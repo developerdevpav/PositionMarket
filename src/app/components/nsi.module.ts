@@ -5,7 +5,6 @@ import {typeReducer} from '../store/reducers/type.reducer';
 import {tagReducer} from '../store/reducers/tag.reducer';
 import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { EditorEntityComponent } from './editor-entity/editor-entity.component';
 import { SettingComponent } from './setting/setting.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import { EntityListComponent } from './entity-list/entity-list.component';
@@ -15,7 +14,7 @@ import {
   MatButtonModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatDividerModule,
+  MatDividerModule, MatExpansionModule,
   MatIconModule,
   MatListModule,
   MatTabsModule
@@ -31,12 +30,12 @@ import {typeServiceReducer} from '../store/reducers/type-service.reducer';
 import { EntitiesEditComponent } from './entities-edit/entities-edit.component';
 import { DialogEditEntityComponent } from './dialog-edit-entity/dialog-edit-entity.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CatalogComponent,
-    EditorEntityComponent,
     SettingComponent,
     EntityListComponent,
     ShoppingCartComponent,
@@ -46,11 +45,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ProductComponent,
     AttractionComponent,
     EntitiesEditComponent,
-    DialogEditEntityComponent
+    DialogEditEntityComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatExpansionModule,
     FormsModule,
     RouterModule,
     AppRoutingModule,

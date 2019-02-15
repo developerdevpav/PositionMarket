@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
-import {DialogEditEntityComponent} from '../dialog-edit-entity/dialog-edit-entity.component';
-import {MatDialog} from '@angular/material';
 import {Action, Store} from '@ngrx/store';
 
 @Component({
