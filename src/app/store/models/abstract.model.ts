@@ -1,5 +1,7 @@
-export interface Nsi {
+export interface BaseEntity {
   id: string;
+}
+export interface Nsi extends BaseEntity {
   values: Value[];
 }
 

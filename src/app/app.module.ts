@@ -19,6 +19,8 @@ import {TagEffects} from './store/effects/tag.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatDividerModule, MatIconModule, MatTabsModule} from '@angular/material';
 import {TypeServiceEffects} from './store/effects/type-service.effects';
+import {AttractionService} from './store/services/attraction.service';
+import {AttractionEffects} from './store/effects/attraction.effects';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,12 @@ import {TypeServiceEffects} from './store/effects/type-service.effects';
       maxAge: 25
     }),
     AngularSvgIconModule,
-    EffectsModule.forRoot([TypeEffects, TagEffects, TypeServiceEffects]),
+    EffectsModule.forRoot([
+      TypeEffects,
+      TagEffects,
+      TypeServiceEffects,
+      AttractionEffects
+    ]),
     NsiModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -55,7 +62,7 @@ import {TypeServiceEffects} from './store/effects/type-service.effects';
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [NsiAbstractService],
+  providers: [NsiAbstractService, AttractionService],
   exports: [
     AppRoutingModule,
     MatButtonModule,

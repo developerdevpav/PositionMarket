@@ -5,11 +5,11 @@ import {CatalogComponent} from './components/catalog/catalog.component';
 import {EntityListComponent} from './components/entity-list/entity-list.component';
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
 import {SettingComponent} from './components/setting/setting.component';
-import {TagComponent} from './components/entities-ui/tag/tag.component';
-import {TypeComponent} from './components/entities-ui/type/type.component';
-import {TypeServiceComponent} from './components/entities-ui/type-service/type-service.component';
+import {TagComponent} from './components/setting-components/entities-ui/tag/tag.component';
+import {TypeComponent} from './components/setting-components/entities-ui/type/type.component';
+import {TypeServiceComponent} from './components/setting-components/entities-ui/type-service/type-service.component';
 import {UserListComponent} from './components/user-list/user-list.component';
-import {AttractionComponent} from './components/entities-ui/attraction/attraction.component';
+import {AttractionComponent} from './components/setting-components/entities-ui/attraction/attraction.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},

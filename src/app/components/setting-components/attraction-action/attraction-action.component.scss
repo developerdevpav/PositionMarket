@@ -1,11 +1,15 @@
-.list-attractions {
+
+.container-item {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  border-top: 2px cadetblue solid;
 
-  .item-attraction {
+  div {
     display: flex;
     width: 100%;
-    background: white;
+    flex-wrap: wrap;
   }
+
+
 }

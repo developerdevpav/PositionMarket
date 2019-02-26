@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {selectTypeServicesByLanguage, selectTypeServiceById} from '../../../store/selectors/selectors';
+import {selectTypeServicesByLanguage, selectTypeServiceById} from '../../../../store/selectors/selectors';
 import {
   ApiTypeServiceCreate, ApiTypeServiceDelete,
   ApiTypeServiceLoadAll, ApiTypeServiceUpdate,
   DeleteTypeServices,
   UpdateTypeService
-} from '../../../store/actions/type-service.actions';
+} from '../../../../store/actions/type-service.actions';
 import { MatDialog } from '@angular/material';
 import { TypeService } from 'src/app/store/models/type-service.model';
 import { DialogEditEntityComponent } from '../../dialog-edit-entity/dialog-edit-entity.component';

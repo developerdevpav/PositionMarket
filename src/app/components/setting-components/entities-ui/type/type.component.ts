@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {selectTagsByLanguage, selectTypeById, selectTypesByLanguage} from '../../../store/selectors/selectors';
+import {selectTagsByLanguage, selectTypeById, selectTypesByLanguage} from '../../../../store/selectors/selectors';
 import {
   ApiTypeCreate,
   ApiTypeDelete,
   ApiTypeLoadAll,
   ApiTypeUpdate
-} from '../../../store/actions/type.actions';
+} from '../../../../store/actions/type.actions';
 import {DialogEditEntityComponent} from '../../dialog-edit-entity/dialog-edit-entity.component';
-import {ApiTagCreate, ApiTagDelete, ApiTagLoadAll, ApiTagUpdate} from '../../../store/actions/tag.actions';
+import {ApiTagCreate, ApiTagDelete, ApiTagLoadAll, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {MatDialog} from '@angular/material';
-import {Tag} from '../../../store/models/tag.model';
-import {Type} from '../../../store/models/type.model';
+import {Tag} from '../../../../store/models/tag.model';
+import {Type} from '../../../../store/models/type.model';
 
 @Component({
   selector: 'app-type',

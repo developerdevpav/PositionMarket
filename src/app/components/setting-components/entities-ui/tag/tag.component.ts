@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {Action, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {selectTagById, selectTagsByLanguage} from '../../../store/selectors/selectors';
+import {selectTagById, selectTagsByLanguage} from '../../../../store/selectors/selectors';
 import {
   ApiTagCreate,
   ApiTagDelete,
   ApiTagLoadAll, ApiTagLoadById,
   ApiTagUpdate
-} from '../../../store/actions/tag.actions';
+} from '../../../../store/actions/tag.actions';
 import {DialogEditEntityComponent} from '../../dialog-edit-entity/dialog-edit-entity.component';
 import {MatDialog} from '@angular/material';
-import {Tag} from '../../../store/models/tag.model';
+import {Tag} from '../../../../store/models/tag.model';
 
 @Component({
   selector: 'app-tag',

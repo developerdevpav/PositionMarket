@@ -1,0 +1,13 @@
+<div class="action-panel">
+
+</div>
+<div class="list-position">
+  <div class="item-position" *ngFor="let item of attractions$ | async">
+    <div class="list-item" (click)="functionSelectAction(item.uuid)">
+      <div class="item-title">
+        {{item.title}}
+      </div>
+    </div>
+    <app-attraction-action [hidden]="!isSelect(item.uuid)" [attraction$]="item"></app-attraction-action>
+  </div>
+</div>
