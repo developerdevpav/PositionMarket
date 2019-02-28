@@ -19,7 +19,7 @@
       width: 60%;
       height: 100%;
       padding-top: 14px;
-      padding-left: 10px;
+      padding-left: 22px;
       color: black;
     }
 
@@ -27,7 +27,6 @@
       width: 40%;
       height: 100%;
       display: flex;
-      //background: white;
       justify-content: flex-end;
       align-items: center;
 
@@ -37,11 +36,6 @@
         margin-right: 10px;
       }
 
-      /*button {
-        width: 100px;
-        height: 40px;
-        margin-right: 10px;
-      }*/
     }
   }
 
@@ -51,30 +45,5 @@
 
   .entity:nth-last-child(1) {
     margin-bottom: 0;
-  }
-}
-
-.header-list-fixed {
-  position: sticky;
-  top: 80px;
-  left: 0;
-  z-index: 1000;
-  background: #000098;
-  width: 100%;
-  .header-list {
-    display: flex;
-    width: 100%;
-    flex-wrap: nowrap;
-    margin: 0 0 20px 0;
-    justify-content: flex-end;
-    align-items: center;
-    background: white;
-    height: 70px;
-
-    button {
-      margin-right: 20px;
-      width: 100px;
-      height: 40px;
-    }
   }
 }

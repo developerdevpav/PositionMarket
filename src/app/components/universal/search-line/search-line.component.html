@@ -1,0 +1,9 @@
+<div class="component-search">
+  <input type="text" [(ngModel)]="text"
+         (blur)="focusInput($event)"
+         (focus)="focusInput($event)"
+         (keydown)="keydown($event)"
+         (input)="input()"
+         title="search"
+         placeholder="Search" name="input-search">
+</div>

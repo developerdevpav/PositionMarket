@@ -10,7 +10,7 @@ import {
 } from '../../../../store/actions/type-service.actions';
 import { MatDialog } from '@angular/material';
 import { TypeService } from 'src/app/store/models/type-service.model';
-import { DialogEditEntityComponent } from '../../dialog-edit-entity/dialog-edit-entity.component';
+import { DialogEditEntityComponent } from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 
 @Component({
   selector: 'app-type-service',

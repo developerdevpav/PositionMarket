@@ -29,8 +29,8 @@ mat-list {
   }
 
   mat-list-item:hover {
-    background: #0000e7;
-    color: white;
+    outline-width: 1px;
+    outline-color: #00a4ee;
     cursor: pointer;
   }
 }
@@ -41,6 +41,8 @@ mat-tab-group {
 }
 
 .active {
-  background: #000098;
+  background: #0000d9;
   color: white;
 }
+
+

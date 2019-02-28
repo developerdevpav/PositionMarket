@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Store} from '@ngrx/store';
-import {Nsi} from '../../store/models/abstract.model';
-import {Language} from '../../store/models/language.model';
+import {Nsi} from '../../../../store/models/abstract.model';
+import {Language} from '../../../../store/models/language.model';
 
 @Component({
   selector: 'app-dialog-edit-entity',
@@ -26,7 +26,8 @@ export class DialogEditEntityComponent implements OnInit {
   };
 
   constructor(public dialogRef: MatDialogRef<DialogEditEntityComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { action: string, object: Nsi }, public store: Store<any>) {
+              @Inject(MAT_DIALOG_DATA) public data: { action: string, object: Nsi },
+              public store: Store<any>) {
   }
 
   ngOnInit(): void {
@@ -43,6 +44,6 @@ export class DialogEditEntityComponent implements OnInit {
   }
 
   add() {
-    this.dialogRef.close({ action: this.data.action, entity: this.nsi });
+    this.dialogRef.close({action: this.data.action, entity: this.nsi});
   }
 }

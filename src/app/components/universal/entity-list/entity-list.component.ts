@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Action, Store} from '@ngrx/store';
 
 @Component({
@@ -11,6 +11,7 @@ export class EntityListComponent implements OnInit {
 
   @Input()
   list$: Observable<{ uuid: string, value: string }[]>;
+  listByParam$: Observable<{ uuid: string, value: string }[]>;
 
   selected: string[] = [];
 
@@ -21,7 +22,10 @@ export class EntityListComponent implements OnInit {
 
   @Output() getElementById = new EventEmitter<Action>();
 
-  constructor(public store: Store<any>) {}
+  public paramSearch = '';
+
+  constructor(public store: Store<any>) {
+  }
 
   create() {
     console.log('create EntityListComponent');
@@ -70,6 +74,20 @@ export class EntityListComponent implements OnInit {
   ngOnInit() {
     console.log('load listEntity');
     this.selected = [];
+    this.listByParam$ = this.list$;
   }
 
+  getParamSearch($event) {
+    console.log('Value: ' + $event);
+    if (!$event) {
+      this.listByParam$ = this.list$;
+      return;
+    }
+
+    this.list$.subscribe(list => {
+      this.listByParam$ = of(list.filter(it => {
+        return it.value.toLocaleLowerCase().startsWith($event.toLocaleLowerCase());
+      }));
+    });
+  }
 }

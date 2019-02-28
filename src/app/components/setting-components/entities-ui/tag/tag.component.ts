@@ -8,7 +8,7 @@ import {
   ApiTagLoadAll, ApiTagLoadById,
   ApiTagUpdate
 } from '../../../../store/actions/tag.actions';
-import {DialogEditEntityComponent} from '../../dialog-edit-entity/dialog-edit-entity.component';
+import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {MatDialog} from '@angular/material';
 import {Tag} from '../../../../store/models/tag.model';
 

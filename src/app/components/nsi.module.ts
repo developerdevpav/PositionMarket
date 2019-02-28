@@ -5,9 +5,7 @@ import {typeReducer} from '../store/reducers/type.reducer';
 import {tagReducer} from '../store/reducers/tag.reducer';
 import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { SettingComponent } from './setting/setting.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import { EntityListComponent } from './entity-list/entity-list.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import {AppRoutingModule} from '../app-routing.module';
 
@@ -26,15 +24,15 @@ import { TagComponent } from './setting-components/entities-ui/tag/tag.component
 import { TypeComponent } from './setting-components/entities-ui/type/type.component';
 import { TypeServiceComponent } from './setting-components/entities-ui/type-service/type-service.component';
 import {languageReducer} from '../store/reducers/language.reducer';
-import { ProductComponent } from './setting-components/entities-ui/product/product.component';
 import { AttractionComponent } from './setting-components/entities-ui/attraction/attraction.component';
 import {typeServiceReducer} from '../store/reducers/type-service.reducer';
-import { EntitiesEditComponent } from './entities-edit/entities-edit.component';
-import { DialogEditEntityComponent } from './dialog-edit-entity/dialog-edit-entity.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { UserListComponent } from './user-list/user-list.component';
-import { AttractionActionComponent } from './setting-components/attraction-action/attraction-action.component';
 import {attractionReducer} from '../store/reducers/attraction.reducer';
+import { PanelEntityComponent } from './universal/panel-entity/panel-entity.component';
+import {DialogEditEntityComponent} from './universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
+import {EntityListComponent} from './universal/entity-list/entity-list.component';
+import {SettingComponent} from './setting-components/setting/setting.component';
+import { SearchLineComponent } from './universal/search-line/search-line.component';
 
 @NgModule({
   declarations: [
@@ -46,12 +44,10 @@ import {attractionReducer} from '../store/reducers/attraction.reducer';
     TagComponent,
     TypeComponent,
     TypeServiceComponent,
-    ProductComponent,
     AttractionComponent,
-    EntitiesEditComponent,
     DialogEditEntityComponent,
-    UserListComponent,
-    AttractionActionComponent
+    PanelEntityComponent,
+    SearchLineComponent
   ],
   imports: [
     CommonModule,

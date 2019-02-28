@@ -1,0 +1,16 @@
+<app-panel-entity
+  (changeChange)="change()"
+  (createChange)="create()"
+  (deleteChange)="deleteFunction()"
+  (viewChange)="view()" [selected]="selected.length" (paramSearch)="getParamSearch($event)"></app-panel-entity>
+
+<div class="list-entity">
+  <div class="entity" *ngFor="let item of listByParam$ | async">
+    <div class="title">
+      {{item.value}}
+    </div>
+    <div class="actions">
+      <mat-checkbox (change)="checkboxEvent($event, item.uuid)" [checked]="historySelect(item.uuid)" color="primary"></mat-checkbox>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="panel-fixed">
+  <div class="panel-action">
+    <app-search-line [ngClass]="{'full': focusSearch}"
+                     (textSearch)="paramSearch.emit($event)"
+      (focus)="changeFocusSearchInput($event)"></app-search-line>
+    <div class="panel-action-buttons" [ngClass]="{'panel-action-buttons-disable': focusSearch}">
+      <button mat-stroked-button color="primary" (click)="create()">Create</button>
+      <button [hidden]="selected > 1 || selected === 0" mat-stroked-button color="primary" (click)="view()">View
+      </button>
+      <button [hidden]="selected > 1 || selected === 0" mat-stroked-button color="primary" (click)="change()">Edit
+      </button>
+      <button [hidden]="selected === 0" mat-stroked-button color="primary" (click)="deleteFunction()">Remove</button>
+    </div>
+  </div>
+</div>
