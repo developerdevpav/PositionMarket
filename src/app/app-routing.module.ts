@@ -50,7 +50,11 @@ const routes: Routes = [
       }
     ]
   },
-  {path: 'shopping-cart', component: ShoppingCartComponent, pathMatch: 'full'}
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent,
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

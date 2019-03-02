@@ -17,7 +17,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {HttpLoaderFactory} from './ui/translate.service';
 import {TagEffects} from './store/effects/tag.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatDividerModule, MatIconModule, MatTabsModule} from '@angular/material';
+import {MatButtonModule, MatChipsModule, MatDividerModule, MatIconModule, MatTabsModule} from '@angular/material';
 import {TypeServiceEffects} from './store/effects/type-service.effects';
 import {AttractionService} from './store/services/attraction.service';
 import {AttractionEffects} from './store/effects/attraction.effects';
@@ -55,7 +55,8 @@ import {AttractionEffects} from './store/effects/attraction.effects';
     MatTabsModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule
   ],
   bootstrap: [AppComponent],
   schemas: [
@@ -69,7 +70,8 @@ import {AttractionEffects} from './store/effects/attraction.effects';
     MatTabsModule,
     MatDividerModule,
     BrowserModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule
   ]
 })
 export class AppModule { }

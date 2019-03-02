@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AttractionModel} from '../../../../store/models/attraction-model';
-import {Observable, of} from 'rxjs';
-import {selectAll} from 'src/app/store/reducers/attraction.reducer';
+import {Observable} from 'rxjs';
 import {ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
-import {selectAttractionsByLanguage, selectTagById} from '../../../../store/selectors/selectors';
-import {AttractionUI} from '../../../../ui/models';
-import {ApiTagDelete} from '../../../../store/actions/tag.actions';
+import {selectAttractionsByLanguageArrayList} from '../../../../store/selectors/selectors';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-attraction',
@@ -15,16 +13,9 @@ import {ApiTagDelete} from '../../../../store/actions/tag.actions';
 })
 export class AttractionComponent implements OnInit {
 
-  attractions$: Observable<AttractionUI[]> = this.store.select(selectAttractionsByLanguage);
-  listForList$: Observable<{ uuid: string, value: string } []>;
+  listForList$: Observable<{ uuid: string, value: string } []> = this.store.select(selectAttractionsByLanguageArrayList);
 
   constructor(private store: Store<AttractionModel>) {
-    this.attractions$.subscribe((array) => {
-      const list = array.map((position) => {
-        return {uuid: position.uuid, value: position.title};
-      });
-      this.listForList$ = of(list);
-    });
   }
 
   ngOnInit() {
@@ -32,7 +23,6 @@ export class AttractionComponent implements OnInit {
   }
 
   create($event) {
-    console.log('attraction create');
   }
 
   changeOrView($event, action: string) {

@@ -46,6 +46,16 @@ export const selectAttractionsByLanguage = createSelector(
   }
 );
 
+export const selectAttractionsByLanguageArrayList = createSelector(
+  selectLanguage,
+  attraction.selectAll,
+  (lang: LanguageState, array: AttractionModel[]) => {
+    return array.map(value => {
+      return { uuid: value.id, value:  getStringFromArrayValuesByLanguage(value.title, lang.language)};
+    });
+  }
+);
+
 export const selectTagById = createSelector(
   tag.selectEntities,
   (array, props) => {

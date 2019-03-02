@@ -11,7 +11,7 @@ import {AppRoutingModule} from '../app-routing.module';
 
 import {
   MatButtonModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatChipsModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
@@ -33,6 +33,7 @@ import {DialogEditEntityComponent} from './universal/dialogs/dialog-edit-entity/
 import {EntityListComponent} from './universal/entity-list/entity-list.component';
 import {SettingComponent} from './setting-components/setting/setting.component';
 import { SearchLineComponent } from './universal/search-line/search-line.component';
+import { DialogActionAttractionComponent } from './universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 
 @NgModule({
   declarations: [
@@ -47,9 +48,11 @@ import { SearchLineComponent } from './universal/search-line/search-line.compone
     AttractionComponent,
     DialogEditEntityComponent,
     PanelEntityComponent,
-    SearchLineComponent
+    SearchLineComponent,
+    DialogActionAttractionComponent
   ],
   imports: [
+    MatChipsModule,
     CommonModule,
     ReactiveFormsModule,
     MatExpansionModule,
