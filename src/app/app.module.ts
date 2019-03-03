@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {StoreModule} from '@ngrx/store';
@@ -17,10 +16,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import {HttpLoaderFactory} from './ui/translate.service';
 import {TagEffects} from './store/effects/tag.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatChipsModule, MatDividerModule, MatIconModule, MatTabsModule} from '@angular/material';
 import {TypeServiceEffects} from './store/effects/type-service.effects';
 import {AttractionService} from './store/services/attraction.service';
 import {AttractionEffects} from './store/effects/attraction.effects';
+import {AngularMaterialModule} from './angular-material.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +27,7 @@ import {AttractionEffects} from './store/effects/attraction.effects';
   ],
   imports: [
     BrowserModule,
+    AngularMaterialModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -52,11 +52,7 @@ import {AttractionEffects} from './store/effects/attraction.effects';
       }
     }),
     BrowserAnimationsModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatChipsModule
+
   ],
   bootstrap: [AppComponent],
   schemas: [
@@ -66,12 +62,7 @@ import {AttractionEffects} from './store/effects/attraction.effects';
   providers: [NsiAbstractService, AttractionService],
   exports: [
     AppRoutingModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatDividerModule,
-    BrowserModule,
-    MatIconModule,
-    MatChipsModule
+    BrowserModule
   ]
 })
 export class AppModule { }

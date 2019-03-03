@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {selectTagsByLanguage, selectTypeById, selectTypesByLanguage} from '../../../../store/selectors/selectors';
+import {selectTypeById, selectTypesByLanguage} from '../../../../store/selectors/selectors';
 import {
   ApiTypeCreate,
   ApiTypeDelete,
@@ -9,9 +9,7 @@ import {
   ApiTypeUpdate
 } from '../../../../store/actions/type.actions';
 import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
-import {ApiTagCreate, ApiTagDelete, ApiTagLoadAll, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {MatDialog} from '@angular/material';
-import {Tag} from '../../../../store/models/tag.model';
 import {Type} from '../../../../store/models/type.model';
 
 @Component({

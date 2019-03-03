@@ -28,6 +28,14 @@ export const selectTagsByLanguage = createSelector(
   }
 );
 
+export const selectAttractionById = createSelector(
+  attraction.selectEntities,
+  (array, props) => {
+    console.log(`${props.id} props`);
+    return array[props.id];
+  }
+);
+
 export const selectAttractionsByLanguage = createSelector(
   selectLanguage,
   attraction.selectAll,

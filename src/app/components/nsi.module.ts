@@ -34,6 +34,8 @@ import {EntityListComponent} from './universal/entity-list/entity-list.component
 import {SettingComponent} from './setting-components/setting/setting.component';
 import { SearchLineComponent } from './universal/search-line/search-line.component';
 import { DialogActionAttractionComponent } from './universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
+import { EntityChipActionComponent } from './universal/entity-chip-action/entity-chip-action.component';
+import {AngularMaterialModule} from '../angular-material.module';
 
 @NgModule({
   declarations: [
@@ -49,32 +51,24 @@ import { DialogActionAttractionComponent } from './universal/dialogs/dialog-acti
     DialogEditEntityComponent,
     PanelEntityComponent,
     SearchLineComponent,
-    DialogActionAttractionComponent
+    DialogActionAttractionComponent,
+    EntityChipActionComponent
   ],
   imports: [
-    MatChipsModule,
     CommonModule,
     ReactiveFormsModule,
-    MatExpansionModule,
     FormsModule,
     RouterModule,
+    AngularMaterialModule,
     AppRoutingModule,
     AngularSvgIconModule,
     StoreModule.forFeature('types', typeReducer),
     StoreModule.forFeature('attractions', attractionReducer),
     StoreModule.forFeature('tags', tagReducer),
     StoreModule.forFeature('language', languageReducer),
-    StoreModule.forFeature('typeservises', typeServiceReducer),
-    MatDialogModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatDialogModule,
-    MatCheckboxModule
+    StoreModule.forFeature('typeservises', typeServiceReducer)
   ],
-  entryComponents: [DialogEditEntityComponent],
+  entryComponents: [DialogEditEntityComponent, DialogActionAttractionComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NsiModule { }

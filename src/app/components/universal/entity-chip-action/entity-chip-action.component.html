@@ -1,0 +1,20 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{title}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-chip color="primary" *ngFor="let it of currentList$">
+    {{it.value}}
+  </mat-chip>
+  <p>
+    -----------------------------------------------------
+  </p>
+  <mat-chip-list>
+    <mat-chip color="primary" [selected]="true"
+              *ngFor="let it of loadList$ | async">
+      {{it.value}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-expansion-panel>

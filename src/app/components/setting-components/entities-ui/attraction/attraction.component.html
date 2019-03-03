@@ -1,7 +1,5 @@
 <app-entity-list
   (viewChange)="changeOrView($event, 'view')"
-  (createChange)="create($event)"
+  (createChange)="create()"
   (changeChange)="changeOrView($event, 'change')"
   (deleteChange)="delete($event)" [list$]="listForList$"></app-entity-list>
-
-<app-attraction-edit-panel *ngIf="display" (display)="viewPanel($event)"></app-attraction-edit-panel>
