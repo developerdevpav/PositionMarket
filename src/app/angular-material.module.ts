@@ -6,7 +6,8 @@ import {
   MatExpansionModule,
   MatIconModule,
   MatListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -14,6 +15,7 @@ import {
   imports: [
     MatButtonModule,
     MatExpansionModule,
+    MatSelectModule,
     MatDialogModule,
     MatTabsModule,
     MatListModule,
@@ -26,6 +28,7 @@ import {
     MatButtonModule,
     MatExpansionModule,
     MatDialogModule,
+    MatSelectModule,
     MatTabsModule,
     MatListModule,
     MatDividerModule,

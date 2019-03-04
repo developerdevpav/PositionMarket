@@ -4,45 +4,17 @@
   flex-wrap: nowrap;
   margin-top: 20px;
 
-  .left-menu {
-    position: sticky;
-    top: 80px;
-    left: 0;
-    z-index: 1000;
-    width: 30%;
-    height: fit-content;
-  }
 
-  .place-component {
-    width: 70%;
-    margin-left: 20px;
-    //background: white;
-    height: fit-content;
-  }
 }
 
-mat-list {
-  background: white;
-  mat-list-item {
-    height: 40px;
-    cursor: pointer;
-  }
-
-  mat-list-item:hover {
-    outline-width: 1px;
-    outline-color: #00a4ee;
-    cursor: pointer;
+.setting-body__component {
+  width: 100%;
+  height: fit-content;
+  mat-form-field {
+    background: white;
   }
 }
 
 mat-tab-group {
   background: white;
-  width: 100%;
 }
-
-.active {
-  background: #0000d9;
-  color: white;
-}
-
-

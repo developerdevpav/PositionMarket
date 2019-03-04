@@ -3,12 +3,7 @@
 </mat-tab-group>
 
 <div class="setting-body">
-  <mat-list class="left-menu" role="list">
-    <mat-list-item *ngFor="let it of menu" role="listitem" [routerLink]="[it.link]" routerLinkActive="active">
-       {{it.label}}
-    </mat-list-item>
-  </mat-list>
-  <div class="place-component">
+  <div class="setting-body__component">
     <router-outlet></router-outlet>
   </div>
 </div>
