@@ -1,0 +1,6 @@
+<div class="list-table">
+  <button class="list-table__table-link" mat-stroked-button *ngFor="let it of tables"
+          [routerLink]="it.link">{{it.label}}</button>
+</div>
+
+<router-outlet></router-outlet>

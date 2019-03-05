@@ -61,6 +61,7 @@ export class EntityListComponent implements OnInit {
   }
 
   checkboxEvent($event, uuid: string) {
+    console.log(`uuid: ${uuid} checked: ${$event.checked}`);
     switch ($event.checked) {
       case true: {
         return this.addToSelectList(uuid);

@@ -1,9 +1,9 @@
 <div class="panel-fixed">
   <app-search-line class="panel-fixed__search" [ngClass]="{'panel-fixed__full': focusSearch}" (textSearch)="paramSearch.emit($event)" (focus)="changeFocusSearchInput($event)"></app-search-line>
-  <div class="panel-fixed__buttons" [ngClass]="{'panel-fixed__buttons-disable': focusSearch}">
+  <div class="panel-fixed__buttons">
     <button mat-stroked-button color="primary" (click)="create()">Create</button>
-    <button [hidden]="selected > 1 || selected === 0" mat-stroked-button color="primary" (click)="view()">View</button>
-    <button [hidden]="selected > 1 || selected === 0" mat-stroked-button color="primary" (click)="change()">Edit</button>
-    <button [hidden]="selected === 0" mat-stroked-button color="primary" (click)="deleteFunction()">Remove</button>
+    <button *ngIf="selected > 0 && selected < 2" mat-stroked-button color="primary" (click)="view()">View</button>
+    <button *ngIf="selected > 0 && selected < 2" mat-stroked-button color="primary" (click)="change()">Edit</button>
+    <button *ngIf="selected > 0" mat-stroked-button color="primary" (click)="deleteFunction()">Remove</button>
   </div>
 </div>

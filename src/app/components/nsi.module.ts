@@ -36,6 +36,7 @@ import { SearchLineComponent } from './universal/search-line/search-line.compone
 import { DialogActionAttractionComponent } from './universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 import { EntityChipActionComponent } from './universal/entity-chip-action/entity-chip-action.component';
 import {AngularMaterialModule} from '../angular-material.module';
+import { DataBaseComponent } from './setting-components/data-base/data-base.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {AngularMaterialModule} from '../angular-material.module';
     PanelEntityComponent,
     SearchLineComponent,
     DialogActionAttractionComponent,
-    EntityChipActionComponent
+    EntityChipActionComponent,
+    DataBaseComponent
   ],
   imports: [
     CommonModule,
