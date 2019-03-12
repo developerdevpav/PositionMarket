@@ -1,43 +1,18 @@
-<div class="list">
-  <div class="list__item">
-    <mat-expansion-panel class="expansion-panel-input">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Title position
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <input type="text" placeholder="ru-value">
-      <input type="text" placeholder="en-value">
-    </mat-expansion-panel>
+<div class="items">
+  <div class="items__item">
+    <input class="items__input" type="text" placeholder="Title on russian language">
+    <input class="items__input" type="text" placeholder="Title on english language">
   </div>
-  <div class="list__item">
-    <mat-expansion-panel class="expansion-panel-input">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Link position
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <input type="text" [(ngModel)]="attraction.link" placeholder="url on attraction page">
-    </mat-expansion-panel>
+  <div class="items__item">
+    <input class="items__input" type="text" placeholder="Link on position image">
   </div>
-  <div class="list__item">
-    <mat-expansion-panel class="expansion-panel-input">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Image position
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <input type="text" [(ngModel)]="attraction.image" placeholder="url on image of attraction">
-    </mat-expansion-panel>
+  <div class="items__item">
+    <input class="items__input" type="text" placeholder="Link on position">
   </div>
-  <div class="list__item">
-    <app-entity-chip-action [currentList$]="attraction.tags" [title]="'Tags'"
-                            [loadList$]="tags$"></app-entity-chip-action>
+  <div class="items__item">
+    <a class="items__input" mat-stroked-button (click)="openDialog()">Tags {{attraction.tags.length}}</a>
   </div>
-  <div class="list__item">
-    <app-entity-chip-action [currentList$]="attraction.types" [title]="'Types'"
-                            [loadList$]="types$"></app-entity-chip-action>
+  <div class="items__item">
+    <a class="items__input" mat-stroked-button (click)="openDialog()">Types {{attraction.types.length}}</a>
   </div>
 </div>
-
-

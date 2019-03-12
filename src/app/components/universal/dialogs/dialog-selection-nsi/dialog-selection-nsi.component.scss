@@ -1,0 +1,35 @@
+.boxs {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.boxs__item {
+  display: flex;
+  width: 100%;
+  margin-right: 20px;
+  flex-wrap: wrap;
+}
+
+.boxs__item:last-child {
+  margin-right: 0;
+}
+
+
+.boxs__search {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.boxs__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+}
+
+.boxs__mat-chip {
+
+ }

@@ -2,15 +2,16 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {AttractionModel} from '../../../../store/models/attraction-model';
 import {Store} from '@ngrx/store';
 import {selectAttractionById, selectTagsByLanguage, selectTypesByLanguage} from '../../../../store/selectors/selectors';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Type} from '../../../../store/models/type.model';
 import {Value} from '../../../../store/models/abstract.model';
 import {Tag} from '../../../../store/models/tag.model';
 import {Product} from '../../../../store/models/products';
 import {Observable} from 'rxjs';
 import {NsiUI} from '../../../../ui/models';
-import {ApiTagLoadAll} from '../../../../store/actions/tag.actions';
+import {ApiTagCreate, ApiTagLoadAll, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {ApiTypeLoadAll} from '../../../../store/actions/type.actions';
+import {DialogSelectionNsiComponent} from '../dialog-selection-nsi/dialog-selection-nsi.component';
 
 @Component({
   selector: 'app-dialog-action-attraction',
@@ -34,9 +35,19 @@ export class DialogActionAttractionComponent implements OnInit {
     types: Type[] = [];
   };
 
-  constructor(public store: Store<any>, public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
+  constructor(public dialog: MatDialog, public store: Store<any>, public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string }) {
+  }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogSelectionNsiComponent, {
+      hasBackdrop: true,
+      width: '70%',
+      height: 'auto',
+      data: {}
+    });
+
+    dialogRef.afterClosed();
   }
 
   ngOnInit() {

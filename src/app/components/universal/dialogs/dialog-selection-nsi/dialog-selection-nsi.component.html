@@ -1,0 +1,27 @@
+<div class="boxs">
+  <div class="boxs__item">
+    <div class="boxs__search">
+      <app-search-line></app-search-line>
+    </div>
+    <div class="boxs__content">
+      <mat-chip-list class="boxs__mat-chip-list" aria-orientation="vertical">
+        <mat-chip class="boxs__mat-chip" *ngFor="let it of [1, 2, 3, 4, 5]" [selected]="true" color="primary">
+          Papadum
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+  <div class="boxs__item">
+    <div class="boxs__content">
+      <mat-chip-list class="boxs__mat-chip-list" aria-orientation="vertical">
+        <mat-chip class="boxs__mat-chip" *ngFor="let it of [1, 2, 3, 4, 5]" [selected]="true" color="primary">
+          Papadum
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>
+
+

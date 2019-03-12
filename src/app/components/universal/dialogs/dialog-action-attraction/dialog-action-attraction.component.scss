@@ -1,32 +1,26 @@
-.list {
+.items {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
 }
 
-.list__item {
+.items__item {
+  display: flex;
+  flex-wrap: nowrap;
   width: 100%;
-  margin: 10px 0 10px 0;
+  margin-bottom: 20px;
 }
 
-.list__item > h5 {
-  color: #404040;
-  margin-left: 2px;
-}
-
-.list__item:first-child {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.list__item:last-child {
+.items__input:last-child {
   margin-bottom: 0;
 }
 
-.list__item > input[type='text'] {
-  margin-bottom: 10px;
+.items__input {
+  display: flex;
+  width: 100%;
+  margin-right: 15px;
 }
 
-.list__item > input[type='text']:last-child {
-  margin-bottom: 0;
+.items__input:last-child {
+  margin-right: 0;
 }
