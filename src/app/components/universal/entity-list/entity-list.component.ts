@@ -79,7 +79,6 @@ export class EntityListComponent implements OnInit {
   }
 
   getParamSearch($event) {
-    console.log('Value: ' + $event);
     if (!$event) {
       this.listByParam$ = this.list$;
       return;

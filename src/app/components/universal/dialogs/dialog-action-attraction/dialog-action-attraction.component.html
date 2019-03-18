@@ -1,18 +1,25 @@
-<div class="items">
-  <div class="items__item">
-    <input class="items__input" type="text" placeholder="Title on russian language">
-    <input class="items__input" type="text" placeholder="Title on english language">
+<mat-dialog-content>
+  <div class="items">
+    <div class="items__item">
+      <input class="items__input" type="text" placeholder="Title on russian language">
+      <input class="items__input" type="text" placeholder="Title on english language">
+    </div>
+    <div class="items__item">
+      <input class="items__input" type="text" placeholder="Link on position image">
+    </div>
+    <div class="items__item">
+      <input class="items__input" type="text" placeholder="Link on position">
+    </div>
+    <div class="items__item">
+      <a class="items__input" mat-stroked-button (click)="openDialog()">Types {{attraction.types.length}}</a>
+    </div>
+    <div class="items__item">
+      <a class="items__input" mat-stroked-button (click)="openDialog()">Types {{attraction.types.length}}</a>
+    </div>
   </div>
-  <div class="items__item">
-    <input class="items__input" type="text" placeholder="Link on position image">
-  </div>
-  <div class="items__item">
-    <input class="items__input" type="text" placeholder="Link on position">
-  </div>
-  <div class="items__item">
-    <a class="items__input" mat-stroked-button (click)="openDialog()">Tags {{attraction.tags.length}}</a>
-  </div>
-  <div class="items__item">
-    <a class="items__input" mat-stroked-button (click)="openDialog()">Types {{attraction.types.length}}</a>
-  </div>
-</div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true">Cancel</button>
+  <button mat-button cdkFocusInitial>Save</button>
+</mat-dialog-actions>

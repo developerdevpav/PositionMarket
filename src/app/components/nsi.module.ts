@@ -27,6 +27,7 @@ import {EntityChipActionComponent} from './universal/entity-chip-action/entity-c
 import {AngularMaterialModule} from '../angular-material.module';
 import {DataBaseComponent} from './setting-components/data-base/data-base.component';
 import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
+import { ItemListWithTitleAndCheckboxComponent } from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selectio
     DialogActionAttractionComponent,
     EntityChipActionComponent,
     DataBaseComponent,
-    DialogSelectionNsiComponent
+    DialogSelectionNsiComponent,
+    ItemListWithTitleAndCheckboxComponent
   ],
   imports: [
     CommonModule,

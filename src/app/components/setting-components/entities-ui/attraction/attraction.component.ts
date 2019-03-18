@@ -26,9 +26,15 @@ export class AttractionComponent implements OnInit {
 
   openDialog(actionRef: string, uuid: string): void {
     const dialogRef = this.dialog.open(DialogActionAttractionComponent, {
-      hasBackdrop: true,
-      width: '70%',
-      height: 'auto',
+      position: {
+        top: '10',
+        left: '10',
+        right: '10'
+      },
+      width: '100%',
+      height: '100%',
+      maxHeight: 'none',
+      maxWidth: 'none',
       data: {
         action: actionRef,
         id: uuid

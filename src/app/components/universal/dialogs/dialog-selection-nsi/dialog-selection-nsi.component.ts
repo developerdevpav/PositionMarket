@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {NsiUI} from '../../../../ui/models';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-dialog-selection-nsi',
@@ -10,11 +10,14 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class DialogSelectionNsiComponent implements OnInit {
 
-  @Input()
-  public selectedNsi$: Observable<NsiUI[]>;
+  selected = [];
 
   @Input()
+  public selectedNsi$: Observable<NsiUI[]>;
+  @Input()
   public allNsi$: Observable<NsiUI[]>;
+
+  isEntering = false;
 
   constructor(public dialogRef: MatDialogRef<DialogSelectionNsiComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string }) { }
@@ -22,4 +25,19 @@ export class DialogSelectionNsiComponent implements OnInit {
   ngOnInit() {
   }
 
+  checkboxEvent($event, uuid: string) {
+    if ( $event.checked ) {
+      this.selected.push(uuid);
+    } else {
+      this.selected = this.selected.filter(it => it !== uuid);
+    }
+    console.log(`uuid: ${uuid} checked: ${$event.checked} selected: ${this.selected}`);
+  }
+
+  entering($event: boolean) {
+    this.isEntering = $event;
+    if ( !this.isEntering ) {
+      this.selected = [];
+    }
+  }
 }
