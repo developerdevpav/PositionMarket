@@ -1,25 +1,65 @@
 <mat-dialog-content>
   <div class="items">
     <div class="items__item">
-      <input class="items__input" type="text" placeholder="Title on russian language">
-      <input class="items__input" type="text" placeholder="Title on english language">
+      <div class="items__title">
+        The title of position
+      </div>
+      <div class="items__content">
+        <input class="items__input" type="text" placeholder="Title on russian language">
+        <input class="items__input" type="text" placeholder="Title on english language">
+      </div>
     </div>
     <div class="items__item">
-      <input class="items__input" type="text" placeholder="Link on position image">
+      <div class="items__title">
+        Images
+      </div>
+      <div class="items__content">
+        <input class="items__input" type="text" placeholder="Link on position image">
+      </div>
     </div>
     <div class="items__item">
-      <input class="items__input" type="text" placeholder="Link on position">
+      <div class="items__title">
+        Links by position
+      </div>
+      <div class="items__content">
+        <input class="items__input" type="text" placeholder="Link on position">
+      </div>
     </div>
     <div class="items__item">
-      <a class="items__input" mat-stroked-button (click)="openDialog()">Types {{attraction.types.length}}</a>
+      <div class="items__title">Tags of position <span style="font-size: 15px; color: #626262">{{attraction.tags.length}} / 0</span>
+      </div>
+      <div class="items__content">
+        <mat-chip-list aria-orientation="vertical">
+          <mat-chip *ngFor="let it of ['fewfew', 'fewfewfwe', 'grewregre', 'gregre', 'grefdvdsa', 'gregregre']">
+            {{it}}
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          </mat-chip>
+          <mat-chip mat-chip [selected]="true" color="primary">
+            <mat-icon>add</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <!--<a class="items__input" mat-stroked-button (click)="openDialog()">Tags {{attraction.types.length}}</a>-->
     </div>
     <div class="items__item">
-      <a class="items__input" mat-stroked-button (click)="openDialog()">Types {{attraction.types.length}}</a>
+      <div class="items__title">Types of position <span style="font-size: 15px; color: #626262">{{attraction.types.length}} / 0</span>
+      </div>
+      <div class="items__content">
+        <mat-chip-list aria-orientation="vertical">
+          <mat-chip *ngFor="let it of ['fewfew', 'fewfewfwe', 'grewregre', 'gregre', 'grefdvdsa', 'gregregre']">
+            {{it}}
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          </mat-chip>
+          <mat-chip mat-chip [selected]="true" color="primary">
+            <mat-icon>add</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
     </div>
   </div>
-
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true">Cancel</button>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close="true">Cancel</button>
   <button mat-button cdkFocusInitial>Save</button>
 </mat-dialog-actions>

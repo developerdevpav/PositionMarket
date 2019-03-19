@@ -32,7 +32,7 @@ export class AttractionComponent implements OnInit {
         right: '10'
       },
       width: '100%',
-      height: '100%',
+      height: 'inherit',
       maxHeight: 'none',
       maxWidth: 'none',
       data: {
@@ -46,7 +46,6 @@ export class AttractionComponent implements OnInit {
         console.log(data + ' ' + data.change + ' ' + data.entity);
         switch (data.action) {
           case 'create': {
-
             this.store.dispatch(new ApiTagCreate(data.entity));
             break;
           }

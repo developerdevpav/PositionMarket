@@ -24,10 +24,11 @@ import {SettingComponent} from './setting-components/setting/setting.component';
 import {SearchLineComponent} from './universal/search-line/search-line.component';
 import {DialogActionAttractionComponent} from './universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 import {EntityChipActionComponent} from './universal/entity-chip-action/entity-chip-action.component';
-import {AngularMaterialModule} from '../angular-material.module';
 import {DataBaseComponent} from './setting-components/data-base/data-base.component';
 import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
-import { ItemListWithTitleAndCheckboxComponent } from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
+import { ItemListWithTitleAndCheckboxComponent }
+from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
+import {AngularMaterialModule} from '../angular-material.module';
 
 @NgModule({
   declarations: [
@@ -52,9 +53,9 @@ import { ItemListWithTitleAndCheckboxComponent } from './universal/item-list-wit
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AngularMaterialModule,
     FormsModule,
     RouterModule,
-    AngularMaterialModule,
     AppRoutingModule,
     AngularSvgIconModule,
     StoreModule.forFeature('types', typeReducer),
