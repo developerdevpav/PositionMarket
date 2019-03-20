@@ -3,5 +3,5 @@ import {TypeService} from './type-service.model';
 
 export interface Product extends BaseEntity {
   price: number;
-  service: TypeService;
+  service: string;
 }

@@ -26,15 +26,15 @@
       </div>
     </div>
     <div class="items__item">
-      <div class="items__title">Tags of position <span style="font-size: 15px; color: #626262">{{attraction.tags.length}} / 0</span>
+      <div class="items__title">Tags of position <span style="font-size: 15px; color: #626262">{{position?.tags?.length}} / 0</span>
       </div>
       <div class="items__content">
         <mat-chip-list aria-orientation="vertical">
-          <mat-chip *ngFor="let it of ['fewfew', 'fewfewfwe', 'grewregre', 'gregre', 'grefdvdsa', 'gregregre']">
-            {{it}}
-            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+          <mat-chip *ngFor="let it of selectedTags$ | async">
+            {{it?.title}}
+            <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
-          <mat-chip mat-chip [selected]="true" color="primary">
+          <mat-chip  (click)="openDialog(tags$, selectedTags$)"  mat-chip [selected]="true" color="primary">
             <mat-icon>add</mat-icon>
           </mat-chip>
         </mat-chip-list>
@@ -42,16 +42,16 @@
       <!--<a class="items__input" mat-stroked-button (click)="openDialog()">Tags {{attraction.types.length}}</a>-->
     </div>
     <div class="items__item">
-      <div class="items__title">Types of position <span style="font-size: 15px; color: #626262">{{attraction.types.length}} / 0</span>
+      <div class="items__title">Types of position <span style="font-size: 15px; color: #626262">{{position?.types?.length}} / 0</span>
       </div>
       <div class="items__content">
         <mat-chip-list aria-orientation="vertical">
-          <mat-chip *ngFor="let it of ['fewfew', 'fewfewfwe', 'grewregre', 'gregre', 'grefdvdsa', 'gregregre']">
-            {{it}}
+          <mat-chip *ngFor="let it of selectedTypes$ | async">
+            {{it?.title}}
             <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
           </mat-chip>
-          <mat-chip mat-chip [selected]="true" color="primary">
-            <mat-icon>add</mat-icon>
+          <mat-chip (click)="openDialog(types$, selectedTypes$)" mat-chip [selected]="true" color="primary">
+            <mat-icon >add</mat-icon>
           </mat-chip>
         </mat-chip-list>
       </div>

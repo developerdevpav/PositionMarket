@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Action, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {selectTagById, selectTagsByLanguage} from '../../../../store/selectors/selectors';
 import {
   ApiTagCreate,
   ApiTagDelete,
@@ -11,6 +10,7 @@ import {
 import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {MatDialog} from '@angular/material';
 import {Tag} from '../../../../store/models/tag.model';
+import {selectTagById, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
 
 @Component({
   selector: 'app-tag',
@@ -19,7 +19,7 @@ import {Tag} from '../../../../store/models/tag.model';
 })
 export class TagComponent implements OnInit {
 
-  $tags: Observable<{ uuid: string, value: string }[]> = this.store.select(selectTagsByLanguage);
+  $tags: Observable<{ id: string, title: string }[]> = this.store.select(selectTagsByLanguage);
   value: Tag;
 
   constructor(public dialog: MatDialog, private store: Store<any>) {}

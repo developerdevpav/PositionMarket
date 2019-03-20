@@ -10,8 +10,8 @@ import {Action, Store} from '@ngrx/store';
 export class EntityListComponent implements OnInit {
 
   @Input()
-  list$: Observable<{ uuid: string, value: string }[]>;
-  listByParam$: Observable<{ uuid: string, value: string }[]>;
+  list$: Observable<{ id: string, title: string }[]>;
+  listByParam$: Observable<{ id: string, title: string }[]>;
 
   selected: string[] = [];
 
@@ -78,16 +78,4 @@ export class EntityListComponent implements OnInit {
     this.listByParam$ = this.list$;
   }
 
-  getParamSearch($event) {
-    if (!$event) {
-      this.listByParam$ = this.list$;
-      return;
-    }
-
-    this.list$.subscribe(list => {
-      this.listByParam$ = of(list.filter(it => {
-        return it.value.toLocaleLowerCase().startsWith($event.toLocaleLowerCase());
-      }));
-    });
-  }
 }

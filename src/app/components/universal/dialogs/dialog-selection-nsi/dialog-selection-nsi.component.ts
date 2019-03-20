@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {NsiUI} from '../../../../ui/models';
-import {MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef} from '@angular/material';
+import {Observable, pipe} from 'rxjs';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dialog-selection-nsi',
@@ -10,34 +10,32 @@ import {MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef} from '@angular/materia
 })
 export class DialogSelectionNsiComponent implements OnInit {
 
-  selected = [];
-
-  @Input()
-  public selectedNsi$: Observable<NsiUI[]>;
-  @Input()
-  public allNsi$: Observable<NsiUI[]>;
-
-  isEntering = false;
+  selected: Observable<{ id: string, title: string }[]> = Observable.create();
+  list$: Observable<{ id: string, title: string }[]> = Observable.create();
 
   constructor(public dialogRef: MatDialogRef<DialogSelectionNsiComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string }) { }
+              @Inject(MAT_DIALOG_DATA)
+              public data: {
+                list: Observable<{ id: string, title: string }[]>,
+                selected: Observable<{ id: string, title: string }[]>
+              }) {
+  }
 
   ngOnInit() {
+    this.list$ = this.data.list;
+    this.selected = this.data.selected;
   }
 
-  checkboxEvent($event, uuid: string) {
-    if ( $event.checked ) {
-      this.selected.push(uuid);
-    } else {
-      this.selected = this.selected.filter(it => it !== uuid);
+  selectChips(object: {id: string, title: string}) {
+    if ( object ) {
+      this.selected.subscribe(list => {
+        list.push(object);
+        console.log(list);
+      });
+      this.list$.subscribe(
+        list => list.filter(it => it.id !== object.id)
+      );
     }
-    console.log(`uuid: ${uuid} checked: ${$event.checked} selected: ${this.selected}`);
   }
 
-  entering($event: boolean) {
-    this.isEntering = $event;
-    if ( !this.isEntering ) {
-      this.selected = [];
-    }
-  }
 }

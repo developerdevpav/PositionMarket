@@ -7,7 +7,7 @@ export interface AttractionModel extends BaseEntity {
   title: Value[];
   link: string;
   image: string;
-  tags: Tag[];
-  types: Type[];
+  tags: string[];
+  types: string[];
   products: Product[];
 }

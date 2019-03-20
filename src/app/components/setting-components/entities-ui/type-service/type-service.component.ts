@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {selectTypeServicesByLanguage, selectTypeServiceById} from '../../../../store/selectors/selectors';
 import {
   ApiTypeServiceCreate, ApiTypeServiceDelete,
   ApiTypeServiceLoadAll, ApiTypeServiceUpdate,
@@ -11,6 +10,7 @@ import {
 import { MatDialog } from '@angular/material';
 import { TypeService } from 'src/app/store/models/type-service.model';
 import { DialogEditEntityComponent } from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
+import {selectTypeServiceById, selectTypeServicesByLanguage} from '../../../../store/selectors/type-service.selectors';
 
 @Component({
   selector: 'app-type-service',
@@ -19,7 +19,7 @@ import { DialogEditEntityComponent } from '../../../universal/dialogs/dialog-edi
 })
 export class TypeServiceComponent implements OnInit {
 
-  $typeservices: Observable<{ uuid: string, value: string }[]> = this.store.select(selectTypeServicesByLanguage);
+  $typeservices: Observable<{ id: string, title: string }[]> = this.store.select(selectTypeServicesByLanguage);
   value: TypeService;
 
   constructor(public dialog: MatDialog, private store: Store<any>) {}
@@ -55,14 +55,10 @@ export class TypeServiceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.$typeservices.subscribe(value1 => {
-      console.log('load list tags');
-    });
     this.store.dispatch(new ApiTypeServiceLoadAll());
   }
 
   create($event) {
-    console.log('create');
     this.openDialog('create', $event);
   }
 

@@ -1,17 +1,16 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {AttractionModel} from '../../../../store/models/attraction-model';
 import {Store} from '@ngrx/store';
-import {selectAttractionById, selectTagsByLanguage, selectTypesByLanguage} from '../../../../store/selectors/selectors';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {Type} from '../../../../store/models/type.model';
-import {Value} from '../../../../store/models/abstract.model';
-import {Tag} from '../../../../store/models/tag.model';
-import {Product} from '../../../../store/models/products';
-import {Observable} from 'rxjs';
+import {Observable, pipe} from 'rxjs';
 import {NsiUI} from '../../../../ui/models';
-import {ApiTagCreate, ApiTagLoadAll, ApiTagUpdate} from '../../../../store/actions/tag.actions';
+import {ApiTagLoadAll} from '../../../../store/actions/tag.actions';
 import {ApiTypeLoadAll} from '../../../../store/actions/type.actions';
 import {DialogSelectionNsiComponent} from '../dialog-selection-nsi/dialog-selection-nsi.component';
+import {selectTypesAreNonIds, selectTypesByIds, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
+import {selectTagsAreNonIds, selectTagsByIds, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
+import {ApiAttractionLoadById, LoadAttractionById} from '../../../../store/actions/attraction.actions';
+import {AttractionModel} from '../../../../store/models/attraction-model';
+import {selectPositionById} from '../../../../store/selectors/position.selectors';
 
 @Component({
   selector: 'app-dialog-action-attraction',
@@ -22,44 +21,48 @@ export class DialogActionAttractionComponent implements OnInit {
 
   @Input() public id;
 
-  tags$: Observable<NsiUI[]> = this.store.select(selectTagsByLanguage);
-  types$: Observable<NsiUI[]> = this.store.select(selectTypesByLanguage);
+  selectedTags$: Observable<{ id: string, title: string }[]> = Observable.create();
+  selectedTypes$: Observable<{ id: string, title: string }[]> = Observable.create();
 
-  public attraction: AttractionModel = new class implements AttractionModel {
-    id: string;
-    image: string;
-    link: string;
-    products: Product[];
-    tags: Tag[] = [];
-    title: Value[] = [];
-    types: Type[] = [];
-  };
+  tags$: Observable<{ id: string, title: string }[]> = Observable.create();
+  types$: Observable<{ id: string, title: string }[]> = Observable.create();
 
-  constructor(public dialog: MatDialog, public store: Store<any>, public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
+  position: AttractionModel;
+
+  constructor(public dialog: MatDialog, public store: Store<any>,
+              public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string }) {
   }
 
-  openDialog(): void {
+  openDialog(observable: Observable<{id: string, title: string}[]>, selectValues: Observable<{id: string, title: string}[]>): void {
     const dialogRef = this.dialog.open(DialogSelectionNsiComponent, {
       hasBackdrop: true,
       width: '70%',
       height: 'auto',
-      data: {}
+      data: { list: observable, selected: selectValues}
     });
 
     dialogRef.afterClosed();
   }
 
   ngOnInit() {
-    this.store.dispatch(new ApiTagLoadAll());
-    this.tags$ = this.store.select(selectTagsByLanguage);
-
     this.store.dispatch(new ApiTypeLoadAll());
-    this.types$ = this.store.select(selectTypesByLanguage);
+    this.store.dispatch(new ApiTagLoadAll());
 
     if ( this.data.action !== 'create' && this.data.id !== undefined ) {
-      this.store.select(selectAttractionById, { id: this.data.id }).subscribe(entity => {
-       this.attraction = entity;
+      this.store.dispatch(new ApiAttractionLoadById(this.data.id));
+
+      this.store.select(selectPositionById, {id: this.data.id }).subscribe(position => {
+        this.position = position;
+
+        if (this.position && this.position.types && this.position.types.length > 0) {
+          this.selectedTypes$ = this.store.select(selectTypesByIds, this.position.types);
+          this.types$ = this.store.select(selectTypesAreNonIds, this.position.types);
+        }
+        if (this.position && this.position.tags && this.position.tags.length > 0) {
+          this.selectedTags$ = this.store.select(selectTagsByIds, this.position.tags);
+          this.tags$ = this.store.select(selectTagsAreNonIds, this.position.tags);
+        }
       });
     }
   }

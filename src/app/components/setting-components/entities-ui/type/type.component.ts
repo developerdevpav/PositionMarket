@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {selectTypeById, selectTypesByLanguage} from '../../../../store/selectors/selectors';
 import {
   ApiTypeCreate,
   ApiTypeDelete,
@@ -11,6 +10,7 @@ import {
 import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {MatDialog} from '@angular/material';
 import {Type} from '../../../../store/models/type.model';
+import {selectTypeById, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
 
 @Component({
   selector: 'app-type',
@@ -19,7 +19,7 @@ import {Type} from '../../../../store/models/type.model';
 })
 export class TypeComponent implements OnInit {
 
-  $types: Observable<{ uuid: string, value: string }[]> = this.store.select(selectTypesByLanguage);
+  $types: Observable<{ id: string, title: string }[]> = this.store.select(selectTypesByLanguage);
   value: Type;
 
   constructor(public dialog: MatDialog, private store: Store<any>) {}

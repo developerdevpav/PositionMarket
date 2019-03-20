@@ -1,16 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {AttractionModel} from '../../../../store/models/attraction-model';
 import {Observable} from 'rxjs';
 import {ApiAttractionDelete, ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
-import {selectAttractionsByLanguageArrayList} from '../../../../store/selectors/selectors';
-import {Router} from '@angular/router';
-import {Tag} from '../../../../store/models/tag.model';
-import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {ApiTagCreate, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {MatDialog} from '@angular/material';
-import {ApiTypeDelete} from '../../../../store/actions/type.actions';
 import {DialogActionAttractionComponent} from '../../../universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
+import {selectShortPositionsByLanguage} from '../../../../store/selectors/position.selectors';
 
 @Component({
   selector: 'app-attraction',
@@ -19,7 +14,7 @@ import {DialogActionAttractionComponent} from '../../../universal/dialogs/dialog
 })
 export class AttractionComponent implements OnInit {
 
-  listForList$: Observable<{ uuid: string, value: string } []> = this.store.select(selectAttractionsByLanguageArrayList);
+  listForList$: Observable<{ id: string, title: string } []> = this.store.select(selectShortPositionsByLanguage);
 
   constructor(public dialog: MatDialog, private store: Store<any>) {
   }
