@@ -29,6 +29,7 @@ import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selectio
 import { ItemListWithTitleAndCheckboxComponent }
 from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
 import {AngularMaterialModule} from '../angular-material.module';
+import { FilterObservablePipe } from './pipes/filter-observable.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {AngularMaterialModule} from '../angular-material.module';
     EntityChipActionComponent,
     DataBaseComponent,
     DialogSelectionNsiComponent,
-    ItemListWithTitleAndCheckboxComponent
+    ItemListWithTitleAndCheckboxComponent,
+    FilterObservablePipe
   ],
   imports: [
     CommonModule,

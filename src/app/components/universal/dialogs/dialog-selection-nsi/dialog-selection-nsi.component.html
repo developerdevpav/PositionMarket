@@ -1,10 +1,10 @@
 <div class="boxs">
   <div class="boxs__item">
     <div class="boxs__header">
-      <app-search-line (inputText)="entering($event)" class="boxs__search"></app-search-line>
-      <div class="boxs__select-entity">
+      <app-search-line class="boxs__search" (textSearch)="textSearch = $event"></app-search-line>
+      <div *ngIf="selectedBlockHidden" class="boxs__select-entity">
         <mat-chip-list class="boxs__mat-chip-list" aria-orientation="vertical">
-          <mat-chip class="boxs__mat-chip" [selected]="true" color="primary" *ngFor="let it of selected | async" color="primary">
+          <mat-chip (click)="removeFromSelectedChips(it)" class="boxs__mat-chip" [selected]="true" color="primary" *ngFor="let it of selected | async" color="primary">
             {{it?.title}}
             <mat-icon matChipRemove>remove</mat-icon>
           </mat-chip>
@@ -13,7 +13,7 @@
     </div>
     <div class="boxs__content">
       <mat-chip-list class="boxs__mat-chip-list" aria-orientation="vertical">
-        <mat-chip (click)="selectChips(it)" class="boxs__mat-chip" *ngFor="let it of list$ | async" color="primary">
+        <mat-chip (click)="selectChips(it)" class="boxs__mat-chip" *ngFor="let it of (list$ | async) | filterList:textSearch" color="primary">
           {{it?.title}}
           <mat-icon >add</mat-icon>
         </mat-chip>

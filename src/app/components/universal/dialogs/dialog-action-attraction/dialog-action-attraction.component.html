@@ -5,8 +5,8 @@
         The title of position
       </div>
       <div class="items__content">
-        <input class="items__input" type="text" placeholder="Title on russian language">
-        <input class="items__input" type="text" placeholder="Title on english language">
+        <input class="items__input" [value]="titleRu.value" type="text" placeholder="Title on russian language">
+        <input class="items__input" [value]="titleEn.value" type="text" placeholder="Title on english language">
       </div>
     </div>
     <div class="items__item">
@@ -14,7 +14,7 @@
         Images
       </div>
       <div class="items__content">
-        <input class="items__input" type="text" placeholder="Link on position image">
+        <input class="items__input" [value]="position.image" type="text" placeholder="Link on position image">
       </div>
     </div>
     <div class="items__item">
@@ -22,7 +22,7 @@
         Links by position
       </div>
       <div class="items__content">
-        <input class="items__input" type="text" placeholder="Link on position">
+        <input class="items__input" [value]="position.link" type="text" placeholder="Link on position">
       </div>
     </div>
     <div class="items__item">
@@ -61,5 +61,5 @@
 
 <mat-dialog-actions>
   <button mat-button mat-dialog-close="true">Cancel</button>
-  <button mat-button cdkFocusInitial>Save</button>
+  <button mat-button cdkFocusInitial (click)="buildPosition()">Save</button>
 </mat-dialog-actions>
