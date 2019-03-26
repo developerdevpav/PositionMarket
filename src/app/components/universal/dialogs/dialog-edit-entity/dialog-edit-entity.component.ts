@@ -32,7 +32,6 @@ export class DialogEditEntityComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.object) {
-      console.log(this.data.object);
       this.nsi.id = this.data.object.id;
       this.nsi.values.forEach(valueThis => {
         const findValue = this.data.object.values.find(value => value.language === valueThis.language);

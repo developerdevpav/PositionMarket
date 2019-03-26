@@ -1,4 +1,6 @@
 {
   "Home": "Home",
-  "Catalog": "Catalog"
+  "Catalog": "Catalog",
+  "SELECT_ALL": "Select All",
+  "UN_SELECT_ALL": "UnSelect All"
 }

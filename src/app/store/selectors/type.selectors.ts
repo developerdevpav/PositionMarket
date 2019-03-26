@@ -4,9 +4,8 @@ import * as converter from './converter';
 import {Dictionary} from '@ngrx/entity';
 import {Type} from '../models/type.model';
 import {Tag} from '../models/tag.model';
-import {selectCurrentLanguage, selectLanguage} from './language.selectors';
+import {selectCurrentLanguage} from './language.selectors';
 import {Language} from '../models/language.model';
-import * as tag from '../reducers/tag.reducer';
 
 export const selectTypeById = createSelector(
   type.selectEntities,
@@ -20,9 +19,9 @@ export const selectTypesByIds = createSelector(
   type.selectEntities,
   (lang: Language, array: Dictionary<Type>, props: string[]) => {
     return props
-      .map(uuid => array[uuid])
-      .map(value => {
-        return converter.convertNsiByLanguage(value, lang);
+      .map(it => array[it])
+      .map(it => {
+        return converter.convertNsiByLanguage(it, lang);
       });
   }
 );

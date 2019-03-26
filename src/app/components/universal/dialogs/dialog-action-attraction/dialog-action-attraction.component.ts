@@ -14,6 +14,8 @@ import {selectPositionById} from '../../../../store/selectors/position.selectors
 import {Value} from '../../../../store/models/abstract.model';
 import {Language} from '../../../../store/models/language.model';
 import {Product} from '../../../../store/models/products';
+import {ListItem} from 'ng-multiselect-dropdown/multiselect.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dialog-action-attraction',
@@ -24,6 +26,12 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   titleRu: Value = {language: Language.RU, value: ''};
   titleEn: Value = {language: Language.EN, value: ''};
+
+  dropdownSelectTag: {id: any, title: string}[] = [];
+  dropdownSelectType: {id: any, title: string}[] = [];
+
+  dropdownAllTag: {id: any, title: string}[] = [];
+  dropdownAllType: {id: any, title: string}[] = [];
 
   position: AttractionModel = {
     id: '',
@@ -37,18 +45,35 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   @Input() public id;
 
-  selectedTags$: Observable<{ id: string, title: string }[]> ;
-  selectedTypes$: Observable<{ id: string, title: string }[]>;
+  selectedTags$: Observable<{ id: string, title: string }[]> = Observable.create();
+  selectedTypes$: Observable<{ id: string, title: string }[]> = Observable.create();
 
-  tags$: Observable<{ id: string, title: string }[]>;
-  types$: Observable<{ id: string, title: string }[]>;
+  tags$: Observable<{ id: string, title: string }[]> = Observable.create();
+  types$: Observable<{ id: string, title: string }[]> = Observable.create();
+
+  dropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'title',
+    selectAllText: '',
+    unSelectAllText: '',
+    allowSearchFilter: true,
+    closeDropDownOnSelection: false
+  };
 
   constructor(public dialog: MatDialog, public store: Store<any>,
               public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string }) {
+              @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string },
+              translate: TranslateService) {
+    this.store.dispatch(new ApiTypeLoadAll());
+    this.store.dispatch(new ApiTagLoadAll());
+
+    translate.get('SELECT_ALL').subscribe(value => this.dropdownSettings.selectAllText = value);
+    translate.get('UN_SELECT_ALL').subscribe(value => this.dropdownSettings.unSelectAllText = value);
   }
 
-  openDialog(observable: Observable<{ id: string, title: string }[]>, selectValues: Observable<{ id: string, title: string }[]>): void {
+  openDialog(observable: Observable<{ id: string, title: string }[]>,
+             selectValues: Observable<{ id: string, title: string }[]>): void {
     const dialogRef = this.dialog.open(DialogSelectionNsiComponent, {
       hasBackdrop: true,
       width: '70%',
@@ -60,58 +85,57 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new ApiTypeLoadAll());
-    this.store.dispatch(new ApiTagLoadAll());
-
     this.types$ = this.store.select(selectTypesByLanguage);
     this.tags$ = this.store.select(selectTagsByLanguage);
 
-    this.selectedTypes$ = this.store.select(selectTypesByIds, []);
-    this.selectedTags$ = this.store.select(selectTagsByIds, []);
-
-    if (this.data.action !== 'create' && this.data.id !== undefined) {
+    if ( this.data.action !== 'create' && this.data.id !== undefined ) {
       this.store.dispatch(new ApiAttractionLoadById(this.data.id));
 
       this.store.select(selectPositionById, {id: this.data.id}).subscribe(position => {
         this.position = position;
-        console.log(`Load ${this.position}`);
+        this.selectedTypes$ = this.store.select(selectTypesByIds, this.position.types);
+        this.selectedTags$ = this.store.select(selectTagsByIds, this.position.tags);
+
         this.setValueLanguageFromPositionTitle();
-        if (this.position && this.position.types && this.position.types.length > 0) {
-          this.selectedTypes$ = this.store.select(selectTypesByIds, this.position.types);
-          this.types$ = this.store.select(selectTypesAreNonIds, this.position.types);
-        }
-        if (this.position && this.position.tags && this.position.tags.length > 0) {
-          this.selectedTags$ = this.store.select(selectTagsByIds, this.position.tags);
-          this.tags$ = this.store.select(selectTagsAreNonIds, this.position.tags);
-        }
       });
     }
+
+    this.selectedTags$.subscribe(list => {
+      this.dropdownSelectTag = list;
+    });
+
+    this.selectedTypes$.subscribe(list => {
+      this.dropdownSelectType = list;
+    });
+
+    this.types$.subscribe(list => {
+      this.dropdownAllType = list;
+    });
+
+    this.tags$.subscribe(list => {
+      this.dropdownAllTag = list;
+    });
+
   }
-  
+
   buildPosition() {
     this.updateOrPushValueInTitle(this.titleRu);
     this.updateOrPushValueInTitle(this.titleEn);
 
-    this.selectedTypes$.subscribe(list => {
-      this.position.types = list.filter(it => it.id !== undefined)
-        .map(it => it.id);
-    });
+    this.position.tags = this.dropdownSelectTag
+      .map(tag => tag.id);
 
-    this.selectedTags$.subscribe(list => {
-      this.position.tags = list.filter(it => it.id !== undefined)
-        .map(it => it.id);
-    });
+    this.position.types = this.dropdownSelectType
+      .map(tag => tag.id);
   }
 
   updateOrPushValueInTitle(value: Value) {
     if (value && value.value && value.value !== '') {
       const valueLanguage = this.position.title.find(it => it.language === value.language);
-      console.log(valueLanguage);
       if (valueLanguage && valueLanguage.value !== value.value) {
         valueLanguage.value = value.value;
       } else if (valueLanguage.value !== value.value) {
         this.position.title.push(value);
-        console.log('create new Value');
       }
     }
   }
@@ -128,10 +152,13 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.selectedTags$ = null;
-    this.selectedTypes$ = null;
-    this.position = null;
-    console.log('ngOnDestroy');
+  ngOnDestroy(): void {}
+
+  onItemSelect($event: ListItem) {
+
+  }
+
+  onSelectAll($event: Array<ListItem>) {
+
   }
 }

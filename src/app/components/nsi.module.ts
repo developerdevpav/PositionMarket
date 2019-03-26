@@ -26,10 +26,10 @@ import {DialogActionAttractionComponent} from './universal/dialogs/dialog-action
 import {EntityChipActionComponent} from './universal/entity-chip-action/entity-chip-action.component';
 import {DataBaseComponent} from './setting-components/data-base/data-base.component';
 import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
-import { ItemListWithTitleAndCheckboxComponent }
-from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
 import {AngularMaterialModule} from '../angular-material.module';
 import { FilterObservablePipe } from './pipes/filter-observable.pipe';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {ItemListWithTitleAndCheckboxComponent} from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +57,7 @@ import { FilterObservablePipe } from './pipes/filter-observable.pipe';
     ReactiveFormsModule,
     AngularMaterialModule,
     FormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
     RouterModule,
     AppRoutingModule,
     AngularSvgIconModule,

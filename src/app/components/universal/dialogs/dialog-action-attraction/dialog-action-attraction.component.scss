@@ -49,8 +49,31 @@
 
 .mat-dialog-content {
   max-height: 90%;
+  padding: 0 24px;
 }
 
 .mat-dialog-container {
   border-radius: 0;
+  padding: 24px 24px 0 24px;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  padding: 10px 15px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.mat-dialog-actions__button_action {
+  margin-right: 15px;
+}
+
+.mat-dialog-actions__button_action:last-child {
+  margin-right: 0;
+  background: #000098;
+  color: white;
+}
+
+.items__content__multiselect-dropdown {
+  padding-right: 40px;
 }

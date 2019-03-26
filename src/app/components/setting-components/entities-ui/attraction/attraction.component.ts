@@ -27,7 +27,7 @@ export class AttractionComponent implements OnInit {
         right: '10'
       },
       width: '100%',
-      height: 'inherit',
+      height: '100%',
       maxHeight: 'none',
       maxWidth: 'none',
       data: {
@@ -60,12 +60,10 @@ export class AttractionComponent implements OnInit {
   }
 
   create() {
-    console.log('create a new attraction');
     this.openDialog('create', undefined);
   }
 
   changeOrView($event, action: string) {
-    console.log(`${action} a new attraction + ${$event}`);
     this.openDialog(action, $event);
   }
 

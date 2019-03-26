@@ -10,7 +10,6 @@ import {LanguageState} from '../reducers/language.reducer';
 export const selectPositionById = createSelector(
   attraction.selectEntities,
   (array, props) => {
-    console.log(`${props.id} props`);
     return array[props.id];
   }
 );

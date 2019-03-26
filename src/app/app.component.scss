@@ -35,23 +35,6 @@ header {
           margin-right: 100px;
         }
 
-
-        /*.language {
-          border-radius: 20px 20px 20px 20px;
-          margin: 5px 10px 5px 10px;
-          width: 40px;
-          background: white;
-          color: black;
-          border: 1px black solid;
-          padding-left: 10px;
-          padding-top: 10px;
-        }
-
-        .language:hover {
-          background: blue;
-          color: white;
-        }
-*/
         > a {
           cursor: pointer;
           font-weight: inherit;
@@ -85,27 +68,6 @@ header {
           border-bottom: 2px white solid;
           color: white;
         }
-
-        /*> a:nth-last-child(3) {
-          background: $color;
-          padding-left: 20px;
-          padding-right: 20px;
-          border: none;
-          svg-icon {
-            fill: white;
-          }
-        }*/
-
-        /*> a:nth-last-child(3):hover {
-          background: $color;
-          margin-right: 0;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        > a:hover {
-          background: $color;
-          color: white;
-        }*/
       }
     }
 
@@ -157,11 +119,20 @@ header {
     }
   }
 
+.content {
+  padding-top: 40px;
+
+  .container {
+    margin: 30px 70px 0;
+    //background: white;
+    padding-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
   .content {
-    padding-top: 40px;
     .container {
-      margin: 30px 70px 0;
-      //background: white;
-      padding-top: 20px;
+      margin: 0;
     }
   }
+}

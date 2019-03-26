@@ -28,12 +28,10 @@ export class EntityListComponent implements OnInit {
   }
 
   create() {
-    console.log('create EntityListComponent');
     this.createChange.emit(undefined);
   }
 
   change() {
-    console.log('change EntityListComponent');
     this.changeChange.emit(this.selected[0]);
   }
 
@@ -42,12 +40,10 @@ export class EntityListComponent implements OnInit {
   }
 
   view() {
-    console.log('view EntityListComponent');
     this.viewChange.emit(this.selected[0]);
   }
 
   deleteFunction() {
-    console.log('delete EntityListComponent');
     this.deleteChange.emit(this.selected);
     this.selected = [];
   }
@@ -61,7 +57,6 @@ export class EntityListComponent implements OnInit {
   }
 
   checkboxEvent($event, uuid: string) {
-    console.log(`uuid: ${uuid} checked: ${$event.checked}`);
     switch ($event.checked) {
       case true: {
         return this.addToSelectList(uuid);
@@ -73,7 +68,6 @@ export class EntityListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('load listEntity');
     this.selected = [];
     this.listByParam$ = this.list$;
   }

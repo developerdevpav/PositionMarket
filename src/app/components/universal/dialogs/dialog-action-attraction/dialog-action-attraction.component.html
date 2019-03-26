@@ -26,40 +26,50 @@
       </div>
     </div>
     <div class="items__item">
-      <div class="items__title">Tags of position <span style="font-size: 15px; color: #626262">{{position?.tags?.length}} / 0</span>
+      <div class="items__title">Tags of position <span
+        style="font-size: 15px; color: #626262">{{dropdownSelectTag ? dropdownSelectTag.length : 0}}
+        / {{dropdownAllTag ? dropdownAllTag.length : 0}}</span></div>
+      <div class="item__content">
+        <ng-multiselect-dropdown class="items__content__multiselect-dropdown"
+                                 [placeholder]="'custom placeholder'"
+                                 [data]="dropdownAllTag"
+                                 [(ngModel)]="dropdownSelectTag"
+                                 [settings]="dropdownSettings"
+                                 (onSelect)="onItemSelect($event)"
+                                 (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
       </div>
-      <div class="items__content">
-        <mat-chip-list aria-orientation="vertical">
-          <mat-chip *ngFor="let it of selectedTags$ | async">
-            {{it?.title}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          <mat-chip  (click)="openDialog(tags$, selectedTags$)"  mat-chip [selected]="true" color="primary">
-            <mat-icon>add</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-      </div>
-      <!--<a class="items__input" mat-stroked-button (click)="openDialog()">Tags {{attraction.types.length}}</a>-->
     </div>
     <div class="items__item">
-      <div class="items__title">Types of position <span style="font-size: 15px; color: #626262">{{position?.types?.length}} / 0</span>
+      <div class="items__title">Types of position <span
+        style="font-size: 15px; color: #626262">{{dropdownSelectType ? dropdownSelectType.length : 0}}
+        / {{dropdownAllType ? dropdownAllType.length : 0}}</span>
       </div>
       <div class="items__content">
-        <mat-chip-list aria-orientation="vertical">
-          <mat-chip *ngFor="let it of selectedTypes$ | async">
-            {{it?.title}}
-            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
-          </mat-chip>
-          <mat-chip (click)="openDialog(types$, selectedTypes$)" mat-chip [selected]="true" color="primary">
-            <mat-icon >add</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
+        <ng-multiselect-dropdown class="items__content__multiselect-dropdown"
+                                 [placeholder]="'custom placeholder'"
+                                 [data]="dropdownAllType"
+                                 [(ngModel)]="dropdownSelectType"
+                                 [settings]="dropdownSettings"
+                                 (onSelect)="onItemSelect($event)"
+                                 (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="items__item">
+      <div class="items__title">Prices</div>
+      <div class="items__content">
+        <div *ngFor="let it of position.products">
+          <input class="items__input" type="text">
+          <input class="items__input" type="number" value="{{it.price}}">
+        </div>
       </div>
     </div>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close="true">Cancel</button>
-  <button mat-button cdkFocusInitial (click)="buildPosition()">Save</button>
+  <button mat-stroked-button class="mat-dialog-actions__button_action" mat-dialog-close="true">Cancel</button>
+  <button mat-stroked-button class="mat-dialog-actions__button_action" cdkFocusInitial (click)="buildPosition()">Save
+  </button>
 </mat-dialog-actions>

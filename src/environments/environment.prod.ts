@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  config: {
+    url: 'http://rest/api'
+  }
 };

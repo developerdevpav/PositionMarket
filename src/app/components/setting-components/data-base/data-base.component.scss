@@ -11,3 +11,16 @@
 .list-table__active-button {
   background: white;
 }
+
+@media only screen and (max-width: 900px) {
+  .list-table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list-table__table-link {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+}

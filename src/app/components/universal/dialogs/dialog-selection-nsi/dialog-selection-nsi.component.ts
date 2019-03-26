@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, Input, OnInit} from '@angular/core';
 import {Observable, pipe} from 'rxjs';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {filter, switchMap} from 'rxjs/operators';

@@ -21,7 +21,6 @@ export function getStringFromArrayValuesByLanguage(array: Value[], language: any
 
   if (array) {
     const objectFond = array.find(value => {
-      console.log(`${value.language} === ${language.toString()}`);
       return value.language === language.language as string;
     });
     if ( objectFond ) {

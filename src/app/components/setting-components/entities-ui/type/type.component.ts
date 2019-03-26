@@ -40,7 +40,6 @@ export class TypeComponent implements OnInit {
         console.log(data + ' ' + data.change + ' ' + data.entity);
         switch (data.action) {
           case 'create': {
-
             this.store.dispatch(new ApiTypeCreate(data.entity));
             break;
           }
@@ -55,14 +54,10 @@ export class TypeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.$types.subscribe(value1 => {
-      console.log('load list tags');
-    });
     this.store.dispatch(new ApiTypeLoadAll());
   }
 
   create($event) {
-    console.log('create');
     this.openDialog('create', $event);
   }
 
@@ -74,7 +69,6 @@ export class TypeComponent implements OnInit {
   }
 
   delete($event) {
-    console.log(`delete: ${$event}`);
     this.store.dispatch(new ApiTypeDelete($event));
   }
 

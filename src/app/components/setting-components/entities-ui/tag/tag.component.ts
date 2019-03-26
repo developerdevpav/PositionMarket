@@ -56,14 +56,10 @@ export class TagComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.$tags.subscribe(value1 => {
-      console.log('load list tags');
-    });
     this.store.dispatch(new ApiTagLoadAll());
   }
 
   create($event) {
-    console.log('create');
     this.openDialog('create', $event);
   }
 
