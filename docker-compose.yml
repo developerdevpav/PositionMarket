@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  nginx:
+    image: devpav/positions:nginx
+    ports:
+      - 80:80
+    environment:
+      - TOKEN=5842ab875c2ee6355c2d5c5dd2ee9c9ba7d7b027
+      - USERNAME=devpav
+      - TAG=none
+      - REPOSITORY=UI
+      - ENV=local
