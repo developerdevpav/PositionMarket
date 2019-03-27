@@ -10,7 +10,7 @@ export class AttractionService {
 
   protected headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
-  utl = environment.config.url;
+  utl = '/api';
 
   constructor(protected http: HttpClient) {
   }
