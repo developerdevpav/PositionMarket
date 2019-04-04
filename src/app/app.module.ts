@@ -20,7 +20,7 @@ import {TypeServiceEffects} from './store/effects/type-service.effects';
 import {AttractionService} from './store/services/attraction.service';
 import {AttractionEffects} from './store/effects/attraction.effects';
 import {AngularMaterialModule} from './angular-material.module';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -36,8 +36,8 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    NgMultiSelectDropDownModule.forRoot(),
     AngularSvgIconModule,
+    AngularMultiSelectModule,
     EffectsModule.forRoot([
       TypeEffects,
       TagEffects,

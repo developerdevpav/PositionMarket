@@ -21,15 +21,7 @@ export class AttractionComponent implements OnInit {
 
   openDialog(actionRef: string, uuid: string): void {
     const dialogRef = this.dialog.open(DialogActionAttractionComponent, {
-      position: {
-        top: '10',
-        left: '10',
-        right: '10'
-      },
-      width: '100%',
-      height: '100%',
-      maxHeight: 'none',
-      maxWidth: 'none',
+      height: '80%',
       data: {
         action: actionRef,
         id: uuid

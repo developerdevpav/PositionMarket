@@ -1,71 +1,16 @@
 <mat-dialog-content>
-  <div class="items">
-    <div class="items__item">
-      <div class="items__title">
-        The title of position
-      </div>
-      <div class="items__content">
-        <input class="items__input" [value]="titleRu.value" type="text" placeholder="Title on russian language">
-        <input class="items__input" [value]="titleEn.value" type="text" placeholder="Title on english language">
-      </div>
-    </div>
-    <div class="items__item">
-      <div class="items__title">
-        Images
-      </div>
-      <div class="items__content">
-        <input class="items__input" [value]="position.image" type="text" placeholder="Link on position image">
-      </div>
-    </div>
-    <div class="items__item">
-      <div class="items__title">
-        Links by position
-      </div>
-      <div class="items__content">
-        <input class="items__input" [value]="position.link" type="text" placeholder="Link on position">
-      </div>
-    </div>
-    <div class="items__item">
-      <div class="items__title">Tags of position <span
-        style="font-size: 15px; color: #626262">{{dropdownSelectTag ? dropdownSelectTag.length : 0}}
-        / {{dropdownAllTag ? dropdownAllTag.length : 0}}</span></div>
-      <div class="item__content">
-        <ng-multiselect-dropdown class="items__content__multiselect-dropdown"
-                                 [placeholder]="'custom placeholder'"
-                                 [data]="dropdownAllTag"
-                                 [(ngModel)]="dropdownSelectTag"
-                                 [settings]="dropdownSettings"
-                                 (onSelect)="onItemSelect($event)"
-                                 (onSelectAll)="onSelectAll($event)">
-        </ng-multiselect-dropdown>
-      </div>
-    </div>
-    <div class="items__item">
-      <div class="items__title">Types of position <span
-        style="font-size: 15px; color: #626262">{{dropdownSelectType ? dropdownSelectType.length : 0}}
-        / {{dropdownAllType ? dropdownAllType.length : 0}}</span>
-      </div>
-      <div class="items__content">
-        <ng-multiselect-dropdown class="items__content__multiselect-dropdown"
-                                 [placeholder]="'custom placeholder'"
-                                 [data]="dropdownAllType"
-                                 [(ngModel)]="dropdownSelectType"
-                                 [settings]="dropdownSettings"
-                                 (onSelect)="onItemSelect($event)"
-                                 (onSelectAll)="onSelectAll($event)">
-        </ng-multiselect-dropdown>
-      </div>
-    </div>
-    <div class="items__item">
-      <div class="items__title">Prices</div>
-      <div class="items__content">
-        <div *ngFor="let it of position.products">
-          <input class="items__input" type="text">
-          <input class="items__input" type="number" value="{{it.price}}">
-        </div>
-      </div>
-    </div>
+  <div class="div-content-title">
+    <input class="items__input" [value]="titleRu.value" type="text" placeholder="Title on russian language">
+    <input class="items__input" [value]="titleEn.value" type="text" placeholder="Title on english language">
   </div>
+  <div class="div-content-image">
+    <input class="items__input" [value]="position.image" type="text" placeholder="Link on position image">
+  </div>
+  <div class="div-content-title">
+    <input class="items__input" [value]="position.link" type="text" placeholder="Link on position">
+  </div>
+  <angular2-multiselect [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag" [settings]="settings"></angular2-multiselect>
+  <angular2-multiselect [data]="dropdownAllType" [(ngModel)]="dropdownSelectType" [settings]="settings"></angular2-multiselect>
 </mat-dialog-content>
 
 <mat-dialog-actions>

@@ -2,5 +2,7 @@
   "Home": "Home",
   "Catalog": "Catalog",
   "SELECT_ALL": "Select All",
-  "UN_SELECT_ALL": "UnSelect All"
+  "UN_SELECT_ALL": "UnSelect All",
+  "Setting": "Settings",
+  "log in": "log in"
 }

@@ -28,8 +28,9 @@ import {DataBaseComponent} from './setting-components/data-base/data-base.compon
 import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
 import {AngularMaterialModule} from '../angular-material.module';
 import { FilterObservablePipe } from './pipes/filter-observable.pipe';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {ItemListWithTitleAndCheckboxComponent} from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
+import {ItemListWithTitleAndCheckboxComponent}
+  from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
+import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -53,11 +54,11 @@ import {ItemListWithTitleAndCheckboxComponent} from './universal/item-list-with-
     FilterObservablePipe
   ],
   imports: [
+    AngularMultiSelectModule,
     CommonModule,
     ReactiveFormsModule,
     AngularMaterialModule,
     FormsModule,
-    NgMultiSelectDropDownModule.forRoot(),
     RouterModule,
     AppRoutingModule,
     AngularSvgIconModule,

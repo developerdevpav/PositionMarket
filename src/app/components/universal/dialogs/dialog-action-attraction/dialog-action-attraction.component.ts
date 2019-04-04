@@ -1,20 +1,17 @@
 import {Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {Observable, pipe} from 'rxjs';
-import {NsiUI} from '../../../../ui/models';
+import {Observable} from 'rxjs';
 import {ApiTagLoadAll} from '../../../../store/actions/tag.actions';
 import {ApiTypeLoadAll} from '../../../../store/actions/type.actions';
 import {DialogSelectionNsiComponent} from '../dialog-selection-nsi/dialog-selection-nsi.component';
-import {selectTypesAreNonIds, selectTypesByIds, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
-import {selectTagsAreNonIds, selectTagsByIds, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
-import {ApiAttractionLoadById, LoadAttractionById} from '../../../../store/actions/attraction.actions';
+import {selectTypesByIds, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
+import {selectTagsByIds, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
+import {ApiAttractionLoadById} from '../../../../store/actions/attraction.actions';
 import {AttractionModel} from '../../../../store/models/attraction-model';
 import {selectPositionById} from '../../../../store/selectors/position.selectors';
 import {Value} from '../../../../store/models/abstract.model';
 import {Language} from '../../../../store/models/language.model';
-import {Product} from '../../../../store/models/products';
-import {ListItem} from 'ng-multiselect-dropdown/multiselect.model';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -32,6 +29,13 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   dropdownAllTag: {id: any, title: string}[] = [];
   dropdownAllType: {id: any, title: string}[] = [];
+
+  settings = {
+    text: 'Select Countries',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    classes: 'myclass custom-class'
+  };
 
   position: AttractionModel = {
     id: '',
@@ -154,11 +158,4 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  onItemSelect($event: ListItem) {
-
-  }
-
-  onSelectAll($event: Array<ListItem>) {
-
-  }
 }

@@ -2,5 +2,7 @@
   "Home": "Главная",
   "Catalog": "Каталог",
   "SELECT_ALL": "Выделить все",
-  "UN_SELECT_ALL": "Снять все"
+  "UN_SELECT_ALL": "Снять все",
+  "Setting": "Настройки",
+  "log in": "войти"
 }

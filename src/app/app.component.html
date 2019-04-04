@@ -1,31 +1,41 @@
+<div class="container">
+  <div class="container-contacts">
+    <svg-icon src="../assets/icon/phone.svg" [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
+    <a href="tel:+375 (29) 947-96-30">+375 (29) 947-96-30</a>
+  </div>
+</div>
 <header>
   <div class="container">
-    <div class="navbar">
-      <div class="logo">
-        <img src="../assets/img/logo5.png" alt="">
-      </div>
-      <div class="button-bar">
-        <a routerLink="/home" routerLinkActive="active">{{ 'Home' | translate }}</a>
-        <a routerLink="/catalog" routerLinkActive="active">{{ 'Catalog' | translate }}</a>
-        <a routerLink="/settings" class="setting-button" routerLinkActive="active">
-          <svg-icon src="../assets/icon/settings.svg" [svgStyle]="{ 'width.px':25, 'height.px':25 }"></svg-icon>
-        </a>
+    <div class="header-actions">
+      <a routerLink="/home" routerLinkActive="active">{{ 'Home' | translate }}</a>
+      <a routerLink="/catalog" routerLinkActive="active">{{ 'Catalog' | translate }}</a>
+      <a routerLink="/settings" routerLinkActive="active">{{ 'Setting' | translate }}</a>
+    </div>
+
+    <div class="header-user-action">
+      <div class="header-language">
         <a [ngClass]="currentLanguage === 'ru' ? 'language-active' : ''"
-           class="language" (click)="switchLanguage('ru')">RU</a>
+           class="language" (click)="switchLanguage('ru')">{{ 'ru' | translate }}</a>
         <a [ngClass]="currentLanguage === 'en' ? 'language-active' : ''"
-           class="language" (click)="switchLanguage('en')">EN</a>
-        <a class="shop-cart" routerLink="shopping-cart">
-          <svg-icon src="../assets/icon/shopping-cart.svg" [svgStyle]="{ 'width.px':25, 'height.px':25 }"></svg-icon>
+           class="language" (click)="switchLanguage('en')">{{ 'en' | translate }}</a>
+      </div>
+
+      <div class="header-shop">
+        <a routerLink="/shopping-cart">
+          <svg-icon src="../assets/icon/shopping-cart.svg" [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
         </a>
+      </div>
+
+      <div class="header-auth">
+        <a routerLink="/shopping-cart" routerLinkActive="active">{{'log in' | translate}}</a>
       </div>
     </div>
+
   </div>
 </header>
 
-<section class="content">
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+<section class="container">
+  <router-outlet></router-outlet>
 </section>
 
 <!--
