@@ -27,3 +27,7 @@ angular2-multiselect {
   width: 100%;
   margin-right: 10px;
 }
+
+angular2-multiselect:last-child {
+  margin-right: 0;
+}

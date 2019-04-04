@@ -19,15 +19,16 @@
   </div>
 
   <div class="items__item" *ngFor="let it of selectProducts">
-    <angular2-multiselect class="item__selector-items" [data]="dropdownSelectTypeService" [(ngModel)]="it.service" [settings]="settingsSingleSelect"></angular2-multiselect>
+    <angular2-multiselect class="item__selector-items" (onSelect)="selectProductAction($event, it.service)" [data]="dropdownAllTypeService" [(ngModel)]="it.service" [settings]="settingsSingleSelect"></angular2-multiselect>
     <input class="items__input" [value]="it.product.price" type="number" placeholder="Price value">
     <div class="add-price">
-      <button mat-stroked-button color="warn" (click)="deleteProduct(it.index, it.product.id)">Remove</button>
+      <button mat-stroked-button color="warn" (click)="deleteProduct(it.index, it.service[0])">Remove</button>
     </div>
   </div>
 
   <div class="add-price">
-    <button mat-stroked-button color="primary" (click)="createItemProduct()">Added price and service</button>
+    <button mat-stroked-button color="primary" [disabled]="!dropdownAllTypeService || dropdownAllTypeService.length === 0"
+            (click)="createItemProduct()">Added price and service</button>
   </div>
 
 </div>
