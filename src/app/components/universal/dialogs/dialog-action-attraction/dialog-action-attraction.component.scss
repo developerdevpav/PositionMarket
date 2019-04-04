@@ -6,74 +6,24 @@
 
 .items__item {
   display: flex;
-  flex-wrap: wrap;
-  border: 1px #d0d0d0 solid;
-  border-radius: 15px;
+  flex-wrap: nowrap;
   width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
-}
-
-.items__title {
-  width: 100%;
-  color: #626262;
-  padding-left: 10px;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.items__content {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.items__input:last-child {
-  margin-bottom: 0;
+  align-items: center;
+  margin-bottom: 15px;
+  height: auto;
 }
 
 .items__input {
+  margin-right: 15px;
   width: 100%;
-  margin-bottom: 15px;
+  height: 40px;
 }
 
 .items__input:last-child {
-  margin-bottom: 0;
+  margin-right: 0px;
 }
 
-.mat-dialog-container {
-  background: #00a4ee;
-  max-width: none;
-  max-height: none;
-}
-
-.mat-dialog-content {
-  max-height: 90%;
-  padding: 0 24px;
-}
-
-.mat-dialog-container {
-  border-radius: 0;
-  padding: 24px 24px 0 24px;
-}
-
-.mat-dialog-actions {
-  display: flex;
-  padding: 10px 15px;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.mat-dialog-actions__button_action {
-  margin-right: 15px;
-}
-
-.mat-dialog-actions__button_action:last-child {
-  margin-right: 0;
-  background: #000098;
-  color: white;
-}
-
-.items__content__multiselect-dropdown {
-  padding-right: 40px;
+angular2-multiselect {
+  width: 100%;
+  margin-right: 10px;
 }

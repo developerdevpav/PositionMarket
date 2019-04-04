@@ -1,20 +1,40 @@
-<mat-dialog-content>
-  <div class="div-content-title">
+<div class="items">
+  <div class="items__item">
     <input class="items__input" [value]="titleRu.value" type="text" placeholder="Title on russian language">
     <input class="items__input" [value]="titleEn.value" type="text" placeholder="Title on english language">
   </div>
-  <div class="div-content-image">
+  <div class="items__item">
     <input class="items__input" [value]="position.image" type="text" placeholder="Link on position image">
   </div>
-  <div class="div-content-title">
+  <div class="items__item">
     <input class="items__input" [value]="position.link" type="text" placeholder="Link on position">
   </div>
-  <angular2-multiselect [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag" [settings]="settings"></angular2-multiselect>
-  <angular2-multiselect [data]="dropdownAllType" [(ngModel)]="dropdownSelectType" [settings]="settings"></angular2-multiselect>
-</mat-dialog-content>
+  <div class="items__item">
+    <angular2-multiselect class="item__selector-items" [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag"
+                          [settings]="settings"></angular2-multiselect>
+  </div>
+  <div class="items__item">
+    <angular2-multiselect class="item__selector-items" [data]="dropdownAllType" [(ngModel)]="dropdownSelectType"
+                          [settings]="settings"></angular2-multiselect>
+  </div>
 
-<mat-dialog-actions>
+  <div class="items__item" *ngFor="let it of selectProducts">
+    <angular2-multiselect class="item__selector-items" [data]="dropdownSelectTypeService" [(ngModel)]="it.service" [settings]="settingsSingleSelect"></angular2-multiselect>
+    <input class="items__input" [value]="it.product.price" type="number" placeholder="Price value">
+    <div class="add-price">
+      <button mat-stroked-button color="warn" (click)="deleteProduct(it.index, it.product.id)">Remove</button>
+    </div>
+  </div>
+
+  <div class="add-price">
+    <button mat-stroked-button color="primary" (click)="createItemProduct()">Added price and service</button>
+  </div>
+
+</div>
+
+
+<!--<mat-dialog-actions>
   <button mat-stroked-button class="mat-dialog-actions__button_action" mat-dialog-close="true">Cancel</button>
   <button mat-stroked-button class="mat-dialog-actions__button_action" cdkFocusInitial (click)="buildPosition()">Save
   </button>
-</mat-dialog-actions>
+</mat-dialog-actions>-->

@@ -4,5 +4,7 @@
   "SELECT_ALL": "Select All",
   "UN_SELECT_ALL": "UnSelect All",
   "Setting": "Settings",
-  "log in": "log in"
+  "log in": "log in",
+  "INPUT_SELECT_TAG_INPUT": "Choose tags",
+  "INPUT_SELECT_TYPES_INPUT": "Choose types"
 }

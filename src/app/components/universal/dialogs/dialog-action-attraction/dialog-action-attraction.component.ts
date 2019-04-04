@@ -13,6 +13,9 @@ import {selectPositionById} from '../../../../store/selectors/position.selectors
 import {Value} from '../../../../store/models/abstract.model';
 import {Language} from '../../../../store/models/language.model';
 import {TranslateService} from '@ngx-translate/core';
+import {Product} from '../../../../store/models/products';
+import {selectTypeServiceById} from '../../../../store/selectors/type-service.selectors';
+import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-dialog-action-attraction',
@@ -21,20 +24,43 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
+  selectProducts: {
+    index: number,
+    product: Product,
+    service: {
+      id: string,
+      title: string
+    }
+  }[] = [];
+
   titleRu: Value = {language: Language.RU, value: ''};
   titleEn: Value = {language: Language.EN, value: ''};
 
-  dropdownSelectTag: {id: any, title: string}[] = [];
-  dropdownSelectType: {id: any, title: string}[] = [];
+  dropdownSelectTag: { id: any, title: string }[] = [];
+  dropdownSelectType: { id: any, title: string }[] = [];
 
-  dropdownAllTag: {id: any, title: string}[] = [];
-  dropdownAllType: {id: any, title: string}[] = [];
+  dropdownAllTag: { id: any, title: string }[] = [];
+  dropdownAllType: { id: any, title: string }[] = [];
+
+  dropdownSelectTypeService: { id: any, title: string }[] = [];
+  dropdownAllTypeService: { id: any, title: string }[] = [];
 
   settings = {
-    text: 'Select Countries',
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
-    classes: 'myclass custom-class'
+    text: '',
+    selectAllText: '',
+    unSelectAllText: '',
+    enableSearchFilter: true,
+    singleSelection: false,
+    labelKey: 'title'
+  };
+
+  settingsSingleSelect = {
+    text: '',
+    selectAllText: '',
+    unSelectAllText: '',
+    enableSearchFilter: true,
+    singleSelection: true,
+    labelKey: 'title'
   };
 
   position: AttractionModel = {
@@ -54,16 +80,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   tags$: Observable<{ id: string, title: string }[]> = Observable.create();
   types$: Observable<{ id: string, title: string }[]> = Observable.create();
-
-  dropdownSettings = {
-    singleSelection: false,
-    idField: 'id',
-    textField: 'title',
-    selectAllText: '',
-    unSelectAllText: '',
-    allowSearchFilter: true,
-    closeDropDownOnSelection: false
-  };
+  typesService$: Observable<{ id: string, title: string }[]> = Observable.create();
 
   constructor(public dialog: MatDialog, public store: Store<any>,
               public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
@@ -71,9 +88,13 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
               translate: TranslateService) {
     this.store.dispatch(new ApiTypeLoadAll());
     this.store.dispatch(new ApiTagLoadAll());
+    this.store.dispatch(new ApiTypeServiceLoadAll());
 
-    translate.get('SELECT_ALL').subscribe(value => this.dropdownSettings.selectAllText = value);
-    translate.get('UN_SELECT_ALL').subscribe(value => this.dropdownSettings.unSelectAllText = value);
+    translate.get('SELECT_ALL').subscribe(value => this.settings.selectAllText = value);
+    translate.get('UN_SELECT_ALL').subscribe(value => this.settings.unSelectAllText = value);
+
+    translate.get('INPUT_SELECT_TAG_INPUT').subscribe(value => this.settings.text = value);
+    translate.get('INPUT_SELECT_TYPES_INPUT').subscribe(value => this.settings.text = value);
   }
 
   openDialog(observable: Observable<{ id: string, title: string }[]>,
@@ -91,14 +112,21 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.types$ = this.store.select(selectTypesByLanguage);
     this.tags$ = this.store.select(selectTagsByLanguage);
+    this.typesService$ = this.store.select(selectTypesByLanguage);
 
-    if ( this.data.action !== 'create' && this.data.id !== undefined ) {
+    if (this.data.action !== 'create' && this.data.id !== undefined) {
       this.store.dispatch(new ApiAttractionLoadById(this.data.id));
 
       this.store.select(selectPositionById, {id: this.data.id}).subscribe(position => {
         this.position = position;
         this.selectedTypes$ = this.store.select(selectTypesByIds, this.position.types);
         this.selectedTags$ = this.store.select(selectTagsByIds, this.position.tags);
+
+        if (this.position.products && this.position.products.length !== 0) {
+          this.position.products.forEach((it, ind) => {
+            this.selectProducts.push({index: ind, product: it, service: this.getTypeServiceById(it.service)});
+          });
+        }
 
         this.setValueLanguageFromPositionTitle();
       });
@@ -119,6 +147,26 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     this.tags$.subscribe(list => {
       this.dropdownAllTag = list;
     });
+
+    this.typesService$.subscribe(list => {
+      this.dropdownAllTypeService = list;
+    });
+  }
+
+  getTypeServiceById(uuid: string): { id: string, title: string } {
+    if (!uuid) {
+      return {id: null, title: ''};
+    }
+
+    let value: { id: null, title: '' };
+    this.store.select(selectTypeServiceById, {id: uuid}).subscribe(typeService => {
+        value = typeService;
+      }
+    );
+    return value;
+  }
+
+  calculateProductPrice(array: Product[]) {
 
   }
 
@@ -147,15 +195,40 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   setValueLanguageFromPositionTitle() {
     let value = this.position.title.find(it => it.language === Language.RU);
-    if ( value ) {
+    if (value) {
       this.titleRu.value = value.value;
     }
     value = this.position.title.find(it => it.language === Language.EN);
-    if ( value ) {
+    if (value) {
       this.titleEn.value = value.value;
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+  }
 
+  deleteProduct(index: number, uuid: string) {
+    this.removeById(this.selectProducts, element => element.index === index);
+  }
+
+  createItemProduct() {
+    let resultIndex = 0;
+
+    if (this.selectProducts && this.selectProducts.length !== 0) {
+      this.selectProducts.sort((a, b) => a.index > b.index ? 1 : a.index === b.index ? 0 : -1);
+      resultIndex = this.selectProducts[0].index ? this.selectProducts[0].index : 0;
+    }
+
+    console.log(resultIndex);
+    const object = {index: resultIndex, product: {id: null, price: 0, service: ''}, service: {id: '', title: ''}};
+    this.selectProducts.push(object);
+  }
+
+  removeById(array, functionFind: (element) => boolean) {
+    const index1 = array.findIndex(functionFind);
+    if (index1 >= 0) {
+      array.splice(index1, 1);
+    }
+    return array;
+  }
 }

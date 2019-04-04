@@ -4,5 +4,7 @@
   "SELECT_ALL": "Выделить все",
   "UN_SELECT_ALL": "Снять все",
   "Setting": "Настройки",
-  "log in": "войти"
+  "log in": "войти",
+  "INPUT_SELECT_TAG_INPUT": "Выберите теги",
+  "INPUT_SELECT_TYPES_INPUT": "Выберите типы"
 }
