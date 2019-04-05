@@ -24,6 +24,7 @@ import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.acti
 })
 export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
+  selectedProduct = 0;
   selectProducts: {
     index: number,
     product: Product,
@@ -125,7 +126,12 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.types$ = this.store.select(selectTypesByLanguage);
     this.tags$ = this.store.select(selectTagsByLanguage);
-    this.loadAllTypeService(list => this.dropdownAllTypeService = list);
+    this.loadAllTypeService(list => {
+      this.dropdownAllTypeService = list;
+      this.selectedProduct = this.dropdownAllTypeService.length;
+    });
+
+    this.calculateProduct();
 
     this.selectedTags$.subscribe(list => {
       this.dropdownSelectTag = list;
@@ -233,8 +239,14 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     }
   }
 
+  conditionBlockButtonItem(): boolean {
+    const length = this.dropdownAllTypeService.length;
+    const lengthSelected = this.selectProducts.length;
+    return  (lengthSelected < this.selectedProduct) && this.selectedProduct !== 0;
+  }
+
   createItemProduct() {
-    if (this.dropdownAllTypeService.length <= this.selectProducts.length) {
+    if (!this.conditionBlockButtonItem()) {
       // TODO: @Author devpav will change when exists message service
       return;
     }
@@ -266,6 +278,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   }
 
   calculateProduct() {
+    this.store.dispatch(new ApiTypeServiceLoadAll());
     this.loadAllTypeService(list => {
       this.dropdownAllTypeService = list;
       if (this.selectProducts) {
@@ -279,8 +292,6 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
           });
       }
 
-      console.log(this.selectProducts);
-      console.log(this.dropdownAllTypeService);
     });
   }
 }

@@ -27,7 +27,7 @@
   </div>
 
   <div class="add-price">
-    <button mat-stroked-button color="primary" [disabled]="!dropdownAllTypeService || dropdownAllTypeService.length === 0"
+    <button mat-stroked-button color="primary" *ngIf="conditionBlockButtonItem()"
             (click)="createItemProduct()">Added price and service</button>
   </div>
 
