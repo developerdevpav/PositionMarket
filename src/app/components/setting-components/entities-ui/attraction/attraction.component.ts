@@ -1,7 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
-import {ApiAttractionDelete, ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
+import {
+  ApiAttractionCreate,
+  ApiAttractionDelete,
+  ApiAttractionLoadAll,
+  ApiAttractionUpdate
+} from '../../../../store/actions/attraction.actions';
 import {ApiTagCreate, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {MatDialog} from '@angular/material';
 import {DialogActionAttractionComponent} from '../../../universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
@@ -32,23 +37,7 @@ export class AttractionComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      this.store.dispatch(new ApiTypeServiceLoadAll());
-      console.log('load');
-      /*if (data && data.action && data.entity) {
-        console.log(data + ' ' + data.change + ' ' + data.entity);
-        switch (data.action) {
-          case 'create': {
-            this.store.dispatch(new ApiTagCreate(data.entity));
-            break;
-          }
-          case 'change': {
-            this.store.dispatch(new ApiTagUpdate((data.entity)));
-            break;
-          }
-          default:
-            return;
-        }
-      }*/
+      // this.store.dispatch(new ApiTypeServiceLoadAll());
     });
   }
 

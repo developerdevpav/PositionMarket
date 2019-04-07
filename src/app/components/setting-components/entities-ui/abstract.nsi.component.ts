@@ -11,10 +11,10 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
   list: { id: string, title: string }[] = [];
 
   private value: T;
-  private subscriberGetAll: Subscription;
 
-  constructor(public store: Store<any>, public dialog: MatDialog) {
-  }
+  private subscriber: Subscription = new Subscription();
+
+  constructor(public store: Store<any>, public dialog: MatDialog) {}
 
   openDialog(actionRef: string, value: T): void {
     const dialogRef = this.dialog.open(DialogEditEntityComponent, {
@@ -49,36 +49,40 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
   protected abstract getActionForCreate(object: T): Action;
 
   protected abstract getActionForChange(object: T): Action;
+
   protected abstract getActionForDelete(uuids: string[]): Action;
 
+  protected abstract getActionForLoadAll(): Action;
+
   protected abstract getSelectorForGetNsiById(): MemoizedSelectorWithProps<T, any, any>;
-  protected abstract getSelectorForGetAllNsi(): MemoizedSelector<LanguageState, {id: string, title: string}[]>;
+
+  protected abstract getSelectorForGetAllNsi(): MemoizedSelector<LanguageState, { id: string, title: string }[]>;
 
   protected create($event) {
+    console.log($event);
     this.openDialog('create', $event);
   }
 
   protected changeOrView($event, action: string) {
-    this.store.select(this.getSelectorForGetNsiById(), {id: $event})
-      .subscribe((value: T) => {
-        this.value = value;
-      });
+    console.log($event, action);
+    this.subscriber.add(
+      this.store.select(this.getSelectorForGetNsiById(), {id: $event})
+        .subscribe((value: T) => this.value = value)
+    );
     this.openDialog(action, this.value);
   }
 
   protected delete(uuids: string[]) {
+    console.log(uuids);
     this.store.dispatch(this.getActionForDelete(uuids));
   }
 
   public ngOnDestroy(): void {
-    this.subscriberGetAll.unsubscribe();
+    this.subscriber.unsubscribe();
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(new ApiTypeServiceLoadAll());
-    this.subscriberGetAll = this.store.select(this.getSelectorForGetAllNsi())
-      .subscribe(list => {
-      this.list = list;
-    });
+    this.store.dispatch(this.getActionForLoadAll());
+    this.subscriber.add(this.store.select(this.getSelectorForGetAllNsi()).subscribe(list => this.list = list));
   }
 }

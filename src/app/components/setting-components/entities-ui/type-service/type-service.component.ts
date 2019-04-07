@@ -46,4 +46,8 @@ export class TypeServiceComponent extends AbstractNsiComponent<TypeService> impl
     return selectTypeServiceById;
   }
 
+  protected getActionForLoadAll(): Action {
+    return new ApiTypeServiceLoadAll();
+  }
+
 }

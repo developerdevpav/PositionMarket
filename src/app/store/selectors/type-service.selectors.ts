@@ -34,8 +34,17 @@ export const selectTypeServiceByLanguageAndByLanguage = createSelector(
 );
 
 export const selectTypeServiceByIds = createSelector(
-  tag.selectEntities,
+  typeservices.selectEntities,
   (array: Dictionary<TypeService>, props: string[]) => {
     return props.map(uuid => array[uuid]);
+  }
+);
+
+export const selectTypeServiceByLanguageAndByIds = createSelector(
+  selectLanguage,
+  typeservices.selectEntities,
+  (lanaguage, array: Dictionary<TypeService>, props: string[]) => {
+    const newArray: TypeService[] = props.map(uuid => array[uuid]);
+    return converter.convertArrayNsiByLanguage(newArray, lanaguage);
   }
 );

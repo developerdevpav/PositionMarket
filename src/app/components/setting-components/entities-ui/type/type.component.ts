@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
+import {Action, MemoizedSelector, MemoizedSelectorWithProps, Store} from '@ngrx/store';
 import {
   ApiTypeCreate,
   ApiTypeDelete,
@@ -11,67 +11,50 @@ import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-
 import {MatDialog} from '@angular/material';
 import {Type} from '../../../../store/models/type.model';
 import {selectTypeById, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
+import {TypeService} from '../../../../store/models/type-service.model';
+import {
+  ApiTypeServiceCreate,
+  ApiTypeServiceDelete,
+  ApiTypeServiceLoadAll,
+  ApiTypeServiceUpdate
+} from '../../../../store/actions/type-service.actions';
+import {LanguageState} from '../../../../store/reducers/language.reducer';
+import {selectTypeServiceById, selectTypeServicesByLanguage} from '../../../../store/selectors/type-service.selectors';
+import {AbstractNsiComponent} from '../abstract.nsi.component';
 
 @Component({
   selector: 'app-type',
   templateUrl: './type.component.html',
   styleUrls: ['./type.component.scss']
 })
-export class TypeComponent implements OnInit {
+export class TypeComponent extends AbstractNsiComponent<Type> implements OnInit {
 
-  $types: Observable<{ id: string, title: string }[]> = this.store.select(selectTypesByLanguage);
-  value: Type;
-
-  constructor(public dialog: MatDialog, private store: Store<Type>) {
-
+  constructor(public dialog: MatDialog, public store: Store<Type>) {
+    super(store, dialog);
   }
 
-  openDialog(actionRef: string, type: Type): void {
-    const dialogRef = this.dialog.open(DialogEditEntityComponent, {
-      hasBackdrop: true,
-      width: '650px',
-      height: '270px',
-      data: {
-        action: actionRef,
-        object: type
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(data => {
-      if (data && data.action && data.entity) {
-        console.log(data + ' ' + data.change + ' ' + data.entity);
-        switch (data.action) {
-          case 'create': {
-            this.store.dispatch(new ApiTypeCreate(data.entity));
-            break;
-          }
-          case 'change': {
-            this.store.dispatch(new ApiTypeUpdate(data.entity));
-            break;
-          }
-          default: return;
-        }
-      }
-    });
+  protected getActionForChange(object: Type): Action {
+    return new ApiTypeUpdate(object);
   }
 
-  ngOnInit() {
-    this.store.dispatch(new ApiTypeLoadAll());
+  protected getActionForCreate(object: Type): Action {
+    return  new ApiTypeCreate(object);
   }
 
-  create($event) {
-    this.openDialog('create', $event);
+  protected getActionForDelete(uuids: string[]): Action {
+    return new ApiTypeDelete(uuids);
   }
 
-  changeOrView($event, action: string) {
-    this.store.select(selectTypeById, {id: $event}).subscribe(value => {
-      this.value = value;
-    });
-    this.openDialog(action, this.value);
+  protected getSelectorForGetAllNsi(): MemoizedSelector<LanguageState, { id: string; title: string }[]> {
+    return selectTypesByLanguage;
   }
 
-  delete($event) {
-    this.store.dispatch(new ApiTypeDelete($event));
+  protected getSelectorForGetNsiById(): MemoizedSelectorWithProps<Type, any, any> {
+    return selectTypeById;
+  }
+
+  protected getActionForLoadAll(): Action {
+    return new ApiTypeLoadAll();
   }
 
 }

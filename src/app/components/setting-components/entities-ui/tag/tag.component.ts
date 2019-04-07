@@ -1,78 +1,47 @@
 import {Component, OnInit} from '@angular/core';
-import {Action, Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
-import {
-  ApiTagCreate,
-  ApiTagDelete,
-  ApiTagLoadAll, ApiTagLoadById,
-  ApiTagUpdate
-} from '../../../../store/actions/tag.actions';
-import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
-import {MatDialog} from '@angular/material';
+import {AbstractNsiComponent} from '../abstract.nsi.component';
 import {Tag} from '../../../../store/models/tag.model';
+import {MatDialog} from '@angular/material';
+import {Action, MemoizedSelector, MemoizedSelectorWithProps, Store} from '@ngrx/store';
+import {Type} from '../../../../store/models/type.model';
+import {LanguageState} from '../../../../store/reducers/language.reducer';
+import {ApiTagCreate, ApiTagDelete, ApiTagLoadAll, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {selectTagById, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
+import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-tag',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss']
 })
-export class TagComponent implements OnInit {
+export class TagComponent extends AbstractNsiComponent<Tag> implements OnInit {
 
-  $tags: Observable<{ id: string, title: string }[]> = this.store.select(selectTagsByLanguage);
-  value: Tag;
-
-  constructor(public dialog: MatDialog, private store: Store<Tag>) {}
-
-
-  openDialog(actionRef: string, tag: Tag): void {
-    const dialogRef = this.dialog.open(DialogEditEntityComponent, {
-      hasBackdrop: true,
-      width: '650px',
-      height: '270px',
-      data: {
-        action: actionRef,
-        object: tag
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(data => {
-      if (data && data.action && data.entity) {
-        console.log(data + ' ' + data.change + ' ' + data.entity);
-        switch (data.action) {
-          case 'create': {
-
-            this.store.dispatch(new ApiTagCreate(data.entity));
-            break;
-          }
-          case 'change': {
-            this.store.dispatch(new ApiTagUpdate((data.entity)));
-            break;
-          }
-          default: return;
-        }
-      }
-    });
+  constructor(public dialog: MatDialog, public store: Store<Type>) {
+    super(store, dialog);
   }
 
-  ngOnInit() {
-    this.store.dispatch(new ApiTagLoadAll());
+  protected getActionForChange(object: Tag): Action {
+    return new ApiTagUpdate(object);
   }
 
-  create($event) {
-    this.openDialog('create', $event);
+  protected getActionForCreate(object: Tag): Action {
+    return new ApiTagCreate(object);
   }
 
-  changeOrView($event, action: string) {
-    this.store.select(selectTagById, {id: $event}).subscribe(value => {
-      this.value = value;
-    });
-    this.openDialog(action, this.value);
+  protected getActionForDelete(uuids: string[]): Action {
+    return new ApiTagDelete(uuids);
   }
 
-
-  delete($event) {
-    console.log(`delete: ${$event}`);
-    this.store.dispatch(new ApiTagDelete($event));
+  protected getSelectorForGetAllNsi(): MemoizedSelector<LanguageState, { id: string; title: string }[]> {
+    return selectTagsByLanguage;
   }
+
+  protected getSelectorForGetNsiById(): MemoizedSelectorWithProps<Tag, any, any> {
+    return selectTagById;
+  }
+
+  protected getActionForLoadAll(): Action {
+    return new ApiTagLoadAll();
+  }
+
 }

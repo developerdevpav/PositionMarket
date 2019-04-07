@@ -24,9 +24,8 @@
                   [svgStyle]="{ 'width.px': 30, 'height.px': 30 }"></svg-icon>
         <svg-icon class="box-gallery_shadow__delete-image-icon" src="../assets/icon/delete.svg"
                   [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
-        <img class="box-gallery__image" src="{{it.url}}" (click)="selectMainImage(it)">
+        <img class="box-gallery__image" [src]="it.url" (click)="selectMainImage(it.image)">
       </div>
-
     </div>
   </div>
   <div class="items__item">
