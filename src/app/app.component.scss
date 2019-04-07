@@ -19,11 +19,11 @@ header {
 }
 
 .language-active {
-  color: red;
+  color: red !important;
 }
 
 .active {
-  border-bottom: 1px #00a4ee solid;
+  border-bottom: 1px #f3f4f6 solid;
 }
 
 header .header-actions {
@@ -36,7 +36,8 @@ header .header-actions {
 header .header-actions > a {
   margin-right: 25px;
   text-decoration: none;
-  color: #1f2124;
+  color: #551a8b;
+  font-weight: 500;
 }
 
 header .header-user-action {
@@ -50,12 +51,13 @@ header .header-language {
   display: flex;
   width: 12%;
   align-items: center;
-  margin-right: 10px;
   font-weight: 500;
+  min-width: 55px;
 }
 
 header .header-language > a {
   margin-left: 10px;
+  color: #a8a8a8;
 }
 
 header .header-shop {
@@ -64,15 +66,16 @@ header .header-shop {
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+  min-width: 45px;
 }
 
 header .header-shop svg-icon {
-  fill: #4b4b4b;
+  fill: #b3b3b3;
 }
 
 header .header-auth {
   display: flex;
-  width: 10%;
+  width: auto;
   justify-content: flex-end;
   align-items: center;
 }
@@ -80,6 +83,7 @@ header .header-auth {
 header .header-auth > a {
   text-decoration: none;
   font-weight: 500;
+  min-width: 40px;
 }
 
 header .header-contacts {
@@ -118,3 +122,9 @@ header .container {
   text-decoration: none;
 }
 
+@media screen and (max-width: 900px){
+
+  header .container {
+
+  }
+}

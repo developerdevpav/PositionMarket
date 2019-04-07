@@ -28,9 +28,10 @@ import {DataBaseComponent} from './setting-components/data-base/data-base.compon
 import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
 import {AngularMaterialModule} from '../angular-material.module';
 import { FilterObservablePipe } from './pipes/filter-observable.pipe';
-import {ItemListWithTitleAndCheckboxComponent}
-  from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
-import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
+import {ItemListWithTitleAndCheckboxComponent} from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
+import {imageReducer} from '../store/reducers/image.reducer';
+import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import { ImagesComponent } from './setting-components/entities-ui/images/images.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
     DataBaseComponent,
     DialogSelectionNsiComponent,
     ItemListWithTitleAndCheckboxComponent,
-    FilterObservablePipe
+    FilterObservablePipe,
+    ImagesComponent
   ],
   imports: [
     AngularMultiSelectModule,
@@ -66,7 +68,8 @@ import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
     StoreModule.forFeature('attractions', attractionReducer),
     StoreModule.forFeature('tags', tagReducer),
     StoreModule.forFeature('language', languageReducer),
-    StoreModule.forFeature('typeservises', typeServiceReducer)
+    StoreModule.forFeature('typeservises', typeServiceReducer),
+    StoreModule.forFeature('images', imageReducer)
   ],
   entryComponents: [DialogEditEntityComponent, DialogActionAttractionComponent, DialogSelectionNsiComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

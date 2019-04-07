@@ -22,7 +22,7 @@ export class TagComponent implements OnInit {
   $tags: Observable<{ id: string, title: string }[]> = this.store.select(selectTagsByLanguage);
   value: Tag;
 
-  constructor(public dialog: MatDialog, private store: Store<any>) {}
+  constructor(public dialog: MatDialog, private store: Store<Tag>) {}
 
 
   openDialog(actionRef: string, tag: Tag): void {

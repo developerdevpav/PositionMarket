@@ -25,6 +25,10 @@ export class DataBaseComponent implements OnInit {
     {
       label: '/attractions',
       link: '/settings/database/attraction'
+    },
+    {
+      label: '/images',
+      link: '/settings/database/images'
     }
   ];
 

@@ -10,8 +10,7 @@ import {Action, Store} from '@ngrx/store';
 export class EntityListComponent implements OnInit {
 
   @Input()
-  list$: Observable<{ id: string, title: string }[]>;
-  listByParam$: Observable<{ id: string, title: string }[]>;
+  list$: { id: string, title: string }[];
 
   selected: string[] = [];
 
@@ -69,7 +68,6 @@ export class EntityListComponent implements OnInit {
 
   ngOnInit() {
     this.selected = [];
-    this.listByParam$ = this.list$;
   }
 
 }

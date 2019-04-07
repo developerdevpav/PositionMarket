@@ -25,6 +25,14 @@ export const selectTypeServicesByLanguage = createSelector(
   }
 );
 
+export const selectTypeServiceByLanguageAndByLanguage = createSelector(
+  selectCurrentLanguage,
+  typeservices.selectEntities,
+  (language, array, props) => {
+    return converter.convertNsiByLanguage(array[props.id], language);
+  }
+);
+
 export const selectTypeServiceByIds = createSelector(
   tag.selectEntities,
   (array: Dictionary<TypeService>, props: string[]) => {

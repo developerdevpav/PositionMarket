@@ -21,6 +21,7 @@ import {AttractionService} from './store/services/attraction.service';
 import {AttractionEffects} from './store/effects/attraction.effects';
 import {AngularMaterialModule} from './angular-material.module';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
+import {ImageEffects} from './store/effects/image.effects';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
       TypeEffects,
       TagEffects,
       TypeServiceEffects,
-      AttractionEffects
+      AttractionEffects,
+      ImageEffects
     ]),
     NsiModule,
     HttpClientModule,

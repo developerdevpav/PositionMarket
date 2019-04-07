@@ -1,13 +1,33 @@
+<h2 mat-dialog-title>Position dialog ({{data.action}})</h2>
 <div class="items">
   <div class="items__item">
-    <input class="items__input" [value]="titleRu.value" type="text" placeholder="Title on russian language">
-    <input class="items__input" [value]="titleEn.value" type="text" placeholder="Title on english language">
+    <input class="items__input" #titleRuId="ngModel" [(ngModel)]="titleRu.value" [ngModelOptions]="{standalone: true}"
+           type="text" placeholder="Title on russian language">
+    <input class="items__input" #titleEnId="ngModel" [(ngModel)]="titleEn.value" [ngModelOptions]="{standalone: true}"
+           type="text" placeholder="Title on english language">
   </div>
-  <div class="items__item">
-    <input class="items__input" [value]="position.image" type="text" placeholder="Link on position image">
-  </div>
-  <div class="items__item">
-    <input class="items__input" [value]="position.link" type="text" placeholder="Link on position">
+  <div class="items__item-file">
+    <input type="file" class="item__file-input" multiple accept=".png,.jpeg,.jpg" (change)="changeInput($event)"
+           name="file" id="file"/>
+    <div class="item__input-label">
+      <label class="input-label__label-box" for="file">
+        <span class="input-label__label-box-title">
+          Load images
+        </span>
+        <svg-icon class="input-label__label-box-icon" src="../assets/icon/load-image.svg"
+                  [svgStyle]="{ 'width.px': 22, 'height.px': 22 }"></svg-icon>
+      </label>
+    </div>
+    <div class="item__box-gallery" *ngIf="images && images.length > 0">
+      <div *ngFor="let it of images" class="item__box-gallery_shadow">
+        <svg-icon *ngIf="it.mainImage" class="box-gallery_shadow__set-main-image-icon" src="../assets/icon/checked.svg"
+                  [svgStyle]="{ 'width.px': 30, 'height.px': 30 }"></svg-icon>
+        <svg-icon class="box-gallery_shadow__delete-image-icon" src="../assets/icon/delete.svg"
+                  [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
+        <img class="box-gallery__image" src="{{it.url}}" (click)="selectMainImage(it)">
+      </div>
+
+    </div>
   </div>
   <div class="items__item">
     <angular2-multiselect class="item__selector-items" [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag"
@@ -19,23 +39,25 @@
   </div>
 
   <div class="items__item" *ngFor="let it of selectProducts">
-    <angular2-multiselect class="item__selector-items" (onSelect)="selectProductAction($event, it.service)" [data]="dropdownAllTypeService" [(ngModel)]="it.service" [settings]="settingsSingleSelect"></angular2-multiselect>
-    <input class="items__input" [value]="it.product.price" type="number" placeholder="Price value">
+    <angular2-multiselect class="item__selector-items" (onSelect)="selectProductAction($event, it.service)"
+                          [data]="dropdownAllTypeService" [(ngModel)]="it.service"
+                          [settings]="settingsSingleSelect"></angular2-multiselect>
+    <input class="items__input" [(ngModel)]="it.product.price" type="number" placeholder="Price value">
     <div class="add-price">
       <button mat-stroked-button color="warn" (click)="deleteProduct(it.index, it.service[0])">Remove</button>
     </div>
   </div>
 
-  <div class="add-price">
-    <button mat-stroked-button color="primary" *ngIf="conditionBlockButtonItem()"
-            (click)="createItemProduct()">Added price and service</button>
+  <div class="items__item">
+    <button mat-stroked-button class="item__add_button" color="primary" *ngIf="conditionBlockButtonItem()"
+            (click)="createItemProduct()">
+      Add price and service
+    </button>
   </div>
 
+  <div class="items__item-action">
+    <button mat-stroked-button class="item-action__button_action" mat-dialog-close="true" (click)="dialogRef.afterClosed(true)" color="warn">Cancel</button>
+    <button mat-stroked-button class="item-action__button_action" (click)="buildPosition()" color="primary">Save
+    </button>
+  </div>
 </div>
-
-
-<!--<mat-dialog-actions>
-  <button mat-stroked-button class="mat-dialog-actions__button_action" mat-dialog-close="true">Cancel</button>
-  <button mat-stroked-button class="mat-dialog-actions__button_action" cdkFocusInitial (click)="buildPosition()">Save
-  </button>
-</mat-dialog-actions>-->

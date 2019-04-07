@@ -1,76 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Action, MemoizedSelector, MemoizedSelectorWithProps, Store} from '@ngrx/store';
 import {
-  ApiTypeServiceCreate, ApiTypeServiceDelete,
-  ApiTypeServiceLoadAll, ApiTypeServiceUpdate,
-  DeleteTypeServices,
-  UpdateTypeService
+  ApiTypeServiceCreate,
+  ApiTypeServiceDelete,
+  ApiTypeServiceLoadAll,
+  ApiTypeServiceUpdate
 } from '../../../../store/actions/type-service.actions';
-import { MatDialog } from '@angular/material';
-import { TypeService } from 'src/app/store/models/type-service.model';
-import { DialogEditEntityComponent } from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
+import {MatDialog} from '@angular/material';
+import {TypeService} from 'src/app/store/models/type-service.model';
+import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {selectTypeServiceById, selectTypeServicesByLanguage} from '../../../../store/selectors/type-service.selectors';
+import {Subscription} from 'rxjs';
+import {AbstractNsiComponent} from '../abstract.nsi.component';
+import {LanguageState} from '../../../../store/reducers/language.reducer';
 
 @Component({
   selector: 'app-type-service',
   templateUrl: './type-service.component.html',
   styleUrls: ['./type-service.component.scss']
 })
-export class TypeServiceComponent implements OnInit {
+export class TypeServiceComponent extends AbstractNsiComponent<TypeService> implements OnInit, OnDestroy {
 
-  $typeservices: Observable<{ id: string, title: string }[]> = this.store.select(selectTypeServicesByLanguage);
-  value: TypeService;
-
-  constructor(public dialog: MatDialog, private store: Store<any>) {}
-
-  openDialog(actionRef: string, typeService: TypeService): void {
-    const dialogRef = this.dialog.open(DialogEditEntityComponent, {
-      hasBackdrop: true,
-      width: '650px',
-      height: '270px',
-      data: {
-        action: actionRef,
-        object: typeService
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(data => {
-      if (data && data.action && data.entity) {
-        console.log(data + ' ' + data.change + ' ' + data.entity);
-        switch (data.action) {
-          case 'create': {
-
-            this.store.dispatch(new ApiTypeServiceCreate(data.entity));
-            break;
-          }
-          case 'change': {
-            this.store.dispatch(new ApiTypeServiceUpdate(data.entity));
-            break;
-          }
-          default: return;
-        }
-      }
-    });
+  constructor(public dialog: MatDialog, public store: Store<TypeService>) {
+    super(store, dialog);
   }
 
-  ngOnInit() {
-    this.store.dispatch(new ApiTypeServiceLoadAll());
+  getActionForChange(object: TypeService): Action {
+    return new ApiTypeServiceUpdate(object);
   }
 
-  create($event) {
-    this.openDialog('create', $event);
+  getActionForCreate(object: TypeService): Action {
+    return new ApiTypeServiceCreate(object);
   }
 
-  changeOrView($event, action: string) {
-    this.store.select(selectTypeServiceById, {id: $event}).subscribe(value => {
-      this.value = value;
-    });
-    this.openDialog(action, this.value);
+
+  getActionForDelete(uuids: string[]): Action {
+    return new ApiTypeServiceDelete(uuids);
   }
 
-  delete($event) {
-    console.log(`delete: ${$event}`);
-    this.store.dispatch(new ApiTypeServiceDelete($event));
+  getSelectorForGetAllNsi(): MemoizedSelector<LanguageState, { id: string; title: string }[]> {
+    return selectTypeServicesByLanguage;
   }
+
+  getSelectorForGetNsiById(): MemoizedSelectorWithProps<object, any, any> {
+    return selectTypeServiceById;
+  }
+
 }

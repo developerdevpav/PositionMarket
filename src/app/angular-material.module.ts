@@ -1,18 +1,23 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {
-  MatButtonModule, MatCheckboxModule, MatChipsModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
+  MatProgressBarModule,
   MatIconModule,
   MatListModule,
-  MatTabsModule,
-  MatSelectModule, MatCardModule
+  MatSelectModule,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
   declarations: [],
   imports: [
+    MatProgressBarModule,
     MatButtonModule,
     MatExpansionModule,
     MatSelectModule,
@@ -26,6 +31,7 @@ import {
     MatDividerModule
   ],
   exports: [
+    MatProgressBarModule,
     MatButtonModule,
     MatExpansionModule,
     MatDialogModule,

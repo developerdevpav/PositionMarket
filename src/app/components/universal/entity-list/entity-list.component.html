@@ -5,7 +5,7 @@
   (viewChange)="view()" [selected]="selected.length"></app-panel-entity>
 
 <div class="list-entity">
-  <app-item-list-with-title-and-checkbox class="list-entity__item" *ngFor="let item of listByParam$ | async"
+  <app-item-list-with-title-and-checkbox class="list-entity__item" *ngFor="let item of list$"
     [checked]="historySelect(item.id)"
     (change)="checkboxEvent($event.event, $event.uuid)"
     [entity]="{ index: item.id, title: item.title }">

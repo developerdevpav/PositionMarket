@@ -9,6 +9,7 @@ import {TypeServiceComponent} from './components/setting-components/entities-ui/
 import {AttractionComponent} from './components/setting-components/entities-ui/attraction/attraction.component';
 import {SettingComponent} from './components/setting-components/setting/setting.component';
 import {DataBaseComponent} from './components/setting-components/data-base/data-base.component';
+import {ImagesComponent} from './components/setting-components/entities-ui/images/images.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -47,6 +48,10 @@ const routes: Routes = [
           {
             path: 'type-service',
             component: TypeServiceComponent
+          },
+          {
+            path: 'images',
+            component: ImagesComponent
           }
         ],
       }

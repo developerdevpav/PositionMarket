@@ -22,7 +22,9 @@ export class TypeComponent implements OnInit {
   $types: Observable<{ id: string, title: string }[]> = this.store.select(selectTypesByLanguage);
   value: Type;
 
-  constructor(public dialog: MatDialog, private store: Store<any>) {}
+  constructor(public dialog: MatDialog, private store: Store<Type>) {
+
+  }
 
   openDialog(actionRef: string, type: Type): void {
     const dialogRef = this.dialog.open(DialogEditEntityComponent, {

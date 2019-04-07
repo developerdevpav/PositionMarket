@@ -36,6 +36,13 @@ export class ApiAttractionDelete implements Action {
   }
 }
 
+export class ApiAttractionsDelete implements Action {
+  readonly type = APIAction.DELETE + '[Attraction]';
+
+  constructor(public payload: string) {
+  }
+}
+
 export enum AttractionActionTypes {
   LOAD_SUCCESS_ATTRACTIONS = '[ATTRACTION] LOAD ATTRACTIONS',
   LOAD_SUCCESS_ATTRACTION = '[ATTRACTION] LOAD ATTRACTION',
