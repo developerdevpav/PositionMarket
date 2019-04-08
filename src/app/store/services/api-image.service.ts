@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ImageModel} from '../models/image.model';
-import {ImageService} from './image/image.service';
+import {ImageUtilService} from './utils/image-util.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ApiImageService {
 
   private utl = '/api';
 
-  constructor(private http: HttpClient, private imageService: ImageService) {
+  constructor(private http: HttpClient, private imageService: ImageUtilService) {
   }
 
   private upload(data: FormData): Observable<HttpEvent<any>> {

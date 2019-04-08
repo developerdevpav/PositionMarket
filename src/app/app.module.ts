@@ -22,6 +22,7 @@ import {AttractionEffects} from './store/effects/attraction.effects';
 import {AngularMaterialModule} from './angular-material.module';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImageEffects} from './store/effects/image.effects';
+import {ImageUtilService} from './store/services/utils/image-util.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import {ImageEffects} from './store/effects/image.effects';
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [NsiAbstractService, AttractionService],
+  providers: [NsiAbstractService, AttractionService, ImageUtilService],
   exports: [
     AppRoutingModule,
     BrowserModule

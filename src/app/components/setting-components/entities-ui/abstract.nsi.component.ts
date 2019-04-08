@@ -1,5 +1,4 @@
 import {OnDestroy, OnInit} from '@angular/core';
-import {ApiTypeServiceLoadAll} from '../../../store/actions/type-service.actions';
 import {Action, MemoizedSelector, MemoizedSelectorWithProps, Store} from '@ngrx/store';
 import {DialogEditEntityComponent} from '../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {MatDialog} from '@angular/material';
@@ -14,7 +13,7 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
 
   private subscriber: Subscription = new Subscription();
 
-  constructor(public store: Store<any>, public dialog: MatDialog) {}
+  protected constructor(public store: Store<any>, public dialog: MatDialog) {}
 
   openDialog(actionRef: string, value: T): void {
     const dialogRef = this.dialog.open(DialogEditEntityComponent, {
@@ -29,7 +28,6 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data && data.action && data.entity) {
-        console.log(data + ' ' + data.change + ' ' + data.entity);
         switch (data.action) {
           case 'create': {
             this.store.dispatch(this.getActionForCreate(data.entity));
@@ -58,13 +56,11 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
 
   protected abstract getSelectorForGetAllNsi(): MemoizedSelector<LanguageState, { id: string, title: string }[]>;
 
-  protected create($event) {
-    console.log($event);
+  create($event) {
     this.openDialog('create', $event);
   }
 
-  protected changeOrView($event, action: string) {
-    console.log($event, action);
+  changeOrView($event, action: string) {
     this.subscriber.add(
       this.store.select(this.getSelectorForGetNsiById(), {id: $event})
         .subscribe((value: T) => this.value = value)
@@ -72,8 +68,7 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
     this.openDialog(action, this.value);
   }
 
-  protected delete(uuids: string[]) {
-    console.log(uuids);
+  delete(uuids: string[]) {
     this.store.dispatch(this.getActionForDelete(uuids));
   }
 

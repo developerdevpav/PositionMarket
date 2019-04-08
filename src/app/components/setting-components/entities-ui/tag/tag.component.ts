@@ -7,7 +7,6 @@ import {Type} from '../../../../store/models/type.model';
 import {LanguageState} from '../../../../store/reducers/language.reducer';
 import {ApiTagCreate, ApiTagDelete, ApiTagLoadAll, ApiTagUpdate} from '../../../../store/actions/tag.actions';
 import {selectTagById, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
-import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-tag',

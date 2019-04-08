@@ -1,17 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {
-  ApiAttractionCreate,
   ApiAttractionDelete,
-  ApiAttractionLoadAll,
-  ApiAttractionUpdate
-} from '../../../../store/actions/attraction.actions';
-import {ApiTagCreate, ApiTagUpdate} from '../../../../store/actions/tag.actions';
+  ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
 import {MatDialog} from '@angular/material';
 import {DialogActionAttractionComponent} from '../../../universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 import {selectShortPositionsByLanguage} from '../../../../store/selectors/position.selectors';
-import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-attraction',
