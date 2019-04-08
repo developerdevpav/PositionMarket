@@ -13,11 +13,20 @@ import {
   LoadSuccessAttractions,
   UpdateAttraction
 } from '../actions/attraction.actions';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class AttractionEffects {
 
-  constructor(private actions$: Actions, private service: AttractionService) {
+  constructor(private actions$: Actions, private service: AttractionService, private snackBar: MatSnackBar) {
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'close', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom'
+    });
   }
 
   @Effect()
@@ -26,9 +35,12 @@ export class AttractionEffects {
       ofType(APIAction.LOAD_ALL + '[Attraction]'),
       mergeMap(() => this.service.getAll('attractions')
         .pipe(
-          map((array: AttractionModel[]) => (new LoadSuccessAttractions({attractions: array}))),
-          catchError(() => {
-            console.log('error load attractions');
+          map((array: AttractionModel[]) => {
+            this.openSnackBar('Successfully loaded ' + array.length + ' position');
+            return (new LoadSuccessAttractions({attractions: array}));
+          }),
+          catchError((error) => {
+            this.openSnackBar('Error loading ' + error.message);
             return EMPTY;
           })
         ))
@@ -40,7 +52,10 @@ export class AttractionEffects {
     ofType(APIAction.LOAD_BY_ID + '[Attraction]'),
     map((action: ApiAttractionLoadById) => action.payload),
     switchMap((id) => this.service.getById('attractions', id)),
-    map((attractionLoad: AttractionModel) => new LoadAttractionById({attraction: attractionLoad}))
+    map((attractionLoad: AttractionModel) => {
+      this.openSnackBar('Attraction loaded');
+      return new LoadAttractionById({attraction: attractionLoad});
+    })
   );
 
   @Effect()
