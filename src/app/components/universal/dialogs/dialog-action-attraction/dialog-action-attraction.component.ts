@@ -367,32 +367,15 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     const fileList: FileList = $event.target.files;
     this.isActiveLoading = true;
     if (fileList && fileList.length > 0) {
-      this.imageService.uploadImages(fileList).subscribe(event => {
-        switch (event.type) {
-          case HttpEventType.UploadProgress: {
-            this.currentValueProgressLoading = (100 / event.total) * event.loaded;
-            break;
+      this.subscriptionNsi.add(
+        this.imageUtil.uploadImages(fileList,
+          percent => {
+            this.currentValueProgressLoading = percent;
+          }, imagePositionList => {
+            this.images = imagePositionList;
           }
-          case HttpEventType.Response: {
-            this.isActiveLoading = false;
-            const selectedImage: ImageModel[] = JSON.parse(event.body);
-            if (selectedImage && selectedImage.length > 0) {
-              selectedImage.forEach(imageModel => {
-                this.images.push(
-                  {
-                    id: null,
-                    url: imageModel.url,
-                    image: imageModel.id,
-                    mainImage: false
-                  }
-                );
-              });
-              this.defaultSetMainImage();
-            }
-            break;
-          }
-        }
-      });
+        )
+      );
     }
   }
 
