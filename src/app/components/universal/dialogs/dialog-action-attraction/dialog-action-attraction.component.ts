@@ -4,10 +4,9 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Observable, Subscription} from 'rxjs';
 import {ApiTagLoadAll} from '../../../../store/actions/tag.actions';
 import {ApiTypeLoadAll} from '../../../../store/actions/type.actions';
-import {DialogSelectionNsiComponent} from '../dialog-selection-nsi/dialog-selection-nsi.component';
 import {selectTypesByIds, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
 import {selectTagsByIds, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
-import {ApiAttractionCreate, ApiAttractionLoadById} from '../../../../store/actions/attraction.actions';
+import {ApiAttractionCreate, ApiAttractionLoadById, ApiAttractionUpdate} from '../../../../store/actions/attraction.actions';
 import {AttractionModel} from '../../../../store/models/attraction-model';
 import {selectPositionById} from '../../../../store/selectors/position.selectors';
 import {Value} from '../../../../store/models/abstract.model';
@@ -16,8 +15,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {Product} from '../../../../store/models/products';
 import {selectTypeServiceByLanguageAndByIds, selectTypeServicesByLanguage} from '../../../../store/selectors/type-service.selectors';
 import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.actions';
-import {ApiImageService} from '../../../../store/services/api-image.service';
-import {HttpEventType} from '@angular/common/http';
 import {ImageModel} from '../../../../store/models/image.model';
 import {PositionImageModel} from '../../../../store/models/position.image.model';
 import {ImageUtilService} from '../../../../store/services/utils/image-util.service';
@@ -33,6 +30,9 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   subscriptionNsi: Subscription = new Subscription();
 
   selectedImages: ImageModel[] = [];
+
+  loadedDropdownTag = false;
+  loadedDropdownType = false;
 
   currentValueProgressLoading = 0;
   isActiveLoading = false;
@@ -91,48 +91,56 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   selectedTypes$: Observable<{ id: string, title: string }[]>;
   typesService$: Observable<{ id: string, title: string }[]>;
 
-  constructor(public imageService: ApiImageService, public dialog: MatDialog, public store: Store<any>,
+  constructor(public dialog: MatDialog, public store: Store<any>,
               public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string },
               translate: TranslateService,
               public imageUtil: ImageUtilService) {
 
-    translate.get('SELECT_ALL').subscribe(value => {
-      this.settings.selectAllText = value;
-      this.settingsSingleSelect.selectAllText = value;
-    }).unsubscribe();
+    this.subscriptionNsi.add(
+      translate.get('SELECT_ALL').subscribe(value => {
+        this.settings.selectAllText = value;
+        this.settingsSingleSelect.selectAllText = value;
+      })
+    );
 
-    translate.get('UN_SELECT_ALL').subscribe(value => {
-      this.settings.unSelectAllText = value;
-      this.settingsSingleSelect.unSelectAllText = value;
-    }).unsubscribe();
+    this.subscriptionNsi.add(
+      translate.get('UN_SELECT_ALL').subscribe(value => {
+        this.settings.unSelectAllText = value;
+        this.settingsSingleSelect.unSelectAllText = value;
+      })
+    );
+    this.subscriptionNsi.add(
+      translate.get('INPUT_SELECT_TAG_INPUT').subscribe(value => {
+        this.settings.text = value;
+        this.settingsSingleSelect.text = value;
+      })
+    );
 
+    this.subscriptionNsi.add(
+      translate.get('INPUT_SELECT_TYPES_INPUT').subscribe(value => {
+        this.settings.text = value;
+        this.settingsSingleSelect.text = value;
+      })
+    );
 
-    translate.get('INPUT_SELECT_TAG_INPUT').subscribe(value => {
-      this.settings.text = value;
-      this.settingsSingleSelect.text = value;
-    }).unsubscribe();
-
-    translate.get('INPUT_SELECT_TYPES_INPUT').subscribe(value => {
-      this.settings.text = value;
-      this.settingsSingleSelect.text = value;
-    }).unsubscribe();
-
-  }
-
-  openDialog(observable: Observable<{ id: string, title: string }[]>,
-             selectValues: Observable<{ id: string, title: string }[]>): void {
-    const dialogRef = this.dialog.open(DialogSelectionNsiComponent, {
-      hasBackdrop: true,
-      width: '70%',
-      height: 'auto',
-      data: {list: observable, selected: selectValues}
-    });
-
-    dialogRef.afterClosed();
   }
 
   ngOnInit() {
+    if (this.data.action === 'create') {
+      this.loadedDropdownTag = true;
+      this.loadedDropdownType = true;
+    }
+    this.updateDataThisDialog();
+  }
+
+  loadAllTypeService(seccLoad: (list) => void) {
+    this.typesService$ = this.store.select(selectTypeServicesByLanguage);
+    this.subscriptionNsi.add(this.typesService$.subscribe(it => seccLoad(it)));
+  }
+
+  updateDataThisDialog() {
+
     this.store.dispatch(new ApiTypeLoadAll());
     this.store.dispatch(new ApiTagLoadAll());
     this.store.dispatch(new ApiTypeServiceLoadAll());
@@ -150,9 +158,10 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     );
 
     this.loadAllTypeService(list => {
-      this.dropdownAllTypeService = list;
-      this.selectedProduct = this.dropdownAllTypeService.length;
-    });
+        this.dropdownAllTypeService = list;
+        this.selectedProduct = this.dropdownAllTypeService.length;
+      }
+    );
 
     if (this.data.action !== 'create' && this.data.id !== undefined) {
       this.store.dispatch(new ApiAttractionLoadById(this.data.id));
@@ -161,21 +170,26 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
         .subscribe(position => {
           this.position = position;
 
-
           this.selectedTypes$ = this.store.select(selectTypesByIds, this.position.types);
           this.selectedTags$ = this.store.select(selectTagsByIds, this.position.tags);
 
           this.subscriptionNsi.add(
             this.selectedTypes$.subscribe(list => {
-              this.dropdownSelectType = list;
-              console.log(this.dropdownSelectType);
+              if (list) {
+                this.dropdownSelectType = list.filter(it => it);
+                this.loadedDropdownType = true;
+              }
             })
           );
 
           this.subscriptionNsi.add(
             this.selectedTags$.subscribe(list => {
-              this.dropdownSelectTag = list;
-              console.log(this.dropdownSelectTag);
+              if (list) {
+                this.dropdownSelectTag = list
+                  .filter(tag => tag != null)
+                  .filter(tag => tag.id !== null && tag.title);
+                this.loadedDropdownTag = true;
+              }
             })
           );
 
@@ -198,6 +212,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
                         .filter(typeService => typeService && typeService.id)
                         .find(typeService => typeService.id === it.product.service);
                       if (foundService && it.service.length === 0) {
+                        // it.service = it.service.filter(service => service.id && service.title);
                         if (it.service) {
                           it.service.push(foundService);
                         }
@@ -210,33 +225,16 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
           this.calculateProduct();
 
           if (this.position.images && this.position.images.length !== 0) {
-            this.images = this.position.images
-              .map(imageModel => {
-                  return {
-                    id: imageModel.id,
-                    url: imageModel.url,
-                    image: imageModel.image,
-                    mainImage: imageModel.mainImage
-                  };
-                }
-              );
+            this.images = this.position.images;
+            console.log(this.images);
           }
 
-          this.defaultSetMainImage();
           this.setValueLanguageFromPositionTitle();
         });
 
       this.subscriptionNsi.add(subscribePosition);
     }
-
-
   }
-
-  loadAllTypeService(seccLoad: (list) => void) {
-    this.typesService$ = this.store.select(selectTypeServicesByLanguage);
-    this.subscriptionNsi.add(this.typesService$.subscribe(it => seccLoad(it)));
-  }
-
 
   buildPosition() {
     this.updateOrPushValueInTitle(this.titleRu);
@@ -265,7 +263,15 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
     this.position.images = this.images.filter(image => image && image.image && image.url);
 
-    this.store.dispatch(new ApiAttractionCreate(this.position));
+    if (this.data.action !== 'view') {
+      this.store.dispatch(
+        this.data.action === 'create'
+          ? new ApiAttractionCreate(this.position)
+          : new ApiAttractionUpdate(this.position)
+      );
+      // this.resetVariables();
+      this.dialogRef.close();
+    }
   }
 
   updateOrPushValueInTitle(field: Value) {
@@ -309,10 +315,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   }
 
   conditionBlockButtonItem(): boolean {
-    const length = this.dropdownAllTypeService.length;
-    const lengthSelected = this.selectProducts.length;
-
-    return (lengthSelected < this.selectedProduct) && this.selectedProduct !== 0;
+    return (this.selectProducts.length < this.selectedProduct) && this.selectedProduct !== 0;
   }
 
   createItemProduct() {
@@ -367,27 +370,23 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     const fileList: FileList = $event.target.files;
     this.isActiveLoading = true;
     if (fileList && fileList.length > 0) {
-      this.subscriptionNsi.add(
-        this.imageUtil.uploadImages(fileList,
-          percent => {
-            this.currentValueProgressLoading = percent;
-          }, imagePositionList => {
-            this.images = imagePositionList;
-          }
-        )
+      const subscriberUploadImages = this.imageUtil.uploadImages(fileList,
+        percent => {
+          this.currentValueProgressLoading = percent;
+        }, imagePositionList => {
+          imagePositionList.forEach(image => {
+            this.images.push(image);
+          });
+        }
       );
-    }
-  }
-
-  defaultSetMainImage() {
-    if (this.images && this.images.length > 0) {
-      if (!this.images.find(image => image.mainImage)) {
-        this.images[0].mainImage = true;
-      }
+      this.subscriptionNsi.add(subscriberUploadImages);
     }
   }
 
   selectMainImage(it: string) {
+    console.log(this.images);
     this.images = this.imageUtil.setMainImage(this.images, it);
+    console.log(this.images);
   }
+
 }

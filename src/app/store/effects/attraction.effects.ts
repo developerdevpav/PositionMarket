@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {APIAction} from '../actions/abstarct.actions';
 import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
@@ -8,8 +8,12 @@ import {AttractionService} from '../services/attraction.service';
 import {AttractionModel} from '../models/attraction-model';
 import {
   AddAttraction,
-  ApiAttractionCreate, ApiAttractionDelete, ApiAttractionLoadById,
-  ApiAttractionUpdate, DeleteAttraction, LoadAttractionById,
+  ApiAttractionCreate,
+  ApiAttractionDelete,
+  ApiAttractionLoadById,
+  ApiAttractionUpdate,
+  DeleteAttraction,
+  LoadAttractionById,
   LoadSuccessAttractions,
   UpdateAttraction
 } from '../actions/attraction.actions';
@@ -21,11 +25,12 @@ export class AttractionEffects {
   constructor(private actions$: Actions, private service: AttractionService, private snackBar: MatSnackBar) {
   }
 
-  openSnackBar(message: string) {
+  openSnackBar(message: string, error: boolean = false) {
     this.snackBar.open(message, 'close', {
-      duration: 5000,
+      duration: 2000,
       horizontalPosition: 'right',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
+      panelClass: error ? 'red-snackbar' : 'green-snackbar'
     });
   }
 
@@ -40,7 +45,7 @@ export class AttractionEffects {
             return (new LoadSuccessAttractions({attractions: array}));
           }),
           catchError((error) => {
-            this.openSnackBar('Error loading ' + error.message);
+            this.openSnackBar('Error loading ' + error.message, true);
             return EMPTY;
           })
         ))
@@ -53,8 +58,12 @@ export class AttractionEffects {
     map((action: ApiAttractionLoadById) => action.payload),
     switchMap((id) => this.service.getById('attractions', id)),
     map((attractionLoad: AttractionModel) => {
-      this.openSnackBar('Attraction loaded');
+      this.openSnackBar('Successfully Attraction load');
       return new LoadAttractionById({attraction: attractionLoad});
+    }),
+    catchError((e) => {
+      this.openSnackBar(`error load ${e.message}`, true);
+      return EMPTY;
     })
   );
 
@@ -65,10 +74,14 @@ export class AttractionEffects {
       map((action: ApiAttractionCreate) => action.payload),
       switchMap((data) => this.service.create('attractions', data).pipe(
         map((loadAttraction: AttractionModel) => {
-          console.log('load ' + loadAttraction);
+          this.openSnackBar(`create position `);
           return new AddAttraction({attraction: loadAttraction});
         }),
-        catchError(error => EMPTY)
+        catchError((e) => {
+          this.openSnackBar(`Error create position ${e.message}`, true);
+          console.log(e);
+          return EMPTY;
+        })
         ),
       ),
     );
@@ -83,12 +96,19 @@ export class AttractionEffects {
       switchMap(
         (object: AttractionModel) => this.service.update('attractions', object)
           .pipe(
-            map(() => new UpdateAttraction({
-              attraction: {
-                id: object.id,
-                changes: object
-              }
-            }))
+            map(() => {
+              this.openSnackBar(`Successfully update position`);
+              return new UpdateAttraction({
+                attraction: {
+                  id: object.id,
+                  changes: object
+                }
+              });
+            }),
+            catchError((e) => {
+              this.openSnackBar(`Error update position ${e.message}`, true);
+              return EMPTY;
+            })
           )
       )
     );
@@ -103,7 +123,14 @@ export class AttractionEffects {
     switchMap(
       (index: string) => this.service.delete('attractions', index)
         .pipe(
-          map(() => new DeleteAttraction({ id: index }))
+          map(() => {
+            this.openSnackBar(`Successfully delete position`);
+            return new DeleteAttraction({id: index});
+          }),
+          catchError((e) => {
+            this.openSnackBar(`Error delete position ${e.message}`, true);
+            return EMPTY;
+          })
         )
     )
   );

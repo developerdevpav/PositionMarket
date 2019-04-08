@@ -17,33 +17,29 @@ export class ImageUtilService {
   * If the list doesn't have the main image, first found image is set
   * */
   public setMainImage(positionImages: Array<PositionImageModel>, imageId: string): Array<PositionImageModel> {
-    let tmpImage: Array<PositionImageModel> = [];
-    console.log('Init values: ');
-    console.log(positionImages);
     if (positionImages && positionImages.length > 0) {
       const isExistsMainImage = positionImages.find(it => it.mainImage);
 
-      if (isExistsMainImage) {
-        tmpImage = positionImages
-          .map(positionImage => {
-              positionImage.mainImage = (imageId && imageId === positionImage.image);
+      if ( isExistsMainImage && imageId ) {
+        positionImages
+          .forEach(positionImage => {
+              positionImage.mainImage = (imageId === positionImage.image);
               return positionImage;
             }
           );
       } else {
-        tmpImage = positionImages.map(it => it);
-        tmpImage.forEach(it => it.mainImage = false);
-        tmpImage[0].mainImage = true;
+        positionImages.forEach(it => it.mainImage = false);
+        positionImages[0].mainImage = true;
       }
     }
 
-    return tmpImage;
+    return positionImages;
   }
 
   /*
   * method getFormData build FormData from list file
   * */
-  public getFormData(fileList: FileList): FormData {
+  private getFormData(fileList: FileList): FormData {
     const formData: FormData = new FormData();
     for (let i = 0; i < fileList.length; i++) {
       formData.append('image', fileList.item(i));
@@ -52,7 +48,7 @@ export class ImageUtilService {
   }
 
   public uploadImages(fileList: FileList, uploadProgress: (percent: number) => void, response: (images: PositionImageModel[]) => void) {
-    return this.imageService.uploadImages(fileList).subscribe(event => {
+    return this.imageService.upload(this.getFormData(fileList)).subscribe(event => {
       switch (event.type) {
         case HttpEventType.UploadProgress: {
           uploadProgress((100 / event.total) * event.loaded );

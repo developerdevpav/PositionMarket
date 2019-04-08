@@ -13,20 +13,15 @@ export class ApiImageService {
 
   private utl = '/api';
 
-  constructor(private http: HttpClient, private imageService: ImageUtilService) {
+  constructor(private http: HttpClient) {
   }
 
-  private upload(data: FormData): Observable<HttpEvent<any>> {
+  upload(data: FormData): Observable<HttpEvent<any>> {
     const req = new HttpRequest('POST', `${this.utl}/images/multiple/upload`, data, {
       reportProgress: true,
       responseType: 'text'
     });
 
     return this.http.request(req);
-  }
-
-  uploadImages(fileList: FileList): Observable<HttpEvent<any>> {
-    const formData: FormData = this.imageService.getFormData(fileList);
-    return this.upload(formData);
   }
 }

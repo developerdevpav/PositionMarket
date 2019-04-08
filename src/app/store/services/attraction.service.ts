@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {AttractionModel} from '../models/attraction-model';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

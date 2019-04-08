@@ -24,21 +24,24 @@
                   [svgStyle]="{ 'width.px': 30, 'height.px': 30 }"></svg-icon>
         <svg-icon class="box-gallery_shadow__delete-image-icon" src="../assets/icon/delete.svg"
                   [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
-        <img class="box-gallery__image" [src]="it.url" (click)="selectMainImage(it.image)">
+        <img class="box-gallery__image" (click)="selectMainImage(it.image)" [src]="it.url">
       </div>
     </div>
   </div>
-  <div class="items__item">
+  <div class="items__item" *ngIf="loadedDropdownTag">
     <angular2-multiselect class="item__selector-items" [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag"
                           [settings]="settings"></angular2-multiselect>
   </div>
-  <div class="items__item">
-    <angular2-multiselect class="item__selector-items" [data]="dropdownAllType" [(ngModel)]="dropdownSelectType"
+  <div class="items__item" *ngIf="loadedDropdownType">
+    <angular2-multiselect class="item__selector-items"
+                          [data]="dropdownAllType"
+                          [(ngModel)]="dropdownSelectType"
                           [settings]="settings"></angular2-multiselect>
   </div>
 
   <div class="items__item" *ngFor="let it of selectProducts">
-    <angular2-multiselect class="item__selector-items" (onSelect)="selectProductAction($event, it.service)"
+    <angular2-multiselect class="item__selector-items"
+                          (onSelect)="selectProductAction($event, it.service)"
                           [data]="dropdownAllTypeService" [(ngModel)]="it.service"
                           [settings]="settingsSingleSelect"></angular2-multiselect>
     <input class="items__input" [(ngModel)]="it.product.price" type="number" placeholder="Price value">

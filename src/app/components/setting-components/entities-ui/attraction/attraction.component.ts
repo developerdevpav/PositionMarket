@@ -7,6 +7,7 @@ import {
 import {MatDialog} from '@angular/material';
 import {DialogActionAttractionComponent} from '../../../universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 import {selectShortPositionsByLanguage} from '../../../../store/selectors/position.selectors';
+import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-attraction',
@@ -32,7 +33,7 @@ export class AttractionComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      // this.store.dispatch(new ApiTypeServiceLoadAll());
+        this.store.dispatch(new ApiTypeServiceLoadAll());
     });
   }
 
