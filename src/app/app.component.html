@@ -32,15 +32,39 @@
   <router-outlet></router-outlet>
 </section>
 
-<!--
-<footer>
-  <div class="social">
-    <svg-icon src="../assets/social/vk.svg" [svgStyle]="{ 'width.px':30, 'height.px':30 }"></svg-icon>
-    <svg-icon src="../assets/social/instagram.svg" [svgStyle]="{ 'width.px':30, 'height.px':30 }"></svg-icon>
-    <svg-icon src="../assets/social/youtube.svg" [svgStyle]="{ 'width.px':30, 'height.px':30 }"></svg-icon>
+<footer class="container">
+  <div class="container__footer">
+    <div class="footer__contacts">
+      <div class="contacts__title">Контакты</div>
+      <div class="contacts__item-contact">
+        <svg-icon src="../assets/icon/phone.svg" class="item-contact__icon"
+                  [svgStyle]="{ 'width.px': 25, 'height.px': 25 }">
+        </svg-icon>
+        <a class="item-contact__text">+375 (29) 947-96-30</a>
+      </div>
+      <div class="contacts__item-contact">
+        <svg-icon src="../assets/icon/envelope.svg" class="item-contact__icon"
+                  [svgStyle]="{ 'width.px': 25, 'height.px': 25 }">
+        </svg-icon>
+        <a class="item-contact__text">devpavdeveloper@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer__social">
+      <svg-icon src="../assets/icon/telegram.svg" class="social__icon"
+                [svgStyle]="{ 'width.px': 25, 'height.px': 25 }">
+      </svg-icon>
+      <svg-icon src="../assets/icon/git.svg" class="social__icon"
+                [svgStyle]="{ 'width.px': 25, 'height.px': 25 }">
+      </svg-icon>
+    </div>
+    <div class="footer__navigator">
+      <div class="navigator__title">Навигация</div>
+      <a class="navigator__link">Главная</a>
+      <a class="navigator__link">Каталог</a>
+      <a class="navigator__link">Войти</a>
+    </div>
   </div>
-  <div class="copy-right">
-    <span>@ Pavel Talaika</span>
+  <div class="author">
+     Pavel Talaika
   </div>
 </footer>
--->
