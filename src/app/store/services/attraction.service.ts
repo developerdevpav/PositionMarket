@@ -34,4 +34,8 @@ export class AttractionService {
     return this.http.delete(`${this.utl}/${service}/${uuid}`, {headers: this.headers});
   }
 
+  public deleteArray(service: string, uuids: string[]) {
+    return this.http.post(`${this.utl}/${service}/multiple/delete`, uuids, { headers: this.headers });
+  }
+
 }

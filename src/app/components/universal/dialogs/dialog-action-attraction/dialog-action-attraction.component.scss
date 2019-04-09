@@ -92,11 +92,15 @@ mat-dialog-actions {
   justify-content: flex-start;
 }
 
+.item__button-delete-service {
+  min-width: 85px;
+}
+
 .box-gallery__image {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
-  height: 80px;
+  height: 120px;
   width: 150px;
 }
 
@@ -125,7 +129,6 @@ mat-dialog-actions {
   right: -5px;
 }
 
-
 .item__box-gallery_shadow {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
@@ -140,6 +143,7 @@ mat-dialog-actions {
 
 .item-action__button_action {
   margin-right: 15px;
+  min-width: 85px;
 }
 
 .item-action__button_action:last-child {

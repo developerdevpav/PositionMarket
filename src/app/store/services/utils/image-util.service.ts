@@ -20,13 +20,15 @@ export class ImageUtilService {
     if (positionImages && positionImages.length > 0) {
       const isExistsMainImage = positionImages.find(it => it.mainImage);
 
-      if ( isExistsMainImage && imageId ) {
-        positionImages
-          .forEach(positionImage => {
-              positionImage.mainImage = (imageId === positionImage.image);
-              return positionImage;
-            }
-          );
+      if (isExistsMainImage) {
+        if (imageId) {
+          positionImages
+            .forEach(positionImage => {
+                positionImage.mainImage = (imageId === positionImage.image);
+                return positionImage;
+              }
+            );
+        }
       } else {
         positionImages.forEach(it => it.mainImage = false);
         positionImages[0].mainImage = true;
@@ -51,7 +53,7 @@ export class ImageUtilService {
     return this.imageService.upload(this.getFormData(fileList)).subscribe(event => {
       switch (event.type) {
         case HttpEventType.UploadProgress: {
-          uploadProgress((100 / event.total) * event.loaded );
+          uploadProgress((100 / event.total) * event.loaded);
           break;
         }
         case HttpEventType.Response: {

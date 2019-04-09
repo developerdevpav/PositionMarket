@@ -45,9 +45,8 @@
                           [data]="dropdownAllTypeService" [(ngModel)]="it.service"
                           [settings]="settingsSingleSelect"></angular2-multiselect>
     <input class="items__input" [(ngModel)]="it.product.price" type="number" placeholder="Price value">
-    <div class="add-price">
-      <button mat-stroked-button color="warn" (click)="deleteProduct(it.index, it.service[0])">Remove</button>
-    </div>
+    <button class="item__button-delete-service" mat-stroked-button color="warn" (click)="deleteProduct(it.index, it.service[0])">Remove</button>
+
   </div>
 
   <div class="items__item">

@@ -25,13 +25,14 @@ import {SearchLineComponent} from './universal/search-line/search-line.component
 import {DialogActionAttractionComponent} from './universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 import {EntityChipActionComponent} from './universal/entity-chip-action/entity-chip-action.component';
 import {DataBaseComponent} from './setting-components/data-base/data-base.component';
-import { DialogSelectionNsiComponent } from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
+import {DialogSelectionNsiComponent} from './universal/dialogs/dialog-selection-nsi/dialog-selection-nsi.component';
 import {AngularMaterialModule} from '../angular-material.module';
-import { FilterObservablePipe } from './pipes/filter-observable.pipe';
+import {FilterObservablePipe} from './pipes/filter-observable.pipe';
 import {ItemListWithTitleAndCheckboxComponent} from './universal/item-list-with-title-and-checkbox/item-list-with-title-and-checkbox.component';
 import {imageReducer} from '../store/reducers/image.reducer';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
-import { ImagesComponent } from './setting-components/entities-ui/images/images.component';
+import {ImagesComponent} from './setting-components/entities-ui/images/images.component';
+import {SnackBarComponent} from './universal/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ImagesComponent } from './setting-components/entities-ui/images/images.
     DialogSelectionNsiComponent,
     ItemListWithTitleAndCheckboxComponent,
     FilterObservablePipe,
-    ImagesComponent
+    ImagesComponent,
+    SnackBarComponent
   ],
   imports: [
     AngularMultiSelectModule,

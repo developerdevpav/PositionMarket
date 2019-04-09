@@ -9,15 +9,16 @@ import {AttractionModel} from '../models/attraction-model';
 import {
   AddAttraction,
   ApiAttractionCreate,
-  ApiAttractionDelete,
   ApiAttractionLoadById,
+  ApiAttractionsDelete,
   ApiAttractionUpdate,
-  DeleteAttraction,
+  DeleteAttractions,
   LoadAttractionById,
   LoadSuccessAttractions,
   UpdateAttraction
 } from '../actions/attraction.actions';
 import {MatSnackBar} from '@angular/material';
+import {SnackBarComponent} from '../../components/universal/snack-bar/snack-bar.component';
 
 @Injectable()
 export class AttractionEffects {
@@ -25,12 +26,16 @@ export class AttractionEffects {
   constructor(private actions$: Actions, private service: AttractionService, private snackBar: MatSnackBar) {
   }
 
-  openSnackBar(message: string, error: boolean = false) {
-    this.snackBar.open(message, 'close', {
+  openSnackBar(msg: string, err: boolean = false) {
+    this.snackBar.openFromComponent(SnackBarComponent, {
       duration: 2000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
-      panelClass: error ? 'red-snackbar' : 'green-snackbar'
+      panelClass: err ? 'red-snackbar' : 'green-snackbar',
+      data: {
+        message: msg,
+        error: err
+      }
     });
   }
 
@@ -113,6 +118,7 @@ export class AttractionEffects {
       )
     );
 
+/*
   @Effect()
   destroy$: Observable<Action> = this.actions$.pipe(
     ofType(APIAction.DELETE + '[Attraction]'),
@@ -129,6 +135,29 @@ export class AttractionEffects {
           }),
           catchError((e) => {
             this.openSnackBar(`Error delete position ${e.message}`, true);
+            return EMPTY;
+          })
+        )
+    )
+  );
+*/
+
+  @Effect()
+  deleteArrayPosition$: Observable<Action> = this.actions$.pipe(
+    ofType(APIAction.DELETE + '[Attraction]'),
+    map((action: ApiAttractionsDelete) => {
+      console.log('Deleted: ' + action.payload);
+      return action.payload;
+    }),
+    switchMap(
+      (index: string[]) => this.service.deleteArray('attractions', index)
+        .pipe(
+          map(() => {
+            this.openSnackBar(`Successfully delete positions`);
+            return new DeleteAttractions({ ids: index });
+          }),
+          catchError((e) => {
+            this.openSnackBar(`Error delete positions ${e.message}`, true);
             return EMPTY;
           })
         )

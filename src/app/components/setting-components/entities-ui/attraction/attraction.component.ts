@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
-import {
-  ApiAttractionDelete,
-  ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
+import {ApiAttractionLoadAll, ApiAttractionsDelete} from '../../../../store/actions/attraction.actions';
 import {MatDialog} from '@angular/material';
 import {DialogActionAttractionComponent} from '../../../universal/dialogs/dialog-action-attraction/dialog-action-attraction.component';
 import {selectShortPositionsByLanguage} from '../../../../store/selectors/position.selectors';
@@ -53,7 +51,7 @@ export class AttractionComponent implements OnInit, OnDestroy {
   }
 
   delete($event) {
-    this.store.dispatch(new ApiAttractionDelete($event));
+    this.store.dispatch(new ApiAttractionsDelete($event));
   }
 
   ngOnDestroy(): void {

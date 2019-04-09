@@ -39,7 +39,7 @@ export class ApiAttractionDelete implements Action {
 export class ApiAttractionsDelete implements Action {
   readonly type = APIAction.DELETE + '[Attraction]';
 
-  constructor(public payload: string) {
+  constructor(public payload: string[]) {
   }
 }
 

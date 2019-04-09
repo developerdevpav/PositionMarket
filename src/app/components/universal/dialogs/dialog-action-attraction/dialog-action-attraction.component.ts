@@ -377,6 +377,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
           imagePositionList.forEach(image => {
             this.images.push(image);
           });
+          this.imageUtil.setMainImage(this.images, null);
         }
       );
       this.subscriptionNsi.add(subscriberUploadImages);
@@ -384,9 +385,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   }
 
   selectMainImage(it: string) {
-    console.log(this.images);
     this.images = this.imageUtil.setMainImage(this.images, it);
-    console.log(this.images);
   }
 
 }
