@@ -1,5 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {CatalogComponent} from './components/catalog/catalog.component';
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
@@ -10,6 +10,7 @@ import {AttractionComponent} from './components/setting-components/entities-ui/a
 import {SettingComponent} from './components/setting-components/setting/setting.component';
 import {DataBaseComponent} from './components/setting-components/data-base/data-base.component';
 import {ImagesComponent} from './components/setting-components/entities-ui/images/images.component';
+import {AuthorizationComponent} from './components/authorization/authorization.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -60,6 +61,11 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth',
+    component: AuthorizationComponent,
     pathMatch: 'full'
   },
   {

@@ -1,4 +1,6 @@
-$color: #008dcd;
+$mainColorBackgroundBack: #551a8be8;
+$mainColorBackground: #551a8be8;
+$mainColorFont: white;
 
 header {
   display: flex;
@@ -7,11 +9,27 @@ header {
   align-items: center;
   width: 100%;
   height: auto;
-  background: white;
+  background: $mainColorBackgroundBack;
   margin-bottom: 20px;
   font-size: 14px;
   font-family: Roboto, Arial, sans-serif;
 }
+
+.wrapper {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 247px;
+}
+
+
+header .container {
+  display: flex;
+  width: 100%;
+  background: $mainColorBackground;
+  justify-content: space-between;
+  height: 50px;
+}
+
 
 .language {
   color: black;
@@ -23,12 +41,30 @@ header {
 }
 
 .active {
-  border-bottom: 1px #f3f4f6 solid;
+  color: red !important;
+  // border-bottom: 1px #f3f4f6 solid;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  width: 10%;
+  font-weight: bold;
+}
+
+.logo__domain {
+  color: red;
+  font-style: oblique;
+}
+
+.logo__title {
+  color: $mainColorFont;
 }
 
 header .header-actions {
   display: flex;
-  width: 60%;
+  width: 50%;
   height: auto;
   align-items: center;
 }
@@ -36,7 +72,7 @@ header .header-actions {
 header .header-actions > a {
   margin-right: 25px;
   text-decoration: none;
-  color: #551a8b;
+  color: $mainColorFont;
   font-weight: 500;
 }
 
@@ -57,7 +93,7 @@ header .header-language {
 
 header .header-language > a {
   margin-left: 10px;
-  color: #a8a8a8;
+  color: $mainColorFont;
 }
 
 header .header-shop {
@@ -71,7 +107,7 @@ header .header-shop {
 }
 
 header .header-shop svg-icon {
-  fill: #b3b3b3;
+  fill: $mainColorFont;
 }
 
 header .header-auth {
@@ -85,19 +121,13 @@ header .header-auth > a {
   text-decoration: none;
   font-weight: 500;
   min-width: 40px;
+  color: $mainColorFont;
 }
 
 header .header-contacts {
   display: flex;
   width: 80%;
   justify-content: space-between;
-}
-
-header .container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  height: 50px;
 }
 
 .container-contacts {
@@ -132,7 +162,7 @@ header .container {
   font-size: 11px;
   text-align: center;
   border-radius: 11px;
-  background: #551aa9;
+  background: $mainColorBackground;
   color: white;
   bottom: 11px;
   right: 2px;
@@ -143,6 +173,10 @@ footer {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #64388c;
 }
 
 .common-title {
@@ -150,7 +184,7 @@ footer {
   color: white;
   font-weight: 500;
   font-size: 18px;
-  border-bottom: 1px white solid;
+  //border-bottom: 1px white solid;
   padding-bottom: 10px;
   height: 25px;
 }
@@ -165,7 +199,7 @@ footer {
 
 .container__footer {
   padding: 20px;
-  background: #551a8b;
+  background: #551a8be8;
   width: 100%;
   height: auto;
   flex-wrap: nowrap;
@@ -197,7 +231,7 @@ footer {
 }
 
 .item-contact__icon {
-  fill: white;
+  fill: $mainColorFont;
   width: 15%;
 }
 
