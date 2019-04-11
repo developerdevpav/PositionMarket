@@ -24,6 +24,7 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImageEffects} from './store/effects/image.effects';
 import {ImageUtilService} from './store/services/utils/image-util.service';
 import {SnackBarComponent} from './components/universal/snack-bar/snack-bar.component';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -65,10 +66,22 @@ import {SnackBarComponent} from './components/universal/snack-bar/snack-bar.comp
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [NsiAbstractService, AttractionService, ImageUtilService],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      }
+    },
+    NsiAbstractService,
+    AttractionService,
+    ImageUtilService
+  ],
   exports: [
     AppRoutingModule,
     BrowserModule
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

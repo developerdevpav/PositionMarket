@@ -1,3 +1,38 @@
-.image-home {
+.service {
+  display: flex;
   width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.service__item {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  flex-wrap: wrap;
+  background: white;
+  margin-bottom: 20px;
+  justify-content: center;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item__icon {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  fill: #561d8b;
+}
+
+.item__title {
+  display: flex;
+  margin: 10px auto;
+  color: #626262;
+}
+
+.item__text {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
 }

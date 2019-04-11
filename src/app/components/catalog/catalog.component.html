@@ -1,11 +1,23 @@
-<p>
+<div class="row">
+  <div class="col-md-9">
+    <div class="container-items__item" *ngFor="let it of [0, 1, 2, 3, 1, 5, 4, 4]">
+      <div class="col-md-3 col-12" style="background: #626262">
+      </div>
+      <div class="col-md-7 col-12">
+        <div class="col-12">
+          Title
+        </div>
+        <div class="col-12">
+          Description
+        </div>
+      </div>
+      <div class="col-md-2">
+        Price
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 order-lg-0 order-1">
+    aaaaaaaaaaaaaaaaaaaaaa
+  </div>
+</div>
 
-  <angular2-multiselect [data]="itemList"
-                        [(ngModel)]="selectedItems"
-                        [settings]="settings"
-                        (onSelect)="onItemSelect($event)"
-                        (onDeSelect)="OnItemDeSelect($event)"
-                        (onSelectAll)="onSelectAll($event)"
-                        (onDeSelectAll)="onDeSelectAll($event)">
-  </angular2-multiselect>
-</p>

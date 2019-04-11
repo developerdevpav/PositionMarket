@@ -28,9 +28,6 @@ export class AttractionEffects {
 
   openSnackBar(msg: string, err: boolean = false) {
     this.snackBar.openFromComponent(SnackBarComponent, {
-      duration: 2000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
       panelClass: err ? 'red-snackbar' : 'green-snackbar',
       data: {
         message: msg,

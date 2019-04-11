@@ -41,8 +41,22 @@ header .container {
 }
 
 .active {
-  color: red !important;
+  outline: 1px solid #f6f6f6;
   // border-bottom: 1px #f3f4f6 solid;
+}
+
+.header-actions__link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-actions__link {
+  width: 100px;
+  justify-content: center;
+  font-weight: 500;
+  text-decoration: none;
+  color: $mainColorFont;
 }
 
 header .logo {
@@ -50,7 +64,7 @@ header .logo {
   align-items: center;
   font-size: 15px;
   width: 10%;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .logo__domain {
@@ -69,11 +83,8 @@ header .header-actions {
   align-items: center;
 }
 
-header .header-actions > a {
-  margin-right: 25px;
-  text-decoration: none;
-  color: $mainColorFont;
-  font-weight: 500;
+header .header-actions {
+
 }
 
 header .header-user-action {
@@ -162,10 +173,10 @@ header .header-contacts {
   font-size: 11px;
   text-align: center;
   border-radius: 11px;
-  background: $mainColorBackground;
+  background: #551a8be8;
   color: white;
   bottom: 11px;
-  right: 2px;
+  right: -1px;
 }
 
 
