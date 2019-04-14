@@ -1,23 +1,29 @@
 <div class="row">
-  <div class="col-md-9">
-    <div class="container-items__item" *ngFor="let it of [0, 1, 2, 3, 1, 5, 4, 4]">
-      <div class="col-md-3 col-12" style="background: #626262">
-      </div>
-      <div class="col-md-7 col-12">
-        <div class="col-12">
-          Title
+  <div class="col-md-3 col-12 content-menu">
+
+  </div>
+  <div class="col-md-9 col-12">
+
+    <div class="box__item" *ngFor="let it of [0, 1, 2, 3, 4, 5, 6, 7]">
+      <div class="box__item__item">
+        <img class="item__avatar" src="https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?cs=srgb&dl=artistic-blossom-bright-207962.jpg&fm=jpg">
+        <div class="item__content">
+          <div class="item__title col-12">
+            Новые акулы
+          </div>
+          <div class="item__text col-12">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi impedit laudantium neque repellat vel
+            velit! Accusantium obcaecati quae quaerat sit tenetur. Eveniet!
+          </div>
         </div>
-        <div class="col-12">
-          Description
+        <div class="item__price" (click)="ex = !ex">
+          <a>Prices</a>
         </div>
       </div>
-      <div class="col-md-2">
-        Price
+      <div class="item__detail" [ngClass]="ex ? 'item__detail-action' : ''">
+
       </div>
     </div>
-  </div>
-  <div class="col-md-3 order-lg-0 order-1">
-    aaaaaaaaaaaaaaaaaaaaaa
   </div>
 </div>
 

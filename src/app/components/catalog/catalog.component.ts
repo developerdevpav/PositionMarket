@@ -7,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CatalogComponent implements OnInit {
 
+  ex = true;
+
   constructor() {
 
   }

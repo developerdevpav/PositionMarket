@@ -40,19 +40,23 @@ header .container {
   color: red !important;
 }
 
-.active {
-  outline: 1px solid #f6f6f6;
+.active .header-actions__link{
+  background: white !important;
+  color: red !important;
+
   // border-bottom: 1px #f3f4f6 solid;
 }
 
 .header-actions__link {
   display: flex;
   align-items: center;
+  background: inherit;
   height: 100%;
 }
 
-.header-actions__link {
+.link-menu {
   width: 100px;
+  z-index: 200;
   justify-content: center;
   font-weight: 500;
   text-decoration: none;
@@ -81,10 +85,6 @@ header .header-actions {
   width: 50%;
   height: auto;
   align-items: center;
-}
-
-header .header-actions {
-
 }
 
 header .header-user-action {

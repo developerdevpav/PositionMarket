@@ -6,11 +6,16 @@
         <span class="logo__domain">.by</span>
       </div>
       <div class="header-actions">
-        <a routerLink="/home" routerLinkActive="active" class="header-actions__link">{{ 'Home' | translate }}</a>
-        <a routerLink="/catalog" routerLinkActive="active" class="header-actions__link">{{ 'Catalog' | translate }}</a>
-        <a routerLink="/settings" routerLinkActive="active" class="header-actions__link">{{ 'Setting' | translate }}</a>
+        <div class="header-actions__link">
+          <a class="link-menu" routerLink="/home" routerLinkActive="active">{{ 'Home' | translate }}</a>
+        </div>
+        <div class="header-actions__link">
+          <a class="link-menu" routerLink="/catalog" routerLinkActive="active">{{ 'Catalog' | translate }}</a>
+        </div>
+        <div class="header-actions__link">
+          <a class="link-menu" routerLink="/settings" routerLinkActive="active">{{ 'Setting' | translate }}</a>
+        </div>
       </div>
-
       <div class="header-user-action">
         <div class="header-language">
           <a [ngClass]="currentLanguage === 'ru' ? 'language-active' : ''"
@@ -21,7 +26,8 @@
 
         <div class="header-shop">
           <a routerLink="/shopping-cart">
-            <svg-icon src="../assets/icon/shopping-cart.svg" [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
+            <svg-icon src="../assets/icon/shopping-cart.svg"
+                      [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
           </a>
           <div class="header-shop__counter-product">0</div>
         </div>
