@@ -1,18 +1,24 @@
-<div class="row">
+<div class="row body-catalog">
   <div class="col-md-3 col-12 content-menu">
-    <div class="content-menu__selector">
-      <angular2-multiselect [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag"
-                            [settings]="settingsTag"></angular2-multiselect>
+    <div class="content-menu_title-item">
+      Типы аттракциона
     </div>
     <div class="content-menu__selector">
       <angular2-multiselect [data]="dropdownAllType" [(ngModel)]="dropdownSelectType"
                             [settings]="settingsType"></angular2-multiselect>
     </div>
+    <div class="content-menu_title-item">
+      Теги аттракциона
+    </div>
+    <div class="content-menu__selector">
+      <angular2-multiselect [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag"
+                            [settings]="settingsTag"></angular2-multiselect>
+    </div>
     <button class="col-12" mat-stroked-button color="primary" (click)="createItemProduct()">
       Подобрать
     </button>
   </div>
-  <div class="col-md-9 col-12">
+  <div class="col-md-9 col-12 box-right">
     <div class="box__item" *ngFor="let it of [0, 1, 2, 3, 4, 5, 6, 7]">
       <div class="box__item__item">
         <img class="item__avatar"

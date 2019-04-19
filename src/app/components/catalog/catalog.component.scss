@@ -107,3 +107,23 @@ angular2-multiselect {
 .content-menu__selector:last-child {
   margin-bottom: 20px;
 }
+
+.body-catalog {
+  background: white;
+  padding: 20px 0 20px 0;
+}
+
+.content-menu_title-item {
+  margin: 0 0 15px 0;
+  color: #7a7a7a;
+  font-size: 12px;
+  border-bottom-color: #000098;
+}
+
+.content-menu_title-item:first-child {
+  margin: 0 0 15px 0;
+}
+
+.box-right {
+  border-left: 1px solid #0000ff14;
+}

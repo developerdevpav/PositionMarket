@@ -22,7 +22,7 @@ export class CatalogComponent implements OnInit {
     text: 'Теги аттракциона',
     selectAllText: 'Выделить все',
     unSelectAllText: 'Снять',
-    enableSearchFilter: true,
+    enableSearchFilter: false,
     singleSelection: true,
     labelKey: 'title'
   };
@@ -31,7 +31,7 @@ export class CatalogComponent implements OnInit {
     text: 'Типы аттракциона',
     selectAllText: 'Выделить все',
     unSelectAllText: 'Снять',
-    enableSearchFilter: true,
+    enableSearchFilter: false,
     singleSelection: true,
     labelKey: 'title'
   };
