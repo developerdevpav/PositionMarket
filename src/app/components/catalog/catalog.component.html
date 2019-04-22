@@ -1,11 +1,15 @@
 <div class="row body-catalog">
-  <div class="col-md-3 col-12 content-menu">
+  <div class="col-md-2 col-12 content-menu">
     <div class="content-menu_title-item">
       Типы аттракциона
     </div>
     <div class="content-menu__selector">
+
+      <mat-checkbox style="width: 100%" *ngFor="let it of dropdownAllType" [checked]="true"
+                    color="primary">{{it.title}}</mat-checkbox>
+      <!--
       <angular2-multiselect [data]="dropdownAllType" [(ngModel)]="dropdownSelectType"
-                            [settings]="settingsType"></angular2-multiselect>
+                            [settings]="settingsType"></angular2-multiselect>-->
     </div>
     <div class="content-menu_title-item">
       Теги аттракциона
@@ -18,14 +22,15 @@
       Подобрать
     </button>
   </div>
-  <div class="col-md-9 col-12 box-right">
-    <div class="box__item" *ngFor="let it of [0, 1, 2, 3, 4, 5, 6, 7]">
+  <div class="col-md-10 col-12 box-right">
+    <div class="box__item" *ngFor="let it of positions">
       <div class="box__item__item">
-        <img class="item__avatar"
-             src="https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?cs=srgb&dl=artistic-blossom-bright-207962.jpg&fm=jpg">
+        <div class="item__avatar">
+          <img src="{{it.image.url}}" class="avatar">
+        </div>
         <div class="item__content">
           <div class="item__title col-12">
-            Новые акулы
+            {{it.title}}
           </div>
           <div class="item__text col-12">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi impedit laudantium neque repellat
@@ -34,10 +39,10 @@
           </div>
         </div>
         <div class="item__price">
-          <a>Prices</a>
+          <button mat-stroked-button color="primary" (click)="deployItem(it.id)" class="action-price"  [ngClass]="idDeployItem(it.id) ? 'action-price-active' : ''">Prices</button>
         </div>
       </div>
-      <div class="item__detail" [ngClass]="false ? 'item__detail-action' : ''">
+      <div class="item__detail" [ngClass]="idDeployItem(it.id) ? 'item__detail-action' : ''">
 
       </div>
     </div>

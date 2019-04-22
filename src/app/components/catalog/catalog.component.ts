@@ -4,6 +4,8 @@ import {ApiTagLoadAll} from '../../store/actions/tag.actions';
 import {selectTagsByLanguage} from '../../store/selectors/tag.selectors';
 import {ApiTypeLoadAll} from '../../store/actions/type.actions';
 import {selectTypesByLanguage} from '../../store/selectors/type.selectors';
+import {selectPositionByLanguageForCatalog} from '../../store/selectors/position.selectors';
+import {ApiAttractionLoadAll} from '../../store/actions/attraction.actions';
 
 @Component({
   selector: 'app-catalog',
@@ -11,6 +13,10 @@ import {selectTypesByLanguage} from '../../store/selectors/type.selectors';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
+
+  deployPositionDictionary: Map<string, string> = new Map();
+
+  positions = [];
 
   dropdownSelectTag: { id: any, title: string }[] = [];
   dropdownSelectType: { id: any, title: string }[] = [];
@@ -43,6 +49,7 @@ export class CatalogComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new ApiTagLoadAll());
     this.store.dispatch(new ApiTypeLoadAll());
+    this.store.dispatch(new ApiAttractionLoadAll());
 
     this.store.select(selectTagsByLanguage).subscribe(it => {
       this.dropdownAllTag = it;
@@ -51,9 +58,31 @@ export class CatalogComponent implements OnInit {
     this.store.select(selectTypesByLanguage).subscribe(it => {
       this.dropdownAllType = it;
     });
+
+
+    this.store.select(selectPositionByLanguageForCatalog).subscribe(it => {
+      this.positions = it;
+      console.log(it);
+    });
   }
+
+
 
   createItemProduct() {
 
   }
+
+  deployItem(id: string) {
+    const foundId = this.deployPositionDictionary.get(id);
+    if ( foundId ) {
+      this.deployPositionDictionary.delete(id);
+    } else {
+      this.deployPositionDictionary.set(id, id);
+    }
+  }
+
+  idDeployItem(id: string) {
+    return this.deployPositionDictionary.get(id);
+  }
+
 }

@@ -37,13 +37,15 @@
 }
 
 .item__avatar {
-  display: flex;
-  flex-wrap: nowrap;
-
-  flex-shrink: 0;
-  object-fit: fill;
+  width: 200px;
   height: 120px;
-  max-height: 150px;
+}
+
+.avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .item__title {
@@ -126,4 +128,13 @@ angular2-multiselect {
 
 .box-right {
   border-left: 1px solid #0000ff14;
+}
+
+.action-price {
+  width: 120px;
+}
+
+.action-price-active {
+  background: #551a8be8;
+  color: white;
 }
