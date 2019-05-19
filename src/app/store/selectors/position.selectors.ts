@@ -60,7 +60,15 @@ export const selectPositionByLanguageForCatalog = createSelector(
     return array.map(value => {
       const tagObjects = value.tags.map(it => converter.convertNsiByLanguage(tagDictionary[it], language));
       const typeObjects = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
-      const imageMain = value.images.find(it => it.mainImage);
+      const imageValues = value.images
+        .sort(it => it.mainImage ? -1 : 1)
+        .map((it, ind, arrayImage) => {
+          return {
+            image: it.image,
+            url: it.url,
+            index: ++ind
+          };
+        });
       const productValues = value.products.map(it => {
         const serviceFound = converter.convertNsiByLanguage(typeServiceDictionary[it.service], language);
         return {
@@ -74,10 +82,8 @@ export const selectPositionByLanguageForCatalog = createSelector(
         title: converter.getStringFromArrayValuesByLanguage(value.title, language),
         tags: tagObjects,
         types: typeObjects,
-        image: imageMain,
-        images: value.images.sort(it => it.mainImage ? -1 : 1),
-        sizeImages: value.images.length,
-        indexCurrentImage: 1,
+        images: imageValues,
+        image: imageValues[0],
         products: productValues
       };
     });

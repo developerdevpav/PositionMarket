@@ -86,7 +86,6 @@ export class CatalogComponent implements OnInit {
       return;
     }
 
-    position.indexCurrentImage = indexImage + 1;
     position.image = position.images[++indexImage];
   }
 
@@ -96,7 +95,7 @@ export class CatalogComponent implements OnInit {
     if ( indexImage < 0 || ( indexImage === 0 ) ) {
       return;
     }
-    position.indexCurrentImage = indexImage + 1;
+
     position.image = position.images[--indexImage];
   }
 
