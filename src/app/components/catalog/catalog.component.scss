@@ -147,11 +147,12 @@
   padding: 0 15px;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 60px;
+  color: white;
   right: 0;
   left: 0;
   bottom: 0;
-  opacity: 0;
+  opacity: 1;
   z-index: 1000;
 }
 
@@ -159,8 +160,8 @@
   display: flex;
   color: #535b5a;
   width: 100%;
-  height: auto;
-  padding: 10px 15px;
+  height: fit-content;
+  padding: 15px 0 0 20px;
 }
 
 .item__text {

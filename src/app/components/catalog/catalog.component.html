@@ -9,7 +9,7 @@
                         [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>
             </div>
             <div class="avatar-counter">
-              {{it.images}}
+              {{it?.image?.index}} / {{it.images.length}}
             </div>
             <div class="avatar-next" (click)="next(it)">
               <svg-icon src="../assets/icon/right-arrow.svg"
@@ -20,8 +20,8 @@
           <img src="{{it?.image?.url}}" (click)="next(it)" class="avatar">
         </div>
         <div class="item__content">
-          <div class="item__title" (click)="prev(it)">
-            {{it.title}} {{it?.image?.index}} / {{it.images.length}}
+          <div class="item__title">
+            {{it.title}}
           </div>
           <div class="item__text">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi impedit laudantium neque repellat
