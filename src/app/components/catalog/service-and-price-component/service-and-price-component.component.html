@@ -1,0 +1,11 @@
+<div class="item" *ngFor="let it of list$">
+  <div class="item__title" >
+    {{it?.service?.title}}
+  </div>
+  <div class="item__price">
+    <span class="price-text">{{it?.price}} <span class="currency">BYN</span></span>
+  </div>
+  <div class="item__in-shopping-cart">
+    <button mat-stroked-button color="primary" class="active-price">В корзину</button>
+  </div>
+</div>

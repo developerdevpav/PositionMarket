@@ -1,52 +1,47 @@
 <div class="row body-catalog">
-  <div class="col-md-2 col-12 content-menu">
-    <div class="content-menu_title-item">
-      Типы аттракциона
-    </div>
-    <div class="content-menu__selector">
-
-      <mat-checkbox style="width: 100%" *ngFor="let it of dropdownAllType" [checked]="true"
-                    color="primary">{{it.title}}</mat-checkbox>
-      <!--
-      <angular2-multiselect [data]="dropdownAllType" [(ngModel)]="dropdownSelectType"
-                            [settings]="settingsType"></angular2-multiselect>-->
-    </div>
-    <div class="content-menu_title-item">
-      Теги аттракциона
-    </div>
-    <div class="content-menu__selector">
-      <angular2-multiselect [data]="dropdownAllTag" [(ngModel)]="dropdownSelectTag"
-                            [settings]="settingsTag"></angular2-multiselect>
-    </div>
-    <button class="col-12" mat-stroked-button color="primary" (click)="createItemProduct()">
-      Подобрать
-    </button>
-  </div>
-  <div class="col-md-10 col-12 box-right">
-    <div class="box__item" *ngFor="let it of positions">
+  <div class="col-md-12 col-12 box-right">
+    <div class="box__item" *ngFor="let it of positions" [ngClass]="idDeployItem(it.id) ? 'item__deploy' : ''">
       <div class="box__item__item">
         <div class="item__avatar">
-          <img src="{{it.image.url}}" class="avatar">
+          <div class="avatar-mirror-dark">
+            <div class="avatar-prev" (click)="prev(it)">
+              <svg-icon src="../assets/icon/left-arrow.svg"
+                        [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>
+            </div>
+            <div class="avatar-counter">
+              {{it.indexCurrentImage}} / {{it.sizeImages}}
+            </div>
+            <div class="avatar-next" (click)="next(it)">
+              <svg-icon src="../assets/icon/right-arrow.svg"
+                        [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>
+            </div>
+          </div>
+
+          <img src="{{it.image?.url}}" (click)="next(it)" class="avatar">
         </div>
         <div class="item__content">
-          <div class="item__title col-12">
-            {{it.title}}
+          <div class="item__title" (click)="prev(it)">
+            {{it.title}} {{it.indexCurrentImage}} / {{it.sizeImages}}
           </div>
-          <div class="item__text col-12">
+          <div class="item__text">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi impedit laudantium neque repellat
             vel
             velit! Accusantium obcaecati quae quaerat sit tenetur. Eveniet!
           </div>
         </div>
         <div class="item__price">
-          <button mat-stroked-button color="primary" (click)="deployItem(it.id)" class="action-price"  [ngClass]="idDeployItem(it.id) ? 'action-price-active' : ''">Prices</button>
+          <button mat-stroked-button color="primary" (click)="deployItem(it.id)" class="action-price"
+                  [ngClass]="idDeployItem(it.id) ? 'action-price-active' : ''">120 BYN / час
+          </button>
+          <button mat-stroked-button color="primary" (click)="deployItem(it.id)" class="action-price">Подробнее
+          </button>
         </div>
       </div>
-      <div class="item__detail" [ngClass]="idDeployItem(it.id) ? 'item__detail-action' : ''">
-
-      </div>
+      <app-service-and-price-component class="item__detail price-and-service"
+                                       [list$]="it.products"
+                                       [ngClass]="idDeployItem(it.id) ? 'item__detail-action' : 'item__detail-unaction'">
+      </app-service-and-price-component>
     </div>
   </div>
-
 </div>
 

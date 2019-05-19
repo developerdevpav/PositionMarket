@@ -34,6 +34,7 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImagesComponent} from './setting-components/entities-ui/images/images.component';
 import {SnackBarComponent} from './universal/snack-bar/snack-bar.component';
 import {AuthorizationComponent} from './authorization/authorization.component';
+import {ServiceAndPriceComponentComponent} from './catalog/service-and-price-component/service-and-price-component.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {AuthorizationComponent} from './authorization/authorization.component';
     FilterObservablePipe,
     ImagesComponent,
     SnackBarComponent,
-    AuthorizationComponent
+    AuthorizationComponent,
+    ServiceAndPriceComponentComponent
   ],
   imports: [
     AngularMultiSelectModule,

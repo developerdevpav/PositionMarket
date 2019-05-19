@@ -33,8 +33,8 @@ export class NsiAbstractService<T> {
     return this.http.delete(`${this.utl}/${service}/${uuid}`, {headers: this.headers});
   }
 
-  public deleteAll(service: string, uuid: string[]) {
-    return this.http.post(`${this.utl}/${service}/multiple/delete`, JSON.stringify(uuid), {headers: this.headers});
+  public deleteAll(service: string, uuids: string[]) {
+    return this.http.delete(`${this.utl}/${service}/[${uuids}]`, {headers: this.headers});
   }
 }
 

@@ -6,6 +6,7 @@ import {ApiTypeLoadAll} from '../../store/actions/type.actions';
 import {selectTypesByLanguage} from '../../store/selectors/type.selectors';
 import {selectPositionByLanguageForCatalog} from '../../store/selectors/position.selectors';
 import {ApiAttractionLoadAll} from '../../store/actions/attraction.actions';
+import {ApiTypeServiceLoadAll} from '../../store/actions/type-service.actions';
 
 @Component({
   selector: 'app-catalog',
@@ -43,12 +44,12 @@ export class CatalogComponent implements OnInit {
   };
 
   constructor(private store: Store<any>) {
-
   }
 
   ngOnInit() {
     this.store.dispatch(new ApiTagLoadAll());
     this.store.dispatch(new ApiTypeLoadAll());
+    this.store.dispatch(new ApiTypeServiceLoadAll());
     this.store.dispatch(new ApiAttractionLoadAll());
 
     this.store.select(selectTagsByLanguage).subscribe(it => {
@@ -59,17 +60,10 @@ export class CatalogComponent implements OnInit {
       this.dropdownAllType = it;
     });
 
-
     this.store.select(selectPositionByLanguageForCatalog).subscribe(it => {
       this.positions = it;
-      console.log(it);
+      console.log(this.positions);
     });
-  }
-
-
-
-  createItemProduct() {
-
   }
 
   deployItem(id: string) {
@@ -83,6 +77,27 @@ export class CatalogComponent implements OnInit {
 
   idDeployItem(id: string) {
     return this.deployPositionDictionary.get(id);
+  }
+
+  next(position: any) {
+    let indexImage = position.images.indexOf(position.image);
+
+    if ( indexImage < 0 || ( (indexImage + 1) === position.images.length) ) {
+      return;
+    }
+
+    position.indexCurrentImage = indexImage + 1;
+    position.image = position.images[++indexImage];
+  }
+
+  prev(position: any) {
+    let indexImage = position.images.indexOf(position.image);
+
+    if ( indexImage < 0 || ( indexImage === 0 ) ) {
+      return;
+    }
+    position.indexCurrentImage = indexImage + 1;
+    position.image = position.images[--indexImage];
   }
 
 }
