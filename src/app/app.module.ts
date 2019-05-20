@@ -25,6 +25,7 @@ import {ImageEffects} from './store/effects/image.effects';
 import {ImageUtilService} from './store/services/utils/image-util.service';
 import {SnackBarComponent} from './components/universal/snack-bar/snack-bar.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import {TranslatorYandexService} from './store/services/translator-yandex.service';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
     },
     NsiAbstractService,
     AttractionService,
-    ImageUtilService
+    ImageUtilService,
+    TranslatorYandexService
   ],
   exports: [
     AppRoutingModule,

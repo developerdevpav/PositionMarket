@@ -6,7 +6,7 @@ import {ApiTagLoadAll} from '../../../../store/actions/tag.actions';
 import {ApiTypeLoadAll} from '../../../../store/actions/type.actions';
 import {selectTypesByIds, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
 import {selectTagsByIds, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
-import {ApiAttractionCreate, ApiAttractionLoadById, ApiAttractionUpdate} from '../../../../store/actions/attraction.actions';
+import {ApiAttractionLoadById} from '../../../../store/actions/attraction.actions';
 import {AttractionModel} from '../../../../store/models/attraction-model';
 import {selectPositionById} from '../../../../store/selectors/position.selectors';
 import {Value} from '../../../../store/models/abstract.model';
@@ -18,6 +18,7 @@ import {ApiTypeServiceLoadAll} from '../../../../store/actions/type-service.acti
 import {ImageModel} from '../../../../store/models/image.model';
 import {PositionImageModel} from '../../../../store/models/position.image.model';
 import {ImageUtilService} from '../../../../store/services/utils/image-util.service';
+import {TranslatorYandexService} from '../../../../store/services/translator-yandex.service';
 
 @Component({
   selector: 'app-dialog-action-attraction',
@@ -49,6 +50,9 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
 
   titleRu: Value = {language: Language.RU, value: ''};
   titleEn: Value = {language: Language.EN, value: ''};
+
+  descriptionRu: Value = {language: Language.RU, value: ''};
+  descriptionEn: Value = {language: Language.EN, value: ''};
 
   dropdownSelectTag: { id: any, title: string }[] = [];
   dropdownSelectType: { id: any, title: string }[] = [];
@@ -82,6 +86,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     images: [],
     tags: [],
     title: [],
+    description: [],
     types: []
   };
 
@@ -95,8 +100,8 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
               public dialogRef: MatDialogRef<DialogActionAttractionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { action: string, id: string },
               translate: TranslateService,
-              public imageUtil: ImageUtilService) {
-
+              public imageUtil: ImageUtilService,
+              public translatorYandex: TranslatorYandexService) {
     this.subscriptionNsi.add(
       translate.get('SELECT_ALL').subscribe(value => {
         this.settings.selectAllText = value;
@@ -230,6 +235,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
           }
 
           this.setValueLanguageFromPositionTitle();
+          this.setValueLanguageFromPositionDescription();
         });
 
       this.subscriptionNsi.add(subscribePosition);
@@ -239,6 +245,9 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   buildPosition() {
     this.updateOrPushValueInTitle(this.titleRu);
     this.updateOrPushValueInTitle(this.titleEn);
+
+    this.updateOrPushValueInDescription(this.descriptionRu);
+    this.updateOrPushValueInDescription(this.descriptionEn);
 
     this.position.products = [];
 
@@ -264,13 +273,14 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     this.position.images = this.images.filter(image => image && image.image && image.url);
 
     if (this.data.action !== 'view') {
-      this.store.dispatch(
+      console.log(this.position);
+     /* this.store.dispatch(
         this.data.action === 'create'
           ? new ApiAttractionCreate(this.position)
           : new ApiAttractionUpdate(this.position)
       );
       // this.resetVariables();
-      this.dialogRef.close();
+      this.dialogRef.close();*/
     }
   }
 
@@ -285,6 +295,17 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateOrPushValueInDescription(field: Value) {
+    if (field && field.value && field.value !== '') {
+      const valueLanguage = this.position.description.find(it => it.language === field.language);
+      if (valueLanguage) {
+        valueLanguage.value = field.value;
+      } else {
+        this.position.description.push(field);
+      }
+    }
+  }
+
 
   setValueLanguageFromPositionTitle() {
     let value = this.position.title.find(it => it.language === Language.RU);
@@ -294,6 +315,17 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     value = this.position.title.find(it => it.language === Language.EN);
     if (value) {
       this.titleEn.value = value.value;
+    }
+  }
+
+  setValueLanguageFromPositionDescription() {
+    let value = this.position.description.find(it => it.language === Language.RU);
+    if (value) {
+      this.descriptionRu.value = value.value;
+    }
+    value = this.position.description.find(it => it.language === Language.EN);
+    if (value) {
+      this.descriptionEn.value = value.value;
     }
   }
 

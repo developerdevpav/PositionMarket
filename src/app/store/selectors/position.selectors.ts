@@ -28,6 +28,7 @@ export const selectPositionsByLanguage = createSelector(
       return {
         id: value.id,
         title: converter.getStringFromArrayValuesByLanguage(value.title, language),
+        description: converter.getStringFromArrayValuesByLanguage(value.description, language),
         tags: value.tags,
         types: value.types,
         products: value.products
@@ -80,6 +81,7 @@ export const selectPositionByLanguageForCatalog = createSelector(
       return {
         id: value.id,
         title: converter.getStringFromArrayValuesByLanguage(value.title, language),
+        description: converter.getStringFromArrayValuesByLanguage(value.description, language),
         tags: tagObjects,
         types: typeObjects,
         images: imageValues,

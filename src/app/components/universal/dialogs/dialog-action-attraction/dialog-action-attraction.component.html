@@ -55,6 +55,12 @@
       Add price and service
     </button>
   </div>
+  <div class="description-box">
+    <textarea placeholder="Описание на русском языке" #descriptionRuId="ngModel" [(ngModel)]="descriptionRu.value"
+              [ngModelOptions]="{standalone: true}"></textarea>
+    <textarea placeholder="Описание на английском языке" #descriptionEnId="ngModel" [(ngModel)]="descriptionEn.value"
+              [ngModelOptions]="{standalone: true}"></textarea>
+  </div>
 
   <div class="items__item-action">
     <button mat-stroked-button class="item-action__button_action" mat-dialog-close="true" color="warn">Cancel</button>

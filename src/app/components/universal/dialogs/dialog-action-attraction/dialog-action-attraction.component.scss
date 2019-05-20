@@ -146,6 +146,34 @@ mat-dialog-actions {
   min-width: 85px;
 }
 
+textarea {
+  width: 50%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+  resize: none;
+  margin-right: 15px;
+}
+
+textarea:focus, input:focus{
+  outline: 0;
+}
+
+textarea:last-child {
+  margin-right: 0;
+}
+
+.description-box {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
 .item-action__button_action:last-child {
   margin-right: 0;
 }
@@ -177,5 +205,9 @@ mat-dialog-actions {
 
   .items__input:last-child {
     margin-bottom: 0;
+  }
+
+  textarea {
+    width: 100%;
   }
 }

@@ -79,19 +79,20 @@
   left: 0;
   right: 0;
   opacity: 0;
+  background: black;
   z-index: 1;
 }
 
 .avatar-mirror-dark:hover {
-  opacity: 1;
+  opacity: 0.4;
 }
 
-.avatar-mirror-dark:hover .avatar-prev {
+.avatar-mirror-dark:hover ~ .avatar-prev {
   opacity: 1;
   z-index: 19999;
 }
 
-.avatar-mirror-dark:hover .avatar-next {
+.avatar-mirror-dark:hover ~ .avatar-next {
   opacity: 1;
   z-index: 19999;
 }
@@ -167,7 +168,7 @@
 .item__text {
   height: 60px;
   width: 100%;
-  padding: 0 15px;
+  padding: 20px 20px;
   font-size: 14px;
   overflow: hidden;
 }
@@ -187,6 +188,7 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  height: fit-content;
 }
 
 .container-items__left-menu {
