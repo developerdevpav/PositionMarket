@@ -6,7 +6,7 @@ import {ApiTagLoadAll} from '../../../../store/actions/tag.actions';
 import {ApiTypeLoadAll} from '../../../../store/actions/type.actions';
 import {selectTypesByIds, selectTypesByLanguage} from '../../../../store/selectors/type.selectors';
 import {selectTagsByIds, selectTagsByLanguage} from '../../../../store/selectors/tag.selectors';
-import {ApiAttractionLoadById} from '../../../../store/actions/attraction.actions';
+import {ApiAttractionCreate, ApiAttractionLoadById, ApiAttractionUpdate} from '../../../../store/actions/attraction.actions';
 import {AttractionModel} from '../../../../store/models/attraction-model';
 import {selectPositionById} from '../../../../store/selectors/position.selectors';
 import {Value} from '../../../../store/models/abstract.model';
@@ -273,14 +273,12 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     this.position.images = this.images.filter(image => image && image.image && image.url);
 
     if (this.data.action !== 'view') {
-      console.log(this.position);
-     /* this.store.dispatch(
+      this.store.dispatch(
         this.data.action === 'create'
           ? new ApiAttractionCreate(this.position)
           : new ApiAttractionUpdate(this.position)
       );
-      // this.resetVariables();
-      this.dialogRef.close();*/
+      this.dialogRef.close();
     }
   }
 

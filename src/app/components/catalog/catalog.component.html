@@ -3,10 +3,7 @@
     <div class="box__item" *ngFor="let it of positions" [ngClass]="idDeployItem(it.id) ? 'item__deploy' : ''">
       <div class="box__item__item">
         <div class="item__avatar">
-          <div class="avatar-mirror-dark">
-
-          </div>
-
+          <div class="avatar-mirror-dark"></div>
           <div class="avatar-prev" (click)="prev(it)">
             <svg-icon src="../assets/icon/left-arrow.svg"
                       [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>
