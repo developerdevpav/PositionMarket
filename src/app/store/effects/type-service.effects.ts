@@ -1,20 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import {Injectable} from '@angular/core';
+import {Actions, Effect, ofType} from '@ngrx/effects';
 import {
   AddTypeService,
   ApiTypeServiceDelete,
-  ApiTypeServiceLoadById, ApiTypeServiceUpdate,
+  ApiTypeServiceLoadById,
+  ApiTypeServiceUpdate,
   DeleteTypeServices,
-  LoadSuccessTypeServices, LoadTypeServiceById,
+  LoadSuccessTypeServices,
+  LoadTypeServiceById,
   UpdateTypeService
 } from '../actions/type-service.actions';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { EMPTY, Observable } from 'rxjs';
-import { NsiAbstractService } from '../services/nsi.abstract.service';
-import { TypeService } from '../models/type-service.model';
-import { ApiTypeCreate } from '../actions/type.actions';
-import { Action } from '@ngrx/store';
-import { APIAction } from '../actions/abstarct.actions';
+import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
+import {EMPTY, Observable} from 'rxjs';
+import {NsiAbstractService} from '../services/nsi.abstract.service';
+import {TypeService} from '../models/type-service.model';
+import {ApiTypeCreate} from '../actions/type.actions';
+import {Action} from '@ngrx/store';
+import {APIAction} from '../actions/abstarct.actions';
 
 @Injectable()
 export class TypeServiceEffects {
@@ -27,7 +29,10 @@ export class TypeServiceEffects {
       ofType(APIAction.LOAD_ALL + '[TypeService]'),
       mergeMap(() => this.service.getAll('typeservices')
         .pipe(
-          map((array: TypeService[]) => (new LoadSuccessTypeServices({ typeServices: array }))),
+          map((array: TypeService[]) => {
+            console.log(array);
+            return (new LoadSuccessTypeServices({ typeServices: array }))
+          }),
           catchError(() => EMPTY)
         ))
     );
@@ -45,7 +50,7 @@ export class TypeServiceEffects {
     .pipe(
       ofType(APIAction.CREATE + '[TypeService]'),
       map((action: ApiTypeCreate) => action.payload),
-      switchMap((data) => this.service.create('typeservices', data)
+      switchMap((data: TypeService) => this.service.create('typeservices', data)
         .pipe(
           map((loadTypeService: TypeService) => {
             return new AddTypeService({ typeService: loadTypeService });

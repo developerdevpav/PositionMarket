@@ -30,6 +30,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
   images: PositionImageModel[] = [];
   subscriptionNsi: Subscription = new Subscription();
 
+  rentPriceHour = 0;
   selectedImages: ImageModel[] = [];
 
   loadedDropdownTag = false;
@@ -174,7 +175,6 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
       const subscribePosition = this.store.select(selectPositionById, {id: this.data.id})
         .subscribe(position => {
           this.position = position;
-
           this.selectedTypes$ = this.store.select(selectTypesByIds, this.position.types);
           this.selectedTags$ = this.store.select(selectTagsByIds, this.position.tags);
 

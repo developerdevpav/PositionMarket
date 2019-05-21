@@ -19,7 +19,11 @@
   height: fit-content;
   margin: 15px 10px;
 }
-
+.item__title svg-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
 .item__in-shopping-cart {
   display: flex;
   flex-wrap: nowrap;

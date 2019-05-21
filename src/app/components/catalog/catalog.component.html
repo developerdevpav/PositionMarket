@@ -19,12 +19,19 @@
           <img src="{{it?.image?.url}}" (click)="next(it)" class="avatar">
         </div>
         <div class="item__content">
-          <div class="item__title">
-            {{it.title}}
+          <div class="content__info">
+            <div class="item__title">
+              {{it.title}}
+            </div>
+            <div class="item__text">
+              {{it?.description}}
+            </div>
+
+            <div class="content__footer">
+              fwifgyuewgyuf
+            </div>
           </div>
-          <div class="item__text">
-            {{it?.description}}
-          </div>
+
         </div>
         <div class="item__price">
           <button mat-stroked-button color="primary" (click)="deployItem(it.id)" class="action-price"

@@ -8,9 +8,7 @@ import {
 } from '../../../../store/actions/type-service.actions';
 import {MatDialog} from '@angular/material';
 import {TypeService} from 'src/app/store/models/type-service.model';
-import {DialogEditEntityComponent} from '../../../universal/dialogs/dialog-edit-entity/dialog-edit-entity.component';
 import {selectTypeServiceById, selectTypeServicesByLanguage} from '../../../../store/selectors/type-service.selectors';
-import {Subscription} from 'rxjs';
 import {AbstractNsiComponent} from '../abstract.nsi.component';
 import {LanguageState} from '../../../../store/reducers/language.reducer';
 
@@ -22,7 +20,7 @@ import {LanguageState} from '../../../../store/reducers/language.reducer';
 export class TypeServiceComponent extends AbstractNsiComponent<TypeService> implements OnInit, OnDestroy {
 
   constructor(public dialog: MatDialog, public store: Store<TypeService>) {
-    super(store, dialog);
+    super(store, dialog, 'typeService');
   }
 
   getActionForChange(object: TypeService): Action {

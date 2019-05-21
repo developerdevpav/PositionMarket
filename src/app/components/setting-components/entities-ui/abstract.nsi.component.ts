@@ -4,8 +4,9 @@ import {DialogEditEntityComponent} from '../../universal/dialogs/dialog-edit-ent
 import {MatDialog} from '@angular/material';
 import {Subscription} from 'rxjs';
 import {LanguageState} from '../../../store/reducers/language.reducer';
+import {Nsi} from '../../../store/models/abstract.model';
 
-export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
+export abstract class AbstractNsiComponent<T extends Nsi> implements OnInit, OnDestroy {
 
   list: { id: string, title: string }[] = [];
 
@@ -13,16 +14,21 @@ export abstract class AbstractNsiComponent<T> implements OnInit, OnDestroy {
 
   private subscriber: Subscription = new Subscription();
 
-  protected constructor(public store: Store<any>, public dialog: MatDialog) {}
+  type = '';
+
+  protected constructor(public store: Store<any>, public dialog: MatDialog, type: string) {
+    this.type = type;
+  }
 
   openDialog(actionRef: string, value: T): void {
     const dialogRef = this.dialog.open(DialogEditEntityComponent, {
       hasBackdrop: true,
       width: '650px',
-      height: '270px',
+      height: this.type === 'typeService' ? '650px' : '270px',
       data: {
         action: actionRef,
-        object: value
+        object: value,
+        type: this.type
       }
     });
 

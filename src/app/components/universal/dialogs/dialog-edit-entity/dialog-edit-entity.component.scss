@@ -15,8 +15,18 @@ h2[mat-dialog-title] {
     margin: 10px 0 10px 0;
   }
 
+  textarea {
+    width: 100%;
+    height: 150px;
+    margin: 10px 0 10px 0;
+  }
+
   input:last-child {
     margin-top: 0;
+  }
+
+  angular2-multiselect {
+    width: 100%;
   }
 }
 

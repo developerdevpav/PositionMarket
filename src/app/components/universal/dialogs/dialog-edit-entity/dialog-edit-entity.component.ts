@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Store} from '@ngrx/store';
-import {Nsi} from '../../../../store/models/abstract.model';
 import {Language} from '../../../../store/models/language.model';
 
 @Component({
@@ -11,7 +10,7 @@ import {Language} from '../../../../store/models/language.model';
 })
 export class DialogEditEntityComponent implements OnInit {
 
-  nsi: Nsi = {
+  nsi = {
     id: null,
     values: [
       {
@@ -22,13 +21,47 @@ export class DialogEditEntityComponent implements OnInit {
         language: Language.EN,
         value: ''
       }
-    ]
+    ],
+    description: [
+      {
+        language: Language.RU,
+        value: ''
+      },
+      {
+        language: Language.EN,
+        value: ''
+      }
+    ],
+    type: ''
+  };
+
+  isTypeService = false;
+
+  types = [
+    {
+      title: 'RENT'
+    },
+    {title: 'DELIVERY'},
+    {title: 'PERSONAL'}
+  ];
+
+  selectService = [];
+
+  settingsSingleSelect = {
+    text: 'Тип сервиса',
+    selectAllText: '',
+    unSelectAllText: '',
+    enableSearchFilter: false,
+    singleSelection: true,
+    labelKey: 'title'
   };
 
   constructor(public dialogRef: MatDialogRef<DialogEditEntityComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { action: string, object: Nsi },
+              @Inject(MAT_DIALOG_DATA) public data: { action: string, object: any, type: string },
               public store: Store<any>) {
+    this.isTypeService = this.data.type === 'typeService';
   }
+
 
   ngOnInit(): void {
     if (this.data.object) {
@@ -39,10 +72,26 @@ export class DialogEditEntityComponent implements OnInit {
           valueThis.value = findValue.value;
         }
       });
+      if (this.isTypeService) {
+        this.nsi.description.forEach(valueThis => {
+          const findValue = this.data.object.description.find(value => value.language === valueThis.language);
+          if (findValue) {
+            valueThis.value = findValue.value;
+          }
+        });
+        if ( this.data.object.type ) {
+          this.nsi.type = this.data.object.type;
+          this.selectService[0] = {title: this.nsi.type};
+        }
+      }
     }
   }
 
   add() {
+    if (this.isTypeService) {
+      this.nsi.type = this.selectService[0].title;
+      console.log(this.nsi);
+    }
     this.dialogRef.close({action: this.data.action, entity: this.nsi});
   }
 }

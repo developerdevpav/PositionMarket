@@ -16,7 +16,7 @@ import {selectTagById, selectTagsByLanguage} from '../../../../store/selectors/t
 export class TagComponent extends AbstractNsiComponent<Tag> implements OnInit {
 
   constructor(public dialog: MatDialog, public store: Store<Type>) {
-    super(store, dialog);
+    super(store, dialog, 'tag');
   }
 
   protected getActionForChange(object: Tag): Action {
