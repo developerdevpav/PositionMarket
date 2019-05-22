@@ -1,9 +1,26 @@
 import {Nsi, Value} from '../models/abstract.model';
 import {Language} from '../models/language.model';
 import {Product} from '../models/products';
+import {TypeService} from '../models/type-service.model';
 
 export function convertArrayNsiByLanguage<T extends Nsi>(array: T[], language: Language) {
   return array.map(value => convertNsiByLanguage(value, language));
+}
+
+export function convertArrayTypeServiceByLanguage<T extends TypeService>(array: T[], language: Language) {
+  return array.map(value => convertTypeServiceByLanguage(value, language)).filter(it => it != null);
+}
+
+export function convertTypeServiceByLanguage<T extends TypeService>(object: T, language: Language) {
+  if ( !object ) {
+    return null;
+  }
+  return {
+    id: object.id,
+    title: getStringFromArrayValuesByLanguage(object.values, language),
+    type: object.type,
+    description: getStringFromArrayValuesByLanguage(object.description, language)
+  };
 }
 
 export function convertNsiByLanguage<T extends Nsi>(object: T, language: Language) {

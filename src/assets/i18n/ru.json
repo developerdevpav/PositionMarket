@@ -6,5 +6,8 @@
   "Setting": "Настройки",
   "log in": "Войти",
   "INPUT_SELECT_TAG_INPUT": "Выберите теги",
-  "INPUT_SELECT_TYPES_INPUT": "Выберите типы"
+  "INPUT_SELECT_TYPES_INPUT": "Выберите типы",
+  "PERSONAL": "Персонал",
+  "RENT": "Аренда",
+  "DELIVERY": "Доставка и транспортировка"
 }

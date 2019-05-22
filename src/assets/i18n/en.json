@@ -6,5 +6,8 @@
   "Setting": "Settings",
   "log in": "Log in",
   "INPUT_SELECT_TAG_INPUT": "Choose tags",
-  "INPUT_SELECT_TYPES_INPUT": "Choose types"
+  "INPUT_SELECT_TYPES_INPUT": "Choose types",
+  "PERSONAL": "Staff",
+  "RENT": "Rent",
+  "DELIVERY": "Delivery"
 }

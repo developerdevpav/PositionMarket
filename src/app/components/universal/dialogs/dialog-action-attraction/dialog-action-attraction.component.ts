@@ -257,7 +257,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     this.position.types = this.dropdownSelectType
       .map(type => type.id);
 
-    this.selectProducts.map(product => {
+    this.selectProducts.forEach((product, index) => {
       if (product.service && product.service.length > 0) {
         const service = product.service[0];
         if (service && product.product && service.id) {
@@ -265,6 +265,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
           if (!this.position.products) {
             this.position.products = [];
           }
+          product.product.order = index;
           this.position.products.push(product.product);
         }
       }
@@ -273,6 +274,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
     this.position.images = this.images.filter(image => image && image.image && image.url);
 
     if (this.data.action !== 'view') {
+      console.log(this.position);
       this.store.dispatch(
         this.data.action === 'create'
           ? new ApiAttractionCreate(this.position)
@@ -361,7 +363,7 @@ export class DialogActionAttractionComponent implements OnInit, OnDestroy {
       resultIndex = (this.selectProducts[0].index ? this.selectProducts[0].index : 0) + 1;
     }
 
-    const object = {index: resultIndex, product: {id: null, price: 0, service: ''}, service: []};
+    const object = {index: resultIndex, product: {id: null, price: 0, order: 0, service: ''}, service: []};
     this.selectProducts.push(object);
     this.calculateProduct();
   }

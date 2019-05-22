@@ -19,19 +19,12 @@
           <img src="{{it?.image?.url}}" (click)="next(it)" class="avatar">
         </div>
         <div class="item__content">
-          <div class="content__info">
             <div class="item__title">
               {{it.title}}
             </div>
             <div class="item__text">
               {{it?.description}}
             </div>
-
-            <div class="content__footer">
-              fwifgyuewgyuf
-            </div>
-          </div>
-
         </div>
         <div class="item__price">
           <button mat-stroked-button color="primary" (click)="deployItem(it.id)" class="action-price"
@@ -41,8 +34,7 @@
           </button>
         </div>
       </div>
-      <app-service-and-price-component class="item__detail price-and-service"
-                                       [list$]="it.products"
+      <app-service-and-price-component class="item__detail price-and-service" [list$]="it.products"
                                        [ngClass]="idDeployItem(it.id) ? 'item__detail-action' : 'item__detail-unaction'">
       </app-service-and-price-component>
     </div>

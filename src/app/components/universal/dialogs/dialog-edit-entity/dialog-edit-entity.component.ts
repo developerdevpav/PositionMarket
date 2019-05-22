@@ -45,14 +45,15 @@ export class DialogEditEntityComponent implements OnInit {
     {title: 'PERSONAL'}
   ];
 
-  selectService = [];
+  selectedService: {
+    title: string
+  }[] = [];
 
-  settingsSingleSelect = {
-    text: 'Тип сервиса',
-    selectAllText: '',
-    unSelectAllText: '',
-    enableSearchFilter: false,
+  settings = {
     singleSelection: true,
+    text: 'Select Country',
+    primaryKey: 'title',
+    classes: 'input-multi-select',
     labelKey: 'title'
   };
 
@@ -61,7 +62,6 @@ export class DialogEditEntityComponent implements OnInit {
               public store: Store<any>) {
     this.isTypeService = this.data.type === 'typeService';
   }
-
 
   ngOnInit(): void {
     if (this.data.object) {
@@ -79,9 +79,9 @@ export class DialogEditEntityComponent implements OnInit {
             valueThis.value = findValue.value;
           }
         });
-        if ( this.data.object.type ) {
+        if (this.data.object.type) {
           this.nsi.type = this.data.object.type;
-          this.selectService[0] = {title: this.nsi.type};
+          this.selectedService[0] = {title: this.nsi.type};
         }
       }
     }
@@ -89,7 +89,7 @@ export class DialogEditEntityComponent implements OnInit {
 
   add() {
     if (this.isTypeService) {
-      this.nsi.type = this.selectService[0].title;
+      this.nsi.type = this.selectedService[0].title;
       console.log(this.nsi);
     }
     this.dialogRef.close({action: this.data.action, entity: this.nsi});

@@ -171,6 +171,7 @@
 .item__price {
   display: flex;
   width: auto;
+  min-width: 200px;
   flex-wrap: wrap;
   padding: 0 20px;
   justify-content: center;

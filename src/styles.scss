@@ -42,3 +42,20 @@ input {
   background: red;
   color: $mainColorFont;
 }
+
+.input-multi-select {
+  color: $mainColorBackground;
+}
+
+.input-multi-select .c-token{
+  background: $mainColorBackground !important;
+}
+
+.input-multi-select .pure-checkbox label::before {
+  border-color: #098536 !important;
+  border-width: 1px;
+}
+
+.input-multi-select .pure-checkbox input[type="checkbox"]:checked + label[_ngcontent-c1]:before {
+  background: #098536 !important;
+}

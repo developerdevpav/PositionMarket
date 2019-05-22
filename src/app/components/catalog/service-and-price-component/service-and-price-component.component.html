@@ -1,12 +1,19 @@
-<div class="item" *ngFor="let it of list$">
-  <div class="item__title" >
-    <svg-icon src="../assets/icon/success.svg" [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
-    {{it?.service?.title}}
-  </div>
-  <div class="item__price">
-    <span class="price-text">{{it?.price}} <span class="currency">BYN</span></span>
-  </div>
-  <div class="item__in-shopping-cart">
-    <button mat-stroked-button color="primary" class="active-price">В корзину</button>
+<div class="box" *ngFor="let key of getKey(map)">
+  <span class="title-section">{{ key | translate }}</span>
+  <div class="item" *ngFor="let it of map.get(key)">
+    <div class="item__info">
+      <div class="item__title" >
+        <svg-icon src="../assets/icon/success.svg" [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
+        {{it?.service?.title}}
+      </div>
+      <div class="item__price">
+        <span class="price-text">{{it?.price}} <span class="currency">BYN</span></span>
+      </div>
+    </div>
+
+    <div class="item__in-shopping-cart">
+      <button mat-stroked-button color="primary" (click)="addService(it)" class="active-price">В корзину</button>
+    </div>
   </div>
 </div>
+

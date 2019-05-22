@@ -63,7 +63,7 @@ export const selectPositionByLanguageForCatalog = createSelector(
       const typeObjects = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
       const imageValues = value.images
         .sort(it => it.mainImage ? -1 : 1)
-        .map((it, ind, arrayImage) => {
+        .map((it, ind) => {
           return {
             image: it.image,
             url: it.url,
@@ -71,11 +71,12 @@ export const selectPositionByLanguageForCatalog = createSelector(
           };
         });
       const productValues = value.products.map(it => {
-        const serviceFound = converter.convertNsiByLanguage(typeServiceDictionary[it.service], language);
+        const serviceFound = converter.convertTypeServiceByLanguage(typeServiceDictionary[it.service], language);
         return {
           service: serviceFound,
           id: it.id,
-          price: it.price
+          price: it.price,
+          order: it.order
         };
       });
       return {

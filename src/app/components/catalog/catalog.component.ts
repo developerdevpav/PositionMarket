@@ -62,7 +62,6 @@ export class CatalogComponent implements OnInit {
 
     this.store.select(selectPositionByLanguageForCatalog).subscribe(it => {
       this.positions = it;
-      console.log(this.positions);
     });
   }
 

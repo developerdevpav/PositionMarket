@@ -35,6 +35,9 @@ import {ImagesComponent} from './setting-components/entities-ui/images/images.co
 import {SnackBarComponent} from './universal/snack-bar/snack-bar.component';
 import {AuthorizationComponent} from './authorization/authorization.component';
 import {ServiceAndPriceComponentComponent} from './catalog/service-and-price-component/service-and-price-component.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpLoaderFactory} from '../ui/translate.service';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,14 @@ import {ServiceAndPriceComponentComponent} from './catalog/service-and-price-com
     StoreModule.forFeature('tags', tagReducer),
     StoreModule.forFeature('language', languageReducer),
     StoreModule.forFeature('typeservises', typeServiceReducer),
-    StoreModule.forFeature('images', imageReducer)
+    StoreModule.forFeature('images', imageReducer),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   entryComponents: [DialogEditEntityComponent, DialogActionAttractionComponent, DialogSelectionNsiComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
