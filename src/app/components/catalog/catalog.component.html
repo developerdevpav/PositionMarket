@@ -34,7 +34,8 @@
           </button>
         </div>
       </div>
-      <app-service-and-price-component class="item__detail price-and-service" [list$]="it.products"
+      <app-service-and-price-component class="item__detail price-and-service"
+                                       [list$]="showPriceAndService(it)"
                                        [ngClass]="idDeployItem(it.id) ? 'item__detail-action' : 'item__detail-unaction'">
       </app-service-and-price-component>
     </div>

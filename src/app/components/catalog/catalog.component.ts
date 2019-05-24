@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {ApiTagLoadAll} from '../../store/actions/tag.actions';
 import {selectTagsByLanguage} from '../../store/selectors/tag.selectors';
@@ -7,41 +7,23 @@ import {selectTypesByLanguage} from '../../store/selectors/type.selectors';
 import {selectPositionByLanguageForCatalog} from '../../store/selectors/position.selectors';
 import {ApiAttractionLoadAll} from '../../store/actions/attraction.actions';
 import {ApiTypeServiceLoadAll} from '../../store/actions/type-service.actions';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss']
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit, OnDestroy {
+
+  subscriber: Subscription = new Subscription();
 
   deployPositionDictionary: Map<string, string> = new Map();
 
   positions = [];
 
-  dropdownSelectTag: { id: any, title: string }[] = [];
-  dropdownSelectType: { id: any, title: string }[] = [];
-
   dropdownAllTag: { id: any, title: string }[] = [];
   dropdownAllType: { id: any, title: string }[] = [];
-
-  settingsTag = {
-    text: 'Теги аттракциона',
-    selectAllText: 'Выделить все',
-    unSelectAllText: 'Снять',
-    enableSearchFilter: false,
-    singleSelection: true,
-    labelKey: 'title'
-  };
-
-  settingsType = {
-    text: 'Типы аттракциона',
-    selectAllText: 'Выделить все',
-    unSelectAllText: 'Снять',
-    enableSearchFilter: false,
-    singleSelection: true,
-    labelKey: 'title'
-  };
 
   constructor(private store: Store<any>) {
   }
@@ -52,16 +34,29 @@ export class CatalogComponent implements OnInit {
     this.store.dispatch(new ApiTypeServiceLoadAll());
     this.store.dispatch(new ApiAttractionLoadAll());
 
-    this.store.select(selectTagsByLanguage).subscribe(it => {
+    const subscriberTag = this.store.select(selectTagsByLanguage).subscribe(it => {
       this.dropdownAllTag = it;
     });
 
-    this.store.select(selectTypesByLanguage).subscribe(it => {
+    const subscriberType = this.store.select(selectTypesByLanguage).subscribe(it => {
       this.dropdownAllType = it;
     });
 
-    this.store.select(selectPositionByLanguageForCatalog).subscribe(it => {
+    const subscriberPosition = this.store.select(selectPositionByLanguageForCatalog).subscribe(it => {
       this.positions = it;
+    });
+
+    this.subscriber.add(subscriberTag);
+    this.subscriber.add(subscriberType);
+    this.subscriber.add(subscriberPosition);
+  }
+
+  showPriceAndService(it: any) {
+    return it.products.map(product => {
+      return  {
+        id: product.id,
+        attraction: it.id
+      };
     });
   }
 
@@ -96,6 +91,10 @@ export class CatalogComponent implements OnInit {
     }
 
     position.image = position.images[--indexImage];
+  }
+
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
   }
 
 }

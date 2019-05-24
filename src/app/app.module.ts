@@ -23,8 +23,6 @@ import {AngularMaterialModule} from './angular-material.module';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImageEffects} from './store/effects/image.effects';
 import {ImageUtilService} from './store/services/utils/image-util.service';
-import {SnackBarComponent} from './components/universal/snack-bar/snack-bar.component';
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {TranslatorYandexService} from './store/services/translator-yandex.service';
 
 @NgModule({
@@ -62,19 +60,12 @@ import {TranslatorYandexService} from './store/services/translator-yandex.servic
     BrowserAnimationsModule,
 
   ],
-  bootstrap: [AppComponent, SnackBarComponent],
+  bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
   providers: [
-    {
-      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {
-        duration: 2000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
-      }
-    },
     NsiAbstractService,
     AttractionService,
     ImageUtilService,

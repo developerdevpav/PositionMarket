@@ -1,4 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {selectProductFromAttraction} from '../../../store/selectors/position.selectors';
+import {DeleteProduct, SetProduct} from '../../../store/actions/select-product.actions';
+import {getTotalPriceByAttractionId} from '../../../store/selectors/selected.product.selectors';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-service-and-price-component',
@@ -8,27 +13,41 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class ServiceAndPriceComponentComponent implements OnInit {
 
   @Input()
-  list$: ProductService[] = [];
+  list$: { id: string, attraction: string }[] = [];
+  products: {
+    id: string,
+    price: number,
+    order: number,
+    attraction: string,
+    selected: boolean,
+    service: {
+      id: string,
+      title: string,
+      type: string,
+      description: string
+    }
+  }[] = [];
 
   map: Map<string, ProductService[]> = new Map();
 
-  private selectedProductService: Map<string, ProductService> = new Map();
-
-  totalPrice = 0;
+  total: Observable<number>;
 
   @Output()
   item = new EventEmitter();
 
-  constructor() {
+  constructor(private repository: Store<any>) {
 
   }
 
   ngOnInit() {
-    this.list$ = this.list$.sort((master, other) => master.order > other.order ? 1 : -1);
-    this.list$
+    this.total = this.repository.select(getTotalPriceByAttractionId, this.list$[0].attraction);
+    this.repository.select(selectProductFromAttraction, this.list$).subscribe(it => {
+      this.products = it;
+
+    });
+    this.products
       .filter(it => it !== null && it.service !== null && it.service.type !== null)
       .forEach(it => {
-        it.selected = false;
         if (this.map.has(it.service.type)) {
           this.map.get(it.service.type).push(it);
         } else {
@@ -37,28 +56,32 @@ export class ServiceAndPriceComponentComponent implements OnInit {
           this.map.set(it.service.type, array);
         }
       });
+
   }
 
   getKey(map: Map<string, ProductService>) {
     return Array.from(map.keys());
   }
 
-  switchActionService(nameGroup: string, group: ProductService[], item: ProductService, event: any) {
+  switchActionService(nameGroup: string, group: ProductService[], item: any, event: any) {
     switch (nameGroup) {
       case 'RENT': {
         if (event.checked) {
           group.forEach(it => {
             it.selected = false;
+            this.repository.dispatch(new DeleteProduct(it.id));
           });
+          this.repository.dispatch(new SetProduct(item));
         }
-
         break;
       }
       case 'PERSONAL': {
         if (event.checked) {
           group.forEach(it => {
             it.selected = false;
+            this.repository.dispatch(new DeleteProduct(it.id));
           });
+          this.repository.dispatch(new SetProduct(item));
         }
         break;
       }
@@ -66,26 +89,18 @@ export class ServiceAndPriceComponentComponent implements OnInit {
         if (event.checked) {
           group.forEach(it => {
             it.selected = false;
+            this.repository.dispatch(new DeleteProduct(it.id));
           });
+          this.repository.dispatch(new SetProduct(item));
         }
         break;
       }
     }
 
+    if (!event.checked) {
+      this.repository.dispatch(new DeleteProduct(item.id));
+    }
     item.selected = event.checked;
-    this.totalPrice = 0;
-    this.list$.forEach((value) => {
-      if (value.selected) {
-        this.totalPrice += value.price;
-      }
-    });
-
-    console.log(this.selectedProductService);
-    console.log();
-  }
-
-  isSelectRent(object: any) {
-    return this.list$.find(it => it.selected && it.service.type === 'RENT') !== null && object !== 'RENT';
   }
 }
 

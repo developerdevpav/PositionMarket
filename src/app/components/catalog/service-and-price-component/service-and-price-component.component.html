@@ -1,17 +1,22 @@
 <div class="main-box-service">
   <div class="footer__service">
-    <div class="footer-service__total-price">
-      ~ {{totalPrice}} р.
+    <div class="help-text-service">Вы можете выбрать нужные услуги и добавить позицию в корзину (не является оформлением заказа)</div>
+    <div class="action-service-and-price">
+      <div class="footer-service__total-price">
+        ~ {{(total | async)}} р.
+      </div>
+      <div class="footer-service__shopping-cart-button">
+        <button [disabled]="(total | async) === 0" mat-flat-button color="primary" class="active-price">В корзину
+        </button>
+      </div>
     </div>
-    <div class="footer-service__shopping-cart-button">
-      <button [disabled]="totalPrice === 0" mat-flat-button color="primary"  class="active-price">В корзину</button>
-    </div>
+
   </div>
-  <div class="box" *ngFor="let key of getKey(map)" >
+  <div class="box" *ngFor="let key of getKey(map)">
     <span class="title-section">{{ key | translate }}</span>
     <div class="item" [ngClass]="it.selected ? 'item-selected' : ''" *ngFor="let it of map.get(key)">
       <div class="item__info">
-        <div class="item__title" >
+        <div class="item__title">
           <svg-icon src="../assets/icon/success.svg" [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
           {{it?.service?.title}}
         </div>
@@ -21,7 +26,8 @@
       </div>
 
       <div class="item__in-shopping-cart">
-        <mat-checkbox [(ngModel)]="it.selected" (change)="switchActionService(key, map.get(key), it, $event)" color="primary"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="it.selected" (change)="switchActionService(key, map.get(key), it, $event)"
+                      color="primary"></mat-checkbox>
       </div>
     </div>
   </div>

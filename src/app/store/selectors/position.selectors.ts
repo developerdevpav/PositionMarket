@@ -7,10 +7,12 @@ import {Language} from '../models/language.model';
 import * as  type from '../reducers/type.reducer';
 import * as  tag from '../reducers/tag.reducer';
 import * as  typeService from '../reducers/type-service.reducer';
+import * as  selectedProduct from '../reducers/selected-product.reducer';
 import {Tag} from '../models/tag.model';
 import {Dictionary} from '@ngrx/entity';
 import {Type} from '../models/type.model';
 import {TypeService} from '../models/type-service.model';
+import {SelectedProduct} from '../models/products';
 
 
 export const selectPositionById = createSelector(
@@ -88,6 +90,33 @@ export const selectPositionByLanguageForCatalog = createSelector(
         images: imageValues,
         image: imageValues[0],
         products: productValues
+      };
+    });
+  }
+);
+
+export const selectProductFromAttraction = createSelector(
+  selectCurrentLanguage,
+  selectedProduct.selectEntities,
+  attraction.selectEntities,
+  typeService.selectEntities,
+  (language: Language, selectedProductDictionary: Dictionary<SelectedProduct>,
+   positionDictionary: Dictionary<AttractionModel>,
+   typeServiceDictionary: Dictionary<TypeService>, props: { id: string, attraction: string }[]) => {
+    return props.map(item => {
+      const position = positionDictionary[item.attraction];
+      const product = position.products
+        .find(it => it.id === item.id);
+      if (!product) {
+        return null;
+      }
+      return {
+        id: product.id,
+        price: product.price,
+        order: product.order,
+        attraction: item.attraction,
+        selected: selectedProductDictionary[product.id] !== undefined,
+        service: converter.convertTypeServiceByLanguage(typeServiceDictionary[product.service], language)
       };
     });
   }

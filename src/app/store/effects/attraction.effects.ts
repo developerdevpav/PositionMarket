@@ -18,22 +18,11 @@ import {
   UpdateAttraction
 } from '../actions/attraction.actions';
 import {MatSnackBar} from '@angular/material';
-import {SnackBarComponent} from '../../components/universal/snack-bar/snack-bar.component';
 
 @Injectable()
 export class AttractionEffects {
 
   constructor(private actions$: Actions, private service: AttractionService, private snackBar: MatSnackBar) {
-  }
-
-  openSnackBar(msg: string, err: boolean = false) {
-    this.snackBar.openFromComponent(SnackBarComponent, {
-      panelClass: err ? 'red-snackbar' : 'green-snackbar',
-      data: {
-        message: msg,
-        error: err
-      }
-    });
   }
 
   @Effect()
@@ -43,11 +32,9 @@ export class AttractionEffects {
       mergeMap(() => this.service.getAll('attractions')
         .pipe(
           map((array: AttractionModel[]) => {
-            this.openSnackBar('Successfully loaded ' + array.length + ' position');
             return (new LoadSuccessAttractions({attractions: array}));
           }),
           catchError((error) => {
-            this.openSnackBar('Error loading ' + error.message, true);
             return EMPTY;
           })
         ))
@@ -60,11 +47,9 @@ export class AttractionEffects {
     map((action: ApiAttractionLoadById) => action.payload),
     switchMap((id) => this.service.getById('attractions', id)),
     map((attractionLoad: AttractionModel) => {
-      this.openSnackBar('Successfully Attraction load');
       return new LoadAttractionById({attraction: attractionLoad});
     }),
     catchError((e) => {
-      this.openSnackBar(`error load ${e.message}`, true);
       return EMPTY;
     })
   );
@@ -76,12 +61,9 @@ export class AttractionEffects {
       map((action: ApiAttractionCreate) => action.payload),
       switchMap((data) => this.service.create('attractions', data).pipe(
         map((loadAttraction: AttractionModel) => {
-          this.openSnackBar(`create position `);
           return new AddAttraction({attraction: loadAttraction});
         }),
         catchError((e) => {
-          this.openSnackBar(`Error create position ${e.message}`, true);
-          console.log(e);
           return EMPTY;
         })
         ),
@@ -99,7 +81,6 @@ export class AttractionEffects {
         (object: AttractionModel) => this.service.update('attractions', object)
           .pipe(
             map(() => {
-              this.openSnackBar(`Successfully update position`);
               return new UpdateAttraction({
                 attraction: {
                   id: object.id,
@@ -108,36 +89,11 @@ export class AttractionEffects {
               });
             }),
             catchError((e) => {
-              this.openSnackBar(`Error update position ${e.message}`, true);
               return EMPTY;
             })
           )
       )
     );
-
-/*
-  @Effect()
-  destroy$: Observable<Action> = this.actions$.pipe(
-    ofType(APIAction.DELETE + '[Attraction]'),
-    map((action: ApiAttractionDelete) => {
-      console.log('Deleted: ' + action.payload);
-      return action.payload;
-    }),
-    switchMap(
-      (index: string) => this.service.delete('attractions', index)
-        .pipe(
-          map(() => {
-            this.openSnackBar(`Successfully delete position`);
-            return new DeleteAttraction({id: index});
-          }),
-          catchError((e) => {
-            this.openSnackBar(`Error delete position ${e.message}`, true);
-            return EMPTY;
-          })
-        )
-    )
-  );
-*/
 
   @Effect()
   deleteArrayPosition$: Observable<Action> = this.actions$.pipe(
@@ -150,11 +106,9 @@ export class AttractionEffects {
       (index: string[]) => this.service.deleteArray('attractions', index)
         .pipe(
           map(() => {
-            this.openSnackBar(`Successfully delete positions`);
             return new DeleteAttractions({ ids: index });
           }),
           catchError((e) => {
-            this.openSnackBar(`Error delete positions ${e.message}`, true);
             return EMPTY;
           })
         )

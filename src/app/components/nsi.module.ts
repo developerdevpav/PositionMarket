@@ -32,12 +32,12 @@ import {ItemListWithTitleAndCheckboxComponent} from './universal/item-list-with-
 import {imageReducer} from '../store/reducers/image.reducer';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImagesComponent} from './setting-components/entities-ui/images/images.component';
-import {SnackBarComponent} from './universal/snack-bar/snack-bar.component';
 import {AuthorizationComponent} from './authorization/authorization.component';
 import {ServiceAndPriceComponentComponent} from './catalog/service-and-price-component/service-and-price-component.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpLoaderFactory} from '../ui/translate.service';
 import {HttpClient} from '@angular/common/http';
+import {selectedProductReducer} from '../store/reducers/selected-product.reducer';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,6 @@ import {HttpClient} from '@angular/common/http';
     ItemListWithTitleAndCheckboxComponent,
     FilterObservablePipe,
     ImagesComponent,
-    SnackBarComponent,
     AuthorizationComponent,
     ServiceAndPriceComponentComponent
   ],
@@ -79,6 +78,7 @@ import {HttpClient} from '@angular/common/http';
     StoreModule.forFeature('language', languageReducer),
     StoreModule.forFeature('typeservises', typeServiceReducer),
     StoreModule.forFeature('images', imageReducer),
+    StoreModule.forFeature('selectedProducts', selectedProductReducer),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

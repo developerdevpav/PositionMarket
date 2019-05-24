@@ -30,8 +30,7 @@ export class TypeServiceEffects {
       mergeMap(() => this.service.getAll('typeservices')
         .pipe(
           map((array: TypeService[]) => {
-            console.log(array);
-            return (new LoadSuccessTypeServices({ typeServices: array }))
+            return (new LoadSuccessTypeServices({ typeServices: array }));
           }),
           catchError(() => EMPTY)
         ))
