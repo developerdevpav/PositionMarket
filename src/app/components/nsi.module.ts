@@ -38,6 +38,8 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpLoaderFactory} from '../ui/translate.service';
 import {HttpClient} from '@angular/common/http';
 import {selectedProductReducer} from '../store/reducers/selected-product.reducer';
+import {ItemPositionComponent} from './universal/item-position/item-position.component';
+import {ItemComponent} from './universal/item/item.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import {selectedProductReducer} from '../store/reducers/selected-product.reducer
     FilterObservablePipe,
     ImagesComponent,
     AuthorizationComponent,
-    ServiceAndPriceComponentComponent
+    ServiceAndPriceComponentComponent,
+    ItemPositionComponent,
+    ItemComponent
   ],
   imports: [
     AngularMultiSelectModule,

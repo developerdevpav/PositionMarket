@@ -1,0 +1,14 @@
+<div class="body-item" (click)="onClick()">
+  <div class="item__description">
+    <img class="item__avatar"
+         src="https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?cs=srgb&dl=artistic-blossom-bright-207962.jpg&fm=jpg">
+    <div class="item__title">
+      {{item.title}}
+    </div>
+  </div>
+  <div class="item__action">
+    <mat-checkbox style="z-index: 2000" checked="true" color="primary" labelPosition="before">
+      <span class="action__price">200 р.</span>
+    </mat-checkbox>
+  </div>
+</div>

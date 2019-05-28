@@ -1,0 +1,43 @@
+$background: white;
+
+.body-item {
+  display: flex;
+  position: relative;
+  background: $background;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.11);
+
+  .item__description {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .item__avatar {
+      width: 90px;
+      height: 60px;
+    }
+
+    .item__title {
+      display: flex;
+      margin-left: 18px;
+      width: 100%;
+      font-size: 15px;
+      color: #535b5a;
+    }
+  }
+
+  .item__action {
+    margin-right: 20px;
+
+    .action__price {
+      font-size: 15px;
+      color: #000098;
+      font-weight: 500;
+      margin-right: 10px;
+    }
+  }
+}

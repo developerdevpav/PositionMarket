@@ -44,11 +44,6 @@ export const selectSelectedProductById = createSelector(
 export const getTotalPriceByAttractionId = createSelector(
   selectedProduct.selectAll,
   (array: SelectedProduct[], props: string) => {
-    console.log(array);
-    console.log(props);
-    console.log(array
-      .filter(it => it.attraction === props)
-      .reduce((sum, current) => sum + current.price, 0));
     return array
       .filter(it => it.attraction === props)
       .reduce((sum, current) => sum + current.price, 0);
@@ -62,3 +57,29 @@ export const getTotalPrice = createSelector(
     return array.reduce((sum, current) => sum + current.price, 0);
   }
 );
+
+export const getShoppingCart = createSelector(
+  selectedProduct.selectAll,
+  typeService.selectEntities,
+  (array: SelectedProduct[]) => {
+    const map: Map<string, { total: number, products: SelectedProduct[] }> = new Map();
+
+    array.forEach(it => {
+      if (map.has(it.attraction)) {
+        const value = map.get(it.attraction);
+        value.products.push(it);
+      } else {
+        const newArray = [];
+        newArray.push(it);
+        map.set(it.attraction, {total: 0, products: newArray});
+      }
+    });
+
+    map.forEach((value, key) => {
+      value.total = value.products.reduce((sum, it) => sum += it.price, 0);
+    });
+
+    return map;
+  }
+);
+

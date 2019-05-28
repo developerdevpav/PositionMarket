@@ -29,7 +29,7 @@
             <svg-icon src="../assets/icon/shopping-cart.svg"
                       [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
           </a>
-          <div class="header-shop__counter-product">{{itemInShoppingCart}}</div>
+          <div class="header-shop__counter-product">{{(newArray | async).size}}</div>
         </div>
         <div class="header-auth">
           <a routerLink="/auth" routerLinkActive="active">{{'log in' | translate}}</a>

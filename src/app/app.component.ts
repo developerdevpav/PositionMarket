@@ -3,6 +3,9 @@ import {TranslateService} from '@ngx-translate/core';
 import {Store} from '@ngrx/store';
 import {SetLanguage} from './store/actions/language.actions';
 import {selectTotal} from './store/reducers/selected-product.reducer';
+import {Observable} from 'rxjs';
+import {SelectedProduct} from './store/models/products';
+import {getShoppingCart} from './store/selectors/selected.product.selectors';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +15,18 @@ import {selectTotal} from './store/reducers/selected-product.reducer';
 export class AppComponent implements OnInit {
 
   currentLanguage = 'ru';
-  itemInShoppingCart = 0;
+  itemInShoppingCart: Observable<number> = this.store.select(selectTotal);
+  newArray: Observable<Map<string, {total: number, products: SelectedProduct[]}>> = this.store.select(getShoppingCart);
 
   constructor(private translate: TranslateService, private store: Store<any>) {
     this.translate.setDefaultLang('ru');
   }
 
+  public converter(map: Map<string, {total: number, products: SelectedProduct[]}>) {
+    return JSON.stringify(map);
+  }
+
   ngOnInit(): void {
-    this.store.select(selectTotal).subscribe(it => this.itemInShoppingCart = it);
     const language = localStorage.getItem('language');
     if ( language ) {
       this.translate.use(language);
