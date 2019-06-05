@@ -49,6 +49,42 @@ export const selectShortPositionsByLanguage = createSelector(
   }
 );
 
+export const getProductItem = createSelector(
+  selectCurrentLanguage,
+  attraction.selectAll,
+  typeService.selectEntities,
+  (language: Language, array: AttractionModel[],  typeServiceDictionary: Dictionary<TypeService>) => {
+
+    return array.map(value => {
+      console.log(value.products);
+      const minPrice = value.products
+        .filter(it => it.service !== undefined && typeServiceDictionary[it.service].type === 'RENT')
+        .sort((a, b) => {
+          return a.price > b.price ? 1 : -1;
+        })[0];
+
+      const imageValues = value.images
+        .sort(it => it.mainImage ? -1 : 1)
+        .map((it, ind) => {
+          return {
+            image: it.image,
+            url: it.url,
+            index: ++ind
+          };
+        });
+      return {
+        id: value.id,
+        title: converter.getStringFromArrayValuesByLanguage(value.title, language),
+        descriptionText: converter.getStringFromArrayValuesByLanguage(value.description, language),
+        minPrice: minPrice ? minPrice.price : 0,
+        photos: imageValues,
+        services: undefined
+      };
+    });
+  }
+);
+
+
 export const selectPositionByLanguageForCatalog = createSelector(
   selectCurrentLanguage,
   attraction.selectAll,

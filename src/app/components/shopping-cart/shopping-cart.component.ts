@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,10 +10,11 @@ export class ShoppingCartComponent implements OnInit {
 
   clickId: string;
 
+
   onClickItem(click: string) {
   }
 
-  constructor() { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
   }

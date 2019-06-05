@@ -79,7 +79,7 @@ export const getShoppingCart = createSelector(
       value.total = value.products.reduce((sum, it) => sum += it.price, 0);
     });
 
-    return map;
+    return Array.from(map);
   }
 );
 

@@ -5,7 +5,6 @@ import {SetLanguage} from './store/actions/language.actions';
 import {selectTotal} from './store/reducers/selected-product.reducer';
 import {Observable} from 'rxjs';
 import {SelectedProduct} from './store/models/products';
-import {getShoppingCart} from './store/selectors/selected.product.selectors';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +15,6 @@ export class AppComponent implements OnInit {
 
   currentLanguage = 'ru';
   itemInShoppingCart: Observable<number> = this.store.select(selectTotal);
-  newArray: Observable<Map<string, {total: number, products: SelectedProduct[]}>> = this.store.select(getShoppingCart);
-
   constructor(private translate: TranslateService, private store: Store<any>) {
     this.translate.setDefaultLang('ru');
   }
