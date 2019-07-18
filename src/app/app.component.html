@@ -1,10 +1,6 @@
 <div class="wrapper">
   <header>
     <div class="container">
-      <div class="logo">
-        <span class="logo__title">devpav</span>
-        <span class="logo__domain">.by</span>
-      </div>
       <div class="header-actions">
         <div class="header-actions__link">
           <a class="link-menu" routerLink="/home" routerLinkActive="active">{{ 'Home' | translate }}</a>
@@ -29,7 +25,6 @@
             <svg-icon src="../assets/icon/shopping-cart.svg"
                       [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
           </a>
-          <div class="header-shop__counter-product">{{(newArray | async).size}}</div>
         </div>
         <div class="header-auth">
           <a routerLink="/auth" routerLinkActive="active">{{'log in' | translate}}</a>
@@ -39,8 +34,10 @@
   </header>
 
   <section class="container">
+    <app-devpav-input [ph]="'New'"></app-devpav-input>
     <router-outlet></router-outlet>
   </section>
+
 
   <footer>
     <div class="container">

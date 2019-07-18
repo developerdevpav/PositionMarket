@@ -1,0 +1,16 @@
+input {
+  width: 100%;
+  padding: 11px 15px;
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+  color: #676e7b;
+  background: #fff;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+  border: 1px solid #a5a5a5;
+}

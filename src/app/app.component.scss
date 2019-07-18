@@ -1,6 +1,13 @@
-$mainColorBackgroundBack: #551a8be8;
-$mainColorBackground: #551a8be8;
-$mainColorFont: white;
+$mainColorBackgroundBack: rgba(255, 255, 255, 0.91);
+$mainColorFont: #4a4a4a;
+
+$mainColorBackground: rgba(255, 255, 255, 0.91);
+
+$headerBack: #f8f8f8;
+$headerFront: #ffffff;
+
+$footerContact: #ffffff;
+$footerBackend: #f8f8f8;
 
 header {
   display: flex;
@@ -9,7 +16,7 @@ header {
   align-items: center;
   width: 100%;
   height: auto;
-  background: $mainColorBackgroundBack;
+  background: $headerBack;
   margin-bottom: 20px;
   font-size: 14px;
   font-family: Roboto, Arial, sans-serif;
@@ -25,7 +32,7 @@ header {
 header .container {
   display: flex;
   width: 100%;
-  background: $mainColorBackground;
+  background: $headerFront;
   justify-content: space-between;
   height: 50px;
 }
@@ -43,8 +50,6 @@ header .container {
 .active .header-actions__link{
   background: white !important;
   color: red !important;
-
-  // border-bottom: 1px #f3f4f6 solid;
 }
 
 .header-actions__link {
@@ -157,7 +162,7 @@ header .header-contacts {
 }
 
 .container-contacts > a {
-  color: #626262;
+  color: $mainColorFont;
   margin-left: 10px;
   font-size: 14px;
   font-family: Roboto, Arial, sans-serif;
@@ -174,7 +179,7 @@ header .header-contacts {
   text-align: center;
   border-radius: 11px;
   background: #551a8be8;
-  color: white;
+  color: $mainColorFont;
   bottom: 11px;
   right: -1px;
 }
@@ -187,15 +192,14 @@ footer {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #64388c;
+  background: $footerBackend;
 }
 
 .common-title {
   width: 100%;
-  color: white;
+  color: $mainColorFont;
   font-weight: 500;
   font-size: 18px;
-  //border-bottom: 1px white solid;
   padding-bottom: 10px;
   height: 25px;
 }
@@ -210,7 +214,7 @@ footer {
 
 .container__footer {
   padding: 20px;
-  background: #551a8be8;
+  background: $footerContact;
   width: 100%;
   height: auto;
   flex-wrap: nowrap;
@@ -248,7 +252,7 @@ footer {
 
 
 .item-contact__text {
-  color: white;
+  color: $mainColorFont;
   display: flex;
   align-items: center;
   width: 80%;
@@ -263,7 +267,7 @@ footer {
 }
 
 .social__icon {
-  fill: white;
+  fill: $mainColorFont;
   margin-right: 15px;
 }
 
@@ -280,18 +284,18 @@ footer {
 .navigator__link {
   display: flex;
   width: 100%;
-  color: white;
+  color: $mainColorFont;
   margin-top: 15px;
 }
 
 .author {
   display: flex;
   width: 100%;
-  color: #fff;
+  color: $mainColorFont;
   justify-content: center;
   align-items: center;
   height: 30px;
-  background: #551a8bbf;
+  background: $mainColorBackground;
 }
 
 @media screen and (max-width: 900px) {

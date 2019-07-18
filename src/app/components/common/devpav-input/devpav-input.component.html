@@ -1,0 +1,6 @@
+<input [type]="type"
+       (blur)="blurInput($event.returnValue)"
+       (focus)="focusInput($event.returnValue)"
+       [placeholder]="ph"
+       (input)="setValue()"
+       [(ngModel)]="value">

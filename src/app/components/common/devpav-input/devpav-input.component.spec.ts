@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ItemPositionComponent} from './item-position.component';
+import {DevpavInputComponent} from './devpav-input.component';
 
-describe('ItemPositionComponent', () => {
-  let component: ItemPositionComponent;
-  let fixture: ComponentFixture<ItemPositionComponent>;
+describe('DevpavInputComponent', () => {
+  let component: DevpavInputComponent;
+  let fixture: ComponentFixture<DevpavInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemPositionComponent ]
+      declarations: [ DevpavInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemPositionComponent);
+    fixture = TestBed.createComponent(DevpavInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

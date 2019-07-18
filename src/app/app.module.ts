@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {NsiModule} from './components/nsi.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import * as storeReducers from './store';
 import {EffectsModule} from '@ngrx/effects';
@@ -24,10 +23,12 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImageEffects} from './store/effects/image.effects';
 import {ImageUtilService} from './store/services/utils/image-util.service';
 import {TranslatorYandexService} from './store/services/translator-yandex.service';
+import {DevpavInputComponent} from './components/common/devpav-input/devpav-input.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DevpavInputComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,6 @@ import {TranslatorYandexService} from './store/services/translator-yandex.servic
       AttractionEffects,
       ImageEffects
     ]),
-    NsiModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
