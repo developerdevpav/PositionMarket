@@ -23,24 +23,26 @@ import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {ImageEffects} from './store/effects/image.effects';
 import {ImageUtilService} from './store/services/utils/image-util.service';
 import {TranslatorYandexService} from './store/services/translator-yandex.service';
-import {DevpavInputComponent} from './components/common/devpav-input/devpav-input.component';
+import {ComponentCommonModule} from './components/common/component-common.module';
+import {PageModule} from './pages/page.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DevpavInputComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AngularMaterialModule,
     AppRoutingModule,
     FormsModule,
+    ComponentCommonModule,
     ReactiveFormsModule,
     StoreModule.forRoot(storeReducers.reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
     AngularSvgIconModule,
+    PageModule,
     AngularMultiSelectModule,
     EffectsModule.forRoot([
       TypeEffects,
@@ -49,6 +51,7 @@ import {DevpavInputComponent} from './components/common/devpav-input/devpav-inpu
       AttractionEffects,
       ImageEffects
     ]),
+    PageModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -70,10 +73,6 @@ import {DevpavInputComponent} from './components/common/devpav-input/devpav-inpu
     AttractionService,
     ImageUtilService,
     TranslatorYandexService
-  ],
-  exports: [
-    AppRoutingModule,
-    BrowserModule
   ]
 })
 export class AppModule {

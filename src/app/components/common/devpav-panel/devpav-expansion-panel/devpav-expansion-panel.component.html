@@ -1,0 +1,7 @@
+<div class="devpav-panel-header" (click)="expansionPanel()">
+  <ng-content select="devpav-expansion-panel-header"></ng-content>
+</div>
+<div class="devpav-panel-content" [@expansionPanel]="state">
+  <ng-content select="devpav-expansion-panel-content"></ng-content>
+  <ng-content select="*"></ng-content>
+</div>

@@ -2,14 +2,17 @@
   <header>
     <div class="container">
       <div class="header-actions">
-        <div class="header-actions__link">
-          <a class="link-menu" routerLink="/home" routerLinkActive="active">{{ 'Home' | translate }}</a>
+        <div class="header-actions__link" routerLink="/home" routerLinkActive="active">
+          <a class="link-menu">{{ 'Home' | translate }}</a>
         </div>
-        <div class="header-actions__link">
-          <a class="link-menu" routerLink="/catalog" routerLinkActive="active">{{ 'Catalog' | translate }}</a>
+        <div class="header-actions__link" routerLink="/catalog" routerLinkActive="active">
+          <a class="link-menu" >{{ 'Catalog' | translate }}</a>
         </div>
-        <div class="header-actions__link">
-          <a class="link-menu" routerLink="/settings" routerLinkActive="active">{{ 'Setting' | translate }}</a>
+        <div class="header-actions__link" routerLink="/settings" routerLinkActive="active">
+          <a class="link-menu">{{ 'Setting' | translate }}</a>
+        </div>
+        <div class="header-actions__link" routerLink="/contacts" routerLinkActive="active">
+          <a class="link-menu">{{ 'CONTACTS' | translate }}</a>
         </div>
       </div>
       <div class="header-user-action">
@@ -33,8 +36,7 @@
     </div>
   </header>
 
-  <section class="container">
-    <app-devpav-input [ph]="'New'"></app-devpav-input>
+  <section class="container-fluid">
     <router-outlet></router-outlet>
   </section>
 

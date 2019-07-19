@@ -1,4 +1,6 @@
 {
+  "ru": "ru",
+  "en": "en",
   "Home": "Home",
   "Catalog": "Catalog",
   "SELECT_ALL": "Select All",
@@ -9,5 +11,6 @@
   "INPUT_SELECT_TYPES_INPUT": "Choose types",
   "PERSONAL": "Staff",
   "RENT": "Rent",
-  "DELIVERY": "Delivery"
+  "DELIVERY": "Delivery",
+  "CONTACTS": "Contacts"
 }

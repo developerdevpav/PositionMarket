@@ -1,0 +1,26 @@
+.display_flex_w_100 {
+  display: flex;
+  width: 100%;
+}
+
+.devpav-panel-header {
+  @extend .display_flex_w_100;
+  height: auto;
+}
+
+.devpav-panel-content {
+  @extend .display_flex_w_100;
+  overflow: hidden;
+  background: white;
+  padding: 0 10px 0 10px;
+}
+
+:host /deep/ devpav-expansion-panel-header {
+  @extend .display_flex_w_100;
+  justify-content: space-between;
+}
+
+
+:host /deep/ devpav-expansion-panel-content {
+  @extend .display_flex_w_100;
+}

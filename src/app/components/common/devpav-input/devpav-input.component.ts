@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-devpav-input',
+  selector: 'devpav-input',
   templateUrl: './devpav-input.component.html',
   styleUrls: ['./devpav-input.component.scss']
 })

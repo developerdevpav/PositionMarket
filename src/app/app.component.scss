@@ -20,12 +20,14 @@ header {
   margin-bottom: 20px;
   font-size: 14px;
   font-family: Roboto, Arial, sans-serif;
+  box-shadow: 1px 0 10px 3px rgba(0,0,0,0.1);
 }
 
 .wrapper {
   min-height: 100vh;
   position: relative;
   padding-bottom: 247px;
+  background: #f8f8f8;
 }
 
 
@@ -35,6 +37,7 @@ header .container {
   background: $headerFront;
   justify-content: space-between;
   height: 50px;
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.2);
 }
 
 
@@ -43,13 +46,18 @@ header .container {
   cursor: pointer;
 }
 
+.active {
+  background: whitesmoke !important;
+}
+
 .language-active {
   color: red !important;
 }
 
-.active .header-actions__link{
+.active .header-actions__link a {
   background: white !important;
   color: red !important;
+  cursor: pointer;
 }
 
 .header-actions__link {
@@ -57,6 +65,8 @@ header .container {
   align-items: center;
   background: inherit;
   height: 100%;
+  cursor: pointer;
+  outline: none;
 }
 
 .link-menu {
@@ -66,6 +76,7 @@ header .container {
   font-weight: 500;
   text-decoration: none;
   color: $mainColorFont;
+  text-align: center;
 }
 
 header .logo {
@@ -90,6 +101,7 @@ header .header-actions {
   width: 50%;
   height: auto;
   align-items: center;
+
 }
 
 header .header-user-action {
@@ -193,6 +205,7 @@ footer {
   bottom: 0;
   left: 0;
   background: $footerBackend;
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.1);;
 }
 
 .common-title {
