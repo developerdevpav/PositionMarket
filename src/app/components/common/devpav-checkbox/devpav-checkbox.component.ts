@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'devpav-checkbox',
@@ -6,6 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./devpav-checkbox.component.scss']
 })
 export class DevpavCheckboxComponent implements OnInit {
+
+  @Input()
+  title: string;
 
   constructor() { }
 

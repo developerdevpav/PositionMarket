@@ -61,7 +61,7 @@ import {PageModule} from './pages/page.module';
       }
     }),
     BrowserAnimationsModule,
-
+    NgxPrettyCheckboxModule
   ],
   bootstrap: [AppComponent],
   schemas: [

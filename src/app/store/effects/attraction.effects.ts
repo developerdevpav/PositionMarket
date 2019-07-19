@@ -17,7 +17,7 @@ import {
   LoadSuccessAttractions,
   UpdateAttraction
 } from '../actions/attraction.actions';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
 export class AttractionEffects {

@@ -5,12 +5,14 @@ import {FormsModule} from '@angular/forms';
 import {DevpavExpansionPanelModule} from './devpav-panel/devpav-expansion-panel.module';
 import {DevpavCardComponent} from './devpav-card/devpav-card.component';
 import {DevpavCheckboxComponent} from './devpav-checkbox/devpav-checkbox.component';
+import {DevpavButtonComponent} from './devpav-button/devpav-button.component';
 
 @NgModule({
   declarations: [
     DevpavInputComponent,
     DevpavCardComponent,
-    DevpavCheckboxComponent
+    DevpavCheckboxComponent,
+    DevpavButtonComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import {DevpavCheckboxComponent} from './devpav-checkbox/devpav-checkbox.compone
     DevpavInputComponent,
     DevpavExpansionPanelModule,
     DevpavCardComponent,
-    DevpavCheckboxComponent
+    DevpavCheckboxComponent,
+    DevpavButtonComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

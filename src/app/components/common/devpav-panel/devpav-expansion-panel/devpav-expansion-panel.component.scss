@@ -15,12 +15,12 @@
   padding: 0 10px 0 10px;
 }
 
-:host /deep/ devpav-expansion-panel-header {
+:host devpav-expansion-panel-header {
   @extend .display_flex_w_100;
   justify-content: space-between;
 }
 
 
-:host /deep/ devpav-expansion-panel-content {
+:host devpav-expansion-panel-content {
   @extend .display_flex_w_100;
 }
