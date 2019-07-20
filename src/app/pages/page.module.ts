@@ -6,8 +6,9 @@ import {ComponentCommonModule} from '../components/common/component-common.modul
 import {CatalogPageComponent} from './catalog-page/catalog-page.component';
 import {SettingPageComponent} from './setting-page/setting-page.component';
 import {ContactsPageComponent} from './contacts-page/contacts-page.component';
-import {NgxPrettyCheckboxModule} from 'ngx-pretty-checkbox';
-import {IgxAvatarModule} from 'igniteui-angular';
+import {MaterialDesignModule} from '../material-design.module';
+import {UsersComponentsModule} from '../components/users/users.module';
+import {AngularMaterialModule} from '../angular-material.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import {IgxAvatarModule} from 'igniteui-angular';
     CommonModule,
     DevpavExpansionPanelModule,
     ComponentCommonModule,
-    NgxPrettyCheckboxModule,
-    IgxAvatarModule
+    MaterialDesignModule,
+    UsersComponentsModule,
+    AngularMaterialModule
   ],
   schemas: [
     NO_ERRORS_SCHEMA

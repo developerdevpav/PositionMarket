@@ -11,8 +11,7 @@
 .devpav-panel-content {
   @extend .display_flex_w_100;
   overflow: hidden;
-  background: white;
-  padding: 0 10px 0 10px;
+  position: relative;
 }
 
 :host devpav-expansion-panel-header {

@@ -106,6 +106,7 @@ export class DeleteAttractions implements Action {
 
 export type AttractionActions =
   LoadSuccessAttractions |
+  LoadAttractionById |
   AddAttraction |
   AddAttractions |
   UpdateAttraction |

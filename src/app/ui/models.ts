@@ -10,8 +10,27 @@ export class NsiUI implements BaseEntity {
 
 export class ProductUI {
 
-  constructor(public price: number, public service: string) {}
+  constructor(public id: string,
+              public price: number,
+              public attractionId: string,
+              public service: TypeServiceUI) {}
 
+}
+
+export class TypeServiceUI {
+  constructor(public id: string, public title: string, public description: string) {}
+}
+
+export interface ExpansionSwitcher {
+  value: boolean;
+  id: any;
+}
+
+
+export interface OptionDevpavCard {
+  avatar: string;
+  title: string;
+  id: number | string;
 }
 
 export class AttractionUI implements BaseEntity {

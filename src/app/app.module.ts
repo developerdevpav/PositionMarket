@@ -4,15 +4,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import * as storeReducers from './store';
 import {EffectsModule} from '@ngrx/effects';
 import {TypeEffects} from './store/effects/type.effects';
 import {NsiAbstractService} from './store/services/nsi.abstract.service';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpLoaderFactory} from './ui/translate.service';
 import {TagEffects} from './store/effects/tag.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TypeServiceEffects} from './store/effects/type-service.effects';
@@ -25,6 +23,7 @@ import {ImageUtilService} from './store/services/utils/image-util.service';
 import {TranslatorYandexService} from './store/services/translator-yandex.service';
 import {ComponentCommonModule} from './components/common/component-common.module';
 import {PageModule} from './pages/page.module';
+import {MaterialDesignModule} from './material-design.module';
 
 @NgModule({
   declarations: [
@@ -53,15 +52,8 @@ import {PageModule} from './pages/page.module';
     ]),
     PageModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    BrowserAnimationsModule,
-    NgxPrettyCheckboxModule
+    MaterialDesignModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent],
   schemas: [

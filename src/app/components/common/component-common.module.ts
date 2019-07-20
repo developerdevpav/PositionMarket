@@ -6,6 +6,7 @@ import {DevpavExpansionPanelModule} from './devpav-panel/devpav-expansion-panel.
 import {DevpavCardComponent} from './devpav-card/devpav-card.component';
 import {DevpavCheckboxComponent} from './devpav-checkbox/devpav-checkbox.component';
 import {DevpavButtonComponent} from './devpav-button/devpav-button.component';
+import {MaterialDesignModule} from '../../material-design.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {DevpavButtonComponent} from './devpav-button/devpav-button.component';
   imports: [
     CommonModule,
     FormsModule,
-    DevpavExpansionPanelModule
+    DevpavExpansionPanelModule,
+    MaterialDesignModule
   ],
   exports: [
     DevpavInputComponent,

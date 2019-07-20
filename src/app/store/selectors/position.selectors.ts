@@ -12,7 +12,10 @@ import {Tag} from '../models/tag.model';
 import {Dictionary} from '@ngrx/entity';
 import {Type} from '../models/type.model';
 import {TypeService} from '../models/type-service.model';
-import {SelectedProduct} from '../models/products';
+import {Product, SelectedProduct} from '../models/products';
+import {TypeServiceEnum} from '../models/type-service';
+import {EntityTypeServiceEnumToProduct} from '../models/catalog-entities';
+import {ProductUI} from '../../ui/models';
 
 
 export const selectPositionById = createSelector(
@@ -53,12 +56,12 @@ export const getProductItem = createSelector(
   selectCurrentLanguage,
   attraction.selectAll,
   typeService.selectEntities,
-  (language: Language, array: AttractionModel[],  typeServiceDictionary: Dictionary<TypeService>) => {
+  (language: Language, array: AttractionModel[], typeServiceDictionary: Dictionary<TypeService>) => {
 
     return array.map(value => {
       console.log(value.products);
       const minPrice = value.products
-        .filter(it => it.service !== undefined && typeServiceDictionary[it.service].type === 'RENT')
+        .filter(it => it.service !== undefined && typeServiceDictionary[it.service].type === TypeServiceEnum.RENT)
         .sort((a, b) => {
           return a.price > b.price ? 1 : -1;
         })[0];
@@ -158,3 +161,52 @@ export const selectProductFromAttraction = createSelector(
   }
 );
 
+export const selectProductsFromAttractionByType = createSelector(
+  selectCurrentLanguage,
+  selectedProduct.selectEntities,
+  attraction.selectEntities,
+  typeService.selectEntities,
+  (language: Language, selectedProductDictionary: Dictionary<SelectedProduct>, positionDictionary: Dictionary<AttractionModel>,
+   typeServiceDictionary: Dictionary<TypeService>, props) => {
+    const position: AttractionModel = positionDictionary[props.id];
+
+    if (!position) {
+      return null;
+    }
+    const products = position.products;
+    const map: Map<TypeServiceEnum, Product[]> = new Map();
+
+    map.set(TypeServiceEnum.RENT, []);
+    map.set(TypeServiceEnum.DELIVERY, []);
+    map.set(TypeServiceEnum.PERSONAL, []);
+
+    products
+      .forEach(it => {
+        const service = typeServiceDictionary[it.service];
+        if (service) {
+          if (!map.has(service.type)) {
+            map.set(service.type, []);
+          }
+          map.get(service.type).push(it);
+        }
+      });
+
+    const resultList: EntityTypeServiceEnumToProduct[] = [];
+    map.forEach((value, key) => {
+      if (value.length !== 0) {
+        resultList.push({
+          type: key,
+          values: value.map(it => {
+            const service = converter.convertTypeServiceByLanguage(typeServiceDictionary[it.service], language);
+            return new ProductUI(it.id, it.price, props.id, {
+              title: service.title,
+              description: service.description,
+              id: it.service
+            });
+          })
+        })
+      }
+    });
+
+    return resultList;
+  });

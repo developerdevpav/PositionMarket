@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -15,17 +15,17 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class DevpavExpansionPanelComponent implements OnInit {
 
-  isExpansionPanel = false;
   state = 'unexpansion';
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
-  expansionPanel() {
-    this.isExpansionPanel = !this.isExpansionPanel;
-    this.state = this.isExpansionPanel ? 'expansion' : 'unexpansion';
-    console.log(this.state);
+  @Input()
+  set opened(value: boolean) {
+    this.state = value ? 'expansion' : 'unexpansion';
   }
+
 }

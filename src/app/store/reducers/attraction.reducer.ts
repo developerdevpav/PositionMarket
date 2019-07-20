@@ -1,4 +1,4 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {AttractionModel} from '../models/attraction-model';
 import {createFeatureSelector} from '@ngrx/store';
 import {AttractionActions, AttractionActionTypes} from '../actions/attraction.actions';
@@ -40,6 +40,9 @@ export function attractionReducer(
 
     case AttractionActionTypes.LOAD_SUCCESS_ATTRACTIONS: {
       return adapter.addAll(action.payload.attractions, state);
+    }
+    case AttractionActionTypes.LOAD_SUCCESS_ATTRACTION: {
+      return adapter.addOne(action.payload.attraction, state);
     }
 
     default: {

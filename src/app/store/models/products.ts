@@ -7,6 +7,10 @@ export interface Product extends BaseEntity {
   service: string;
 }
 
+export interface ProductCatalogServiceDescription {
+
+}
+
 export interface SelectedProduct extends BaseEntity {
   id: string;
   attraction: string;

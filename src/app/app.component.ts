@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
     this.currentLanguage = language;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
   }
 
   switchLanguage(language: string) {

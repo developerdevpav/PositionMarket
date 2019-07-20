@@ -1,8 +1,19 @@
 <div class="box">
-  <div class="box-header">
-    <div class="box-header__title">
-      {{title}}
-      <ng-content select="*"></ng-content>
+  <div *ngIf="avatar" (click)="actionOnClickByAvatar($event)" class="box_avatar">
+    <img [src]="avatar" alt="{{title}}">
+  </div>
+  <div class="box-body-card">
+    <div class="box-header" (click)="clickByTitle()">
+      <div class="box-header_title">
+        {{title}}
+      </div>
+    </div>
+    <div class="box_action" *ngIf="showAction" (click)="expansion()">
+      <mat-checkbox *ngIf="typeAction" color="primary" (change)="actionCheckbox($event)"></mat-checkbox>
+      <svg-icon *ngIf="!typeAction"  [src]="'../../assets/icon/' +
+      (expansionEvent ? 'baseline-expand_less.svg' : 'baseline-expand.svg')"
+                [svgStyle]="{ 'width.px': 25, 'height.px': 25 }">
+      </svg-icon>
     </div>
   </div>
 </div>
