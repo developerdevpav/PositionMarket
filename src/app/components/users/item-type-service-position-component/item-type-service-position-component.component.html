@@ -1,0 +1,8 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title class="type">
+      {{entity.type.toString() | translate}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-item-service-of-position [products]="entity.values"></app-item-service-of-position>
+</mat-expansion-panel>

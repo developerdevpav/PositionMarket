@@ -26,6 +26,7 @@
         <div class="header-shop">
           <a routerLink="/shopping-cart">
             <svg-icon src="../assets/icon/shopping-cart.svg" [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
+            {{countProduct | async}}
           </a>
         </div>
         <div class="header-auth">

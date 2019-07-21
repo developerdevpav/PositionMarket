@@ -2,19 +2,35 @@ export interface BaseEntity {
   uuid: string;
 }
 
-export class NsiUI implements BaseEntity {
 
-  constructor(public value: string, public uuid: string) {}
-
-}
 
 export class ProductUI {
 
   constructor(public id: string,
               public price: number,
               public attractionId: string,
-              public service: TypeServiceUI) {}
+              public service: TypeServiceUI,
+              public order: number) {}
 
+}
+
+export interface PositionByLanguageForCatalog {
+  id: string;
+  title: string;
+  description: string;
+  tags: NsiUI[],
+  types: NsiUI[],
+  images: ImageUI[],
+  image: ImageUI,
+  products: ProductUI[]
+}
+
+export class NsiUI {
+  constructor(public id: string, public title: string) {}
+}
+
+export class ImageUI {
+  constructor(public id: string | number, public index: number, public url: string) {}
 }
 
 export class TypeServiceUI {

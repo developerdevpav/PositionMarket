@@ -1,0 +1,16 @@
+<div class="item" *ngFor="let it of products" [ngClass]="checked ? 'item-selected' : ''">
+  <div class="item__info">
+    <div class="item__title">
+      <svg-icon *ngIf="showIcon"
+                [src]="'../assets/icon/' + (checked ? 'success.svg' : 'circle-empty.svg')"
+                [svgStyle]="{ 'width.px': 15, 'height.px': 15 }"></svg-icon>
+      {{it?.service?.title}}
+    </div>
+    <div class="item__price">
+      <span class="price-text">~ {{it?.price}} <span class="currency">р.</span></span>
+    </div>
+  </div>
+  <div class="item__in-shopping-cart">
+    <mat-checkbox color="primary" (change)="setProduct($event, it)"></mat-checkbox>
+  </div>
+</div>

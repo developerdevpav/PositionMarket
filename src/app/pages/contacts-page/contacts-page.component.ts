@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-contacts-page',
@@ -7,9 +8,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ContactsPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public store: Store<any>) { }
 
   ngOnInit() {
+    console.log('ngOnInit ContactsPageComponent');
   }
 
 }

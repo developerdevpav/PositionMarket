@@ -50,6 +50,14 @@ export const getTotalPriceByAttractionId = createSelector(
   }
 );
 
+export const getCountProductSelected = createSelector(
+  selectedProduct.selectIds,
+  (array: number[] | string[]) => {
+    return array.length;
+  }
+);
+
+
 export const getTotalPrice = createSelector(
   selectedProduct.selectAll,
   typeService.selectEntities,

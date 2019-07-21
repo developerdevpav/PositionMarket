@@ -15,7 +15,7 @@ import {TypeService} from '../models/type-service.model';
 import {Product, SelectedProduct} from '../models/products';
 import {TypeServiceEnum} from '../models/type-service';
 import {EntityTypeServiceEnumToProduct} from '../models/catalog-entities';
-import {ProductUI} from '../../ui/models';
+import {ImageUI, NsiUI, PositionByLanguageForCatalog, ProductUI, TypeServiceUI} from '../../ui/models';
 
 
 export const selectPositionById = createSelector(
@@ -100,27 +100,20 @@ export const selectPositionByLanguageForCatalog = createSelector(
    typeDictionary: Dictionary<Type>,
    typeServiceDictionary: Dictionary<TypeService>) => {
     return array.map(value => {
-      const tagObjects = value.tags.map(it => converter.convertNsiByLanguage(tagDictionary[it], language));
-      const typeObjects = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
+
+      const tagObjects: NsiUI[] = value.tags.map(it => converter.convertNsiByLanguage(tagDictionary[it], language));
+      const typeObjects: NsiUI[] = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
+
       const imageValues = value.images
         .sort(it => it.mainImage ? -1 : 1)
-        .map((it, ind) => {
-          return {
-            image: it.image,
-            url: it.url,
-            index: ++ind
-          };
-        });
+        .map((it, ind) => new ImageUI(it.image, ++ind, it.url));
+
       const productValues = value.products.map(it => {
-        const serviceFound = converter.convertTypeServiceByLanguage(typeServiceDictionary[it.service], language);
-        return {
-          service: serviceFound,
-          id: it.id,
-          price: it.price,
-          order: it.order
-        };
+        const serviceFound: TypeServiceUI = converter.convertTypeServiceByLanguage(typeServiceDictionary[it.service], language);
+        return new ProductUI(it.id, it.price, value.id, serviceFound, it.order);
       });
-      return {
+
+      const position: PositionByLanguageForCatalog = {
         id: value.id,
         title: converter.getStringFromArrayValuesByLanguage(value.title, language),
         description: converter.getStringFromArrayValuesByLanguage(value.description, language),
@@ -130,6 +123,8 @@ export const selectPositionByLanguageForCatalog = createSelector(
         image: imageValues[0],
         products: productValues
       };
+
+      return position;
     });
   }
 );
@@ -194,19 +189,22 @@ export const selectProductsFromAttractionByType = createSelector(
     const resultList: EntityTypeServiceEnumToProduct[] = [];
     map.forEach((value, key) => {
       if (value.length !== 0) {
-        resultList.push({
+        const obj = {
           type: key,
           values: value.map(it => {
             const service = converter.convertTypeServiceByLanguage(typeServiceDictionary[it.service], language);
-            return new ProductUI(it.id, it.price, props.id, {
-              title: service.title,
-              description: service.description,
-              id: it.service
-            });
+            return new ProductUI(it.id, it.price, props.id,
+              {
+                title: service.title,
+                description: service.description,
+                id: it.service
+              }, 0);
           })
-        })
+        };
+        resultList.push(obj);
       }
     });
+    console.log(resultList);
 
     return resultList;
   });

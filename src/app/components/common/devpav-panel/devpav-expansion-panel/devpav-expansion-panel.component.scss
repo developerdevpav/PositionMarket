@@ -12,6 +12,7 @@
   @extend .display_flex_w_100;
   overflow: hidden;
   position: relative;
+  margin-top: 10px;
 }
 
 :host devpav-expansion-panel-header {

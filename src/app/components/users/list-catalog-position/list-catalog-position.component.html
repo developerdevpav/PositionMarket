@@ -1,0 +1,24 @@
+<div class="row body-catalog">
+  <div class="col-md-12 col-12 box-right">
+    <div class="box__item" style="cursor: pointer;" *ngFor="let position of (positions | async)">
+      <div class="box__item__item">
+        <app-avatar-carousel class="avatar-position" [images]="position.images"></app-avatar-carousel>
+        <div class="item__content">
+          <div class="item__title">
+            {{position.title}}
+          </div>
+          <div class="item__text">
+            {{position?.description}}
+          </div>
+        </div>
+        <div class="item__price">
+          <button mat-stroked-button color="primary" class="action-price">120 BYN / час</button>
+          <button mat-stroked-button color="primary" class="action-price">Подробнее</button>
+        </div>
+      </div>
+      <app-devpav-catalog-service-description class="down-panel" [idAttraction]="position.id">
+      </app-devpav-catalog-service-description>
+    </div>
+  </div>
+</div>
+
