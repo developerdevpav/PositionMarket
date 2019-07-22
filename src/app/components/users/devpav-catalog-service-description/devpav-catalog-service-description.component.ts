@@ -49,15 +49,10 @@ export class DevpavCatalogServiceDescriptionComponent implements OnInit, OnDestr
   }
 
   deleteProductFromShoppingCart(it: ProductUI) {
-    console.log('Delete: ');
-    //console.log(it);
-    //this.store.dispatch(new DeleteProduct(it.id));
+
   }
 
   addProductToShoppingCart(it: ProductUI) {
-    console.log('Added: ');
-    console.log(it);
-
     const obj: SelectedProduct = {
       service: it.service.id,
       price: it.price,

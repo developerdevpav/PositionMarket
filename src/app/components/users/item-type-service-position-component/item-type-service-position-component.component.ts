@@ -14,9 +14,6 @@ export class ItemTypeServicePositionComponentComponent implements OnInit {
 
   constructor(private store: Store<any>) { }
 
-  ngOnInit() {
-    console.log('ngOnInit ItemTypeServicePositionComponentComponent');
-    console.log(this.entity);
-  }
+  ngOnInit() {}
 
 }

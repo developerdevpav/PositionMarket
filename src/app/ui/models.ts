@@ -1,3 +1,5 @@
+import {DevpavProductTypeServiceInputProps} from "../components/users/catalog/devpav-product-type-service/devpav-product-type-service.component";
+
 export interface BaseEntity {
   uuid: string;
 }
@@ -18,11 +20,16 @@ export interface PositionByLanguageForCatalog {
   id: string;
   title: string;
   description: string;
-  tags: NsiUI[],
-  types: NsiUI[],
-  images: ImageUI[],
-  image: ImageUI,
-  products: ProductUI[]
+  tags: NsiUI[];
+  types: NsiUI[];
+  images: ImageUI[];
+  image: ImageUI;
+  products: ProductUI[];
+}
+
+export interface OptionsWrapper {
+  type: DevpavProductTypeServiceInputProps;
+  services: DevpavProductTypeServiceInputProps[];
 }
 
 export class NsiUI {

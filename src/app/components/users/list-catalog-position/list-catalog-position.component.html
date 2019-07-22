@@ -12,12 +12,11 @@
           </div>
         </div>
         <div class="item__price">
-          <button mat-stroked-button color="primary" class="action-price">120 BYN / час</button>
+          <button mat-stroked-button color="primary" class="action-price" (click)="get(position.id)">120 BYN / час</button>
           <button mat-stroked-button color="primary" class="action-price">Подробнее</button>
         </div>
       </div>
-      <app-devpav-catalog-service-description class="down-panel" [idAttraction]="position.id">
-      </app-devpav-catalog-service-description>
+      <ngx-json-viewer [json]="position"></ngx-json-viewer>
     </div>
   </div>
 </div>

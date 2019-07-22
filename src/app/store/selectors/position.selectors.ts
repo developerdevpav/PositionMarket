@@ -204,7 +204,5 @@ export const selectProductsFromAttractionByType = createSelector(
         resultList.push(obj);
       }
     });
-    console.log(resultList);
-
     return resultList;
   });

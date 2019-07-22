@@ -1,0 +1,8 @@
+<div class="wrapper">
+  <devpav-product-card class="wrapper__type" [options]="optionType" (click)="expansionPanel()"></devpav-product-card>
+  <div  class="wrapper__service" [@expansionTrigger]="stateExpansionPanel">
+    <devpav-product-card class="wrapper__service-card"
+      *ngFor="let it of servicesOptions" [options]="it" (checked)="setProduct(it.id, $event)">
+    </devpav-product-card>
+  </div>
+</div>

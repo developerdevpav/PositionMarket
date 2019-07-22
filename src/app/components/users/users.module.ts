@@ -12,6 +12,10 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AvatarCarouselComponent} from './avatar-carousel/avatar-carousel.component';
 import {ProductConverterService} from './services/product-converter.service';
+import {DevpavProductCardComponent} from './catalog/devpav-product-card/devpav-product-card.component';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import {DevpavProductTypeServiceComponent} from './catalog/devpav-product-type-service/devpav-product-type-service.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [DevpavCatalogServiceDescriptionComponent,
@@ -19,15 +23,19 @@ import {ProductConverterService} from './services/product-converter.service';
     ListServiceOfPositionComponent,
     ItemServiceOfPositionComponent,
     ItemTypeServicePositionComponentComponent,
-    AvatarCarouselComponent
+    AvatarCarouselComponent,
+    DevpavProductCardComponent,
+    DevpavProductTypeServiceComponent
   ],
   imports: [
     CommonModule,
     MaterialDesignModule,
     ComponentCommonModule,
+    BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    NgxJsonViewerModule
   ],
   exports: [
     DevpavCatalogServiceDescriptionComponent,
@@ -35,7 +43,10 @@ import {ProductConverterService} from './services/product-converter.service';
     ListServiceOfPositionComponent,
     ItemServiceOfPositionComponent,
     ItemTypeServicePositionComponentComponent,
-    AvatarCarouselComponent
+    AvatarCarouselComponent,
+    DevpavProductCardComponent,
+    NgxJsonViewerModule,
+    DevpavProductTypeServiceComponent
   ],
   providers: [
     ProductConverterService

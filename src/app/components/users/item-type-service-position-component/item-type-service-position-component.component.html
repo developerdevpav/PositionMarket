@@ -4,5 +4,5 @@
       {{entity.type.toString() | translate}}
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <app-item-service-of-position [products]="entity.values"></app-item-service-of-position>
+  <app-item-service-of-position (selected)="setProduct(entity)" [products]="entity.values"></app-item-service-of-position>
 </mat-expansion-panel>

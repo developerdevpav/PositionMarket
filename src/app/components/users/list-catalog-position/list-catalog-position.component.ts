@@ -3,7 +3,8 @@ import {Observable, Subscription} from 'rxjs';
 import {selectPositionByLanguageForCatalog} from '../../../store/selectors/position.selectors';
 import {Store} from '@ngrx/store';
 import {PositionByLanguageForCatalog} from '../../../ui/models';
-import {ApiAttractionLoadAll, ApiAttractionLoadById} from '../../../store/actions/attraction.actions';
+import {ApiAttractionLoadAll} from '../../../store/actions/attraction.actions';
+import {ProductConverterService} from "../services/product-converter.service";
 
 @Component({
   selector: 'app-list-catalog-position',
@@ -12,13 +13,13 @@ import {ApiAttractionLoadAll, ApiAttractionLoadById} from '../../../store/action
 })
 export class ListCatalogPositionComponent implements OnInit, OnDestroy {
 
-  expansion: boolean = false;
+  expansion = false;
 
   subscriber: Subscription = new Subscription();
 
   positions: Observable<PositionByLanguageForCatalog[]> = this.store.select(selectPositionByLanguageForCatalog);
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private productConverter: ProductConverterService) {
     this.store.dispatch(new ApiAttractionLoadAll());
   }
 
@@ -29,10 +30,6 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
-
-  get(id: string) {
-    this.expansion = !this.expansion;
-    this.store.dispatch(new ApiAttractionLoadById(id))
-  }
-
 }
+
+

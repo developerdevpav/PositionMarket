@@ -3,6 +3,8 @@ import {ProductUI} from '../../../ui/models';
 import {MatCheckboxChange} from '@angular/material';
 import {Store} from '@ngrx/store';
 import {selectSelectedProducts} from '../../../store/selectors/selected.product.selectors';
+import {SelectedProduct} from "../../../store/models/products";
+import {DeleteProduct, SetProduct} from "../../../store/actions/select-product.actions";
 
 @Component({
   selector: 'app-item-service-of-position',
@@ -30,13 +32,12 @@ export class ItemServiceOfPositionComponent implements OnInit {
   setProduct(matCheckboxChange: MatCheckboxChange, it: ProductUI) {
     this.selected.emit(matCheckboxChange.checked);
 
-/*
     const product: SelectedProduct = {
       id: it.id,
       order: it.order,
       attraction: it.attractionId,
       price: it.price,
-      service: it.service
+      service: it.service.id
     };
 
     this.checked = matCheckboxChange.checked;
@@ -46,6 +47,5 @@ export class ItemServiceOfPositionComponent implements OnInit {
     } else {
       this.store.dispatch(new DeleteProduct(it.id));
     }
-*/
   }
 }

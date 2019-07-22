@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.wrapper__type {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.wrapper__service {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px;
+  width: 100%;
+  overflow: hidden;
+  height: auto;
+  z-index: 20;
+  padding: 5px;
+}
+
+.wrapper__service-card {
+  margin-top: 15px;
+  flex-basis: 100%;
+  height: 50px;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
+  float:right;
+}
+
+.wrapper__service-card:first-child {
+  margin-bottom: 0;
+}
+
+.wrapper__service-card:last-child {
+  margin-bottom: 0;
+}
