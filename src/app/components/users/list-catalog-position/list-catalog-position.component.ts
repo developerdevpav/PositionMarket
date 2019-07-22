@@ -14,8 +14,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./list-catalog-position.component.scss'],
   animations: [
     trigger('expansionTrigger', [
-      state('hidden', style({height: 0})),
-      state('expansion', style({height: '*'})),
+      state(ExpansionPanelState.HIDDEN.toString(), style({height: 0})),
+      state(ExpansionPanelState.EXPANSION.toString(), style({height: '*'})),
       transition('hidden <=> expansion', animate('0.3s'))
     ])
   ]
@@ -23,6 +23,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class ListCatalogPositionComponent implements OnInit, OnDestroy {
 
   expansion = false;
+
+  statePanels: Map<string, StatePanel> = new Map();
 
   subscriber: Subscription = new Subscription();
 
@@ -33,11 +35,38 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriber.add(this.positions.subscribe());
+    this.positions.subscribe(positions => {
+      positions.filter(position => !this.statePanels.has(position.id))
+        .forEach(position => {
+          this.statePanels.set(position.id, {
+            id: position.id,
+            isExpansion: false,
+            state: ExpansionPanelState.HIDDEN
+          });
+        });
+
+    });
+    this.subscriber.add();
   }
 
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
+  }
+
+  expansionPanel(id: string) {
+    const state = this.statePanels.get(id);
+
+    if (state) {
+      state.isExpansion = !state.isExpansion;
+      state.state = state.isExpansion ? ExpansionPanelState.EXPANSION.toString()
+        : ExpansionPanelState.HIDDEN.toString();
+    }
+
+    console.log(this.statePanels);
+  }
+
+  getState(id: string) {
+    return this.statePanels.get(id).state;
   }
 
   selectProduct(position: PositionByLanguageForCatalog, $event: DevpavProductTypeServiceOutputProps) {
@@ -57,3 +86,12 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
 }
 
 
+export interface StatePanel {
+  id: string;
+  state: string;
+  isExpansion: boolean;
+}
+
+const enum ExpansionPanelState {
+  EXPANSION = 'expansion', HIDDEN = 'hidden'
+}

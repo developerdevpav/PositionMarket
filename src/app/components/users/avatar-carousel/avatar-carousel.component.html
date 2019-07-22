@@ -1,5 +1,5 @@
 <div class="item__avatar">
-  <div class="avatar-mirror-dark"></div>
+  <div [ngClass]="{'avatar-mirror-dark' : image}"></div>
   <div *ngIf="image" class="avatar-prev" (click)="prev()">
     <svg-icon src="../assets/icon/left-arrow.svg"
               [svgStyle]="{ 'width.px': 40, 'height.px': 60 }"></svg-icon>

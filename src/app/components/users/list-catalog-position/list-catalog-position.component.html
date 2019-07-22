@@ -12,12 +12,12 @@
           </div>
         </div>
         <div class="item__price">
-          <button mat-stroked-button color="primary" class="action-price" (click)="get(position.id)">120 BYN / час
+          <button mat-stroked-button color="primary" class="action-price" (click)="expansionPanel(position.id)">120 BYN / час
           </button>
           <button mat-stroked-button color="primary" class="action-price">Подробнее</button>
         </div>
       </div>
-      <div style="display: flex; width: 100%; margin-top: 10px;"></div>
+      <div [@expansionTrigger]="getState(position.id)" style="display: flex; width: 100%; margin-top: 10px; overflow: hidden;"></div>
       <app-devpav-product-type-service style="width: 100%"
                                        *ngFor="let item of position?.options"
                                        [typeService]="item.type"
