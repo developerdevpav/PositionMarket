@@ -1,4 +1,5 @@
-import {DevpavProductTypeServiceInputProps} from "../components/users/catalog/devpav-product-type-service/devpav-product-type-service.component";
+import {DevpavProductTypeServiceInputProps} from '../components/users/catalog/devpav-product-type-service/devpav-product-type-service.component';
+import {TypeServiceEnum} from '../store/models/type-service';
 
 export interface BaseEntity {
   uuid: string;
@@ -25,6 +26,7 @@ export interface PositionByLanguageForCatalog {
   images: ImageUI[];
   image: ImageUI;
   products: ProductUI[];
+  options: OptionsWrapper[];
 }
 
 export interface OptionsWrapper {
@@ -41,7 +43,10 @@ export class ImageUI {
 }
 
 export class TypeServiceUI {
-  constructor(public id: string, public title: string, public description: string) {}
+  constructor(public id: string,
+              public title: string,
+              public description: string,
+              public type: TypeServiceEnum) {}
 }
 
 export interface ExpansionSwitcher {

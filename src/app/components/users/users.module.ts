@@ -18,7 +18,8 @@ import {DevpavProductTypeServiceComponent} from './catalog/devpav-product-type-s
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [DevpavCatalogServiceDescriptionComponent,
+  declarations: [
+    DevpavCatalogServiceDescriptionComponent,
     ListCatalogPositionComponent,
     ListServiceOfPositionComponent,
     ItemServiceOfPositionComponent,

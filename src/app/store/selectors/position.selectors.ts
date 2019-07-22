@@ -15,7 +15,8 @@ import {TypeService} from '../models/type-service.model';
 import {Product, SelectedProduct} from '../models/products';
 import {TypeServiceEnum} from '../models/type-service';
 import {EntityTypeServiceEnumToProduct} from '../models/catalog-entities';
-import {ImageUI, NsiUI, PositionByLanguageForCatalog, ProductUI, TypeServiceUI} from '../../ui/models';
+import {ImageUI, NsiUI, OptionsWrapper, ProductUI, TypeServiceUI} from '../../ui/models';
+import {DevpavProductTypeServiceInputProps} from '../../components/users/catalog/devpav-product-type-service/devpav-product-type-service.component';
 
 
 export const selectPositionById = createSelector(
@@ -100,7 +101,6 @@ export const selectPositionByLanguageForCatalog = createSelector(
    typeDictionary: Dictionary<Type>,
    typeServiceDictionary: Dictionary<TypeService>) => {
     return array.map(value => {
-
       const tagObjects: NsiUI[] = value.tags.map(it => converter.convertNsiByLanguage(tagDictionary[it], language));
       const typeObjects: NsiUI[] = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
 
@@ -113,7 +113,49 @@ export const selectPositionByLanguageForCatalog = createSelector(
         return new ProductUI(it.id, it.price, value.id, serviceFound, it.order);
       });
 
-      const position: PositionByLanguageForCatalog = {
+      const map: Map<TypeServiceEnum, ProductUI[]> = new Map();
+
+      map.set(TypeServiceEnum.RENT, []);
+      map.set(TypeServiceEnum.DELIVERY, []);
+      map.set(TypeServiceEnum.PERSONAL, []);
+
+      productValues
+        .filter(it => it)
+        .filter(it => it.service)
+        .filter(it => it.service.type)
+        .forEach(product => {
+            if (!map.has(product.service.type)) {
+              map.set(product.service.type, []);
+            }
+            map.get(product.service.type).push(product);
+        });
+
+      const wrapper: OptionsWrapper[] = [];
+
+      map.forEach((value, key) => {
+        if (value.length !== 0) {
+          const typeInput: DevpavProductTypeServiceInputProps = {
+            id: undefined,
+            price: undefined,
+            title: key.toString()
+          };
+
+          const servicesInput: DevpavProductTypeServiceInputProps[] = value.map(it => {
+            return {
+              id: it.id,
+              title: it.service.title,
+              price: it.price
+            };
+          });
+
+          wrapper.push({
+            type: typeInput,
+            services: servicesInput
+          });
+        }
+      });
+
+      return {
         id: value.id,
         title: converter.getStringFromArrayValuesByLanguage(value.title, language),
         description: converter.getStringFromArrayValuesByLanguage(value.description, language),
@@ -121,13 +163,13 @@ export const selectPositionByLanguageForCatalog = createSelector(
         types: typeObjects,
         images: imageValues,
         image: imageValues[0],
-        products: productValues
+        products: productValues,
+        options: wrapper
       };
-
-      return position;
     });
   }
 );
+
 
 export const selectProductFromAttraction = createSelector(
   selectCurrentLanguage,
@@ -197,7 +239,8 @@ export const selectProductsFromAttractionByType = createSelector(
               {
                 title: service.title,
                 description: service.description,
-                id: it.service
+                id: it.service,
+                type: undefined
               }, 0);
           })
         };

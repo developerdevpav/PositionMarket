@@ -10,7 +10,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     trigger('expansionTrigger', [
       state('hidden', style({height: 0})),
       state('expansion', style({height: '*'})),
-      transition('hidden <=> expansion', animate('0.3s'))
+      transition('hidden <=> expansion', animate('0.1s'))
     ])
   ]
 })
@@ -26,8 +26,9 @@ export class DevpavProductTypeServiceComponent implements OnInit {
 
   @Input()
   set typeService(typeService: DevpavProductTypeServiceInputProps) {
+    console.log(typeService);
     this.optionType = {
-      icon: undefined,
+      icon: 'baseline-expand.svg',
       id: typeService.id,
       price: typeService.price,
       showCheckBox: false,
@@ -37,12 +38,13 @@ export class DevpavProductTypeServiceComponent implements OnInit {
 
   @Input()
   set services(services: DevpavProductTypeServiceInputProps[]) {
+    console.log(services);
     this.servicesOptions = services.map(service => {
       return {
         icon: undefined,
         id: service.id,
         price: service.price,
-        showCheckBox: false,
+        showCheckBox: true,
         title: service.title
       };
     });
@@ -55,6 +57,9 @@ export class DevpavProductTypeServiceComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('ngOnInit ');
+    console.log(this.optionType);
+    console.log(this.servicesOptions);
   }
 
   expansionPanel() {
@@ -66,6 +71,7 @@ export class DevpavProductTypeServiceComponent implements OnInit {
   setProduct(idProduct: string, $event: boolean) {
     this.selectedProduct.emit({product: idProduct, checked: $event});
   }
+
 }
 
 export interface DevpavProductTypeServiceOutputProps {

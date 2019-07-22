@@ -3,9 +3,6 @@ import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
 import {EntityTypeServiceEnumToProduct} from '../../../store/models/catalog-entities';
 import {TypeServiceEnum} from '../../../store/models/type-service';
-import {ExpansionSwitcher, ProductUI} from '../../../ui/models';
-import {SetProduct} from '../../../store/actions/select-product.actions';
-import {SelectedProduct} from '../../../store/models/products';
 import {ProductConverterService} from '../services/product-converter.service';
 
 @Component({
@@ -27,40 +24,10 @@ export class DevpavCatalogServiceDescriptionComponent implements OnInit, OnDestr
   }
 
   ngOnInit() {
-    this.converter.getProducts(this.idAttraction).subscribe(entities => {
-      this.entities = entities;
-    });
+
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  opened(value: TypeServiceEnum) {
-    return this.expansionPanel.has(value);
-  }
-
-  switchExpansion(expansionSwitcher: ExpansionSwitcher) {
-    if (expansionSwitcher.value) {
-      this.expansionPanel.delete(expansionSwitcher.id);
-    } else {
-      this.expansionPanel.set(expansionSwitcher.id, null);
-    }
-  }
-
-  deleteProductFromShoppingCart(it: ProductUI) {
-
-  }
-
-  addProductToShoppingCart(it: ProductUI) {
-    const obj: SelectedProduct = {
-      service: it.service.id,
-      price: it.price,
-      id: it.id,
-      attraction: it.attractionId,
-      order: 0
-    };
-
-    this.store.dispatch(new SetProduct(obj));
   }
 }
