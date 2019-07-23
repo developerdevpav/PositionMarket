@@ -18,34 +18,39 @@ export class DevpavProductTypeServiceComponent implements OnInit {
 
   public stateExpansionPanel = 'hidden';
 
-  isExpansion = false;
-
   optionType: DevpavProductCardProps;
 
   servicesOptions: DevpavProductCardProps[] = [];
 
   @Input()
   set typeService(typeService: DevpavProductTypeServiceInputProps) {
-    console.log(typeService);
+
+
     this.optionType = {
       icon: 'baseline-expand.svg',
       id: typeService.id,
       price: typeService.price,
       showCheckBox: false,
-      title: typeService.title
+      title: typeService.title,
+      checked: typeService.selected
     };
+
+    this.stateExpansionPanel = this.optionType.checked ? 'expansion' : 'hidden';
+    this.optionType.icon = this.optionType.checked ? 'baseline-expand_less.svg' : 'baseline-expand.svg';
+
   }
 
   @Input()
   set services(services: DevpavProductTypeServiceInputProps[]) {
-    console.log(services);
     this.servicesOptions = services.map(service => {
+
       return {
         icon: undefined,
         id: service.id,
         price: service.price,
         showCheckBox: true,
-        title: service.title
+        title: service.title,
+        checked: service.selected
       };
     });
   }
@@ -56,16 +61,12 @@ export class DevpavProductTypeServiceComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {
-    console.log('ngOnInit ');
-    console.log(this.optionType);
-    console.log(this.servicesOptions);
-  }
+  ngOnInit() {}
 
-  expansionPanel() {
-    this.isExpansion = !this.isExpansion;
-    this.stateExpansionPanel = this.isExpansion ? 'expansion' : 'hidden';
-    this.optionType.icon = this.isExpansion ? 'baseline-expand_less.svg' : 'baseline-expand.svg';
+  expansion() {
+    this.optionType.checked = !this.optionType.checked;
+    this.stateExpansionPanel = this.optionType.checked ? 'expansion' : 'hidden';
+    this.optionType.icon = this.optionType.checked ? 'baseline-expand_less.svg' : 'baseline-expand.svg';
   }
 
   setProduct(idProduct: string, $event: boolean) {
@@ -83,4 +84,5 @@ export interface DevpavProductTypeServiceInputProps {
   id: string;
   title: string;
   price: number;
+  selected: boolean;
 }

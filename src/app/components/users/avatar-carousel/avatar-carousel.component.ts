@@ -16,7 +16,6 @@ export class AvatarCarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('ngOnInit AvatarCarouselComponent');
     this.image = this.images[0];
   }
 

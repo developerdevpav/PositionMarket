@@ -95,11 +95,13 @@ export const selectPositionByLanguageForCatalog = createSelector(
   tag.selectEntities,
   type.selectEntities,
   typeService.selectEntities,
+  selectedProduct.selectEntities,
   (language: Language,
    array: AttractionModel[],
    tagDictionary: Dictionary<Tag>,
    typeDictionary: Dictionary<Type>,
-   typeServiceDictionary: Dictionary<TypeService>) => {
+   typeServiceDictionary: Dictionary<TypeService>,
+   selectedProductDictionary: Dictionary<SelectedProduct>) => {
     return array.map(value => {
       const tagObjects: NsiUI[] = value.tags.map(it => converter.convertNsiByLanguage(tagDictionary[it], language));
       const typeObjects: NsiUI[] = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
@@ -132,21 +134,28 @@ export const selectPositionByLanguageForCatalog = createSelector(
 
       const wrapper: OptionsWrapper[] = [];
 
-      map.forEach((value, key) => {
-        if (value.length !== 0) {
-          const typeInput: DevpavProductTypeServiceInputProps = {
-            id: undefined,
-            price: undefined,
-            title: key.toString()
-          };
+      map.forEach((val, key) => {
+        if (val.length !== 0) {
 
-          const servicesInput: DevpavProductTypeServiceInputProps[] = value.map(it => {
+          const servicesInput: DevpavProductTypeServiceInputProps[] = val.map(it => {
+            const selectedProductValue = selectedProductDictionary[it.id];
             return {
               id: it.id,
               title: it.service.title,
-              price: it.price
+              price: it.price,
+              selected: selectedProductValue !== undefined
             };
           });
+
+          const typeExpansion = servicesInput.find(it => it.selected);
+          console.log(typeExpansion);
+
+          const typeInput: DevpavProductTypeServiceInputProps = {
+            id: undefined,
+            price: undefined,
+            title: key.toString(),
+            selected: typeExpansion !== undefined
+          };
 
           wrapper.push({
             type: typeInput,

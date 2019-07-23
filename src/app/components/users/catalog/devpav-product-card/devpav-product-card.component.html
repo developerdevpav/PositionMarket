@@ -9,7 +9,7 @@
     <span class="box__price-text">~ {{options?.price}} <span class="box__price-text--color">{{'CURRENCY_BY' | translate}}</span></span>
   </div>
   <div class="box__check-box" *ngIf="options.showCheckBox">
-    <mat-checkbox color="primary" (change)="eventMatChecked($event)" ></mat-checkbox>
+    <mat-checkbox color="primary" (change)="eventMatChecked($event)" [checked]="options?.checked" ></mat-checkbox>
   </div>
 </div>
 

@@ -31,4 +31,5 @@ export interface DevpavProductCardProps {
   price: number;
   icon: string;
   showCheckBox: boolean;
+  checked: boolean;
 }

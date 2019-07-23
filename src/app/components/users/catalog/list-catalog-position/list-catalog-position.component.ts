@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {selectPositionByLanguageForCatalog} from '../../../store/selectors/position.selectors';
+import {selectPositionByLanguageForCatalog} from '../../../../store/selectors/position.selectors';
 import {Store} from '@ngrx/store';
-import {PositionByLanguageForCatalog} from '../../../ui/models';
-import {ApiAttractionLoadAll} from '../../../store/actions/attraction.actions';
-import {DevpavProductTypeServiceOutputProps} from '../catalog/devpav-product-type-service/devpav-product-type-service.component';
-import {DeleteProduct, SetProduct} from '../../../store/actions/select-product.actions';
+import {PositionByLanguageForCatalog} from '../../../../ui/models';
+import {ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
+import {DevpavProductTypeServiceOutputProps} from '../devpav-product-type-service/devpav-product-type-service.component';
+import {DeleteProduct, SetProduct} from '../../../../store/actions/select-product.actions';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -14,8 +14,16 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./list-catalog-position.component.scss'],
   animations: [
     trigger('expansionTrigger', [
-      state(ExpansionPanelState.HIDDEN.toString(), style({height: 0})),
-      state(ExpansionPanelState.EXPANSION.toString(), style({height: '*'})),
+      state(ExpansionPanelState.HIDDEN.toString(), style({
+        height: 0,
+        padding: 0,
+        opacity: 0.1
+      })),
+      state(ExpansionPanelState.EXPANSION.toString(), style({
+        height: '*',
+        padding: '10px',
+        opacity: 1
+      })),
       transition('hidden <=> expansion', animate('0.3s'))
     ])
   ]
@@ -35,18 +43,17 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.positions.subscribe(positions => {
+    const subscriberPosition = this.positions.subscribe(positions => {
       positions.filter(position => !this.statePanels.has(position.id))
         .forEach(position => {
           this.statePanels.set(position.id, {
             id: position.id,
             isExpansion: false,
-            state: ExpansionPanelState.HIDDEN
+            state: 'hidden'
           });
         });
-
     });
-    this.subscriber.add();
+    this.subscriber.add(subscriberPosition);
   }
 
   ngOnDestroy(): void {
@@ -54,12 +61,13 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   }
 
   expansionPanel(id: string) {
-    const state = this.statePanels.get(id);
+    const currentState = this.statePanels.get(id);
 
-    if (state) {
-      state.isExpansion = !state.isExpansion;
-      state.state = state.isExpansion ? ExpansionPanelState.EXPANSION.toString()
-        : ExpansionPanelState.HIDDEN.toString();
+    if (currentState) {
+      currentState.isExpansion = !currentState.isExpansion;
+      currentState.state = currentState.isExpansion
+        ? 'expansion'
+        : 'hidden';
     }
 
     console.log(this.statePanels);
