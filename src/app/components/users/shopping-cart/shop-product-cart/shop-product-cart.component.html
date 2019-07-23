@@ -1,0 +1,54 @@
+
+<!--
+<div class="box-product">
+  <div class="box__avatar">
+    <img [src]="value?.icon" alt="{{value?.title}}">
+  </div>
+  <div class="box__title">
+    <span>{{value?.title}}</span>
+  </div>
+  <div class="box__action">
+    <div class="box__action-btn box__action-btn&#45;&#45;change">
+      <svg-icon src="../assets/icon/info-icon.svg" [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
+    </div>
+    <div class="box__action-btn box__action-btn&#45;&#45;change">
+      <svg-icon src="../assets/icon/edit-icon.svg" [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
+    </div>
+    <div class="box__action-btn box__action-btn&#45;&#45;delete">
+      <svg-icon src="../assets/icon/delete-icon.svg" [svgStyle]="{ 'width.px': 20, 'height.px': 20 }"></svg-icon>
+    </div>
+  </div>
+</div>
+-->
+<table style="width: 100%" mat-table [dataSource]="transactions" class="mat-elevation-z8">
+  <!-- Item Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title Service </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.title}} </td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
+
+  <!-- Cost Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.price}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
+  </ng-container>
+
+  <!-- Cost Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Select </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.type | translate}} </td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
+
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let transaction"> <mat-checkbox color="primary"></mat-checkbox></td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>

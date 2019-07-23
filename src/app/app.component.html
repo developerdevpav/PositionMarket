@@ -8,11 +8,11 @@
         <div class="header-actions__link" routerLink="/catalog" routerLinkActive="active">
           <a class="link-menu" >{{ 'Catalog' | translate }}</a>
         </div>
-        <div class="header-actions__link" routerLink="/settings" routerLinkActive="active">
-          <a class="link-menu">{{ 'Setting' | translate }}</a>
-        </div>
         <div class="header-actions__link" routerLink="/contacts" routerLinkActive="active">
           <a class="link-menu">{{ 'CONTACTS' | translate }}</a>
+        </div>
+        <div class="header-actions__link" routerLink="/settings" routerLinkActive="active">
+          <a class="link-menu">{{ 'Setting' | translate }}</a>
         </div>
       </div>
       <div class="header-user-action">
@@ -24,13 +24,7 @@
         </div>
 
         <div class="header-shop">
-          <button routerLink="/cart" mat-button color="primary" >
-
-            Корзина {{countProduct | async}}</button>
-          <!--<a routerLink="/cart">
-
-            {{countProduct | async}}
-          </a>-->
+          <button routerLink="/cart" mat-button color="primary" >Корзина {{countProduct | async}}</button>
         </div>
         <div class="header-auth">
           <a routerLink="/auth" routerLinkActive="active">{{'log in' | translate}}</a>

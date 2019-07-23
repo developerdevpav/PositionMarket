@@ -179,6 +179,97 @@ export const selectPositionByLanguageForCatalog = createSelector(
   }
 );
 
+export const selectPositionByLanguageForShoppingCard = createSelector(
+  selectCurrentLanguage,
+  attraction.selectAll,
+  tag.selectEntities,
+  type.selectEntities,
+  typeService.selectEntities,
+  selectedProduct.selectEntities,
+  (language: Language,
+   array: AttractionModel[],
+   tagDictionary: Dictionary<Tag>,
+   typeDictionary: Dictionary<Type>,
+   typeServiceDictionary: Dictionary<TypeService>,
+   selectedProductDictionary: Dictionary<SelectedProduct>) => {
+    return array.map(value => {
+      const tagObjects: NsiUI[] = value.tags.map(it => converter.convertNsiByLanguage(tagDictionary[it], language));
+      const typeObjects: NsiUI[] = value.types.map(it => converter.convertNsiByLanguage(typeDictionary[it], language));
+
+      const imageValues = value.images
+        .sort(it => it.mainImage ? -1 : 1)
+        .map((it, ind) => new ImageUI(it.image, ++ind, it.url));
+
+      const productValues = value.products.map(it => {
+        const serviceFound: TypeServiceUI = converter.convertTypeServiceByLanguage(typeServiceDictionary[it.service], language);
+        return new ProductUI(it.id, it.price, value.id, serviceFound, it.order);
+      });
+
+      const map: Map<TypeServiceEnum, ProductUI[]> = new Map();
+
+      map.set(TypeServiceEnum.RENT, []);
+      map.set(TypeServiceEnum.DELIVERY, []);
+      map.set(TypeServiceEnum.PERSONAL, []);
+
+      productValues
+        .filter(it => it)
+        .filter(it => it.service)
+        .filter(it => it.service.type)
+        .forEach(product => {
+          if (!map.has(product.service.type)) {
+            map.set(product.service.type, []);
+          }
+          map.get(product.service.type).push(product);
+        });
+
+      const wrapper: OptionsWrapper[] = [];
+
+      map.forEach((val, key) => {
+        if (val.length !== 0) {
+
+          const servicesInput: DevpavProductTypeServiceInputProps[] = val.map(it => {
+            const selectedProductValue = selectedProductDictionary[it.id];
+            return {
+              id: it.id,
+              title: it.service.title,
+              price: it.price,
+              selected: selectedProductValue !== undefined
+            };
+          });
+
+          const typeExpansion = servicesInput.find(it => it.selected);
+          console.log(typeExpansion);
+
+          const typeInput: DevpavProductTypeServiceInputProps = {
+            id: undefined,
+            price: undefined,
+            title: key.toString(),
+            selected: typeExpansion !== undefined
+          };
+
+          wrapper.push({
+            type: typeInput,
+            services: servicesInput
+          });
+        }
+      });
+
+      return {
+        id: value.id,
+        title: converter.getStringFromArrayValuesByLanguage(value.title, language),
+        description: converter.getStringFromArrayValuesByLanguage(value.description, language),
+        tags: tagObjects,
+        types: typeObjects,
+        images: imageValues,
+        image: imageValues[0],
+        products: productValues,
+        options: wrapper
+      };
+    });
+  }
+);
+
+
 
 export const selectProductFromAttraction = createSelector(
   selectCurrentLanguage,
