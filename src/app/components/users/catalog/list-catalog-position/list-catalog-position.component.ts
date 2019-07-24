@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {selectPositionByLanguageForCatalog} from '../../../../store/selectors/position.selectors';
 import {Store} from '@ngrx/store';
@@ -22,18 +22,16 @@ import {catalogItemTableSetting} from '../../table-service-position/table.settin
   animations: [
     trigger('expansionTrigger', [
       state(ExpansionPanelState.HIDDEN.toString(), style({
-        height: 0,
-        opacity: 0.1
+        height: 0
       })),
       state(ExpansionPanelState.EXPANSION.toString(), style({
-        height: '*',
-        opacity: 1
+        height: '*'
       })),
-      transition('hidden <=> expansion', animate('0.3s'))
+      transition('hidden <=> expansion', animate('0.2s'))
     ])
   ]
 })
-export class ListCatalogPositionComponent implements OnInit, OnDestroy {
+export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterViewInit {
 
   expansion = false;
 
@@ -42,10 +40,6 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   subscriber: Subscription = new Subscription();
 
   positions: Observable<PositionByLanguageForCatalog[]> = this.store.select(selectPositionByLanguageForCatalog);
-
-  constructor(private store: Store<any>) {
-    this.store.dispatch(new ApiAttractionLoadAll());
-  }
 
   columns: EnumColumnProductTable[] = Array(
     EnumColumnProductTable.TITLE,
@@ -63,6 +57,14 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
     {id: '', price: 432, title: 'Аренда на час', type: TypeServiceEnum.RENT},
     {id: '', price: 43233, title: 'Монтажники', type: TypeServiceEnum.PERSONAL}
   ];
+
+  selectedService: ProductRow[] = [];
+
+  productRowClickByRow: ProductRow;
+
+  constructor(private store: Store<any>) {
+    this.store.dispatch(new ApiAttractionLoadAll());
+  }
 
   ngOnInit() {
     const subscriberPosition = this.positions.subscribe(positions => {
@@ -84,15 +86,13 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
 
   expansionPanel(id: string) {
     const currentState = this.statePanels.get(id);
-
+    this.productRowClickByRow = undefined;
     if (currentState) {
       currentState.isExpansion = !currentState.isExpansion;
       currentState.state = currentState.isExpansion
         ? 'expansion'
         : 'hidden';
     }
-
-    console.log(this.statePanels);
   }
 
   getState(id: string) {
@@ -113,13 +113,18 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
       this.store.dispatch(new DeleteProduct(product.id));
     }
   }
-}
 
-export interface ProductPrice {
-  id: string;
-  type: TypeServiceEnum;
-  title: string;
-  price: number;
+  ngAfterViewInit(): void {
+
+  }
+
+  selectedServiceAction($event: ProductRow[]) {
+    this.selectedService = $event;
+  }
+
+  onMouseClickByProductRow($event: ProductRow) {
+    this.productRowClickByRow = $event;
+  }
 }
 
 export interface StatePanel {

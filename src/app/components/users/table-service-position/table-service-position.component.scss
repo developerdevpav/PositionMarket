@@ -27,6 +27,11 @@ mat-cell {
   cursor: pointer;
 }
 
+mat-row:hover {
+  cursor: pointer;
+  background: #f8f8f8;
+}
+
 .activeRow {
   background: rgba(250, 250, 250, 0.57);
 }

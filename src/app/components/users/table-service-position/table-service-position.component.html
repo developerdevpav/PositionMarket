@@ -43,7 +43,7 @@
         </mat-checkbox>
       </mat-cell>
       <mat-footer-cell *matFooterCellDef class="in-shop">
-        <button mat-flat-button color="primary" *ngIf="setting?.hiddenActionBtn">
+        <button mat-flat-button color="primary" (click)="eventMouseClickByActionBtn()" *ngIf="setting?.hiddenActionBtn">
           {{setting?.titleActionBtn | translate}}
         </button>
       </mat-footer-cell>

@@ -17,19 +17,29 @@
           <button mat-stroked-button color="primary" class="action-price">Подробнее</button>
         </div>
       </div>
+      <mat-card style="width: 100%; margin-top: 15px" *ngIf="productRowClickByRow !== undefined">
+        <mat-card-title>
+          Title card
+        </mat-card-title>
+        <mat-card-subtitle>ProductRowClickByRow</mat-card-subtitle>
+        <mat-card-content>
+          <ngx-json-viewer [json]="productRowClickByRow"></ngx-json-viewer>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-button color="warn" (click)="productRowClickByRow = undefined">Скрыть</button>
+        </mat-card-actions>
+      </mat-card>
       <div  style="display: flex; width: 100%; margin-top: 10px; overflow: hidden; flex-wrap: wrap;"
             [@expansionTrigger]="statePanels.get(position.id).state">
-        <!--<app-devpav-product-type-service style="width: 100%; padding-bottom: 10px"
-                                         *ngFor="let item of position?.options"
-                                         [typeService]="item?.type"
-                                         [services]="item?.services"
-                                         (selectedProduct)="selectProduct(position, $event)">
-        </app-devpav-product-type-service>-->
-        <app-table-service-position style="width: 100%" [columns]="columns" [setting]="setting" [data]="transactions">
-
+        <app-table-service-position style="width: 100%"
+                                    [columns]="columns"
+                                    [setting]="setting"
+                                    [data]="transactions"
+                                    [selectData]="transactions"
+                                    (clickByActionBtn)="selectedServiceAction($event)"
+                                    (clickByRow)="onMouseClickByProductRow($event)">
         </app-table-service-position>
       </div>
-
     </div>
   </div>
 </div>

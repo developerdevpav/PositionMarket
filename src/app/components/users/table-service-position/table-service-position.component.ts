@@ -20,6 +20,9 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   data: ProductRow[] = [];
 
   @Input()
+  selectData: ProductRow[] = [];
+
+  @Input()
   setting: TableSetting;
 
   @Output()
@@ -29,27 +32,21 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   unselectItem: EventEmitter<ProductRow> = new EventEmitter();
 
   @Output()
-  onClickByRow: EventEmitter<ProductRow> = new EventEmitter();
+  clickByRow: EventEmitter<ProductRow> = new EventEmitter();
+
+  @Output()
+  clickByActionBtn: EventEmitter<ProductRow[]> = new EventEmitter();
 
   constructor() {}
-
-  @Input()
-  set columns(columns: EnumColumnProductTable[]) {
-    if (columns && columns.length !== 0) {
-      this.displayedColumns = (columns && columns.length !== 0)
-        ? columns.map(it => it.toString())
-        : Object.keys(EnumColumnProductTable).map(value => EnumColumnProductTable[value as any]);
-    }
-  }
-
-  eventMouseClickByRow(row: ProductRow) {
-    this.onClickByRow.emit(row);
-  }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<ProductRow>(this.data);
     this.selection = new SelectionModel<ProductRow>(true, this.data);
     this.selection.clear();
+
+    if (this.selectData && this.selectData.length > 0) {
+      this.selectData.forEach(value => this.selection.select(value));
+    }
 
     const subscriberOnChangeSelection = this.selection.changed.asObservable().subscribe(it => {
       if (it.added.length !== 0) {
@@ -69,6 +66,23 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
     this.subscriber.add(subscriberOnChangeSelection);
   }
 
+  @Input()
+  set columns(columns: EnumColumnProductTable[]) {
+    if (columns && columns.length !== 0) {
+      this.displayedColumns = (columns && columns.length !== 0)
+        ? columns.map(it => it.toString())
+        : Object.keys(EnumColumnProductTable).map(value => EnumColumnProductTable[value as any]);
+    }
+  }
+
+  eventMouseClickByRow(row: ProductRow) {
+    this.clickByRow.emit(row);
+  }
+
+  eventMouseClickByActionBtn() {
+    this.clickByActionBtn.emit(this.selection.selected);
+  }
+
   getTotalPrice(): number {
     return this.selection.selected.reduce((sum, item) => sum += item.price, 0);
   }
@@ -76,6 +90,7 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
+
 }
 
 export enum EnumColumnProductTable {
