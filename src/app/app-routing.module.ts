@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingPageComponent },
   { path: 'contacts', component: ContactsPageComponent },
   { path: 'cart', component: UserShoppingCartComponent },
+  { path: 'positions/:id', component: UserShoppingCartComponent },
   {path: '**', redirectTo: '/home'}
 ];
 

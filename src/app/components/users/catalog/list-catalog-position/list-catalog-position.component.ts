@@ -7,6 +7,13 @@ import {ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions
 import {DevpavProductTypeServiceOutputProps} from '../devpav-product-type-service/devpav-product-type-service.component';
 import {DeleteProduct, SetProduct} from '../../../../store/actions/select-product.actions';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {TypeServiceEnum} from '../../../../store/models/type-service';
+import {
+  EnumColumnProductTable,
+  ProductRow,
+  TableSetting
+} from '../../table-service-position/table-service-position.component';
+import {catalogItemTableSetting} from '../../table-service-position/table.setting';
 
 @Component({
   selector: 'app-list-catalog-position',
@@ -16,12 +23,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     trigger('expansionTrigger', [
       state(ExpansionPanelState.HIDDEN.toString(), style({
         height: 0,
-        padding: 0,
         opacity: 0.1
       })),
       state(ExpansionPanelState.EXPANSION.toString(), style({
         height: '*',
-        padding: '10px',
         opacity: 1
       })),
       transition('hidden <=> expansion', animate('0.3s'))
@@ -41,6 +46,23 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   constructor(private store: Store<any>) {
     this.store.dispatch(new ApiAttractionLoadAll());
   }
+
+  columns: EnumColumnProductTable[] = Array(
+    EnumColumnProductTable.TITLE,
+    EnumColumnProductTable.TYPE,
+    EnumColumnProductTable.PRICE,
+    EnumColumnProductTable.CHECK
+  );
+
+  setting: TableSetting = catalogItemTableSetting;
+
+  transactions: ProductRow[] = [
+    {id: '', price: 432, title: 'Доставка', type: TypeServiceEnum.DELIVERY},
+    {id: '', price: 543, title: 'Самовывоз', type: TypeServiceEnum.DELIVERY},
+    {id: '', price: 45, title: 'Аренда на сутки', type: TypeServiceEnum.RENT},
+    {id: '', price: 432, title: 'Аренда на час', type: TypeServiceEnum.RENT},
+    {id: '', price: 43233, title: 'Монтажники', type: TypeServiceEnum.PERSONAL}
+  ];
 
   ngOnInit() {
     const subscriberPosition = this.positions.subscribe(positions => {
@@ -93,6 +115,12 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy {
   }
 }
 
+export interface ProductPrice {
+  id: string;
+  type: TypeServiceEnum;
+  title: string;
+  price: number;
+}
 
 export interface StatePanel {
   id: string;

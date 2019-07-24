@@ -1,0 +1,47 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-column-select {
+  overflow: visible;
+}
+
+
+.mat-header-cell ~ .name {
+  justify-content: center;
+}
+
+mat-cell ~ .name2 {
+  justify-content: center;
+}
+
+mat-cell {
+  cursor: pointer;
+}
+
+.activeRow {
+  background: rgba(250, 250, 250, 0.57);
+}
+
+.activeRow .mat-cell {
+  color: black;
+}
+
+mat-footer-row {
+  padding: 10px 0 10px 0;
+  font-weight: 500;
+}
+
+.mat-footer-cell ~ .in-shop {
+  justify-content: center;
+}
+
+

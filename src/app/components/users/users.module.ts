@@ -13,6 +13,7 @@ import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {DevpavProductTypeServiceComponent} from './catalog/devpav-product-type-service/devpav-product-type-service.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ShopProductCartComponent} from './shopping-cart/shop-product-cart/shop-product-cart.component';
+import {TableServicePositionComponent} from './table-service-position/table-service-position.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {ShopProductCartComponent} from './shopping-cart/shop-product-cart/shop-p
     AvatarCarouselComponent,
     DevpavProductCardComponent,
     DevpavProductTypeServiceComponent,
-    ShopProductCartComponent
+    ShopProductCartComponent,
+    TableServicePositionComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import {ShopProductCartComponent} from './shopping-cart/shop-product-cart/shop-p
     DevpavProductCardComponent,
     NgxJsonViewerModule,
     DevpavProductTypeServiceComponent,
-    ShopProductCartComponent
+    ShopProductCartComponent,
+    TableServicePositionComponent
   ],
   providers: [
     ProductConverterService

@@ -10,6 +10,7 @@ import {MaterialDesignModule} from '../material-design.module';
 import {UsersComponentsModule} from '../components/users/users.module';
 import {AngularMaterialModule} from '../angular-material.module';
 import {UserShoppingCartComponent} from './user-shopping-cart/user-shopping-cart.component';
+import {PositionDetailPageComponent} from './position-detail-page/position-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {UserShoppingCartComponent} from './user-shopping-cart/user-shopping-cart
     CatalogPageComponent,
     SettingPageComponent,
     ContactsPageComponent,
-    UserShoppingCartComponent
+    UserShoppingCartComponent,
+    PositionDetailPageComponent
   ],
   imports: [
     CommonModule,

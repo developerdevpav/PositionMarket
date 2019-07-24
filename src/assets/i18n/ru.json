@@ -13,5 +13,11 @@
   "RENT": "Аренда",
   "DELIVERY": "Доставка и транспортировка",
   "CONTACTS": "Контакты",
-  "CURRENCY_BY": "бел. руб."
+  "CURRENCY_BY": "бел. руб.",
+  "TOTAL": "Итого",
+  "ADD_TO_CART": "Добавить в корзину",
+  "ORDER_ONE": "Оформить",
+  "TITLE_PRICE": "Название услуги",
+  "TYPE_SERVICE": "Тип услуги",
+  "PRICE_SERVICE": "Цена услуги"
 }
