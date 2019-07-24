@@ -25,8 +25,8 @@
         <mat-card-content>
           <ngx-json-viewer [json]="productRowClickByRow"></ngx-json-viewer>
         </mat-card-content>
-        <mat-card-actions align="end">
-          <button mat-button color="warn" (click)="productRowClickByRow = undefined">Скрыть</button>
+        <mat-card-actions align="center" (click)="productRowClickByRow = undefined">
+          <button mat-button color="warn" >Скрыть</button>
         </mat-card-actions>
       </mat-card>
       <div  style="display: flex; width: 100%; margin-top: 10px; overflow: hidden; flex-wrap: wrap;"

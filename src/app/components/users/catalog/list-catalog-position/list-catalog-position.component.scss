@@ -308,3 +308,13 @@ mat-chip-list {
   height: 250px;
   border-right: 1px solid rgba(121, 121, 121, 0.12);
 }
+
+.mat-card-actions {
+  background: #fcfcfc;
+  border-radius: 25px;
+  height: auto;
+}
+
+.mat-card-actions:hover {
+  background: #fafafa;
+}
