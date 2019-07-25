@@ -7,7 +7,6 @@ import {AngularMaterialModule} from '../../angular-material.module';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AvatarCarouselComponent} from './avatar-carousel/avatar-carousel.component';
-import {ProductConverterService} from './services/product-converter.service';
 import {DevpavProductCardComponent} from './catalog/devpav-product-card/devpav-product-card.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {DevpavProductTypeServiceComponent} from './catalog/devpav-product-type-service/devpav-product-type-service.component';
@@ -44,7 +43,6 @@ import {TableServicePositionComponent} from './table-service-position/table-serv
     TableServicePositionComponent
   ],
   providers: [
-    ProductConverterService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

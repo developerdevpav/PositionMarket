@@ -1,5 +1,5 @@
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource" matSort>
     <!-- Position Column -->
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef> {{'TITLE_PRICE' | translate}}</mat-header-cell>
@@ -8,13 +8,13 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef>{{'PRICE_SERVICE' | translate}}</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'PRICE_SERVICE' | translate}}</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.price}} {{'CURRENCY_BY' | translate}} </mat-cell>
       <mat-footer-cell *matFooterCellDef>{{getTotalPrice()}} {{'CURRENCY_BY' | translate}}</mat-footer-cell>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <mat-header-cell *matHeaderCellDef>{{'TYPE_SERVICE' | translate}}</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'TYPE_SERVICE' | translate}}</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.type.toString() | translate}} </mat-cell>
       <mat-footer-cell *matFooterCellDef></mat-footer-cell>
     </ng-container>

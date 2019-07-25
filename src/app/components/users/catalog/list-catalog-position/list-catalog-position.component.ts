@@ -1,19 +1,35 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {selectPositionByLanguageForCatalog} from '../../../../store/selectors/position.selectors';
-import {Store} from '@ngrx/store';
-import {PositionByLanguageForCatalog} from '../../../../ui/models';
+import {getPositionCatalog} from '../../../../store/selectors/position.selectors';
+import {select, Store} from '@ngrx/store';
+import {ImageUI} from '../../../../ui/models';
 import {ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
-import {DevpavProductTypeServiceOutputProps} from '../devpav-product-type-service/devpav-product-type-service.component';
-import {DeleteProduct, SetProduct} from '../../../../store/actions/select-product.actions';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TypeServiceEnum} from '../../../../store/models/type-service';
-import {
-  EnumColumnProductTable,
-  ProductRow,
-  TableSetting
-} from '../../table-service-position/table-service-position.component';
+import {EnumColumnProductTable, ProductRow, TableSetting} from '../../table-service-position/table-service-position.component';
 import {catalogItemTableSetting} from '../../table-service-position/table.setting';
+import {DeleteProduct, SetProduct, SetProducts} from '../../../../store/actions/select-product.actions';
+import {ProductSelect} from '../../../../store/reducers/selected-product.reducer';
+
+
+export interface PositionCatalog {
+  id: string | number;
+  images: ImageUI[]
+  title: string;
+  description: string;
+  minPrice: number | undefined;
+  products: ProductRow[],
+  selectedProduct: ProductRow[]
+}
+
+export interface StatePanel {
+  state: string;
+  isExpansion: boolean;
+}
+
+const enum ExpansionPanelState {
+  EXPANSION = 'expansion', HIDDEN = 'hidden'
+}
 
 @Component({
   selector: 'app-list-catalog-position',
@@ -33,13 +49,11 @@ import {catalogItemTableSetting} from '../../table-service-position/table.settin
 })
 export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  expansion = false;
-
-  statePanels: Map<string, StatePanel> = new Map();
+  statePanels: Map<string | number, StatePanel> = new Map();
 
   subscriber: Subscription = new Subscription();
 
-  positions: Observable<PositionByLanguageForCatalog[]> = this.store.select(selectPositionByLanguageForCatalog);
+  positions: Observable<PositionCatalog[]>;
 
   columns: EnumColumnProductTable[] = Array(
     EnumColumnProductTable.TITLE,
@@ -67,16 +81,18 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
   }
 
   ngOnInit() {
-    const subscriberPosition = this.positions.subscribe(positions => {
-      positions.filter(position => !this.statePanels.has(position.id))
+    this.positions = this.store.pipe(select(getPositionCatalog));
+
+    const subscriberPosition = this.positions.subscribe(it => {
+      it.filter(position => this.statePanels.get(position.id) == null)
         .forEach(position => {
-          this.statePanels.set(position.id, {
-            id: position.id,
-            isExpansion: false,
-            state: 'hidden'
-          });
+        this.statePanels.set(position.id, {
+          state: 'hidden',
+          isExpansion: false
         });
+      });
     });
+
     this.subscriber.add(subscriberPosition);
   }
 
@@ -84,10 +100,15 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
     this.subscriber.unsubscribe();
   }
 
-  expansionPanel(id: string) {
+  ngAfterViewInit(): void {}
+
+  expansionPanel(id: string | number) {
     const currentState = this.statePanels.get(id);
+
     this.productRowClickByRow = undefined;
+
     if (currentState) {
+
       currentState.isExpansion = !currentState.isExpansion;
       currentState.state = currentState.isExpansion
         ? 'expansion'
@@ -95,44 +116,35 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
     }
   }
 
-  getState(id: string) {
-    return this.statePanels.get(id).state;
-  }
+  selectedServiceAction($event: ProductRow[], idAttraction: string | number) {
+    if ( $event && $event.length > 0 ) {
+      const array = $event.map(row => {
+        return {
+          id: row.id,
+          attractionId: idAttraction
+        } as ProductSelect;
+      });
 
-  selectProduct(position: PositionByLanguageForCatalog, $event: DevpavProductTypeServiceOutputProps) {
-    const product = position.products.find(it => $event.product === it.id);
-    if ($event.checked) {
-      this.store.dispatch(new SetProduct({
-        id: product.id,
-        service: product.service.id,
-        price: product.price,
-        order: product.order,
-        attraction: position.id
-      }));
-    } else {
-      this.store.dispatch(new DeleteProduct(product.id));
+      this.store.dispatch(new SetProducts(array));
     }
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
-  selectedServiceAction($event: ProductRow[]) {
-    this.selectedService = $event;
-  }
-
-  onMouseClickByProductRow($event: ProductRow) {
+  onMouseClickByProductRow($event: ProductRow, id: string | number) {
     this.productRowClickByRow = $event;
   }
+
+  onSelectProductRow($event: ProductRow, idAttraction: string | number) {
+    if ($event) {
+      const value = {
+        id: $event.id,
+        attractionId: idAttraction
+      } as ProductSelect;
+      this.store.dispatch(new SetProduct(value));
+    }
+  }
+
+  eventUnSelectRow($event: ProductRow, id: string | number) {
+    this.store.dispatch(new DeleteProduct($event.id));
+  }
 }
 
-export interface StatePanel {
-  id: string;
-  state: string;
-  isExpansion: boolean;
-}
-
-const enum ExpansionPanelState {
-  EXPANSION = 'expansion', HIDDEN = 'hidden'
-}

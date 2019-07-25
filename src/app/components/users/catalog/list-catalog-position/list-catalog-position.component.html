@@ -12,7 +12,8 @@
           </div>
         </div>
         <div class="item__price">
-          <button mat-stroked-button color="primary" class="action-price" (click)="expansionPanel(position.id)">120 BYN / час
+          <button mat-stroked-button color="primary" class="action-price" (click)="expansionPanel(position.id)">
+            {{position.minPrice}} {{'CURRENCY_BY' | translate}}
           </button>
           <button mat-stroked-button color="primary" class="action-price">Подробнее</button>
         </div>
@@ -29,15 +30,16 @@
           <button mat-button color="warn" >Скрыть</button>
         </mat-card-actions>
       </mat-card>
-      <div  style="display: flex; width: 100%; margin-top: 10px; overflow: hidden; flex-wrap: wrap;"
-            [@expansionTrigger]="statePanels.get(position.id).state">
-        <app-table-service-position style="width: 100%"
+      <div  style="display: flex; width: 100%; margin-top: 10px; overflow: hidden; flex-wrap: wrap;" [@expansionTrigger]="statePanels.get(position.id).state">
+        <app-table-service-position style="width: 100%;"
                                     [columns]="columns"
                                     [setting]="setting"
-                                    [data]="transactions"
-                                    [selectData]="transactions"
-                                    (clickByActionBtn)="selectedServiceAction($event)"
-                                    (clickByRow)="onMouseClickByProductRow($event)">
+                                    [data]="position.products"
+                                    [selectData]="position.selectedProduct"
+                                    (clickByActionBtn)="selectedServiceAction($event, position.id)"
+                                    (selectItem)="onSelectProductRow($event, position.id)"
+                                    (unselectItem)="eventUnSelectRow($event, position.id)"
+                                    (clickByRow)="onMouseClickByProductRow($event, position.id)">
         </app-table-service-position>
       </div>
     </div>

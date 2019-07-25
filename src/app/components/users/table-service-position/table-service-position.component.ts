@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {TypeServiceEnum} from '../../../store/models/type-service';
 import {SelectionModel} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -10,7 +10,10 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./table-service-position.component.scss']
 })
 export class TableServicePositionComponent implements OnInit, OnDestroy {
+  @ViewChild(MatSort) sort: MatSort;
+
   displayedColumns: string[] = [];
+
   selection: SelectionModel<ProductRow>;
   dataSource: MatTableDataSource<ProductRow>;
 
@@ -40,9 +43,19 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
+    if (this.data == null) {
+      this.data = [];
+    }
+
+    this.data = this.data.sort((value, anotherValue) => value.type > anotherValue.type ? -1 : 1);
+
     this.dataSource = new MatTableDataSource<ProductRow>(this.data);
+    this.dataSource.sort = this.sort;
+
     this.selection = new SelectionModel<ProductRow>(true, this.data);
     this.selection.clear();
+
+    this.dataSource.connect().subscribe(d => this.data = d);
 
     if (this.selectData && this.selectData.length > 0) {
       this.selectData.forEach(value => this.selection.select(value));
