@@ -2,7 +2,9 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {TypeServiceEnum} from '../../../store/models/type-service';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatSort, MatTableDataSource} from '@angular/material';
-import {Subscription} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {getSelectProduct} from '../../../store/selectors/position.selectors';
 
 @Component({
   selector: 'app-table-service-position',
@@ -28,6 +30,8 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   @Input()
   setting: TableSetting;
 
+  subjectData: BehaviorSubject<ProductRow[]>;
+
   @Output()
   selectItem: EventEmitter<ProductRow> = new EventEmitter();
 
@@ -40,9 +44,11 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   @Output()
   clickByActionBtn: EventEmitter<ProductRow[]> = new EventEmitter();
 
-  constructor() {}
+  constructor(private store: Store<any>) {
+  }
 
   ngOnInit() {
+
     if (this.data == null) {
       this.data = [];
     }
@@ -52,10 +58,10 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource<ProductRow>(this.data);
     this.dataSource.sort = this.sort;
 
-    this.selection = new SelectionModel<ProductRow>(true, this.data);
+    this.selection = new SelectionModel<ProductRow>(true,  this.data);
     this.selection.clear();
 
-    this.dataSource.connect().subscribe(d => this.data = d);
+    this.subjectData.next(this.data);
 
     if (this.selectData && this.selectData.length > 0) {
       this.selectData.forEach(value => this.selection.select(value));
@@ -76,7 +82,12 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
         .map(value => EnumColumnProductTable[value as any]);
     }
 
+    const subscriberProductSelect = this.store.select(getSelectProduct, this.data).subscribe(value => {
+      value.forEach(it => this.selection.select(it));
+    });
+
     this.subscriber.add(subscriberOnChangeSelection);
+    this.subscriber.add(subscriberProductSelect);
   }
 
   @Input()
@@ -93,7 +104,9 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   }
 
   eventMouseClickByActionBtn() {
-    this.clickByActionBtn.emit(this.selection.selected);
+    this.dataSource = new MatTableDataSource<ProductRow>(this.selection.selected);
+
+    // this.clickByActionBtn.emit(this.selection.selected);
   }
 
   getTotalPrice(): number {
@@ -104,6 +117,35 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
     this.subscriber.unsubscribe();
   }
 
+  isDisabledCheckBox() {
+    if (!this.setting.typeActionBtn) {
+      return false;
+    }
+
+    return this.setting.typeActionBtn === EnumTypeActionBtn.WARN;
+  }
+
+  removeUnSelectedRows() {
+    const tmpArray: ProductRow[] = Object.assign([], this.dataSource.data);
+    this.selection.selected.forEach(item => {
+      const index: number = tmpArray.findIndex(it => it !== item);
+      tmpArray.splice(index, 1);
+    });
+    this.dataSource = new MatTableDataSource<ProductRow>(tmpArray);
+    this.selection = new SelectionModel<ProductRow>(true, this.data);
+  }
+
+}
+
+export enum EnumTypeActionBtn {
+  PRIMARY = 'primary',
+  WARN = 'warn'
+}
+
+
+export enum EnumPlaceTable {
+  CATALOG,
+  CART
 }
 
 export enum EnumColumnProductTable {
@@ -124,4 +166,8 @@ export interface ProductRow {
 export interface TableSetting {
   hiddenActionBtn: boolean;
   titleActionBtn: string;
+  typeActionBtn: EnumTypeActionBtn;
+  place: EnumPlaceTable;
 }
+
+

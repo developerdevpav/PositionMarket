@@ -30,6 +30,9 @@ export function selectedProductReducer(
     case SelectProductActionTypes.DeleteProduct: {
       return adapter.removeOne(action.payload, state);
     }
+    case SelectProductActionTypes.DeleteProducts: {
+      return adapter.removeMany(action.payload, state);
+    }
     default: {
       return state;
     }

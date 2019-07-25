@@ -35,7 +35,7 @@
                                     [columns]="columns"
                                     [setting]="setting"
                                     [data]="position.products"
-                                    [selectData]="position.selectedProduct"
+                                    [selectData]="statePanels.get(position.id)?.selectedProduct"
                                     (clickByActionBtn)="selectedServiceAction($event, position.id)"
                                     (selectItem)="onSelectProductRow($event, position.id)"
                                     (unselectItem)="eventUnSelectRow($event, position.id)"

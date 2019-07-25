@@ -19,5 +19,6 @@
   "ORDER_ONE": "Order one",
   "TITLE_PRICE": "Title of service",
   "TYPE_SERVICE": "Type of service",
-  "PRICE_SERVICE": "Price of service"
+  "PRICE_SERVICE": "Price of service",
+  "DELETE_FROM_CART": "Delete from cart"
 }

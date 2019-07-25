@@ -16,19 +16,17 @@ import {ProductRow} from '../../components/users/table-service-position/table-se
 
 export const getPositionCatalog = createSelector(
   selectCurrentLanguage,
-  selectedProduct.selectEntities,
   attraction.selectAll,
   typeService.selectEntities,
   (language: Language,
-   selectedProducts: Dictionary<ProductSelect>,
    positions: AttractionModel[],
-   typeService: Dictionary<TypeService>) => {
+   typeServiceDictionary: Dictionary<TypeService>) => {
     if (!positions) {
       return [];
     }
 
     return positions.map(position => {
-        let minPriceProduct = undefined;
+        let minPriceProduct;
 
         const products = position.products;
 
@@ -37,7 +35,7 @@ export const getPositionCatalog = createSelector(
             .filter(product => product != null)
             .filter(product => product.service != null)
             .filter(product => {
-              const service = typeService[product.service];
+              const service = typeServiceDictionary[product.service];
               return service != null && service.type === TypeServiceEnum.RENT;
             })
             .sort((productMaster, productNext) => {
@@ -49,19 +47,17 @@ export const getPositionCatalog = createSelector(
           }
         }
 
-        const images = position.images
+        const avatars = position.images
           .sort(image => image.mainImage ? 1 : -1)
           .map((image, index) => new ImageUI(image.id, index, image.url));
 
-        let selectedProductRows: ProductRow[] = [];
         let productRows: ProductRow[] = [];
 
-        console.log(position.products);
         if (position.products && position.products.length > 0) {
           productRows = position.products
-            .filter(product => typeService[product.service])
+            .filter(product => typeServiceDictionary[product.service])
             .map(product => {
-              const service = typeService[product.service];
+              const service = typeServiceDictionary[product.service];
               return {
                 id: product.id,
                 type: service.type,
@@ -69,8 +65,6 @@ export const getPositionCatalog = createSelector(
                 title: converter.getStringFromArrayValuesByLanguage(service.values, language)
               } as ProductRow;
             });
-
-          selectedProductRows = productRows.filter(product => selectedProducts[product.id] != null);
         }
 
         return {
@@ -78,9 +72,8 @@ export const getPositionCatalog = createSelector(
           title: converter.getStringFromArrayValuesByLanguage(position.title, language),
           description: converter.getStringFromArrayValuesByLanguage(position.description, language),
           minPrice: minPriceProduct,
-          images: images,
-          products: productRows,
-          selectedProduct: selectedProductRows
+          images: avatars,
+          products: productRows
         } as PositionCatalog;
       }
     );
@@ -93,7 +86,7 @@ export const getPositionProducts = createSelector(
   selectCurrentLanguage,
   attraction.selectEntities,
   typeService.selectEntities,
-  (language: Language, positions: Dictionary<AttractionModel>, typeService: Dictionary<TypeService>, props) => {
+  (language: Language, positions: Dictionary<AttractionModel>, typeServiceDictionary: Dictionary<TypeService>, props) => {
     if (positions == null) {
       return [];
     }
@@ -109,7 +102,7 @@ export const getPositionProducts = createSelector(
     }
 
     return position.products.map(product => {
-      const service = typeService[product.service];
+      const service = typeServiceDictionary[product.service];
 
       return {
         id: product.id,
@@ -121,3 +114,12 @@ export const getPositionProducts = createSelector(
 
   }
 );
+
+export const getSelectProduct = createSelector(
+  selectCurrentLanguage,
+  selectedProduct.selectEntities,
+  (language: Language, productSelectDictionary: Dictionary<ProductSelect>, products: ProductRow[]) => {
+    return products.filter(product => productSelectDictionary[product.id]);
+  }
+);
+

@@ -6,7 +6,8 @@ export enum SelectProductActionTypes {
   SelectProductById = '[SelectProduct] Select product by ID',
   SetProduct = '[SelectProduct] Set product',
   SetProducts = '[SelectProduct] Set products',
-  DeleteProduct = '[SelectProduct] Delete SelectProduct'
+  DeleteProduct = '[SelectProduct] Delete SelectProduct',
+  DeleteProducts = '[SelectProduct] Delete SelectProducts'
 }
 
 export class SelectProducts implements Action {
@@ -33,4 +34,9 @@ export class DeleteProduct implements Action {
   constructor(public payload: string) {}
 }
 
-export type SelectedProductActions = SetProducts | SelectProductById | SetProduct | SetProducts | DeleteProduct;
+export class DeleteProducts implements Action {
+  readonly type = SelectProductActionTypes.DeleteProducts;
+  constructor(public payload: string[]) {}
+}
+
+export type SelectedProductActions = SetProducts | SelectProductById | SetProduct | SetProducts | DeleteProduct | DeleteProducts;

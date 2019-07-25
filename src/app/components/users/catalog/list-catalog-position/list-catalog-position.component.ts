@@ -5,26 +5,31 @@ import {select, Store} from '@ngrx/store';
 import {ImageUI} from '../../../../ui/models';
 import {ApiAttractionLoadAll} from '../../../../store/actions/attraction.actions';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {TypeServiceEnum} from '../../../../store/models/type-service';
-import {EnumColumnProductTable, ProductRow, TableSetting} from '../../table-service-position/table-service-position.component';
+import {
+  EnumColumnProductTable,
+  EnumTypeActionBtn,
+  ProductRow,
+  TableSetting
+} from '../../table-service-position/table-service-position.component';
 import {catalogItemTableSetting} from '../../table-service-position/table.setting';
-import {DeleteProduct, SetProduct, SetProducts} from '../../../../store/actions/select-product.actions';
+import {DeleteProducts, SetProducts} from '../../../../store/actions/select-product.actions';
 import {ProductSelect} from '../../../../store/reducers/selected-product.reducer';
+import {SelectionModel} from '@angular/cdk/collections';
 
 
 export interface PositionCatalog {
   id: string | number;
-  images: ImageUI[]
+  images: ImageUI[];
   title: string;
   description: string;
   minPrice: number | undefined;
-  products: ProductRow[],
-  selectedProduct: ProductRow[]
+  products: ProductRow[];
 }
 
 export interface StatePanel {
   state: string;
   isExpansion: boolean;
+  selectedProduct: SelectionModel<ProductRow>;
 }
 
 const enum ExpansionPanelState {
@@ -64,16 +69,6 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
 
   setting: TableSetting = catalogItemTableSetting;
 
-  transactions: ProductRow[] = [
-    {id: '', price: 432, title: 'Доставка', type: TypeServiceEnum.DELIVERY},
-    {id: '', price: 543, title: 'Самовывоз', type: TypeServiceEnum.DELIVERY},
-    {id: '', price: 45, title: 'Аренда на сутки', type: TypeServiceEnum.RENT},
-    {id: '', price: 432, title: 'Аренда на час', type: TypeServiceEnum.RENT},
-    {id: '', price: 43233, title: 'Монтажники', type: TypeServiceEnum.PERSONAL}
-  ];
-
-  selectedService: ProductRow[] = [];
-
   productRowClickByRow: ProductRow;
 
   constructor(private store: Store<any>) {
@@ -83,15 +78,25 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
   ngOnInit() {
     this.positions = this.store.pipe(select(getPositionCatalog));
 
-    const subscriberPosition = this.positions.subscribe(it => {
-      it.filter(position => this.statePanels.get(position.id) == null)
-        .forEach(position => {
-        this.statePanels.set(position.id, {
-          state: 'hidden',
-          isExpansion: false
-        });
-      });
-    });
+    this.positions.subscribe(console.log);
+    const subscriberPosition = this.positions.subscribe(positionStore => {
+        positionStore
+          .filter(position => this.statePanels.get(position.id) == null)
+          .forEach(position => {
+            this.statePanels.set(position.id, {
+              state: 'hidden',
+              isExpansion: false,
+              selectedProduct: new SelectionModel<ProductRow>(true, [])
+            });
+          });
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log('');
+      }
+    );
 
     this.subscriber.add(subscriberPosition);
   }
@@ -100,7 +105,8 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
     this.subscriber.unsubscribe();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+  }
 
   expansionPanel(id: string | number) {
     const currentState = this.statePanels.get(id);
@@ -117,34 +123,48 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
   }
 
   selectedServiceAction($event: ProductRow[], idAttraction: string | number) {
-    if ( $event && $event.length > 0 ) {
-      const array = $event.map(row => {
-        return {
-          id: row.id,
-          attractionId: idAttraction
-        } as ProductSelect;
-      });
-
-      this.store.dispatch(new SetProducts(array));
+    if (!$event || $event.length === 0) {
+      return;
     }
+
+    switch (this.setting.typeActionBtn) {
+      case EnumTypeActionBtn.PRIMARY: this.addProductsToStore($event, idAttraction); break;
+      case EnumTypeActionBtn.WARN: this.deleteProductsFromStore($event); break;
+    }
+  }
+
+  deleteProductsFromStore(products: ProductRow[]) {
+    this.store.dispatch(new DeleteProducts(products.map(it => it.id)));
+  }
+
+  addProductsToStore(products: ProductRow[], id: string | number) {
+    const array = products.map(row => {
+      return {
+        id: row.id,
+        attractionId: id
+      } as ProductSelect;
+    });
+
+    this.store.dispatch(new SetProducts(array));
   }
 
   onMouseClickByProductRow($event: ProductRow, id: string | number) {
     this.productRowClickByRow = $event;
   }
 
-  onSelectProductRow($event: ProductRow, idAttraction: string | number) {
+  onSelectProductRow($event: ProductRow, id: string | number) {
     if ($event) {
-      const value = {
-        id: $event.id,
-        attractionId: idAttraction
-      } as ProductSelect;
-      this.store.dispatch(new SetProduct(value));
+      this.statePanels.get(id).selectedProduct.select($event);
     }
   }
 
   eventUnSelectRow($event: ProductRow, id: string | number) {
-    this.store.dispatch(new DeleteProduct($event.id));
+    this.statePanels.get(id).selectedProduct.select($event);
   }
+}
+
+export enum StateTitleBtn {
+  DELETE = 'DELETE_FROM_CART',
+  ADD = 'ADD_TO_CART'
 }
 
