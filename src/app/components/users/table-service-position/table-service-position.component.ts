@@ -7,7 +7,7 @@ import {Store} from '@ngrx/store';
 import {getSelectProduct} from '../../../store/selectors/position.selectors';
 
 @Component({
-  selector: 'app-table-service-position',
+    selector: 'table-service-position',
   templateUrl: './table-service-position.component.html',
   styleUrls: ['./table-service-position.component.scss']
 })
@@ -44,6 +44,9 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   @Output()
   clickByActionBtn: EventEmitter<ProductRow[]> = new EventEmitter();
 
+  @Input()
+  disabledRow = false;
+
   constructor(private store: Store<any>) {
   }
 
@@ -60,8 +63,6 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
 
     this.selection = new SelectionModel<ProductRow>(true,  this.data);
     this.selection.clear();
-
-    this.subjectData.next(this.data);
 
     if (this.selectData && this.selectData.length > 0) {
       this.selectData.forEach(value => this.selection.select(value));
@@ -104,9 +105,7 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   }
 
   eventMouseClickByActionBtn() {
-    this.dataSource = new MatTableDataSource<ProductRow>(this.selection.selected);
-
-    // this.clickByActionBtn.emit(this.selection.selected);
+    this.clickByActionBtn.emit(this.selection.selected);
   }
 
   getTotalPrice(): number {
@@ -116,25 +115,6 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriber.unsubscribe();
   }
-
-  isDisabledCheckBox() {
-    if (!this.setting.typeActionBtn) {
-      return false;
-    }
-
-    return this.setting.typeActionBtn === EnumTypeActionBtn.WARN;
-  }
-
-  removeUnSelectedRows() {
-    const tmpArray: ProductRow[] = Object.assign([], this.dataSource.data);
-    this.selection.selected.forEach(item => {
-      const index: number = tmpArray.findIndex(it => it !== item);
-      tmpArray.splice(index, 1);
-    });
-    this.dataSource = new MatTableDataSource<ProductRow>(tmpArray);
-    this.selection = new SelectionModel<ProductRow>(true, this.data);
-  }
-
 }
 
 export enum EnumTypeActionBtn {

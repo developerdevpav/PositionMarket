@@ -11,8 +11,8 @@ import {Dictionary} from '@ngrx/entity';
 import {TypeService} from '../models/type-service.model';
 import {TypeServiceEnum} from '../models/type-service';
 import {ImageUI} from '../../ui/models';
-import {PositionCatalog} from '../../components/users/catalog/list-catalog-position/list-catalog-position.component';
 import {ProductRow} from '../../components/users/table-service-position/table-service-position.component';
+import {PositionCatalog} from '../../components/users/catalog/item-catalog-position/item-catalog-position.component';
 
 export const getPositionCatalog = createSelector(
   selectCurrentLanguage,
@@ -86,7 +86,8 @@ export const getPositionProducts = createSelector(
   selectCurrentLanguage,
   attraction.selectEntities,
   typeService.selectEntities,
-  (language: Language, positions: Dictionary<AttractionModel>, typeServiceDictionary: Dictionary<TypeService>, props) => {
+  (language: Language, positions: Dictionary<AttractionModel>,
+   typeServiceDictionary: Dictionary<TypeService>, props) => {
     if (positions == null) {
       return [];
     }
@@ -123,3 +124,29 @@ export const getSelectProduct = createSelector(
   }
 );
 
+export const getDescriptionProductById = createSelector(
+  selectCurrentLanguage,
+  attraction.selectEntities,
+  typeService.selectEntities,
+  (language: Language, attractionModelDictionary: Dictionary<AttractionModel>,
+   typeServiceDictionary: Dictionary<TypeService>,
+   props: {positionId: string, productId: string}) => {
+    const position = attractionModelDictionary[props.positionId];
+
+    if (!position) {
+      return '';
+    }
+
+    const product = position.products.find(product => product.id === props.productId);
+
+    if (!product) {
+      return '';
+    }
+
+    const service = typeServiceDictionary[product.service];
+
+    console.log(service);
+
+    return converter.getStringFromArrayValuesByLanguage(service.description, language);
+  }
+);

@@ -20,5 +20,6 @@
   "TITLE_PRICE": "Название услуги",
   "TYPE_SERVICE": "Тип услуги",
   "PRICE_SERVICE": "Цена услуги",
-  "DELETE_FROM_CART": "Удалить из корзины"
+  "DELETE_FROM_CART": "Удалить из корзины",
+  "HIDDEN": "Скрыть"
 }

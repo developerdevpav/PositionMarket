@@ -1,47 +1,6 @@
 <div class="row body-catalog">
   <div class="col-md-12 col-12 box-right">
-    <div class="box__item" style="cursor: pointer;" *ngFor="let position of (positions | async)">
-      <div class="box__item__item">
-        <app-avatar-carousel class="avatar-position" [images]="position.images"></app-avatar-carousel>
-        <div class="item__content">
-          <div class="item__title">
-            {{position.title}}
-          </div>
-          <div class="item__text">
-            {{position?.description}}
-          </div>
-        </div>
-        <div class="item__price">
-          <button mat-stroked-button color="primary" class="action-price" (click)="expansionPanel(position.id)">
-            {{position.minPrice}} {{'CURRENCY_BY' | translate}}
-          </button>
-          <button mat-stroked-button color="primary" class="action-price">Подробнее</button>
-        </div>
-      </div>
-      <mat-card style="width: 100%; margin-top: 15px" *ngIf="productRowClickByRow !== undefined">
-        <mat-card-title>
-          Title card
-        </mat-card-title>
-        <mat-card-subtitle>ProductRowClickByRow</mat-card-subtitle>
-        <mat-card-content>
-          <ngx-json-viewer [json]="productRowClickByRow"></ngx-json-viewer>
-        </mat-card-content>
-        <mat-card-actions align="center" (click)="productRowClickByRow = undefined">
-          <button mat-button color="warn" >Скрыть</button>
-        </mat-card-actions>
-      </mat-card>
-      <div  style="display: flex; width: 100%; margin-top: 10px; overflow: hidden; flex-wrap: wrap;" [@expansionTrigger]="statePanels.get(position.id).state">
-        <app-table-service-position style="width: 100%;"
-                                    [columns]="columns"
-                                    [setting]="setting"
-                                    [data]="position.products"
-                                    [selectData]="statePanels.get(position.id)?.selectedProduct"
-                                    (clickByActionBtn)="selectedServiceAction($event, position.id)"
-                                    (selectItem)="onSelectProductRow($event, position.id)"
-                                    (unselectItem)="eventUnSelectRow($event, position.id)"
-                                    (clickByRow)="onMouseClickByProductRow($event, position.id)">
-        </app-table-service-position>
-      </div>
-    </div>
+    <item-catalog-position *ngFor="let position of getPositions()" [position]="position">
+    </item-catalog-position>
   </div>
 </div>

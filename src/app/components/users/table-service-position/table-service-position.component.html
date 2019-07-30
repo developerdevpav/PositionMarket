@@ -37,7 +37,7 @@
       <mat-header-cell *matHeaderCellDef class="name"></mat-header-cell>
       <mat-cell *matCellDef="let row" class="name2">
         <mat-checkbox color="primary"
-                      [disabled]="isDisabledCheckBox()"
+                      [disabled]="disabledRow"
                       (click)="$event.stopPropagation()"
                       (change)="$event ? selection.toggle(row) : null"
                       [checked]="selection.isSelected(row)">
@@ -53,7 +53,9 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"
-             [ngClass]="{'activeRow': selection.isSelected(row)}" (click)="eventMouseClickByRow(row)">
+             [ngClass]="{'activeRow': selection.isSelected(row)}"
+             disabled="{{disabledRow}}"
+             (click)="eventMouseClickByRow(row)">
     </mat-row>
     <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
   </mat-table>

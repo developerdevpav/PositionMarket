@@ -1,0 +1,8 @@
+<table-service-position [columns]="columns"
+                        [setting]="setting"
+                        [data]="products"
+                        [selectData]="selectedProducts"
+                        [disabledRow]="isLockData"
+                        (clickByRow)="onClickByProduct($event)"
+                        (clickByActionBtn)="selectedServiceAction($event)">
+</table-service-position>

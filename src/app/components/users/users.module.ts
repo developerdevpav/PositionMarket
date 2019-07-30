@@ -7,21 +7,21 @@ import {AngularMaterialModule} from '../../angular-material.module';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AvatarCarouselComponent} from './avatar-carousel/avatar-carousel.component';
-import {DevpavProductCardComponent} from './catalog/devpav-product-card/devpav-product-card.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
-import {DevpavProductTypeServiceComponent} from './catalog/devpav-product-type-service/devpav-product-type-service.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ShopProductCartComponent} from './shopping-cart/shop-product-cart/shop-product-cart.component';
 import {TableServicePositionComponent} from './table-service-position/table-service-position.component';
+import {ItemCatalogPositionComponent} from './catalog/item-catalog-position/item-catalog-position.component';
+import {ProductCatalogPanelServiceComponent} from './catalog/product-catalog-panel-service/product-catalog-panel-service.component';
+import {ItemShopProductCartComponent} from './shopping-cart/item-shop-product-cart/item-shop-product-cart.component';
 
 @NgModule({
   declarations: [
     ListCatalogPositionComponent,
     AvatarCarouselComponent,
-    DevpavProductCardComponent,
-    DevpavProductTypeServiceComponent,
-    ShopProductCartComponent,
-    TableServicePositionComponent
+    TableServicePositionComponent,
+    ItemCatalogPositionComponent,
+    ProductCatalogPanelServiceComponent,
+    ItemShopProductCartComponent
   ],
   imports: [
     CommonModule,
@@ -36,11 +36,10 @@ import {TableServicePositionComponent} from './table-service-position/table-serv
   exports: [
     ListCatalogPositionComponent,
     AvatarCarouselComponent,
-    DevpavProductCardComponent,
     NgxJsonViewerModule,
-    DevpavProductTypeServiceComponent,
-    ShopProductCartComponent,
-    TableServicePositionComponent
+    TableServicePositionComponent,
+    ItemCatalogPositionComponent,
+    ItemShopProductCartComponent
   ],
   providers: [
   ],
