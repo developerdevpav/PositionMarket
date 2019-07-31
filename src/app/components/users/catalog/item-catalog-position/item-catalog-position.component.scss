@@ -12,30 +12,33 @@
   flex-wrap: nowrap;
   background: white;
   width: 100%;
-  height: 250px;
+  height: 150px;
 }
 
 .item__content {
   position: relative;
   display: flex;
   width: 100%;
+  overflow: hidden;
   flex-wrap: wrap;
-  height: 100%;
+  height: 150px;
+  align-content: flex-start;
 }
 
 .item__title {
   display: flex;
-  color: #535b5a;
+  color: black;
   width: 100%;
   height: fit-content;
-  padding: 20px 0 0 20px;
+  padding: 20px 0 15px 20px;
 }
 
 .item__text {
-  height: 155px;
+  height: auto;
   width: 100%;
   padding: 0 20px;
   font-size: 14px;
+  color: #676767;
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
@@ -44,7 +47,7 @@
 .item__price {
   display: flex;
   width: auto;
-  min-width: 250px;
+  min-width: 200px;
   flex-wrap: wrap;
   padding: 0 20px;
   justify-content: center;
@@ -60,8 +63,8 @@
 
 .avatar-position {
   cursor: pointer;
-  width: 300px;
-  height: 250px;
+  width: 200px;
+  height: 150px;
   border-right: 1px solid rgba(121, 121, 121, 0.12);
 }
 

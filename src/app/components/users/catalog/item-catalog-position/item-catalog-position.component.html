@@ -6,7 +6,7 @@
         {{position.title}}
       </div>
       <div class="item__text">
-        {{position?.description}}
+        {{position?.description | cutText: 500 }}
       </div>
     </div>
     <div class="item__price">

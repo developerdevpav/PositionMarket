@@ -13,6 +13,7 @@ import {TableServicePositionComponent} from './table-service-position/table-serv
 import {ItemCatalogPositionComponent} from './catalog/item-catalog-position/item-catalog-position.component';
 import {ProductCatalogPanelServiceComponent} from './catalog/product-catalog-panel-service/product-catalog-panel-service.component';
 import {ItemShopProductCartComponent} from './shopping-cart/item-shop-product-cart/item-shop-product-cart.component';
+import {CutTextPipe} from '../../ui/pipes/cut-text.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {ItemShopProductCartComponent} from './shopping-cart/item-shop-product-ca
     TableServicePositionComponent,
     ItemCatalogPositionComponent,
     ProductCatalogPanelServiceComponent,
-    ItemShopProductCartComponent
+    ItemShopProductCartComponent,
+    CutTextPipe
   ],
   imports: [
     CommonModule,

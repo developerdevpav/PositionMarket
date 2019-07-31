@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   countProduct = this.store.select(getCountProductSelected);
 
   constructor(private translate: TranslateService, private store: Store<any>) {
-    let language = navigator.language.substring(0, 2);
+    const language = navigator.language.substring(0, 2);
     this.translate.setDefaultLang(language);
     this.currentLanguage = language;
 

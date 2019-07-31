@@ -77,6 +77,8 @@ export class ItemCatalogPositionComponent implements OnInit, OnDestroy {
   expansionPanel() {
     this.isExpansion = !this.isExpansion;
     this.state = this.isExpansion ? ExpansionPanelState.EXPANSION : ExpansionPanelState.HIDDEN;
+    this.productInformation = undefined;
+    this.productDescription = undefined;
   }
 
   onClickByProduct($event: ProductRow) {

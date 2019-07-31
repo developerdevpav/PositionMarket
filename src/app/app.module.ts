@@ -65,6 +65,8 @@ import {MaterialDesignModule} from './material-design.module';
     AttractionService,
     ImageUtilService,
     TranslatorYandexService
+  ],
+  exports: [
   ]
 })
 export class AppModule {

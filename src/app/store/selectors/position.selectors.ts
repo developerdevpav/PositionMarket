@@ -49,7 +49,7 @@ export const getPositionCatalog = createSelector(
 
         const avatars = position.images
           .sort(image => image.mainImage ? 1 : -1)
-          .map((image, index) => new ImageUI(image.id, index, image.url));
+          .map((image, index) => new ImageUI(image.id, ++index, image.url));
 
         let productRows: ProductRow[] = [];
 
@@ -124,13 +124,33 @@ export const getSelectProduct = createSelector(
   }
 );
 
+export const getMapPositions = createSelector(
+  selectCurrentLanguage,
+  selectedProduct.selectAll,
+  attraction.selectEntities,
+  (language: Language, productSelects: ProductSelect[],
+   attractionModelDictionary: Dictionary<AttractionModel>) => {
+    const map: Map<string, string[]> = new Map();
+
+    productSelects.forEach(it => {
+      if (!map.has(it.attractionId)) {
+        map.set(it.attractionId, []);
+      }
+
+      map.get(it.attractionId).push(it.id);
+    });
+
+    return map;
+  }
+);
+
 export const getDescriptionProductById = createSelector(
   selectCurrentLanguage,
   attraction.selectEntities,
   typeService.selectEntities,
   (language: Language, attractionModelDictionary: Dictionary<AttractionModel>,
    typeServiceDictionary: Dictionary<TypeService>,
-   props: {positionId: string, productId: string}) => {
+   props: { positionId: string, productId: string }) => {
     const position = attractionModelDictionary[props.positionId];
 
     if (!position) {
