@@ -21,5 +21,6 @@
   "TYPE_SERVICE": "Type of service",
   "PRICE_SERVICE": "Price of service",
   "DELETE_FROM_CART": "Delete from cart",
-  "HIDDEN": "Hidden"
+  "HIDDEN": "Hidden",
+  "CONTACT_OWNER": "Contact owner"
 }

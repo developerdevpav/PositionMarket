@@ -21,5 +21,6 @@
   "TYPE_SERVICE": "Тип услуги",
   "PRICE_SERVICE": "Цена услуги",
   "DELETE_FROM_CART": "Удалить из корзины",
-  "HIDDEN": "Скрыть"
+  "HIDDEN": "Скрыть",
+  "CONTACT_OWNER": "Контакты арендодателя"
 }

@@ -1,3 +1,4 @@
+<!--
 <div class="box__item" style="cursor: pointer;">
   <div class="box__item__item">
     <app-avatar-carousel class="avatar-position" [images]="position.images"></app-avatar-carousel>
@@ -35,3 +36,82 @@
     </product-catalog-panel-service>
   </div>
 </div>
+-->
+<div class="wrapper">
+  <div class="header-item">
+    <div class="logo-company">
+      Artezio company
+    </div>
+    <div class="header-contacts">
+      <button mat-button color="primary">{{'CONTACT_OWNER' | translate}}</button>
+    </div>
+  </div>
+  <div class="item">
+    <app-avatar-carousel class="item_avatar"></app-avatar-carousel>
+    <div class="item_content">
+      <div class="item_title">
+        {{position?.title}}
+      </div>
+      <div class="item_description">
+        {{position?.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque consequatur dolor
+        doloremque dolores ea est, excepturi fuga ipsum iure laudantium modi molestiae neque nihil obcaecati officia qui
+        recusandae sed similique soluta vero vitae voluptatibus. Accusamus, atque consequuntur eaque exercitationem hic
+        ipsa placeat rerum similique, sit ullam voluptatem voluptates! Recusandae.
+      </div>
+    </div>
+    <div class="item_counter">
+      <div class="number">
+        <span class="minus" (click)="decrement()">–</span>
+        <input type="text" [(ngModel)]="count"/>
+        <span class="plus" (click)="increment()">+</span>
+      </div>
+    </div>
+    <div class="item_price" (click)="expansionPanel()">
+      <div class="price-title">
+        от {{position.minPrice}} {{'CURRENCY_BY' | translate}}
+      </div>
+      <div class="price-description">
+        Доступно сервисов аренды позиции ({{position?.products?.length}})<br>
+        Доступно сервисов доставки позиции (0)<br>
+        Доступно сервисов по персоналу ({{position?.products?.length}})
+      </div>
+    </div>
+    <div class="item_action">
+      <svg-icon class="item-information" src="../../../assets/icon/information.svg"
+                [svgStyle]="{'width.px':25, 'height.px':25}"></svg-icon>
+    </div>
+  </div>
+  <mat-card style="width: 100%; margin: 15px;" *ngIf="productInformation !== undefined">
+    <mat-card-subtitle>{{productInformation?.title}}
+      / {{productInformation?.type?.toString() | translate}}</mat-card-subtitle>
+    <mat-card-content>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias aliquam architecto blanditiis
+      consequuntur, corporis et facilis odio officia placeat. Consectetur cumque ducimus eveniet exercitationem facere
+      nihil nisi pariatur, perferendis placeat, quia similique voluptatum. Eos eum facilis inventore maiores nesciunt
+      nobis, quam quas totam voluptatem voluptates. Ab, aspernatur at autem deserunt est et eum excepturi expedita
+      impedit ipsam magnam molestias nesciunt nihil nulla officiis quaerat qui quia quidem quis reprehenderit saepe sed
+      temporibus tenetur veritatis voluptas! Alias animi consequatur, consequuntur cupiditate delectus dolore dolores
+      ducimus esse eveniet, fugit id in iure labore necessitatibus numquam, optio praesentium ratione recusandae
+      repellat voluptates? A architecto assumenda debitis enim error fugit ipsam itaque laboriosam magnam modi nam
+      necessitatibus non odit officiis perspiciatis quaerat sit, soluta temporibus unde voluptates! Animi, atque
+      consequuntur deserunt eos, eum exercitationem fugiat impedit in ipsa labore modi molestias nihil officia omnis
+      quia repellat repellendus rerum sapiente sit soluta sunt vero.
+    </mat-card-content>
+    <mat-card-actions align="center" (click)="hiddenSupportInfoPanel()">
+      <button mat-button color="warn">{{'HIDDEN' |translate}}</button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="wrapper-table-products" style="margin-top: 15px" [@expansionTrigger]="state">
+    <product-catalog-panel-service
+      (clickByRow)="onClickByProduct($event)"
+      (selected)="selectedServiceAction($event)"
+      [select]="selectedProduct"
+      (deleted)="deleteFromCart($event)"
+      class="table-products" [products]="position.products">
+    </product-catalog-panel-service>
+  </div>
+  <div class="footer-item">
+    <button mat-stroked-button color="primary">{{'ADD_TO_CART' | translate}}</button>
+  </div>
+</div>
+

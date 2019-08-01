@@ -38,6 +38,7 @@ export class ProductCatalogPanelServiceComponent implements OnInit {
     EnumColumnProductTable.TITLE,
     EnumColumnProductTable.TYPE,
     EnumColumnProductTable.PRICE,
+    EnumColumnProductTable.DESCRIPTION,
     EnumColumnProductTable.CHECK
   );
   

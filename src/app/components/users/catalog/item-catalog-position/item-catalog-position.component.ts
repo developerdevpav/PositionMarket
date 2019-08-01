@@ -29,16 +29,20 @@ export const enum ExpansionPanelState {
   animations: [
     trigger('expansionTrigger', [
       state(ExpansionPanelState.HIDDEN.toString(), style({
-        height: 0
+        height: 0,
+        margin: '0px'
       })),
       state(ExpansionPanelState.EXPANSION.toString(), style({
-        height: '*'
+        height: '*',
+        margin: '5px'
       })),
       transition('hidden <=> expansion', animate('0.2s'))
     ])
   ]
 })
 export class ItemCatalogPositionComponent implements OnInit, OnDestroy {
+
+  count = 1;
 
   @Input()
   position: PositionCatalog;
@@ -104,5 +108,18 @@ export class ItemCatalogPositionComponent implements OnInit, OnDestroy {
 
   deleteFromCart($event: ProductRow[]) {
     this.store.dispatch(new DeleteProducts($event.map(it => it.id)));
+  }
+
+
+  increment() {
+    this.count++;
+  }
+
+  decrement() {
+    if (this.count <= 1) {
+      return;
+    }
+
+    this.count--;
   }
 }

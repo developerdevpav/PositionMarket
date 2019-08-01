@@ -28,7 +28,8 @@
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef class="name"></mat-header-cell>
       <mat-cell *matCellDef="let element" class="name2">
-        <button mat-button color="primary">Подробнее</button>
+        <svg-icon class="item-information" src="../../../assets/icon/information.svg"
+                  [svgStyle]="{'width.px':20, 'height.px':20}"></svg-icon>
       </mat-cell>
       <mat-footer-cell *matFooterCellDef></mat-footer-cell>
     </ng-container>
@@ -57,6 +58,6 @@
              disabled="{{disabledRow}}"
              (click)="eventMouseClickByRow(row)">
     </mat-row>
-    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+<!--    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>-->
   </mat-table>
 </div>
