@@ -1,16 +1,17 @@
 input {
   width: 100%;
   padding: 11px 15px;
-  font-family: Arial,sans-serif;
-  font-size: 12px;
-  color: #676e7b;
+  font: 400 13.3333px Arial;
+  color: #333;
   background: #fff;
-  border: 1px solid #cccccc;
   border-radius: 3px;
-  box-sizing: border-box;
+  /* border: 1px solid #1489cc;
+   border-radius: 3px;
+   box-sizing: border-box;*/
 }
 
 textarea:focus, input:focus{
-  outline: none;
-  border: 1px solid #a5a5a5;
+/*  outline: none;
+  border: 1px solid #a5a5a5;*/
+  border-radius: 3px;
 }

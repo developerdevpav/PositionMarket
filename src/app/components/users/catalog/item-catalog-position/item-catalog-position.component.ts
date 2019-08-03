@@ -1,13 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ImageUI} from '../../../../ui/models';
-import {ProductRow} from '../../table-service-position/table-service-position.component';
+import {Row} from '../../table-service-position/table-service-position.component';
 import {Subscription} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {getDescriptionProductById, getSelectProduct} from '../../../../store/selectors/position.selectors';
-import {DeleteProducts, SetProducts} from '../../../../store/actions/select-product.actions';
+import {getSelectProduct} from '../../../../store/selectors/position.selectors';
+import {ProductServiceExpansionProps} from '../product-service-expansion/product-service-expansion.component';
 import {ProductSelect} from '../../../../store/reducers/selected-product.reducer';
-
+import {SetProducts} from '../../../../store/actions/select-product.actions';
 
 export interface PositionCatalog {
   id: string | number;
@@ -15,111 +14,68 @@ export interface PositionCatalog {
   title: string;
   description: string;
   minPrice: number | undefined;
-  products: ProductRow[];
-}
-
-export const enum ExpansionPanelState {
-  EXPANSION = 'expansion', HIDDEN = 'hidden'
+  products: Row[];
 }
 
 @Component({
   selector: 'item-catalog-position',
   templateUrl: './item-catalog-position.component.html',
-  styleUrls: ['./item-catalog-position.component.scss'],
-  animations: [
-    trigger('expansionTrigger', [
-      state(ExpansionPanelState.HIDDEN.toString(), style({
-        height: 0,
-        margin: '0px'
-      })),
-      state(ExpansionPanelState.EXPANSION.toString(), style({
-        height: '*',
-        margin: '5px'
-      })),
-      transition('hidden <=> expansion', animate('0.2s'))
-    ])
-  ]
+  styleUrls: ['./item-catalog-position.component.scss']
 })
 export class ItemCatalogPositionComponent implements OnInit, OnDestroy {
-
-  count = 1;
 
   @Input()
   position: PositionCatalog;
 
-  subscriberDescriptionProduct: Subscription = new Subscription();
+  totalPrice: number = 0;
 
   subscriber: Subscription = new Subscription();
-  selectedProduct: ProductRow[];
 
-  productInformation: ProductRow;
-  productDescription: string;
+  propsRent: ProductServiceExpansionProps = {
+    idPosition: '',
+    propsRefPanel: {
+      titleRef: 'Посмотреть цены аренды позиции',
+      idPanelRef: 'RENT'
+    },
+    rows: [],
+    selectedRows: []
+  };
 
-  state: ExpansionPanelState = ExpansionPanelState.HIDDEN;
-  isExpansion = false;
+  rentProducts: ProductSelect[] = [];
 
   constructor(private store: Store<any>) {
   }
 
   ngOnInit() {
+    this.propsRent.idPosition = this.position.id as string;
     const selectedProductSubscriber = this.store.select(getSelectProduct, this.position.products).subscribe(array => {
-      this.selectedProduct = array;
+      this.propsRent.selectedRows = array;
+      this.propsRent.rows = this.position.products;
+      this.totalPrice = this.propsRent.selectedRows.reduce((val, val2) => val += val2.price, 0);
     });
     this.subscriber.add(selectedProductSubscriber);
   }
 
-  selectedServiceAction($event: ProductRow[]) {
-    console.log($event);
-    this.store.dispatch(new SetProducts($event.map(it => {
-      return {
-        attractionId: this.position.id,
-        id: it.id
-      } as ProductSelect;
-    })));
-  }
-
-  expansionPanel() {
-    this.isExpansion = !this.isExpansion;
-    this.state = this.isExpansion ? ExpansionPanelState.EXPANSION : ExpansionPanelState.HIDDEN;
-    this.productInformation = undefined;
-    this.productDescription = undefined;
-  }
-
-  onClickByProduct($event: ProductRow) {
-    this.productInformation = $event;
-    this.subscriberDescriptionProduct.add(
-      this.store.select(getDescriptionProductById, {positionId: this.position.id, productId: $event.id})
-        .subscribe(it => {
-          this.productDescription = it;
-        })
-    );
-  }
-
-  hiddenSupportInfoPanel() {
-    this.productInformation = undefined;
-    this.productDescription = '';
-    this.subscriberDescriptionProduct.unsubscribe();
-  }
-
   ngOnDestroy(): void {
-    this.subscriberDescriptionProduct.unsubscribe();
     this.subscriber.unsubscribe();
   }
 
-  deleteFromCart($event: ProductRow[]) {
-    this.store.dispatch(new DeleteProducts($event.map(it => it.id)));
+  selectProductsRent($event: ProductSelect[]) {
+    this.rentProducts = $event;
   }
 
-
-  increment() {
-    this.count++;
-  }
-
-  decrement() {
-    if (this.count <= 1) {
-      return;
+  getTotalPrice() {
+    if (!this.rentProducts) {
+      return 0;
     }
+    return this.rentProducts.length;
+  }
 
-    this.count--;
+  toCart() {
+    this.store.dispatch(new SetProducts(this.rentProducts));
+  }
+
+  isExistProducts(): boolean {
+    return this.rentProducts && this.rentProducts.length > 0;
   }
 }

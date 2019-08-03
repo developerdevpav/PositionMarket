@@ -1,0 +1,27 @@
+<div class="ref-panel">
+  <devpav-ref-panel
+    (clickRef)="rentRefPanelAction()"
+    [iconSetting]="refPanelRentIcon"
+    [fontColorTitle]="'black'"
+    [fontSizeTitle]="'13px'"
+    [panelStyle]="settingRefPanel"
+    [props]="props?.propsRefPanel">
+  </devpav-ref-panel>
+</div>
+<div class="information-panel">
+  <devpav-information-panel
+    *ngIf="informationPanelProps !== undefined"
+    [btnTitle]="'HIDDEN' | translate"
+    (clickBtn)="hiddenSupportInfoPanel()"
+    [props]="informationPanelProps">
+  </devpav-information-panel>
+</div>
+
+<div class="wrapper-table-products" [@expansionTrigger]="state">
+  <product-catalog-panel-service class="table-products"
+                                 (clickDescription)="onClickByProductDescription($event)"
+                                 (selectedItems)="items($event)"
+                                 [selectProducts]="props?.selectedRows"
+                                 [products]="props?.rows">
+  </product-catalog-panel-service>
+</div>

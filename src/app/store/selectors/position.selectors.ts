@@ -11,7 +11,7 @@ import {Dictionary} from '@ngrx/entity';
 import {TypeService} from '../models/type-service.model';
 import {TypeServiceEnum} from '../models/type-service';
 import {ImageUI} from '../../ui/models';
-import {ProductRow} from '../../components/users/table-service-position/table-service-position.component';
+import {Row} from '../../components/users/table-service-position/table-service-position.component';
 import {PositionCatalog} from '../../components/users/catalog/item-catalog-position/item-catalog-position.component';
 
 export const getPositionCatalog = createSelector(
@@ -51,7 +51,7 @@ export const getPositionCatalog = createSelector(
           .sort(image => image.mainImage ? 1 : -1)
           .map((image, index) => new ImageUI(image.id, ++index, image.url));
 
-        let productRows: ProductRow[] = [];
+        let productRows: Row[] = [];
 
         if (position.products && position.products.length > 0) {
           productRows = position.products
@@ -63,7 +63,7 @@ export const getPositionCatalog = createSelector(
                 type: service.type,
                 price: product.price,
                 title: converter.getStringFromArrayValuesByLanguage(service.values, language)
-              } as ProductRow;
+              } as Row;
             });
         }
 
@@ -110,7 +110,7 @@ export const getPositionProducts = createSelector(
         type: service.type,
         price: product.price,
         title: converter.getStringFromArrayValuesByLanguage(service.values, language)
-      } as ProductRow;
+      } as Row;
     });
 
   }
@@ -119,7 +119,7 @@ export const getPositionProducts = createSelector(
 export const getSelectProduct = createSelector(
   selectCurrentLanguage,
   selectedProduct.selectEntities,
-  (language: Language, productSelectDictionary: Dictionary<ProductSelect>, products: ProductRow[]) => {
+  (language: Language, productSelectDictionary: Dictionary<ProductSelect>, products: Row[]) => {
     return products.filter(product => productSelectDictionary[product.id]);
   }
 );

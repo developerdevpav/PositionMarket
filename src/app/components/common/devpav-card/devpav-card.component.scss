@@ -1,70 +1,20 @@
-$heightBox: 50px;
-
-.box_color_white_w100 {
-  display: flex;
-  flex-wrap: wrap;
+.devpav-card {
   width: 100%;
-}
-
-.box {
-  @extend .box_color_white_w100;
-  flex-wrap: nowrap;
+  height: auto;
+  padding: 15px 20px;
   background: white;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-  height: $heightBox;
-
-
-
-  .box_avatar {
-    @extend .box_color_white_w100;
-    align-items: center;
-    width: 100px;
-    height: $heightBox;
-    cursor: pointer;
-
-    img {
-      width: 100px;
-      height: 100%;
-    }
-  }
-
-
-
-  .box-body-card {
-    @extend .box_color_white_w100;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    padding-left: 15px;
-
-    .box-header {
-      @extend .box_color_white_w100;
-      height: $heightBox;
-      align-items: center;
-
-      .box-header_title {
-        @extend .box_color_white_w100;
-        align-items: center;
-        font-size: 16px;
-        line-height: 24px;
-        color: #66686e;
-        font-family: "Google Sans",Roboto,Arial,sans-serif;
-        font-weight: 400;
-        cursor: pointer;
-      }
-    }
-
-    .box_action {
-      @extend .box_color_white_w100;
-      width: 113px;
-      border-left: solid 2px whitesmoke;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      //background: whitesmoke;
-    }
-
-  }
-
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.19);
 }
 
+.devpav-card__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+  padding: 0 0 10px 0;
+}
 
+.devpav-card__title {
+  color: rgba(136, 136, 136, 0.78);
+  font-size: 18px;
+  font-weight: 400;
+}

@@ -49,4 +49,11 @@ mat-footer-row {
   justify-content: center;
 }
 
+.item-information {
+  display: flex;
+  align-items: center;
+}
 
+.item-information:hover {
+  fill: #0000f0;
+}

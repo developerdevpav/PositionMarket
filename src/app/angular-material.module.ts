@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
+import {AngularSvgIconModule} from 'angular-svg-icon';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
+    AngularSvgIconModule,
     MatTableModule
   ],
   exports: [
@@ -39,6 +41,7 @@ import {MatTableModule} from '@angular/material/table';
     MatDialogModule,
     MatSelectModule,
     MatTabsModule,
+    AngularSvgIconModule,
     MatListModule,
     MatIconModule,
     MatCheckboxModule,

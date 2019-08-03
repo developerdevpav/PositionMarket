@@ -10,7 +10,6 @@ import * as storeReducers from './store';
 import {EffectsModule} from '@ngrx/effects';
 import {TypeEffects} from './store/effects/type.effects';
 import {NsiAbstractService} from './store/services/nsi.abstract.service';
-import {AngularSvgIconModule} from 'angular-svg-icon';
 import {TagEffects} from './store/effects/tag.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TypeServiceEffects} from './store/effects/type-service.effects';
@@ -40,7 +39,6 @@ import {MaterialDesignModule} from './material-design.module';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    AngularSvgIconModule,
     PageModule,
     AngularMultiSelectModule,
     EffectsModule.forRoot([

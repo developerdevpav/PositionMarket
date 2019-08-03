@@ -11,6 +11,7 @@ import {UsersComponentsModule} from '../components/users/users.module';
 import {AngularMaterialModule} from '../angular-material.module';
 import {UserShoppingCartComponent} from './user-shopping-cart/user-shopping-cart.component';
 import {PositionDetailPageComponent} from './position-detail-page/position-detail-page.component';
+import {ManagerComponentModule} from '../components/users/manager-component/manager-component.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {PositionDetailPageComponent} from './position-detail-page/position-detai
     ComponentCommonModule,
     MaterialDesignModule,
     UsersComponentsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ManagerComponentModule
   ],
   schemas: [
     NO_ERRORS_SCHEMA

@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   EnumColumnProductTable,
-  EnumPlaceTable,
-  EnumTypeActionBtn,
-  ProductRow,
+  Row,
+  TableServicePositionProps,
   TableSetting
 } from '../../table-service-position/table-service-position.component';
 
@@ -14,25 +13,41 @@ import {
 })
 export class ProductCatalogPanelServiceComponent implements OnInit {
 
-  isLockData = false;
+  propsTable: TableServicePositionProps = {
+    data: [],
+    selectData: []
+  };
 
-  @Input() products: ProductRow[] = [];
-  selectedProducts: ProductRow[] = [];
-
+  setting: TableSetting = {
+    disabledRow: false,
+    hiddenFooter: false,
+    hiddenHeader: false
+  };
 
   @Input()
-  set select(products: ProductRow[]) {
+  set products (rows: Row[]) {
+    this.propsTable.data = rows;
+  }
+
+  @Input()
+  set selectProducts(products: Row[]) {
     if (products && products.length > 0) {
-      this.selectedProducts = products;
-      this.setting.typeActionBtn = EnumTypeActionBtn.WARN;
-      this.setting.titleActionBtn = 'DELETE_FROM_CART';
-      this.isLockData = true;
+      this.propsTable.selectData = [];
+      this.setting.disabledRow = true;
     }
   }
 
-  @Output() clickByRow: EventEmitter<ProductRow> = new EventEmitter();
-  @Output() selected: EventEmitter<ProductRow[]> = new EventEmitter();
-  @Output() deleted: EventEmitter<ProductRow[]> = new EventEmitter();
+  @Output()
+  clickDescription: EventEmitter<Row> = new EventEmitter();
+
+  @Output()
+  selectedItems: EventEmitter<Row[]> = new EventEmitter();
+
+  @Output()
+  selected: EventEmitter<Row[]> = new EventEmitter();
+
+  @Output()
+  deleted: EventEmitter<Row[]> = new EventEmitter();
 
   columns: EnumColumnProductTable[] = Array(
     EnumColumnProductTable.TITLE,
@@ -41,34 +56,19 @@ export class ProductCatalogPanelServiceComponent implements OnInit {
     EnumColumnProductTable.DESCRIPTION,
     EnumColumnProductTable.CHECK
   );
-  
-  setting: TableSetting = {
-    titleActionBtn: 'ADD_TO_CART',
-    typeActionBtn: EnumTypeActionBtn.PRIMARY,
-    hiddenActionBtn: true,
-    place: EnumPlaceTable.CATALOG
-  };
+
   
   constructor() { }
 
   ngOnInit() {
-    console.log('ngOnInit ProductCatalogPanelServiceComponent');
-    console.log(this.setting);
+
   }
 
-  onClickByProduct($event: ProductRow) {
-    this.clickByRow.emit($event);
+  clickByDescription($event: Row) {
+    this.clickDescription.emit($event);
   }
 
-  selectedServiceAction($event: ProductRow[]) {
-    this.isLockData = !this.isLockData;
-    this.setting.typeActionBtn = this.isLockData ? EnumTypeActionBtn.WARN : EnumTypeActionBtn.PRIMARY;
-    this.setting.titleActionBtn = this.isLockData ? 'DELETE_FROM_CART' : 'ADD_TO_CART';
-
-    if (this.isLockData) {
-      this.selected.emit($event);
-    } else {
-      this.deleted.emit(this.products);
-    }
+  items($event: Row[]) {
+    this.selectedItems.emit($event);
   }
 }

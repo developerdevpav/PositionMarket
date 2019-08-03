@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {getPositionCatalog} from '../../../../store/selectors/position.selectors';
 import {select, Store} from '@ngrx/store';
-import {ProductRow} from '../../table-service-position/table-service-position.component';
+import {Row} from '../../table-service-position/table-service-position.component';
 import {SelectionModel} from '@angular/cdk/collections';
 import {PositionCatalog} from '../item-catalog-position/item-catalog-position.component';
 
@@ -10,7 +10,7 @@ import {PositionCatalog} from '../item-catalog-position/item-catalog-position.co
 export interface StatePanel {
   state: string;
   isExpansion: boolean;
-  selectedProduct: SelectionModel<ProductRow>;
+  selectedProduct: SelectionModel<Row>;
 }
 
 @Component({
@@ -33,7 +33,6 @@ export class ListCatalogPositionComponent implements OnInit, OnDestroy, AfterVie
         this.positions.clear();
         return;
       }
-
 
       array.forEach(value => {
         const positionCatalog = this.positions.get(value.id);

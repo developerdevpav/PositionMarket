@@ -7,9 +7,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class DevpavInputComponent implements OnInit {
 
-
   @Input() ph: string;
-  @Input() type = 'password';
+  @Input() type = 'text';
 
   @Output() blurEmit: EventEmitter<boolean> = new EventEmitter();
   @Output() focusEmit: EventEmitter<boolean> = new EventEmitter();

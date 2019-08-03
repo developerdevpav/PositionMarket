@@ -1,0 +1,8 @@
+<div [ngStyle]="getPanelStyle()" class="box">
+  <a (click)="onClickRef()" class="box__ref"
+     [style.color]="fontColorTitle" [style.fontSize]="fontSizeTitle">
+    {{props?.titleRef}}
+  </a>
+  <svg-icon class="box__icon" src="../../../assets/icon/{{iconSetting?.iconSvg}}"
+            [svgStyle]="{'width.px':25, 'height.px':25, fill: iconSetting?.iconColor}"></svg-icon>
+</div>

@@ -1,0 +1,21 @@
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.box__ref {
+  cursor: pointer;
+}
+
+.box__icon {
+  display: flex;
+  align-items: center;
+  top: auto;
+  bottom: auto;
+  right: 15px;
+  position: absolute;
+  height: auto;
+  width: auto;
+}

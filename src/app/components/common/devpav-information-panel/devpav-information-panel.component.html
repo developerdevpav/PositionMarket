@@ -1,0 +1,23 @@
+<!--
+<mat-card>
+  <mat-card-subtitle>{{props?.title}}</mat-card-subtitle>
+  <mat-card-content>
+    {{props?.description}}
+  </mat-card-content>
+  <mat-card-actions align="center">
+    <button mat-button color="warn" (click)="clickBtn.emit($event)">{{btnTitle}}</button>
+  </mat-card-actions>
+</mat-card>
+-->
+
+<div class="information-panel">
+  <div class="information-panel__title">
+    {{props?.title}}
+  </div>
+  <div class="information-panel__content">
+    {{props?.description}}
+  </div>
+  <div class="information-panel__action" (click)="clickBtn.emit(true)">
+    <mat-icon svgIcon="clear">{{btnTitle}}</mat-icon>
+  </div>
+</div>
