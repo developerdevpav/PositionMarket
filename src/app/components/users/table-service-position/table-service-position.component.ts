@@ -14,6 +14,7 @@ export interface Row {
 }
 
 export interface TableServicePositionProps {
+  id?: string,
   data?: Row[],
   selectData?: Row[]
 }
@@ -50,6 +51,7 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
 
   @Input()
   public props: TableServicePositionProps = {
+    id: '',
     data: [],
     selectData: []
   };
@@ -85,43 +87,31 @@ export class TableServicePositionComponent implements OnInit, OnDestroy {
   @Output()
   clickByActionBtn: EventEmitter<Row[]> = new EventEmitter();
 
-  constructor(private store: Store<any>) {
-  }
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
+    this.selection = new SelectionModel<Row>(true, this.props.data);
+    this.selection.clear();
+
+    this.dataSource = new MatTableDataSource<Row>(this.props.data);
 
     if (this.props.data == null) {
       this.props.data = [];
     }
 
-    this.props.data = this.props.data.sort((value, anotherValue) => {
-      return value.type > anotherValue.type ? -1 : 1;
+    const subscriberOnChangeSelection = this.selection.changed.asObservable().subscribe(it => {
+      if (it.added.length !== 0)
+        this.selectItem.emit(it.added[0]);
+      if (it.removed.length !== 0)
+        this.unselectItem.emit(it.removed[0]);
+
+      this.selectedItems.emit(this.selection.selected);
     });
-
-    this.dataSource = new MatTableDataSource<Row>(this.props.data);
-    this.dataSource.sort = this.sort;
-
-    this.selection = new SelectionModel<Row>(true, this.props.data);
-    this.selection.clear();
 
     const subscriberProductSelect = this.store.select(getSelectProduct, this.props.data).subscribe(value => {
       value.forEach(it => this.selection.select(it));
-    });
-
-    if (this.props.selectData && this.props.selectData.length > 0) {
-      this.props.selectData.forEach(value => this.selection.select(value));
-    }
-
-    const subscriberOnChangeSelection = this.selection.changed.asObservable().subscribe(it => {
-      if (it.added.length !== 0) {
-        this.selectItem.emit(it.added[0]);
-      }
-
-      if (it.removed.length !== 0) {
-        this.unselectItem.emit(it.removed[0]);
-      }
-
-      this.selectedItems.emit(this.selection.selected);
+      this.setting.disabledRow = (value && value.length > 0);
+      console.log('subscriberProductSelect: ', value);
     });
 
     this.subscriber.add(subscriberOnChangeSelection);

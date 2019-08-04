@@ -14,9 +14,13 @@ import {
 export class ProductCatalogPanelServiceComponent implements OnInit {
 
   propsTable: TableServicePositionProps = {
+    id: '',
     data: [],
     selectData: []
   };
+
+  @Input()
+  idPosition: string = '';
 
   setting: TableSetting = {
     disabledRow: false,
@@ -61,7 +65,7 @@ export class ProductCatalogPanelServiceComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    this.propsTable.id = this.idPosition;
   }
 
   clickByDescription($event: Row) {

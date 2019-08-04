@@ -38,6 +38,10 @@ export class AppComponent implements OnInit {
       .addSvgIcon(
         'clear',
         domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/clear.svg')
+      )
+      .addSvgIcon(
+        'check',
+        domSanitizer.bypassSecurityTrustResourceUrl('../assets/icon/check.svg')
       );
   }
 

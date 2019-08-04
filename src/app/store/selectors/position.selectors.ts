@@ -12,7 +12,8 @@ import {TypeService} from '../models/type-service.model';
 import {TypeServiceEnum} from '../models/type-service';
 import {ImageUI} from '../../ui/models';
 import {Row} from '../../components/users/table-service-position/table-service-position.component';
-import {PositionCatalog} from '../../components/users/catalog/item-catalog-position/item-catalog-position.component';
+import {KitProduct, PositionCatalog} from '../../components/users/catalog/item-catalog-position/item-catalog-position.component';
+import {Product} from '../models/products';
 
 export const getPositionCatalog = createSelector(
   selectCurrentLanguage,
@@ -26,59 +27,83 @@ export const getPositionCatalog = createSelector(
     }
 
     return positions.map(position => {
-        let minPriceProduct;
-
         const products = position.products;
 
-        if (products && products.length > 0) {
-          const firstElement = products
-            .filter(product => product != null)
-            .filter(product => product.service != null)
-            .filter(product => {
-              const service = typeServiceDictionary[product.service];
-              return service != null && service.type === TypeServiceEnum.RENT;
-            })
-            .sort((productMaster, productNext) => {
-              return productMaster.price > productNext.price ? 1 : -1;
-            })[0];
+        let minRentPrice;
+        let avatars;
 
-          if (firstElement) {
-            minPriceProduct = firstElement.price;
-          }
+        if (position.images) {
+          avatars = position.images
+            .sort(image => image.mainImage ? 1 : -1)
+            .map((image, index) => new ImageUI(image.id, ++index, image.url));
         }
 
-        const avatars = position.images
-          .sort(image => image.mainImage ? 1 : -1)
-          .map((image, index) => new ImageUI(image.id, ++index, image.url));
-
-        let productRows: Row[] = [];
+        let setProductRent: KitProduct;
+        let setProductDelivery: KitProduct;
+        let setProductPersonal: KitProduct;
 
         if (position.products && position.products.length > 0) {
-          productRows = position.products
-            .filter(product => typeServiceDictionary[product.service])
-            .map(product => {
-              const service = typeServiceDictionary[product.service];
-              return {
-                id: product.id,
-                type: service.type,
-                price: product.price,
-                title: converter.getStringFromArrayValuesByLanguage(service.values, language)
-              } as Row;
-            });
+          setProductRent = convertProductsToSerProduct(products, language, id => typeServiceDictionary[id], TypeServiceEnum.RENT);
+          setProductDelivery = convertProductsToSerProduct(products, language, id => typeServiceDictionary[id], TypeServiceEnum.DELIVERY);
+          setProductPersonal = convertProductsToSerProduct(products, language, id => typeServiceDictionary[id], TypeServiceEnum.PERSONAL);
         }
 
         return {
           id: position.id,
           title: converter.getStringFromArrayValuesByLanguage(position.title, language),
           description: converter.getStringFromArrayValuesByLanguage(position.description, language),
-          minPrice: minPriceProduct,
           images: avatars,
-          products: productRows
+          rent: setProductRent,
+          delivery: setProductDelivery,
+          personal: setProductPersonal
         } as PositionCatalog;
       }
     );
   }
 );
+
+const convertProductsToSerProduct = (array: Product[], language: Language, callBack: (id: string) => TypeService, type: TypeServiceEnum) => {
+  return {
+    minPrice: getMinPriceByTypeService(array,
+      (id) => callBack(id), type),
+    products: convertProductsToRowsByTypeService(array, language,
+      (id) => callBack(id), type)
+  };
+};
+const getMinPriceByTypeService = (array: Product[], callBack: (id: string) => TypeService, type: TypeServiceEnum) => {
+  const firstElement = array
+    .filter(product => product != null)
+    .filter(product => product.service != null)
+    .filter(product => {
+      const service = callBack(product.service);
+      return service != null && service.type === type;
+    })
+    .sort((productMaster, productNext) => {
+      return productMaster.price > productNext.price ? 1 : -1;
+    })[0];
+
+  return firstElement ? firstElement.price : 0;
+};
+const convertProductsToRowsByTypeService = (array: Product[], language: Language, callBack: (id: string) => TypeService, type: TypeServiceEnum) => {
+  if (!array) {
+    return [];
+  }
+
+  return array
+    .filter(product => {
+      const service = callBack(product.service);
+      return service && service.type === type;
+    })
+    .map(product => {
+      const service = callBack(product.service);
+      return {
+        id: product.id,
+        type: service.type,
+        price: product.price,
+        title: converter.getStringFromArrayValuesByLanguage(service.values, language)
+      } as Row;
+    });
+};
 
 /**
  * */
@@ -120,6 +145,9 @@ export const getSelectProduct = createSelector(
   selectCurrentLanguage,
   selectedProduct.selectEntities,
   (language: Language, productSelectDictionary: Dictionary<ProductSelect>, products: Row[]) => {
+    if (!products) {
+      return [];
+    }
     return products.filter(product => productSelectDictionary[product.id]);
   }
 );
@@ -133,11 +161,11 @@ export const getMapPositions = createSelector(
     const map: Map<string, string[]> = new Map();
 
     productSelects.forEach(it => {
-      if (!map.has(it.attractionId)) {
-        map.set(it.attractionId, []);
+      if (!map.has(it.positionId)) {
+        map.set(it.positionId, []);
       }
 
-      map.get(it.attractionId).push(it.id);
+      map.get(it.positionId).push(it.id);
     });
 
     return map;

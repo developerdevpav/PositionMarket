@@ -20,7 +20,9 @@
   "TITLE_PRICE": "Title of service",
   "TYPE_SERVICE": "Type of service",
   "PRICE_SERVICE": "Price of service",
-  "DELETE_FROM_CART": "Delete from cart",
+  "DELETE_FROM_CART": "In Cart",
   "HIDDEN": "Hidden",
-  "CONTACT_OWNER": "Contact owner"
+  "CONTACT_OWNER": "Contact owner",
+  "DETAIL": "Detail",
+  "VALUE_RENT": "Services and prices of rent"
 }

@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ListItem} from 'ng-multiselect-dropdown/multiselect.model';
+import {MatDialog} from '@angular/material';
+import {ActionNsiDialogComponent} from '../dialogs/action-nsi-dialog/action-nsi-dialog.component';
 
 @Component({
   selector: 'action-position',
@@ -7,9 +10,20 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ActionPositionComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
-  ngOnInit() {
+  openDialog() {
+    const dialogRef = this.dialog.open(ActionNsiDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
+  ngOnInit() {
+
+  }
+
+  onItemSelect($event: ListItem) {
+    
+  }
 }

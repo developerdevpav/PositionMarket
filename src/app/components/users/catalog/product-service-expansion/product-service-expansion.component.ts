@@ -44,7 +44,7 @@ export class ProductServiceExpansionComponent implements OnInit, OnDestroy {
   informationPanelProps: DevpavInformationPanelProps;
 
   refPanelRentIcon: DevpavRefPanelIcon = {
-    iconSvg: 'baseline-expand_less.svg',
+    iconSvg: 'baseline-expand.svg',
     iconColor: 'black'
   };
 
@@ -59,8 +59,8 @@ export class ProductServiceExpansionComponent implements OnInit, OnDestroy {
   @Output()
   public selectedProducts: EventEmitter<ProductSelect[]> = new EventEmitter();
 
-  state: ExpansionPanelState = ExpansionPanelState.EXPANSION;
-  isExpansion = true;
+  state: ExpansionPanelState = ExpansionPanelState.HIDDEN;
+  isExpansion = false;
 
 
   constructor(private store: Store<any>) { }
@@ -74,12 +74,8 @@ export class ProductServiceExpansionComponent implements OnInit, OnDestroy {
   }
 
   rentRefPanelAction() {
-    if (this.refPanelRentIcon.iconSvg === 'baseline-expand.svg') {
-      this.refPanelRentIcon.iconSvg = 'baseline-expand_less.svg';
-    } else {
-      this.refPanelRentIcon.iconSvg = 'baseline-expand.svg';
-    }
     this.expansionPanel();
+    this.refPanelRentIcon.iconSvg = this.isExpansion ? 'baseline-expand_less.svg' : 'baseline-expand.svg';
   }
 
   expansionPanel() {
@@ -110,14 +106,13 @@ export class ProductServiceExpansionComponent implements OnInit, OnDestroy {
     if (!$event) {
       return;
     }
-
-    const productsSelected = $event.map(row => {
+    const value = $event.map(row => {
       return {
         id: row.id,
-        attractionId: this.props.idPosition
+        positionId: this.props.idPosition
       } as ProductSelect;
     });
 
-    this.selectedProducts.emit(productsSelected);
+    this.selectedProducts.emit(value);
   }
 }

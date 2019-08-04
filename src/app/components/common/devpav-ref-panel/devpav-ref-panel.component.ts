@@ -55,7 +55,6 @@ export class DevpavRefPanelComponent implements OnInit, AfterContentInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.iconSetting)
   }
 
   onClickRef() {

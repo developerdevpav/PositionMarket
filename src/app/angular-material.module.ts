@@ -14,6 +14,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {AngularSvgIconModule} from 'angular-svg-icon';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [],
@@ -32,7 +33,8 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
     MatDividerModule,
     MatSnackBarModule,
     AngularSvgIconModule,
-    MatTableModule
+    MatTableModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     MatProgressBarModule,
@@ -49,7 +51,8 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    NgMultiSelectDropDownModule
   ]
 })
 export class AngularMaterialModule {

@@ -46,7 +46,7 @@ export function getStringFromArrayValuesByLanguage(array: Value[], language: any
   }
 
   if (!valueString) {
-    valueString = Language.EN === language ? 'Undefined' : 'Неопределено';
+    valueString = Language.EN === language.language ? 'Undefined' : 'Неопределено';
   }
 
   return valueString;

@@ -5,7 +5,7 @@ import {SelectedProductActions, SelectProductActionTypes} from '../actions/selec
 
 export interface ProductSelect {
   id: string;
-  attractionId: string;
+  positionId: string;
 }
 
 export interface State extends EntityState<ProductSelect> {

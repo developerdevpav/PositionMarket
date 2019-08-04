@@ -23,6 +23,7 @@ import {TranslatorYandexService} from './store/services/translator-yandex.servic
 import {ComponentCommonModule} from './components/common/component-common.module';
 import {PageModule} from './pages/page.module';
 import {MaterialDesignModule} from './material-design.module';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MaterialDesignModule} from './material-design.module';
     PageModule,
     HttpClientModule,
     MaterialDesignModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   bootstrap: [AppComponent],
   schemas: [

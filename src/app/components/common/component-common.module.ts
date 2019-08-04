@@ -38,4 +38,5 @@ import {AngularMaterialModule} from '../../angular-material.module';
     NO_ERRORS_SCHEMA
   ]
 })
-export class ComponentCommonModule { }
+export class ComponentCommonModule {
+}
