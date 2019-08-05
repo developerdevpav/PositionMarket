@@ -14,7 +14,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpLoaderFactory} from './ui/translate.service';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -34,7 +36,13 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     MatSnackBarModule,
     AngularSvgIconModule,
     MatTableModule,
-    NgMultiSelectDropDownModule.forRoot()
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     MatProgressBarModule,
@@ -52,7 +60,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     MatDividerModule,
     MatSnackBarModule,
     MatTableModule,
-    NgMultiSelectDropDownModule
+    TranslateModule
   ]
 })
 export class AngularMaterialModule {

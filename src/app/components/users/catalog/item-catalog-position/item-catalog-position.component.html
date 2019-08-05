@@ -16,6 +16,10 @@
 
   <div style="flex-basis: 100%; margin: 5px 0 0 0">
     <app-product-service-expansion
+      [propsRefPanel]="{
+        titleRef: 'Услуги и цены аренды',
+        idPanelRef: TypeServiceEnum.RENT.toString()
+      }"
       (selectedProducts)="selectProductsRent($event)"
       [props]="getPropsRent(('VALUE_RENT' | translate), 'RENT')">
     </app-product-service-expansion>

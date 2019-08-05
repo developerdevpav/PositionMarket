@@ -16,7 +16,6 @@ export interface ProductServiceExpansionProps {
   selectedRows: Row[];
   rows: Row[];
   idPosition?: string;
-  propsRefPanel?: DevpavRefPanelProps;
 }
 
 @Component({
@@ -56,6 +55,9 @@ export class ProductServiceExpansionComponent implements OnInit, OnDestroy {
   @Input()
   public props: ProductServiceExpansionProps;
 
+  @Input()
+  propsRefPanel: DevpavRefPanelProps;
+
   @Output()
   public selectedProducts: EventEmitter<ProductSelect[]> = new EventEmitter();
 
@@ -91,7 +93,8 @@ export class ProductServiceExpansionComponent implements OnInit, OnDestroy {
     };
 
     this.subscriberDescriptionProduct.add(
-      this.store.select(getDescriptionProductById, {positionId: this.props.idPosition, productId: $event.id})
+      this.store.select(getDescriptionProductById,
+        {positionId: this.props.idPosition, productId: $event.id})
         .subscribe(des => {
           this.informationPanelProps.description = des;
         })

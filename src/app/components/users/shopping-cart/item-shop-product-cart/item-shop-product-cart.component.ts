@@ -26,7 +26,7 @@ export class ItemShopProductCartComponent implements OnInit {
     this.count++;
   }
 
-  decrement() {
+  decrement(): number {
     if (this.count <= 0) {
       return;
     }

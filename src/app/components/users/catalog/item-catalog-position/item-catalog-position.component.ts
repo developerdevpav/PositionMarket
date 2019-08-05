@@ -7,7 +7,6 @@ import {getSelectProduct} from '../../../../store/selectors/position.selectors';
 import {ProductServiceExpansionProps} from '../product-service-expansion/product-service-expansion.component';
 import {ProductSelect} from '../../../../store/reducers/selected-product.reducer';
 import {DeleteProducts, SetProducts} from '../../../../store/actions/select-product.actions';
-import {TypeServiceEnum} from '../../../../store/models/type-service';
 
 export interface PositionCatalog {
   id: string | number;
@@ -42,10 +41,6 @@ export class ItemCatalogPositionComponent implements OnInit, OnDestroy {
 
   propsRent: ProductServiceExpansionProps = {
     idPosition: '',
-    propsRefPanel: {
-      titleRef: 'Услуги и цены аренды',
-      idPanelRef: TypeServiceEnum.RENT.toString()
-    },
     rows: [],
     selectedRows: []
   };
@@ -97,10 +92,6 @@ export class ItemCatalogPositionComponent implements OnInit, OnDestroy {
   }
 
   getPropsRent(title: string, id: string): ProductServiceExpansionProps {
-    this.propsRent.propsRefPanel = {
-      idPanelRef: id,
-      titleRef: title
-    };
     return this.propsRent;
   }
 

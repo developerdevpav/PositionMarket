@@ -1,6 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MaterialDesignModule} from '../../material-design.module';
 import {ComponentCommonModule} from '../common/component-common.module';
 import {ListCatalogPositionComponent} from './catalog/list-catalog-position/list-catalog-position.component';
 import {AngularMaterialModule} from '../../angular-material.module';
@@ -29,7 +28,6 @@ import {ProductServiceExpansionComponent} from './catalog/product-service-expans
   ],
   imports: [
     CommonModule,
-    MaterialDesignModule,
     ComponentCommonModule,
     BrowserAnimationsModule,
     AngularMaterialModule,

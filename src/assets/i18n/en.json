@@ -24,5 +24,7 @@
   "HIDDEN": "Hidden",
   "CONTACT_OWNER": "Contact owner",
   "DETAIL": "Detail",
-  "VALUE_RENT": "Services and prices of rent"
+  "VALUE_RENT": "Services and prices of rent",
+  "PLACEHOLDER_TITLE_RU": "Name in Russian",
+  "PLACEHOLDER_TITLE_EN": "Name in English"
 }
