@@ -10,8 +10,9 @@ export class NsiAbstractService<T> {
 
   utl = '/api';
 
-  constructor(protected http: HttpClient) {
-  }
+
+  constructor(protected http: HttpClient) {}
+
 
   getAll(service: string) {
     return this.http.get(`${this.utl}/${service}`, {headers: this.headers});
@@ -36,6 +37,7 @@ export class NsiAbstractService<T> {
   public deleteAll(service: string, uuids: string[]) {
     return this.http.delete(`${this.utl}/${service}/[${uuids}]`, {headers: this.headers});
   }
+
 }
 
 

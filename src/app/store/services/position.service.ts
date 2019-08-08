@@ -1,11 +1,12 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {AttractionModel} from '../models/attraction-model';
+import {Observable} from 'rxjs';
+import {PositionEntity} from '../entities/position.entity';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AttractionService {
+export class PositionService {
 
   protected headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
@@ -14,7 +15,7 @@ export class AttractionService {
   constructor(protected http: HttpClient) {
   }
 
-  getAll(service: string) {
+  getAll(service: string): Observable<any> {
     return this.http.get(`${this.utl}/${service}`, {headers: this.headers});
   }
 
@@ -22,11 +23,11 @@ export class AttractionService {
     return this.http.get(`${this.utl}/${service}/${uuid}`, {headers: this.headers});
   }
 
-  create(service: string, obj: AttractionModel) {
+  create(service: string, obj: PositionEntity) {
     return this.http.post(`${this.utl}/${service}`, obj, {headers: this.headers});
   }
 
-  public update(service: string, obj: AttractionModel) {
+  public update(service: string, obj: PositionEntity) {
     return this.http.put(`${this.utl}/${service}`, obj, {headers: this.headers});
   }
 

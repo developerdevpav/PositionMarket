@@ -13,7 +13,7 @@ import {NsiAbstractService} from './store/services/nsi.abstract.service';
 import {TagEffects} from './store/effects/tag.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TypeServiceEffects} from './store/effects/type-service.effects';
-import {AttractionService} from './store/services/attraction.service';
+import {PositionService} from './store/services/position.service';
 import {AttractionEffects} from './store/effects/attraction.effects';
 import {AngularMaterialModule} from './angular-material.module';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
@@ -62,7 +62,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
   ],
   providers: [
     NsiAbstractService,
-    AttractionService,
+    PositionService,
     ImageUtilService,
     TranslatorYandexService
   ],
