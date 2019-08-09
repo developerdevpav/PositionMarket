@@ -24,7 +24,7 @@
         </div>
 
         <div class="header-shop">
-          <button routerLink="/cart" mat-button color="primary" >Корзина {{countProduct | async}}</button>
+          <button routerLink="/cart" mat-button color="primary" >{{'SHOP_CART' | translate}}</button>
         </div>
         <div class="header-auth">
           <a routerLink="/auth" routerLinkActive="active">{{'log in' | translate}}</a>
@@ -42,7 +42,7 @@
     <div class="container">
       <div class="container__footer">
         <div class="footer__contacts">
-          <div class="contacts__title">Контакты</div>
+          <div class="contacts__title">{{'CONTACTS' | translate}}</div>
           <div class="contacts__item-contact">
             <svg-icon src="../assets/icon/phone.svg" class="item-contact__icon"
                       [svgStyle]="{ 'width.px': 25, 'height.px': 25 }">
@@ -65,7 +65,7 @@
           </svg-icon>
         </div>
         <div class="footer__navigator">
-          <div class="navigator__title">Навигация</div>
+          <div class="navigator__title">{{'NAVIGATION' | translate}}</div>
           <a class="navigator__link">{{ 'Home' | translate }}</a>
           <a class="navigator__link">{{ 'Catalog' | translate }}</a>
           <a class="navigator__link">{{ 'Setting' | translate }}</a>

@@ -26,5 +26,7 @@
   "DETAIL": "Подробнее",
   "VALUE_RENT": "Услуги и цены аренды",
   "PLACEHOLDER_TITLE_RU": "Название на русском языке",
-  "PLACEHOLDER_TITLE_EN": "Название на английском языке"
+  "PLACEHOLDER_TITLE_EN": "Название на английском языке",
+  "NAVIGATION": "Навигация",
+  "SHOP_CART": "Корзина"
 }

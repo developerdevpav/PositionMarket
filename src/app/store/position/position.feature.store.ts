@@ -3,23 +3,14 @@ import {PositionEntity} from '../entities/position.entity';
 import {PositionActions, PositionActionTypes} from './position.actions';
 import {createFeatureSelector, MemoizedSelector} from '@ngrx/store';
 
-export const featurePositionAdapter: EntityAdapter<PositionEntity> = createEntityAdapter<PositionEntity>({
-  selectId: position => position.id
-});
+export const featurePositionAdapter: EntityAdapter<PositionEntity> = createEntityAdapter<PositionEntity>();
 
 export interface PositionFeatureStore extends EntityState<PositionEntity> {
   isLoading?: boolean;
   error?: any;
 }
 
-export const initialPositionState: PositionFeatureStore = (
-  {
-    ids: [],
-    entities: {},
-    isLoading: false,
-    error: null
-  }
-);
+export const initialPositionState: PositionFeatureStore = featurePositionAdapter.getInitialState();
 
 export function reducerPosition(state = initialPositionState, action: PositionActions): PositionFeatureStore {
   switch (action.type) {
@@ -55,6 +46,5 @@ export const selectPositionFeatureState: MemoizedSelector<object, PositionFeatur
 export const {
   selectAll,
   selectEntities,
-  selectIds,
   selectTotal
 } = featurePositionAdapter.getSelectors(selectPositionFeatureState);

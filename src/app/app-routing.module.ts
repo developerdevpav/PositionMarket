@@ -4,7 +4,7 @@ import {HomePageComponent} from './pages/home-page/home-page.component';
 import {CatalogPageComponent} from './pages/catalog-page/catalog-page.component';
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
 import {SettingPageComponent} from './pages/setting-page/setting-page.component';
-import {UserShoppingCartComponent} from "./pages/user-shopping-cart/user-shopping-cart.component";
+import {UserShoppingCartComponent} from './pages/user-shopping-cart/user-shopping-cart.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},

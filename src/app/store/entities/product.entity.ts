@@ -1,4 +1,4 @@
-import {BaseEntity} from '../models/abstract.model';
+import {BaseEntity} from './abstract.entity';
 
 export interface ProductEntity extends BaseEntity {
   price?: number;

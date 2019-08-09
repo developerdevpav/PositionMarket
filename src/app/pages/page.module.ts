@@ -6,12 +6,11 @@ import {ComponentCommonModule} from '../components/common/component-common.modul
 import {CatalogPageComponent} from './catalog-page/catalog-page.component';
 import {SettingPageComponent} from './setting-page/setting-page.component';
 import {ContactsPageComponent} from './contacts-page/contacts-page.component';
-import {MaterialDesignModule} from '../material-design.module';
 import {UsersComponentsModule} from '../components/users/users.module';
 import {AngularMaterialModule} from '../angular-material.module';
 import {UserShoppingCartComponent} from './user-shopping-cart/user-shopping-cart.component';
 import {PositionDetailPageComponent} from './position-detail-page/position-detail-page.component';
-import {ManagerComponentModule} from '../components/users/manager-component/manager-component.module';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
 
 @NgModule({
   declarations: [
@@ -26,10 +25,9 @@ import {ManagerComponentModule} from '../components/users/manager-component/mana
     CommonModule,
     DevpavExpansionPanelModule,
     ComponentCommonModule,
-    MaterialDesignModule,
     UsersComponentsModule,
     AngularMaterialModule,
-    ManagerComponentModule
+    NgxJsonViewerModule
   ],
   schemas: [
     NO_ERRORS_SCHEMA

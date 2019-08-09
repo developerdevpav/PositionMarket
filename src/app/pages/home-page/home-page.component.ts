@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {LoadRequestPositions} from '../../store/position/position.actions';
 
 @Component({
   selector: 'app-home-page',
@@ -9,9 +11,10 @@ export class HomePageComponent implements OnInit {
 
   valueCheck = false;
 
-  constructor() { }
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
+    this.store.dispatch(new LoadRequestPositions());
   }
 
   eventCheck($event: boolean) {

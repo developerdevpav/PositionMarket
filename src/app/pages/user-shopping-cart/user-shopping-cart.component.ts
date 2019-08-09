@@ -11,7 +11,6 @@ export class UserShoppingCartComponent implements OnInit {
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
-
   }
 
 }

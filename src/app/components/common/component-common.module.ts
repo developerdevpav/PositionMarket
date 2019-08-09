@@ -4,7 +4,6 @@ import {DevpavInputComponent} from './devpav-input/devpav-input.component';
 import {FormsModule} from '@angular/forms';
 import {DevpavExpansionPanelModule} from './devpav-panel/devpav-expansion-panel.module';
 import {DevpavCardComponent} from './devpav-card/devpav-card.component';
-import {DevpavCheckboxComponent} from './devpav-checkbox/devpav-checkbox.component';
 import {DevpavButtonComponent} from './devpav-button/devpav-button.component';
 import {DevpavRefPanelComponent} from './devpav-ref-panel/devpav-ref-panel.component';
 import {DevpavInformationPanelComponent} from './devpav-information-panel/devpav-information-panel.component';
@@ -14,7 +13,6 @@ import {AngularMaterialModule} from '../../angular-material.module';
   declarations: [
     DevpavInputComponent,
     DevpavCardComponent,
-    DevpavCheckboxComponent,
     DevpavButtonComponent,
     DevpavRefPanelComponent,
     DevpavInformationPanelComponent
@@ -29,7 +27,6 @@ import {AngularMaterialModule} from '../../angular-material.module';
     DevpavInputComponent,
     DevpavExpansionPanelModule,
     DevpavCardComponent,
-    DevpavCheckboxComponent,
     DevpavButtonComponent,
     DevpavRefPanelComponent,
     DevpavInformationPanelComponent

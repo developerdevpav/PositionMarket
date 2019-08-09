@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ImageUI} from '../../../ui/models';
 
 @Component({
   selector: 'app-avatar-carousel',
@@ -9,9 +8,23 @@ import {ImageUI} from '../../../ui/models';
 export class AvatarCarouselComponent implements OnInit {
 
   @Input()
-  images: ImageUI[] = [];
+  images: {
+    index: number,
+    url: string
+  }[] = [
+    {
+      index: 0,
+      url: ''
+    }
+  ];
 
-  image: ImageUI;
+  image: {
+    index: number,
+    url: string
+  } = {
+    index: 0,
+    url: ''
+  };
 
   constructor() { }
 

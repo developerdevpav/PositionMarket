@@ -8,22 +8,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import * as storeReducers from './store';
 import {EffectsModule} from '@ngrx/effects';
-import {TypeEffects} from './store/effects/type.effects';
 import {NsiAbstractService} from './store/services/nsi.abstract.service';
-import {TagEffects} from './store/effects/tag.effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TypeServiceEffects} from './store/effects/type-service.effects';
 import {PositionService} from './store/services/position.service';
-import {AttractionEffects} from './store/effects/attraction.effects';
 import {AngularMaterialModule} from './angular-material.module';
-import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
-import {ImageEffects} from './store/effects/image.effects';
 import {ImageUtilService} from './store/services/utils/image-util.service';
 import {TranslatorYandexService} from './store/services/translator-yandex.service';
 import {ComponentCommonModule} from './components/common/component-common.module';
 import {PageModule} from './pages/page.module';
-import {MaterialDesignModule} from './material-design.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {PositionEffects} from './store/position/position.effects';
+import {ProductTypeEffects} from './store/product-type/product-type.effects';
 
 @NgModule({
   declarations: [
@@ -37,21 +32,14 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     ComponentCommonModule,
     ReactiveFormsModule,
     StoreModule.forRoot(storeReducers.reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25
-    }),
+    StoreDevtoolsModule.instrument({maxAge: 25}),
     PageModule,
-    AngularMultiSelectModule,
     EffectsModule.forRoot([
-      TypeEffects,
-      TagEffects,
-      TypeServiceEffects,
-      AttractionEffects,
-      ImageEffects
+      PositionEffects,
+      ProductTypeEffects
     ]),
     PageModule,
     HttpClientModule,
-    MaterialDesignModule,
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],

@@ -26,5 +26,7 @@
   "DETAIL": "Detail",
   "VALUE_RENT": "Services and prices of rent",
   "PLACEHOLDER_TITLE_RU": "Name in Russian",
-  "PLACEHOLDER_TITLE_EN": "Name in English"
+  "PLACEHOLDER_TITLE_EN": "Name in English",
+  "NAVIGATION": "Navigation",
+  "SHOP_CART": "Shopping cart"
 }

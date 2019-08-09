@@ -11,7 +11,6 @@ export class ContactsPageComponent implements OnInit {
   constructor(public store: Store<any>) { }
 
   ngOnInit() {
-    console.log('ngOnInit ContactsPageComponent');
   }
 
 }

@@ -1,5 +1,4 @@
-import {Nsi, TypeServiceEnum} from './abstract.entity';
-import {Value} from '../models/abstract.model';
+import {Nsi, TypeServiceEnum, Value} from './abstract.entity';
 
 export interface ProductTypeEntity extends Nsi {
   description: Value[];
