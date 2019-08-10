@@ -1,7 +1,8 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {ProductTypeEntity} from '../entities/product.type.entity';
 import {ProductTypeActions, ProductTypeActionTypes} from './product.type.actions';
-import {createFeatureSelector, MemoizedSelector} from '@ngrx/store';
+import {createSelector, MemoizedSelector} from '@ngrx/store';
+import {IRootStore} from '../index';
 
 export const featureProductTypeEntityAdapter: EntityAdapter<ProductTypeEntity> =
   createEntityAdapter<ProductTypeEntity>();
@@ -48,12 +49,14 @@ export function reducerProductType(state = initialProductTypeState, action: Prod
   }
 }
 
-export const selectProductTypeFeatureState: MemoizedSelector<object, ProductTypeFeatureStore> = createFeatureSelector<ProductTypeFeatureStore>(
-  'productTypeFeature'
-);
+export const selectProductTypeFeatureState: MemoizedSelector<object, ProductTypeFeatureStore> =
+  createSelector(
+    (state: IRootStore) => state.productTypeState,
+    (state: ProductTypeFeatureStore) => state);
 
 export const {
   selectAll,
   selectEntities,
-  selectTotal
+  selectTotal,
+  selectIds
 } = featureProductTypeEntityAdapter.getSelectors(selectProductTypeFeatureState);

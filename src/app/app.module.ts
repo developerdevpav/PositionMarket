@@ -19,6 +19,8 @@ import {PageModule} from './pages/page.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {PositionEffects} from './store/position/position.effects';
 import {ProductTypeEffects} from './store/product-type/product-type.effects';
+import {TypeEffects} from './store/type/type.effects';
+import {TagEffects} from './store/tag/tag.effects';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {ProductTypeEffects} from './store/product-type/product-type.effects';
     PageModule,
     EffectsModule.forRoot([
       PositionEffects,
-      ProductTypeEffects
+      ProductTypeEffects,
+      TypeEffects,
+      TagEffects
     ]),
     PageModule,
     HttpClientModule,

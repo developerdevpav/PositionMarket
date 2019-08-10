@@ -1,12 +1,20 @@
+<div style="background: white; margin-bottom: 20px">
+  <span *ngIf="loadingProductType">Loading ProductTypes</span>
+  <ngx-json-viewer *ngIf="!loadingProductType" [json]="productTypes" [expanded]="loadingProductType"></ngx-json-viewer>
+</div>
 
 <div style="background: white; margin-bottom: 20px">
-  <span *ngIf="loadingProductType">Loading ProductType</span>
-  <!--<ngx-json-viewer *ngIf="!loadingProductType" [json]="productTypes"></ngx-json-viewer>-->
+  <span *ngIf="loadingPosition">Loading Positions</span>
+  <ngx-json-viewer *ngIf="!loadingPosition" [json]="positions" [expanded]="loadingPosition"></ngx-json-viewer>
 </div>
 
 <div style="background: white">
-  <span *ngIf="loadingPosition">Loading Position</span>
-  <!--<ngx-json-viewer *ngIf="!loadingPosition" [json]="positions"></ngx-json-viewer>-->
+  <span *ngIf="loadingType">Loading Types</span>
+  <ngx-json-viewer *ngIf="!loadingType" [json]="types" [expanded]="loadingType"></ngx-json-viewer>
 </div>
 
 
+<div style="background: white">
+  <span *ngIf="loadingTag">Loading Tags</span>
+  <ngx-json-viewer *ngIf="!loadingTag" [json]="tags" [expanded]="loadingTag"></ngx-json-viewer>
+</div>

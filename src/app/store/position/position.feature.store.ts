@@ -1,16 +1,26 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {PositionEntity} from '../entities/position.entity';
 import {PositionActions, PositionActionTypes} from './position.actions';
-import {createFeatureSelector, MemoizedSelector} from '@ngrx/store';
+import {createSelector, MemoizedSelector} from '@ngrx/store';
+import {IRootStore} from '../index';
 
-export const featurePositionAdapter: EntityAdapter<PositionEntity> = createEntityAdapter<PositionEntity>();
+export const featurePositionAdapter: EntityAdapter<PositionEntity> = createEntityAdapter<PositionEntity>({
+  selectId: position => position.id
+});
 
 export interface PositionFeatureStore extends EntityState<PositionEntity> {
   isLoading?: boolean;
   error?: any;
 }
 
-export const initialPositionState: PositionFeatureStore = featurePositionAdapter.getInitialState();
+export const initialPositionState: PositionFeatureStore = featurePositionAdapter.getInitialState(
+  {
+    ids: [],
+    entities: {},
+    isLoading: false,
+    error: null
+  }
+);
 
 export function reducerPosition(state = initialPositionState, action: PositionActions): PositionFeatureStore {
   switch (action.type) {
@@ -41,10 +51,12 @@ export function reducerPosition(state = initialPositionState, action: PositionAc
 }
 
 export const selectPositionFeatureState: MemoizedSelector<object, PositionFeatureStore> =
-  createFeatureSelector<PositionFeatureStore>('positionFeature');
+  createSelector((state: IRootStore) => state.positionState,
+    (positionState: PositionFeatureStore) => positionState);
 
 export const {
   selectAll,
   selectEntities,
-  selectTotal
+  selectTotal,
+  selectIds
 } = featurePositionAdapter.getSelectors(selectPositionFeatureState);

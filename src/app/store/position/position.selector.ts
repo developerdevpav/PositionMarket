@@ -13,6 +13,9 @@ export const getPositionById = (id: string) => createSelector(selectAll, (positi
 
 export const selectIsLoading = createSelector(getIsLoading, (loading: boolean) => loading);
 
-export const selectPositions = createSelector(selectAll, (positions: PositionEntity[]) => {
+export const selectPositions = createSelector(
+  selectAll,
+  (positions: any) => {
+  console.log(positions);
   return positions;
 });
