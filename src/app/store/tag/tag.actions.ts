@@ -1,12 +1,27 @@
 import {Action} from '@ngrx/store';
+import {TagEntity} from '../entities/tag.entity';
 
 export enum TagActionTypes {
-  LoadTags = '[Tag] Load Tags'
+  LOAD_REQUEST = '[Tag] Load Request',
+  LOAD_FAILURE = '[Tag] Load Failure',
+  LOAD_SUCCESS = '[Tag] Load Success'
 }
 
-export class LoadTags implements Action {
-  readonly type = TagActionTypes.LoadTags;
+export class LoadRequestTag implements Action {
+  readonly type = TagActionTypes.LOAD_REQUEST;
 }
 
+export class LoadSuccessTag implements Action {
+  readonly type = TagActionTypes.LOAD_SUCCESS;
+  constructor(public tagEntities: TagEntity[]) {}
+}
 
-export type TagActions = LoadTags;
+export class LoadFailureTag implements Action {
+  readonly type = TagActionTypes.LOAD_FAILURE;
+  constructor(public error: string) {}
+}
+
+export type TagActions =
+  LoadFailureTag |
+  LoadSuccessTag |
+  LoadRequestTag;

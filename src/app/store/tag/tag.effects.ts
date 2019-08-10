@@ -19,8 +19,7 @@ export class TagEffects {
     switchMap(() => this.service.getAll('tags')
       .pipe(
         map((tags: TagEntity[]) => new LoadSuccessTag(tags)),
-        catchError(error => Observable.create(new LoadSuccessTag(error))
-        )
+        catchError(error => Observable.create(new LoadSuccessTag(error)))
       )
     )
   );
