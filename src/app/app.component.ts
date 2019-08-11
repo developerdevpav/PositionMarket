@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
               private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer) {
 
-
     this.matIconRegistry
       .addSvgIcon(
         'success',

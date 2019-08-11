@@ -1,4 +1,4 @@
-import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {forwardRef, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HomePageComponent} from './home-page/home-page.component';
 import {DevpavExpansionPanelModule} from '../components/common/devpav-panel/devpav-expansion-panel.module';
@@ -10,6 +10,9 @@ import {UsersComponentsModule} from '../components/users/users.module';
 import {AngularMaterialModule} from '../angular-material.module';
 import {UserShoppingCartComponent} from './user-shopping-cart/user-shopping-cart.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import {NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {DevpavInputComponent} from '../components/common/devpav-input/devpav-input.component';
+import {ContainerModule} from '../containers/container.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,16 @@ import {NgxJsonViewerModule} from 'ngx-json-viewer';
     ComponentCommonModule,
     UsersComponentsModule,
     AngularMaterialModule,
+    ReactiveFormsModule,
+    ContainerModule,
     NgxJsonViewerModule
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => DevpavInputComponent),
+    }
   ],
   schemas: [
     NO_ERRORS_SCHEMA

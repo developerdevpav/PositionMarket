@@ -1,26 +1,39 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {NsiAbstractService} from '../services/nsi.abstract.service';
+import * as tagAction from './tag.actions';
+import {TagActionTypes} from './tag.actions';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {LoadRequestTag, LoadSuccessTag, TagActionTypes} from './tag.actions';
+import {NsiAbstractService} from '../services/nsi.abstract.service';
 import {TagEntity} from '../entities/tag.entity';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class TagEffects {
 
-  constructor(private actions$: Actions, private service: NsiAbstractService<TagEntity>) {
-  }
+  constructor(private actions$: Actions, private api: NsiAbstractService<TagEntity>) {}
 
   @Effect()
-  loadTagsEffect$ = this.actions$.pipe(
-    ofType<LoadRequestTag>(TagActionTypes.LOAD_REQUEST),
-    startWith(new LoadRequestTag()),
-    switchMap(() => this.service.getAll('tags')
+  public getAll = this.actions$.pipe(
+    ofType<tagAction.LoadTags>(TagActionTypes.LOAD_TAGS),
+    startWith(new tagAction.LoadTags()),
+    switchMap(() => this.api.getAll('tags')
       .pipe(
-        map((tags: TagEntity[]) => new LoadSuccessTag(tags)),
-        catchError(error => Observable.create(new LoadSuccessTag(error)))
+        map((objects: TagEntity[]) => new tagAction.LoadTagsSuccess({tags: objects})),
+        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
       )
     )
   );
+
+  @Effect()
+  public create = this.actions$.pipe(
+    ofType<tagAction.CreateTag>(TagActionTypes.CREATE_TAG),
+    map(it => it.payload),
+    switchMap((payload: {tag: TagEntity}) => this.api.create('tags', payload.tag)
+      .pipe(
+        map((object: TagEntity) => new tagAction.CreateTagSuccess({tag: object})),
+        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
+      )
+    )
+  );
+
 }

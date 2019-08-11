@@ -1,20 +1,40 @@
+<!--
 <div style="background: white; margin-bottom: 20px">
-  <span *ngIf="loadingProductType">Loading ProductTypes</span>
+  <mat-progress-bar *ngIf="loadingProductType" mode="query"></mat-progress-bar>
   <ngx-json-viewer *ngIf="!loadingProductType" [json]="productTypes" [expanded]="loadingProductType"></ngx-json-viewer>
 </div>
 
 <div style="background: white; margin-bottom: 20px">
-  <span *ngIf="loadingPosition">Loading Positions</span>
+  <mat-progress-bar *ngIf="loadingPosition" mode="query"></mat-progress-bar>
   <ngx-json-viewer *ngIf="!loadingPosition" [json]="positions" [expanded]="loadingPosition"></ngx-json-viewer>
 </div>
 
-<div style="background: white">
-  <span *ngIf="loadingType">Loading Types</span>
+<div style="background: white; margin-bottom: 20px">
+  <mat-progress-bar *ngIf="loadingType" mode="query"></mat-progress-bar>
   <ngx-json-viewer *ngIf="!loadingType" [json]="types" [expanded]="loadingType"></ngx-json-viewer>
 </div>
 
 
-<div style="background: white">
-  <span *ngIf="loadingTag">Loading Tags</span>
+<div class="row">
+  <div class="col-12" style="height: 40px; background: red;"></div>
+</div>
+-->
+
+<div style="margin: 10px 0 10px 0">
+  <button mat-flat-button (click)="addTag()" style="float: right">Add</button>
+  <div style="margin: 10px 0 10px 0">
+    <translate-container (inputValues)="changeValues($event)"></translate-container>
+  </div>
+</div>
+
+<div style="margin: 10px 0 10px 0">
+  <button mat-flat-button (click)="addTag()" style="float: right">Add</button>
+  <div style="margin: 10px 0 10px 0">
+    <translate-container (inputValues)="changeValues($event)"></translate-container>
+  </div>
+</div>
+
+<div style="background: white; margin-bottom: 20px">
+  <mat-progress-bar *ngIf="loadingTag" mode="query"></mat-progress-bar>
   <ngx-json-viewer *ngIf="!loadingTag" [json]="tags" [expanded]="loadingTag"></ngx-json-viewer>
 </div>

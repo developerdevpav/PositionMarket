@@ -10,11 +10,11 @@ export class DevpavInputComponent implements OnInit {
   @Input() ph: string;
   @Input() type = 'text';
 
+  @Input() value: string;
+
   @Output() blurEmit: EventEmitter<boolean> = new EventEmitter();
   @Output() focusEmit: EventEmitter<boolean> = new EventEmitter();
   @Output() inputValue: EventEmitter<string> = new EventEmitter();
-
-  value: string;
 
   constructor() { }
 

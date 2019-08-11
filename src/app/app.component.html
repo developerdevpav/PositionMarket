@@ -1,39 +1,26 @@
 <div class="wrapper">
-  <header>
-    <div class="container">
-      <div class="header-actions">
-        <div class="header-actions__link" routerLink="/home" routerLinkActive="active">
-          <a class="link-menu">{{ 'Home' | translate }}</a>
-        </div>
-        <div class="header-actions__link" routerLink="/catalog" routerLinkActive="active">
-          <a class="link-menu" >{{ 'Catalog' | translate }}</a>
-        </div>
-        <div class="header-actions__link" routerLink="/contacts" routerLinkActive="active">
-          <a class="link-menu">{{ 'CONTACTS' | translate }}</a>
-        </div>
-        <div class="header-actions__link" routerLink="/settings" routerLinkActive="active">
-          <a class="link-menu">{{ 'Setting' | translate }}</a>
-        </div>
+  <header class="container">
+      <div class="col-md-3 row justify-content-center" routerLink="/home" routerLinkActive="active">
+        <a>{{ 'Home' | translate }}</a>
       </div>
-      <div class="header-user-action">
-        <div class="header-language">
-          <a [ngClass]="currentLanguage === 'ru' ? 'language-active' : ''"
-             class="language" (click)="switchLanguage('ru')">{{ 'ru' | translate }}</a>
-          <a [ngClass]="currentLanguage === 'en' ? 'language-active' : ''"
-             class="language" (click)="switchLanguage('en')">{{ 'en' | translate }}</a>
-        </div>
-
-        <div class="header-shop">
-          <button routerLink="/cart" mat-button color="primary" >{{'SHOP_CART' | translate}}</button>
-        </div>
-        <div class="header-auth">
-          <a routerLink="/auth" routerLinkActive="active">{{'log in' | translate}}</a>
-        </div>
+      <div class="col-md-3 row justify-content-center" routerLink="/catalog" routerLinkActive="active">
+        <a>{{ 'Catalog' | translate }}</a>
       </div>
+      <div class="col-md-3 row justify-content-center" routerLink="/contacts" routerLinkActive="active">
+        <a>{{ 'CONTACTS' | translate }}</a>
+      </div>
+      <div class="col-md-3 row justify-content-center" routerLink="/settings" routerLinkActive="active">
+        <a>{{ 'Setting' | translate }}</a>
+      </div>
+    <div class="header-language">
+      <a [ngClass]="currentLanguage === 'ru' ? 'language-active' : ''"
+         class="language" (click)="switchLanguage('ru')">{{ 'ru' | translate }}</a>
+      <a [ngClass]="currentLanguage === 'en' ? 'language-active' : ''"
+         class="language" (click)="switchLanguage('en')">{{ 'en' | translate }}</a>
     </div>
   </header>
 
-  <section class="container custom">
+  <section class="container">
     <router-outlet></router-outlet>
   </section>
 

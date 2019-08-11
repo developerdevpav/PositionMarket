@@ -1,0 +1,15 @@
+<form [formGroup]="formGroup" novalidate>
+  <div class="row">
+    <div class="col-lg-6 col-12 mb-lg-0 mb-2">
+      <devpav-input type="text" ph="{{'PLACEHOLDER_TITLE_RU' | translate}}"
+                    (inputValue)="formGroup.get('ru').setValue($event)">
+      </devpav-input>
+    </div>
+    <div class="col-lg-6 col-12">
+      <devpav-input type="text"
+                    ph="{{'PLACEHOLDER_TITLE_EN' | translate}}"
+                    (inputValue)="formGroup.get('en').setValue($event)">
+      </devpav-input>
+    </div>
+  </div>
+</form>

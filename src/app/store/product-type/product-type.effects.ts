@@ -11,8 +11,7 @@ import {LoadRequestProductType, LoadSuccessProductType, ProductTypeActionTypes} 
 export class ProductTypeEffects {
 
 
-  constructor(private actions$: Actions,
-              private service: NsiAbstractService<ProductTypeEntity>) {}
+  constructor(private actions$: Actions, private service: NsiAbstractService<ProductTypeEntity>) {}
 
 
   @Effect()
