@@ -1,18 +1,18 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {createEntityAdapter, EntityAdapter, EntityState, Update} from '@ngrx/entity';
 import {ProductTypeEntity} from '../entities/product.type.entity';
-import {ProductTypeActions, ProductTypeActionTypes} from './product.type.actions';
+import {ProductTypeActions, ProductTypeActionsType} from './product.type.actions';
 import {createSelector, MemoizedSelector} from '@ngrx/store';
 import {IRootStore} from '../index';
+import {TypeEntity} from '../entities/type.entity';
 
-export const featureProductTypeEntityAdapter: EntityAdapter<ProductTypeEntity> =
-  createEntityAdapter<ProductTypeEntity>();
+export const adapter: EntityAdapter<ProductTypeEntity> = createEntityAdapter<ProductTypeEntity>();
 
 export interface ProductTypeFeatureStore extends EntityState<ProductTypeEntity> {
   isLoading?: boolean;
   error?: any;
 }
 
-export const initialProductTypeState: ProductTypeFeatureStore = featureProductTypeEntityAdapter.getInitialState(
+export const initialProductTypeState: ProductTypeFeatureStore = adapter.getInitialState(
   {
     ids: [],
     isLoading: false,
@@ -21,42 +21,43 @@ export const initialProductTypeState: ProductTypeFeatureStore = featureProductTy
   }
 );
 
-export function reducerProductType(state = initialProductTypeState, action: ProductTypeActions): ProductTypeFeatureStore {
+export function reducerProductType(state = initialProductTypeState, action: ProductTypeActionsType): ProductTypeFeatureStore {
   switch (action.type) {
-    case ProductTypeActionTypes.LOAD_REQUEST: {
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
+    case ProductTypeActions.LOAD_PRODUCT_TYPES: {
+      return { ...state, isLoading: true, error: null };
     }
-    case ProductTypeActionTypes.LOAD_SUCCESS: {
-      return featureProductTypeEntityAdapter.addAll(action.productTypes, {
-        ...state,
-        isLoading: false,
-        error: null
-      });
+
+    case ProductTypeActions.LOAD_PRODUCT_TYPES_SUCCESS: {
+      return adapter.addAll(action.payload.productTypes, state);
     }
-    case ProductTypeActionTypes.LOAD_FAILURE: {
-      return {
-        ...state,
-        isLoading: false,
-        error: action.error
-      };
+
+    case ProductTypeActions.CREATE_PRODUCT_TYPE_SUCCESS: {
+      return adapter.addOne(action.payload.productType, state);
     }
-    default:
-      return state;
+
+    case ProductTypeActions.UPDATE_PRODUCT_TYPE_SUCCESS: {
+      const typeWillUpdate: Update<TypeEntity> = { id: action.payload.type.id, changes: action.payload.type };
+      return adapter.updateOne(typeWillUpdate, state);
+    }
+
+    case ProductTypeActions.DELETE_PRODUCT_TYPE_SUCCESS: {
+      return adapter.removeOne(action.payload.id, state);
+    }
+
+    case ProductTypeActions.DELETE_PRODUCT_TYPES_SUCCESS: {
+      return adapter.removeMany(action.payload.ids, state);
+    }
+
+    default: { return state; }
   }
 }
 
-export const selectProductTypeFeatureState: MemoizedSelector<object, ProductTypeFeatureStore> =
-  createSelector(
-    (state: IRootStore) => state.productTypeState,
-    (state: ProductTypeFeatureStore) => state);
+export const selector: MemoizedSelector<object, ProductTypeFeatureStore> =
+  createSelector((state: IRootStore) => state.productTypeState, (state: ProductTypeFeatureStore) => state);
 
 export const {
   selectAll,
   selectEntities,
   selectTotal,
   selectIds
-} = featureProductTypeEntityAdapter.getSelectors(selectProductTypeFeatureState);
+} = adapter.getSelectors(selector);

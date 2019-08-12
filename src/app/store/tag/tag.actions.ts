@@ -1,5 +1,4 @@
 import {Action} from '@ngrx/store';
-import {Update} from '@ngrx/entity';
 import {TagEntity} from '../entities/tag.entity';
 
 export enum TagActionTypes {
@@ -56,14 +55,14 @@ export class CreateTagSuccess implements Action {
 export class UpdateTag implements Action {
   readonly type = TagActionTypes.UPDATE_TAG;
 
-  constructor(public payload: { tag: Update<TagEntity> }) {
+  constructor(public payload: { tag: TagEntity }) {
   }
 }
 
 export class UpdateTagSuccess implements Action {
   readonly type = TagActionTypes.UPDATE_TAG_SUCCESS;
 
-  constructor(public payload: { tag: Update<TagEntity> }) {
+  constructor(public payload: { tag: TagEntity }) {
   }
 }
 

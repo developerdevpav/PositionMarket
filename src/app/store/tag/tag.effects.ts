@@ -36,4 +36,40 @@ export class TagEffects {
     )
   );
 
+  @Effect()
+  public update = this.actions$.pipe(
+    ofType<tagAction.UpdateTag>(TagActionTypes.UPDATE_TAG),
+    map(it => it.payload),
+    switchMap((payload: {tag: TagEntity}) => this.api.update('tags', payload.tag)
+      .pipe(
+        map((object: TagEntity) => new tagAction.UpdateTagSuccess({ tag: object })),
+        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
+      )
+    )
+  );
+
+  @Effect()
+  public delete = this.actions$.pipe(
+    ofType<tagAction.DeleteTag>(TagActionTypes.DELETE_TAG),
+    map(it => it.payload),
+    switchMap((payload: { id: string } ) => this.api.delete('tags', payload.id)
+      .pipe(
+        map((object: string) => new tagAction.DeleteTag({ id: object })),
+        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
+      )
+    )
+  );
+
+  @Effect()
+  public deleteArray = this.actions$.pipe(
+    ofType<tagAction.DeleteTags>(TagActionTypes.DELETE_TAGS),
+    map(it => it.payload),
+    switchMap(( payload: { ids: string[] } ) => this.api.deleteAll('tags', payload.ids)
+      .pipe(
+        map((objects: string[]) => new tagAction.DeleteTags({ ids: objects })),
+        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
+      )
+    )
+  );
+
 }

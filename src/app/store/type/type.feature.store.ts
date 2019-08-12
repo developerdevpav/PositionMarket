@@ -1,10 +1,10 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {TypeEntity} from '../entities/type.entity';
-import {TypeActions, TypeActionTypes} from './type.actions';
-import {createSelector, MemoizedSelector} from '@ngrx/store';
-import {IRootStore} from '../index';
+import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
+import { TypeEntity } from '../entities/type.entity';
+import { TypeActions, TypeActionsEnum } from './type.actions';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { IRootStore } from '../index';
 
-export const featureTypeEntityAdapter: EntityAdapter<TypeEntity> =
+export const adapter: EntityAdapter<TypeEntity> =
   createEntityAdapter<TypeEntity>();
 
 export interface TypeFeatureState extends EntityState<TypeEntity> {
@@ -12,7 +12,7 @@ export interface TypeFeatureState extends EntityState<TypeEntity> {
   error?: any;
 }
 
-export const initialProductTypeState: TypeFeatureState = featureTypeEntityAdapter.getInitialState(
+export const initialProductTypeState: TypeFeatureState = adapter.getInitialState(
   {
     ids: [],
     isLoading: false,
@@ -23,39 +23,42 @@ export const initialProductTypeState: TypeFeatureState = featureTypeEntityAdapte
 
 export function reducerType(state = initialProductTypeState, action: TypeActions): TypeFeatureState {
   switch (action.type) {
-    case TypeActionTypes.LOAD_REQUEST: {
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
+    case TypeActionsEnum.LOAD_TYPES: {
+      return { ...state, isLoading: true, error: null };
     }
-    case TypeActionTypes.LOAD_SUCCESS: {
-      return featureTypeEntityAdapter.addAll(action.typeEntities, {
-        ...state,
-        isLoading: false,
-        error: null
-      });
+
+    case TypeActionsEnum.LOAD_TYPES_SUCCESS: {
+      return adapter.addAll(action.payload.types, state);
     }
-    case TypeActionTypes.LOAD_FAILURE: {
-      return {
-        ...state,
-        isLoading: false,
-        error: action.error
-      };
+
+    case TypeActionsEnum.CREATE_TYPE_SUCCESS: {
+      return adapter.addOne(action.payload.type, state);
     }
-    default:
+
+    case TypeActionsEnum.UPDATE_TYPE_SUCCESS: {
+      const todoUpdate: Update<TypeEntity> = { id: action.payload.type.id, changes: action.payload.type };
+      return adapter.updateOne(todoUpdate, state);
+    }
+
+    case TypeActionsEnum.DELETE_TYPE_SUCCESS: {
+      return adapter.removeOne(action.payload.id, state);
+    }
+
+    case TypeActionsEnum.DELETE_TYPES_SUCCESS: {
+      return adapter.removeMany(action.payload.ids, state);
+    }
+
+    default: {
       return state;
+    }
   }
 }
 
-export const selectTypeFeatureState: MemoizedSelector<object, TypeFeatureState> =
-  createSelector((state: IRootStore) => state.typeState,
-    (state: TypeFeatureState) => state);
+export const selector: MemoizedSelector<object, TypeFeatureState> = createSelector((state: IRootStore) => state.typeState, (state: TypeFeatureState) => state);
 
 export const {
   selectAll,
   selectEntities,
   selectTotal,
   selectIds
-} = featureTypeEntityAdapter.getSelectors(selectTypeFeatureState);
+} = adapter.getSelectors(selector);

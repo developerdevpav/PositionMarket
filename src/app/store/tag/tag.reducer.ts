@@ -1,4 +1,4 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {createEntityAdapter, EntityAdapter, EntityState, Update} from '@ngrx/entity';
 import {TagActions, TagActionTypes} from './tag.actions';
 import {TagEntity} from '../entities/tag.entity';
 import {createSelector} from '@ngrx/store';
@@ -39,7 +39,8 @@ export function tagReducer(state = initialState, action: TagActions): TagState {
     }
 
     case TagActionTypes.UPDATE_TAG_SUCCESS: {
-      return adapter.updateOne(action.payload.tag, state);
+      const todoUpdate: Update<TagEntity> = { id: action.payload.tag.id, changes: action.payload.tag };
+      return adapter.updateOne(todoUpdate, state);
     }
 
     case TagActionTypes.DELETE_TAG_SUCCESS: {
