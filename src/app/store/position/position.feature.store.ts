@@ -1,10 +1,10 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {PositionEntity} from '../entities/position.entity';
-import {PositionActions, PositionActionTypes} from './position.actions';
-import {createSelector, MemoizedSelector} from '@ngrx/store';
-import {IRootStore} from '../index';
+import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
+import { PositionEntity } from '../entities/position.entity';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { IRootStore } from '../index';
+import { PositionActionEnum, ProductPositionActionsPosition } from './position.actions';
 
-export const featurePositionAdapter: EntityAdapter<PositionEntity> = createEntityAdapter<PositionEntity>({
+export const adapter: EntityAdapter<PositionEntity> = createEntityAdapter<PositionEntity>({
   selectId: position => position.id
 });
 
@@ -13,7 +13,7 @@ export interface PositionFeatureStore extends EntityState<PositionEntity> {
   error?: any;
 }
 
-export const initialPositionState: PositionFeatureStore = featurePositionAdapter.getInitialState(
+export const initialPositionState: PositionFeatureStore = adapter.getInitialState(
   {
     ids: [],
     entities: {},
@@ -22,23 +22,56 @@ export const initialPositionState: PositionFeatureStore = featurePositionAdapter
   }
 );
 
-export function reducerPosition(state = initialPositionState, action: PositionActions): PositionFeatureStore {
+export function reducerPosition(state = initialPositionState, action: ProductPositionActionsPosition): PositionFeatureStore {
   switch (action.type) {
-    case PositionActionTypes.LOAD_REQUEST: {
+    case PositionActionEnum.LOAD_POSITIONS: {
       return {
         ...state,
         isLoading: true,
         error: null
       };
     }
-    case PositionActionTypes.LOAD_SUCCESS: {
-      return featurePositionAdapter.addAll(action.positions, {
+    case PositionActionEnum.LOAD_POSITIONS_SUCCESS: {
+      return adapter.addAll(action.payload.positions, {
         ...state,
         isLoading: false,
         error: null
       });
     }
-    case PositionActionTypes.LOAD_FAILURE: {
+    case PositionActionEnum.CREATE_POSITION_SUCCESS: {
+      return adapter.addOne(action.payload.position, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    }
+    case PositionActionEnum.UPDATE_POSITION_SUCCESS: {
+      const updatePosition: Update<PositionEntity> = {
+        id: action.payload.position.id,
+        changes: action.payload.position
+      }
+
+      return adapter.updateOne(updatePosition, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    }
+    case PositionActionEnum.DELETE_POSITION_SUCCESS: {
+      return adapter.removeOne(action.payload.id, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    }
+    case PositionActionEnum.DELETE_POSITIONS_SUCCESS: {
+      return adapter.removeMany(action.payload.ids, {
+        ...state,
+        isLoading: false,
+        error: null
+      });
+    }
+    case PositionActionEnum.REQUEST_POSITION_FAILURE: {
       return {
         ...state,
         isLoading: false,
@@ -50,7 +83,7 @@ export function reducerPosition(state = initialPositionState, action: PositionAc
   }
 }
 
-export const selectPositionFeatureState: MemoizedSelector<object, PositionFeatureStore> =
+export const selector: MemoizedSelector<object, PositionFeatureStore> =
   createSelector((state: IRootStore) => state.positionState,
     (positionState: PositionFeatureStore) => positionState);
 
@@ -59,4 +92,4 @@ export const {
   selectEntities,
   selectTotal,
   selectIds
-} = featurePositionAdapter.getSelectors(selectPositionFeatureState);
+} = adapter.getSelectors(selector);

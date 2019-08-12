@@ -67,7 +67,7 @@ export class ProductTypeEffects {
   public deleteArray = this.actions$.pipe(
     ofType<productTypeAction.DeleteProductTypes>(ProductTypeActions.DELETE_PRODUCT_TYPES),
     map(it => it.payload),
-    switchMap((payload: { ids: string[] }) => this.api.deleteAll('tags', payload.ids)
+    switchMap((payload: { ids: string[] }) => this.api.deleteAll('product-types', payload.ids)
       .pipe(
         map((objects: string[]) => new productTypeAction.DeleteProductTypesSuccess({ ids: objects })),
         catchError(err => Observable.create(new productTypeAction.RequestTypeFailure(err)))
