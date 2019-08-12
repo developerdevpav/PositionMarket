@@ -1,9 +1,9 @@
-import {createEntityAdapter, EntityAdapter, EntityState, Update} from '@ngrx/entity';
-import {ProductTypeEntity} from '../entities/product.type.entity';
-import {ProductTypeActions, ProductTypeActionsType} from './product.type.actions';
-import {createSelector, MemoizedSelector} from '@ngrx/store';
-import {IRootStore} from '../index';
-import {TypeEntity} from '../entities/type.entity';
+import { createEntityAdapter, EntityAdapter, EntityState, Update } from '@ngrx/entity';
+import { ProductTypeEntity } from '../entities/product.type.entity';
+import { ProductTypeActions, ProductTypeActionsType } from './product.type.actions';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { IRootStore } from '../index';
+import { TypeEntity } from '../entities/type.entity';
 
 export const adapter: EntityAdapter<ProductTypeEntity> = createEntityAdapter<ProductTypeEntity>();
 
@@ -36,7 +36,10 @@ export function reducerProductType(state = initialProductTypeState, action: Prod
     }
 
     case ProductTypeActions.UPDATE_PRODUCT_TYPE_SUCCESS: {
-      const typeWillUpdate: Update<TypeEntity> = { id: action.payload.type.id, changes: action.payload.type };
+      const typeWillUpdate: Update<TypeEntity> = {
+        id: action.payload.productType.id, 
+        changes: action.payload.productType 
+      };
       return adapter.updateOne(typeWillUpdate, state);
     }
 

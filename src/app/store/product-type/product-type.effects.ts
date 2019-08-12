@@ -15,7 +15,7 @@ export class ProductTypeEffects {
 
   @Effect()
   loadProductTypesEffect$ = this.actions$.pipe(
-    ofType<productTypeAction.LoadProductTypes>(ProductTypeActions.LOAD_PRODUCT_TYPES_SUCCESS),
+    ofType<productTypeAction.LoadProductTypes>(ProductTypeActions.LOAD_PRODUCT_TYPES),
     startWith(new productTypeAction.LoadProductTypes),
     switchMap(() => this.api.getAll('product-types')
       .pipe(

@@ -4,10 +4,12 @@ import {TranslateContainerComponent} from './translate-container/translate-conta
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentCommonModule} from '../components/common/component-common.module';
 import {AngularMaterialModule} from '../angular-material.module';
+import { DialogActionNsiComponent } from './dialogs/dialog-action-nsi/dialog-action-nsi.component';
 
 @NgModule({
   declarations: [
-    TranslateContainerComponent
+    TranslateContainerComponent,
+    DialogActionNsiComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,11 @@ import {AngularMaterialModule} from '../angular-material.module';
     AngularMaterialModule
   ],
   exports: [
-    TranslateContainerComponent
+    TranslateContainerComponent,
+    DialogActionNsiComponent
+  ],
+  entryComponents: [
+    DialogActionNsiComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

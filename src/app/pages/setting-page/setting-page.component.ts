@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {LoadRequestProductType} from '../../store/product-type/product.type.actions';
 import * as positionStore from '../../store/position/position.selector';
 import * as productTypeStore from '../../store/product-type/product.type.selectors';
 import * as typeStore from '../../store/type/type.selectors';
 import {PositionEntity} from '../../store/entities/position.entity';
 import {ProductTypeEntity} from '../../store/entities/product.type.entity';
-import {LoadRequestPositions} from '../../store/position/position.actions';
 import {TypeEntity} from '../../store/entities/type.entity';
-import {LoadRequestType} from '../../store/type/type.actions';
 import {CreateTag, LoadTags} from '../../store/tag/tag.actions';
 import * as tagSelector from '../../store/tag/tag.selectors';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Value} from '../../store/entities/abstract.entity';
 import {Language} from '../../store/language/language.model';
 import {TagEntity} from '../../store/entities/tag.entity';
+import { LoadTypes } from 'src/app/store/type/type.actions';
+import { LoadPositions } from 'src/app/store/position/position.actions';
+import { LoadProductTypes } from 'src/app/store/product-type/product.type.actions';
 
 @Component({
   selector: 'app-setting-page',
@@ -60,9 +60,9 @@ export class SettingPageComponent implements OnInit {
     this.store.select(positionStore.selectIsLoading).subscribe(isLoading => this.loadingPosition = isLoading);
 
     this.store.dispatch(new LoadTags());
-    this.store.dispatch(new LoadRequestType());
-    this.store.dispatch(new LoadRequestPositions());
-    this.store.dispatch(new LoadRequestProductType());
+    this.store.dispatch(new LoadTypes());
+    this.store.dispatch(new LoadPositions());
+    this.store.dispatch(new LoadProductTypes());
   }
 
   submitTagForm() {
