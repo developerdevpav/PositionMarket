@@ -28,7 +28,6 @@ export class ImageUtilService {
             );
         }
       } else {
-        positionImages.forEach(it => it.mainImage = false);
         positionImages[0].mainImage = true;
       }
     }

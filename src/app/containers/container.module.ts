@@ -5,11 +5,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentCommonModule} from '../components/common/component-common.module';
 import {AngularMaterialModule} from '../angular-material.module';
 import { DialogActionNsiComponent } from './dialogs/dialog-action-nsi/dialog-action-nsi.component';
+import { DialogNsiEntryComponent } from './dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
 
 @NgModule({
   declarations: [
     TranslateContainerComponent,
-    DialogActionNsiComponent
+    DialogActionNsiComponent,
+    DialogNsiEntryComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { DialogActionNsiComponent } from './dialogs/dialog-action-nsi/dialog-act
   ],
   exports: [
     TranslateContainerComponent,
-    DialogActionNsiComponent
+    DialogActionNsiComponent,
+    DialogNsiEntryComponent
   ],
   entryComponents: [
     DialogActionNsiComponent

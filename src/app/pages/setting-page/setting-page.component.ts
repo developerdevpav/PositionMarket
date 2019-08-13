@@ -15,6 +15,8 @@ import {TagEntity} from '../../store/entities/tag.entity';
 import { LoadTypes } from 'src/app/store/type/type.actions';
 import { LoadPositions } from 'src/app/store/position/position.actions';
 import { LoadProductTypes } from 'src/app/store/product-type/product.type.actions';
+import { Route } from '@angular/compiler/src/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting-page',
@@ -39,7 +41,7 @@ export class SettingPageComponent implements OnInit {
 
   buyTicketForm: FormGroup;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private router: Router) {
     this.buyTicketForm = new FormGroup({
       ru_value: new FormControl(null),
       en_value: new FormControl(null)
@@ -48,7 +50,7 @@ export class SettingPageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.store.select(productTypeStore.selectProductTypes).subscribe(positions => this.productTypes = positions);
+ /*    this.store.select(productTypeStore.selectProductTypes).subscribe(positions => this.productTypes = positions);
     this.store.select(positionStore.selectPositions).subscribe(positions => this.positions = positions);
     this.store.select(typeStore.selectTypes).subscribe(types => this.types = types);
 
@@ -62,7 +64,8 @@ export class SettingPageComponent implements OnInit {
     this.store.dispatch(new LoadTags());
     this.store.dispatch(new LoadTypes());
     this.store.dispatch(new LoadPositions());
-    this.store.dispatch(new LoadProductTypes());
+    this.store.dispatch(new LoadProductTypes()); */
+ /*    this.router.navigate(['tags', 3]); */
   }
 
   submitTagForm() {
