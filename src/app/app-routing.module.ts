@@ -6,7 +6,6 @@ import { ContactsPageComponent } from './pages/contacts-page/contacts-page.compo
 import { SettingPageComponent } from './pages/setting-page/setting-page.component';
 import { UserShoppingCartComponent } from './pages/user-shopping-cart/user-shopping-cart.component';
 import { DialogNsiEntryComponent } from './containers/dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
-import { EntityFindResolver } from './helpers/resolvers/resolver.find.entity';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,14 +14,29 @@ const routes: Routes = [
   {
     path: 'settings',
     children: [
-      { 
-        path: ':id',
-        pathMatch: "full",
-        component: DialogNsiEntryComponent,
-        resolve: {
-          entity: EntityFindResolver
-        } 
-      }
+      {
+        path: 'database',
+        children: [
+          {
+            path: ':database',
+            children: 
+              [
+                {
+                  path: ':id',
+                  children: [
+                    {
+                      path: ':action',
+                      pathMatch: 'full',
+                      component: DialogNsiEntryComponent
+                    }
+                  ]
+                }, 
+                { path: '**', redirectTo: 'settings/database/tags' }
+              ]
+          }
+        ]
+      },
+
     ]
   },
   { path: 'contacts', component: ContactsPageComponent },

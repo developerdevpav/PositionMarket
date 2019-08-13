@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {Store} from '@ngrx/store';
-import {MatIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
-import {SetLanguageAction} from './store/language/language.actions';
-import {getCurrentLanguage} from './store/language/language.selector';
-import {Language} from './store/language/language.model';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SetLanguageAction } from './store/language/language.actions';
+import { getCurrentLanguage } from './store/language/language.selector';
+import { Language } from './store/language/language.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,13 @@ export class AppComponent implements OnInit {
   currentLanguage = 'ru';
 
   constructor(private translate: TranslateService,
-              private store: Store<any>,
-              private matIconRegistry: MatIconRegistry,
-              private domSanitizer: DomSanitizer) {
+    private store: Store<any>,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer, private router: Router) {
 
+    const eventSubscriber = this.router.events.subscribe(action => {
+      console.log(action);
+    });
     this.matIconRegistry
       .addSvgIcon(
         'success',

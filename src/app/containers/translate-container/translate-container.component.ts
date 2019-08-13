@@ -19,13 +19,20 @@ export class TranslateContainerComponent implements OnInit {
   inputValues: EventEmitter<Value[]> = new EventEmitter();
 
   constructor(public formBuilder: FormBuilder) {
+    
+  }
+
+  ngOnChanges(changes: any): void {
+    console.log(changes);
+  }
+
+  ngOnInit() {
+    console.log('values', this.values);
     this.formGroup = this.formBuilder.group({
       ru: this.formBuilder.control(this.findValueStringByLanguage(Language.RU, this.values)),
       en: this.formBuilder.control(this.findValueStringByLanguage(Language.EN, this.values))
     });
-  }
 
-  ngOnInit() {
     this.formGroup.valueChanges.subscribe(() => {
       this.inputValues.emit([
         this.buildValue(Language.EN, this.formGroup.get('en').value),

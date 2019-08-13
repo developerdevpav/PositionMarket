@@ -44,8 +44,7 @@ import {TagEffects} from './store/tag/tag.effects';
     ]),
     PageModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent],
   schemas: [

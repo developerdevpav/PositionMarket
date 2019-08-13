@@ -5,7 +5,7 @@ import {TagActionTypes} from './tag.actions';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import {NsiAbstractService} from '../services/nsi.abstract.service';
 import {TagEntity} from '../entities/tag.entity';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class TagEffects {
@@ -19,7 +19,19 @@ export class TagEffects {
     switchMap(() => this.api.getAll('tags')
       .pipe(
         map((objects: TagEntity[]) => new tagAction.LoadTagsSuccess({tags: objects})),
-        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
+        catchError(err => of(new tagAction.RequestTagFailure(err)))
+      )
+    )
+  );
+
+  @Effect()
+  public getById = this.actions$.pipe(
+    ofType<tagAction.GetTagById>(TagActionTypes.GET_TAG_BY_ID),
+    map(action => action.payload.id),
+    switchMap((id: string) => this.api.getById('tags', id)
+      .pipe(
+        map((object: TagEntity) => new tagAction.GetTagByIdSuccess({tag: object})),
+        catchError(err => of(new tagAction.RequestTagFailure(err)))
       )
     )
   );
@@ -43,7 +55,7 @@ export class TagEffects {
     switchMap((payload: {tag: TagEntity}) => this.api.update('tags', payload.tag)
       .pipe(
         map((object: TagEntity) => new tagAction.UpdateTagSuccess({ tag: object })),
-        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
+        catchError(err => of(new tagAction.RequestTagFailure(err)))
       )
     )
   );

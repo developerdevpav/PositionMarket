@@ -2,11 +2,11 @@
 
 <mat-dialog-content>
   <div class="mb-1 mt-1">
-      <translate-container [values]="props?.entity?.values"  (inputValues)="changeValues($event)"></translate-container>
+    <translate-container [values]="props?.entity?.values" (inputValues)="changeValues($event)"></translate-container>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close>{{'CANCEL' | translate}}</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{props.btnTitle}}</button>
 </mat-dialog-actions>

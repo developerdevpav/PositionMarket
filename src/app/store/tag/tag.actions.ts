@@ -6,6 +6,10 @@ export enum TagActionTypes {
   LOAD_TAGS_SUCCESS = '[Tag] Load Tags SUCCESS',
   REQUEST_TAG_FAILURE = '[Tag] FAILURE',
 
+  GET_TAG_BY_ID = '[Tag] Get tag by id',
+  GET_TAG_BY_ID_REQUEST = '[Tag] Get tag by id REQUEST',
+  GET_TAG_BY_ID_SUCCESS = '[Tag] Get tag by id SUCCESS',
+
   CREATE_TAG = '[Tag] Add Tag',
   CREATE_TAG_SUCCESS = '[Tag] Add Tag SUCCESS',
 
@@ -35,6 +39,24 @@ export class LoadTagsSuccess implements Action {
   readonly type = TagActionTypes.LOAD_TAGS_SUCCESS;
 
   constructor(public payload: { tags: TagEntity[] }) {
+  }
+}
+
+export class GetTagById implements Action {
+  readonly type = TagActionTypes.GET_TAG_BY_ID;
+
+  constructor(public payload: { id: string }) {
+  }
+}
+
+export class GetTagByIdRequest implements Action {
+  readonly type = TagActionTypes.GET_TAG_BY_ID;
+}
+
+export class GetTagByIdSuccess implements Action {
+  readonly type = TagActionTypes.GET_TAG_BY_ID_SUCCESS;
+
+  constructor(public payload: { tag: TagEntity }) {
   }
 }
 
@@ -97,6 +119,8 @@ export class DeleteTagsSuccess implements Action {
 export type TagActions =
   LoadTags
   | LoadTagsSuccess
+  | GetTagById
+  | GetTagByIdSuccess
   | CreateTag
   | CreateTagSuccess
   | UpdateTag
@@ -104,4 +128,5 @@ export type TagActions =
   | DeleteTag
   | DeleteTagSuccess
   | DeleteTags
-  | DeleteTagsSuccess;
+  | DeleteTagsSuccess
+  | RequestTagFailure;

@@ -28,5 +28,6 @@
   "PLACEHOLDER_TITLE_RU": "Название на русском языке",
   "PLACEHOLDER_TITLE_EN": "Название на английском языке",
   "NAVIGATION": "Навигация",
-  "SHOP_CART": "Корзина"
+  "SHOP_CART": "Корзина",
+  "CANCEL": "Отмена"
 }

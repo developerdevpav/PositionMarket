@@ -15,27 +15,21 @@ export interface DialogActionNsiProps {
 })
 export class DialogActionNsiComponent implements OnInit {
 
-  props: DialogActionNsiProps = {
-    btnTitle: '',
-    entity: undefined,
-    titleWindow: ''
-  }
+  props: DialogActionNsiProps;
 
   actions: EventEmitter<Nsi> = new EventEmitter();
 
-  constructor(public dialogRef: MatDialogRef<DialogActionNsiComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) { 
+  constructor(public dialogRef: MatDialogRef<DialogActionNsiComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) {
     this.props = this.data;
+    console.log('this.data: ', this.data);
   }
 
   ngOnInit() {
   }
 
   changeValues($events: Value[]) {
-    const nsi = {
-      ...this.props.entity,
-      values: $events
-    }
+    const nsi = {  ...this.props.entity, values: $events }
     this.actions.emit(nsi);
   }
 
