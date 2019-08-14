@@ -29,5 +29,13 @@
   "PLACEHOLDER_TITLE_EN": "Название на английском языке",
   "NAVIGATION": "Навигация",
   "SHOP_CART": "Корзина",
-  "CANCEL": "Отмена"
+  "CANCEL": "Отмена",
+  "ACTIONS": {
+    "VIEWING": "Просмотр",
+    "CREATING": "Создание",
+    "CHANGING": "Изменение",
+    "CANCEL": "Отменить",
+    "CLOSE": "Закрыть",
+    "EDIT": "Редактировать"
+  }
 }

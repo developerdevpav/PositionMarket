@@ -7,7 +7,6 @@ export enum TagActionTypes {
   REQUEST_TAG_FAILURE = '[Tag] FAILURE',
 
   GET_TAG_BY_ID = '[Tag] Get tag by id',
-  GET_TAG_BY_ID_REQUEST = '[Tag] Get tag by id REQUEST',
   GET_TAG_BY_ID_SUCCESS = '[Tag] Get tag by id SUCCESS',
 
   CREATE_TAG = '[Tag] Add Tag',
@@ -47,10 +46,6 @@ export class GetTagById implements Action {
 
   constructor(public payload: { id: string }) {
   }
-}
-
-export class GetTagByIdRequest implements Action {
-  readonly type = TagActionTypes.GET_TAG_BY_ID;
 }
 
 export class GetTagByIdSuccess implements Action {

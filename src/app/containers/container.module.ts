@@ -6,12 +6,14 @@ import {ComponentCommonModule} from '../components/common/component-common.modul
 import {AngularMaterialModule} from '../angular-material.module';
 import { DialogActionNsiComponent } from './dialogs/dialog-action-nsi/dialog-action-nsi.component';
 import { DialogNsiEntryComponent } from './dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
+import { TagGroupComponent } from './database/tag-group/tag-group.component';
 
 @NgModule({
   declarations: [
     TranslateContainerComponent,
     DialogActionNsiComponent,
-    DialogNsiEntryComponent
+    DialogNsiEntryComponent,
+    TagGroupComponent
   ],
   imports: [
     CommonModule,

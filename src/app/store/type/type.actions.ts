@@ -6,6 +6,9 @@ export enum TypeActionsEnum {
   LOAD_TYPES_SUCCESS = '[TYPE] Load TYPEs SUCCESS',
   REQUEST_TYPE_FAILURE = '[TYPE] FAILURE',
 
+  GET_TYPE_BY_ID = '[TYPE] Get TYPE by id',
+  GET_TYPE_BY_ID_SUCCESS = '[Tag] Get TYPE by id SUCCESS',
+
   CREATE_TYPE = '[TYPE] Add TYPE',
   CREATE_TYPE_SUCCESS = '[TYPE] Add TYPE SUCCESS',
 
@@ -37,6 +40,19 @@ export class LoadTypesSuccess implements Action {
   constructor(public payload: { types: TypeEntity[] }) {
   }
 }
+
+export class GetTypeById implements Action {
+  readonly type = TypeActionsEnum.GET_TYPE_BY_ID;
+
+  constructor(public payload: { id: string }) {}
+}
+
+export class GetTypeByIdSuccess implements Action {
+  readonly type = TypeActionsEnum.GET_TYPE_BY_ID_SUCCESS;
+
+  constructor(public payload: { type: TypeEntity }) {}
+}
+
 
 export class CreateType implements Action {
   readonly type = TypeActionsEnum.CREATE_TYPE;
@@ -98,6 +114,8 @@ export type TypeActions =
   RequestTypeFailure
   | LoadTypes
   | LoadTypesSuccess
+  | GetTypeById
+  | GetTypeByIdSuccess
   | CreateType
   | CreateTypeSuccess
   | UpdateType

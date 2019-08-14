@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{props.titleWindow}}</h2>
+<h2 mat-dialog-title>{{ props.titleWindow | async }}</h2>
 
 <mat-dialog-content>
   <div class="mb-1 mt-1">
@@ -7,6 +7,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{'CANCEL' | translate}}</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{props.btnTitle}}</button>
+  <button mat-button mat-dialog-close>{{ (isView() ? 'ACTIONS.CLOSE' : 'ACTIONS.CANCEL') | translate }}</button>
+  <button mat-button cdkFocusInitial *ngIf="!isView()">{{ props?.btnTitle | async }}</button>
 </mat-dialog-actions>

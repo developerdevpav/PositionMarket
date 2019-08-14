@@ -16,12 +16,10 @@ import {ImageUtilService} from './store/services/utils/image-util.service';
 import {TranslatorYandexService} from './store/services/translator-yandex.service';
 import {ComponentCommonModule} from './components/common/component-common.module';
 import {PageModule} from './pages/page.module';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {PositionEffects} from './store/position/position.effects';
 import {ProductTypeEffects} from './store/product-type/product-type.effects';
 import {TypeEffects} from './store/type/type.effects';
 import {TagEffects} from './store/tag/tag.effects';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -45,9 +43,7 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
     ]),
     PageModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
-    NbLayoutModule
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent],
   schemas: [

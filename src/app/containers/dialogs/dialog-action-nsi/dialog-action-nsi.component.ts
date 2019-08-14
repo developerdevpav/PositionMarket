@@ -1,11 +1,14 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Value, Nsi } from 'src/app/store/entities/abstract.entity';
+import { Observable } from 'rxjs';
+import { EntityNsiActionEnum } from '../../dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
 
 export interface DialogActionNsiProps {
-  btnTitle: string;
-  titleWindow: string;
+  btnTitle: Observable<string>;
+  titleWindow: Observable<string>;
   entity: Nsi;
+  type: string;
 }
 
 @Component({
@@ -21,16 +24,19 @@ export class DialogActionNsiComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogActionNsiComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) {
-    this.props = this.data;
-    console.log('this.data: ', this.data);
+    
   }
 
   ngOnInit() {
+    this.props = this.data;
+  }
+
+  isView() {
+    return this.props.type === 'view';
   }
 
   changeValues($events: Value[]) {
-    const nsi = {  ...this.props.entity, values: $events }
-    this.actions.emit(nsi);
+    this.actions.emit({ ...this.props.entity, values: $events });
   }
 
 }

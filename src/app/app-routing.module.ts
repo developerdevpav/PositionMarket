@@ -25,22 +25,26 @@ const routes: Routes = [
         path: 'database',
         children: [
           {
-            path: ':table',
-            children:
-              [
-                {
-                  path: ':id',
-                  children: [
-                    {
-                      path: ':action',
-                      pathMatch: 'full',
-                      component: DialogNsiEntryComponent,
-                      canActivate: [EntityNsiActionGuard]
-                    }
-                  ]
-                }, 
-                { path: '**', redirectTo: 'settings' }
-              ]
+            path: 'tags',
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                component: 
+              },
+              {
+                path: ':action/:id',
+                pathMatch: 'full',
+                component: DialogNsiEntryComponent,
+                canActivate: [EntityNsiActionGuard]
+              }
+            ]
+          },
+          {
+            path: ':table/:action/:id',
+            pathMatch: 'full',
+            component: DialogNsiEntryComponent,
+            canActivate: [EntityNsiActionGuard]
           }
         ]
       },
@@ -53,7 +57,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

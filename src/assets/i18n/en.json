@@ -29,5 +29,12 @@
   "PLACEHOLDER_TITLE_EN": "Name in English",
   "NAVIGATION": "Navigation",
   "SHOP_CART": "Shopping cart",
-  "CANCEL": "Cancel"
+  "ACTIONS": {
+    "VIEWING": "View",
+    "CREATING": "Create",
+    "CHANGING": "Change",
+    "CANCEL": "Cancel",
+    "CLOSE": "Close",
+    "EDIT": "Change"
+  }
 }

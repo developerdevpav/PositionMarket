@@ -19,13 +19,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
   subscriptionRouteQueryParams$: Subscription = new Subscription();
 
   constructor(private store: Store<any>, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
-    const valueRouteQueryParam = route.queryParams.subscribe(params => {
-      if (params['id']) {
-        this.openDialog();
-      }
-    })
-   
-    this.subscriptionRouteQueryParams$.add(valueRouteQueryParam);
    }
 
   ngOnInit() {
@@ -41,35 +34,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.valueCheck = $event;
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogActionNsiComponent, {
-      width: '700px',
-      height: 'auto',
-      data: { 
-        btnTitle: 'Save', 
-        titleWindow: 'Change tags', 
-        entity: { 
-          id: 'fewohfuihefirheiwhfirhwefuirheuwg', 
-          values: [
-            {
-              language: Language.RU,
-              value: 'Название тега'
-            },
-            {
-              language: Language.EN,
-              value: 'Name tag'
-            }
-          ] 
-        } 
-      } as DialogActionNsiProps
-    });
-
-    dialogRef.componentInstance.actions.subscribe(console.log);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(JSON.stringify(result));
-      this.router.navigate(['.'], {relativeTo: this.route})
-    });
-  }
+  openDialog(): void {}
 
 }
