@@ -6,6 +6,8 @@ import { ContactsPageComponent } from './pages/contacts-page/contacts-page.compo
 import { SettingPageComponent } from './pages/setting-page/setting-page.component';
 import { UserShoppingCartComponent } from './pages/user-shopping-cart/user-shopping-cart.component';
 import { DialogNsiEntryComponent } from './containers/dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { EntityNsiActionGuard } from './helpers/guards/entity-nsi-action.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,11 +17,16 @@ const routes: Routes = [
     path: 'settings',
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        component: SettingPageComponent
+      },
+      {
         path: 'database',
         children: [
           {
-            path: ':database',
-            children: 
+            path: ':table',
+            children:
               [
                 {
                   path: ':id',
@@ -27,11 +34,12 @@ const routes: Routes = [
                     {
                       path: ':action',
                       pathMatch: 'full',
-                      component: DialogNsiEntryComponent
+                      component: DialogNsiEntryComponent,
+                      canActivate: [EntityNsiActionGuard]
                     }
                   ]
                 }, 
-                { path: '**', redirectTo: 'settings/database/tags' }
+                { path: '**', redirectTo: 'settings' }
               ]
           }
         ]
@@ -45,7 +53,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

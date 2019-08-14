@@ -21,6 +21,7 @@ import {PositionEffects} from './store/position/position.effects';
 import {ProductTypeEffects} from './store/product-type/product-type.effects';
 import {TypeEffects} from './store/type/type.effects';
 import {TagEffects} from './store/tag/tag.effects';
+import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import {TagEffects} from './store/tag/tag.effects';
     ]),
     PageModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule
   ],
   bootstrap: [AppComponent],
   schemas: [

@@ -21,10 +21,7 @@ export class AppComponent implements OnInit {
     private store: Store<any>,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer, private router: Router) {
-
-    const eventSubscriber = this.router.events.subscribe(action => {
-      console.log(action);
-    });
+      
     this.matIconRegistry
       .addSvgIcon(
         'success',
