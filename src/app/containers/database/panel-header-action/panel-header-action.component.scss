@@ -1,0 +1,19 @@
+.header-action-panel {
+  background: rgba(244, 244, 244, 0.16);
+  height: 40px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.action-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+}
+
+.action-icon mat-icon {
+  margin-right: 15px;
+  cursor: pointer;
+}
+.action-icon mat-icon:last-child {
+  margin-right: 0;
+}
