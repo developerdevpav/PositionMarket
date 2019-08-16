@@ -8,6 +8,7 @@ import { UserShoppingCartComponent } from './pages/user-shopping-cart/user-shopp
 import { DialogNsiEntryComponent } from './containers/dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { EntityNsiActionGuard } from './helpers/guards/entity-nsi-action.guard';
+import { TagGroupComponent } from './containers/database/tag/tag-group/tag-group.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,7 +31,7 @@ const routes: Routes = [
               {
                 path: '',
                 pathMatch: 'full',
-                component: 
+                component: TagGroupComponent
               },
               {
                 path: ':action/:id',

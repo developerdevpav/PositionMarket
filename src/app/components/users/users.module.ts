@@ -7,12 +7,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AvatarCarouselComponent} from './avatar-carousel/avatar-carousel.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CutTextPipe} from '../../ui/pipes/cut-text.pipe';
 
 @NgModule({
   declarations: [
-    AvatarCarouselComponent,
-    CutTextPipe,
+    AvatarCarouselComponent
   ],
   imports: [
     CommonModule,

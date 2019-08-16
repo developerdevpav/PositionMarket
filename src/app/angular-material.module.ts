@@ -14,8 +14,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpLoaderFactory} from './ui/translate.service';
+import {
+  TranslateLoader, 
+  TranslateModule
+} from '@ngx-translate/core';
+import {HttpLoaderFactory} from './util/translate.service';
 import {HttpClient} from '@angular/common/http';
 
 @NgModule({

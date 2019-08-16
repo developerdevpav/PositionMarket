@@ -1,0 +1,13 @@
+<span>Options selected: {{shoes.selectedOptions.selected}}</span>
+<mat-selection-list role="list" #shoes>
+    <mat-list-option *ngFor="let item of (entities$ | async)" role="listitem">{{item?.value}}</mat-list-option>
+</mat-selection-list>
+
+<mat-list>
+    <h3 matSubheader>Folders</h3>
+    <mat-list-item *ngFor="let folder of (entities$ | async)">
+        <mat-icon matListIcon>folder</mat-icon>
+        <h4 matLine>{{folder.value}}</h4>
+        <p matLine class="demo-2"> {{folder.value}} </p>
+    </mat-list-item>
+</mat-list>
