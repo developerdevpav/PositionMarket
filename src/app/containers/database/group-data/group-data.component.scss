@@ -1,0 +1,28 @@
+.item-panel {
+  margin-top: 15px;
+}
+
+.item-panel:last-child {
+  margin-bottom: 0;
+}
+mat-selection-list {
+  outline: none;
+}
+
+.mat-list-text {
+  padding-left: 0 !important;
+}
+
+.title-panel {
+  margin-left: 10px;
+}
+
+mat-list-option {
+  background: #ffffff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.item-panel-body {
+  display: flex;
+  align-items: center;
+}

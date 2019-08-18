@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Value, Nsi } from 'src/app/store/entities/abstract.entity';
-import { Observable } from 'rxjs';
-import { EntityNsiActionEnum } from '../../dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
+import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Nsi, Value} from 'src/app/store/entities/abstract.entity';
+import {Observable} from 'rxjs';
 
 export interface DialogActionNsiProps {
   btnTitle: Observable<string>;
@@ -24,7 +23,6 @@ export class DialogActionNsiComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogActionNsiComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) {
-    
   }
 
   ngOnInit() {

@@ -1,6 +1,8 @@
 <div class="row header-action-panel justify-content-end align-content-center" style="background: white">
-  <div class="action-icon">
-    <app-devpav-icon-set [props]="iconSetProps" #iconSetComponent (clickIcon)="clickActionPanel($event)">
-    </app-devpav-icon-set>
+  <div class="col-8 row justify-content-start align-content-center">
+    <span>/tags</span>
+  </div>
+  <div class="col-4 row justify-content-end action-icon">
+    <devpav-icon-set [props]="iconSetProps" (clickIcon)="clickActionPanel($event)"></devpav-icon-set>
   </div>
 </div>

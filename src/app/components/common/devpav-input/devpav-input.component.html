@@ -1,8 +1,24 @@
-<label>
-  <input [type]="type"
-         (blur)="blurInput($event.returnValue)"
-         (focus)="focusInput($event.returnValue)"
-         [placeholder]="ph"
-         (input)="setValue()"
-         [(ngModel)]="value">
-</label>
+<div class="row">
+  <label class="col-12">
+    <input [type]="type"
+           (blur)="blurInput($event.returnValue)"
+           (focus)="focusInput($event.returnValue)"
+           [placeholder]="ph"
+           (input)="setValue()"
+           [(ngModel)]="value">
+  </label>
+</div>
+
+<div class="row">
+    <div class="col-8">
+      <div class="row justify-content-start align-content-center">
+        <span>Current value</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row justify-content-end">
+        <button mat-icon-button><mat-icon color="primary">add</mat-icon></button>
+      </div>
+    </div>
+</div>
+

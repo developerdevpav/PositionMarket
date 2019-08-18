@@ -1,8 +1,0 @@
-<mat-selection-list (selectionChange)="eventSelectItems($event)" #shoes>
-  <mat-list-option style="background: #ffffff;  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);" *ngFor="let item of items" [disableRipple]="true" checkboxPosition="after" [value]="item.id">
-    <div class="center-vertically">
-      <mat-icon matListIcon color="primary" *ngIf="icon?.showIcon">{{icon?.title}}</mat-icon>
-      <span [ngClass]="icon?.showIcon ? '' : 'title-panel'">{{item.value}}</span>
-    </div>
-  </mat-list-option>
-</mat-selection-list>

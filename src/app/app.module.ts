@@ -20,6 +20,7 @@ import {PositionEffects} from './store/position/position.effects';
 import {ProductTypeEffects} from './store/product-type/product-type.effects';
 import {TypeEffects} from './store/type/type.effects';
 import {TagEffects} from './store/tag/tag.effects';
+import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import {TagEffects} from './store/tag/tag.effects';
     ReactiveFormsModule,
     StoreModule.forRoot(storeReducers.reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    PageModule,
     EffectsModule.forRoot([
       PositionEffects,
       ProductTypeEffects,
@@ -42,6 +42,7 @@ import {TagEffects} from './store/tag/tag.effects';
       TagEffects
     ]),
     PageModule,
+    AdminManagementModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],
@@ -55,8 +56,6 @@ import {TagEffects} from './store/tag/tag.effects';
     PositionService,
     ImageUtilService,
     TranslatorYandexService
-  ],
-  exports: [
   ]
 })
 export class AppModule {

@@ -6,23 +6,22 @@ import {ComponentCommonModule} from '../components/common/component-common.modul
 import {AngularMaterialModule} from '../angular-material.module';
 import {DialogActionNsiComponent} from './dialogs/dialog-action-nsi/dialog-action-nsi.component';
 import {DialogNsiEntryComponent} from './dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
-import {TagGroupComponent} from './database/tag/tag-group/tag-group.component';
-import {TagItemComponent} from './database/tag/tag-item/tag-item.component';
-import {ItemSelectPanelComponent} from './item-select-panel/item-select-panel.component';
 import {PanelHeaderActionComponent} from './database/panel-header-action/panel-header-action.component';
 import {WrapperGroupDataComponent} from './database/wrapper-group-data/wrapper-group-data.component';
-import {NgxJsonViewerModule} from "ngx-json-viewer";
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import {GroupDataComponent} from './database/group-data/group-data.component';
+import {SharedModule} from '../shared/shared.module';
+import {FormGroupDataComponent} from './database/form-group-data/form-group-data.component';
 
 @NgModule({
   declarations: [
     TranslateContainerComponent,
     DialogActionNsiComponent,
     DialogNsiEntryComponent,
-    TagGroupComponent,
-    TagItemComponent,
-    ItemSelectPanelComponent,
     PanelHeaderActionComponent,
-    WrapperGroupDataComponent
+    WrapperGroupDataComponent,
+    GroupDataComponent,
+    FormGroupDataComponent
   ],
   imports: [
     CommonModule,
@@ -30,12 +29,14 @@ import {NgxJsonViewerModule} from "ngx-json-viewer";
     FormsModule,
     ComponentCommonModule,
     AngularMaterialModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    SharedModule
   ],
   exports: [
     TranslateContainerComponent,
     DialogActionNsiComponent,
-    DialogNsiEntryComponent
+    DialogNsiEntryComponent,
+    FormGroupDataComponent
   ],
   entryComponents: [
     DialogActionNsiComponent

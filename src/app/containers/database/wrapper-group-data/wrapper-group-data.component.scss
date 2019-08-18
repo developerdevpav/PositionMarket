@@ -1,0 +1,14 @@
+.data-form {
+  position: relative;
+}
+
+.data-form-panel-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.data-form-content {
+  outline: none;
+  z-index: 1;
+}

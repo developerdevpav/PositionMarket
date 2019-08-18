@@ -1,9 +1,5 @@
-import {AfterContentInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {
-  DevpavIconClickOutput,
-  DevpavIconSetComponent,
-  DevpavIconSetProps
-} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
+import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
 
 enum IconAction {
   ADD = 'ADD_VALUE',
@@ -17,39 +13,36 @@ enum IconAction {
   encapsulation: ViewEncapsulation.None
 })
 export class PanelHeaderActionComponent implements OnInit, AfterContentInit {
-  @ViewChild(DevpavIconSetComponent) component: DevpavIconSetComponent;
 
-  iconSetProps: DevpavIconSetProps = {
-    icons: [
-      {
-        id: IconAction.ADD,
-        iconTitle: 'add'
-      },
-      {
-        id: IconAction.DELETE_ALL,
-        iconTitle: 'playlist_add_check',
-        color: 'red'
-      }
-    ]
-  };
+  @Input()
+  iconSetProps: DevpavIconSetProps;
 
-  constructor() { }
+  @Output()
+  private clickIcon: EventEmitter<DevpavIconClickOutput> = new EventEmitter();
+
+/*
+  disable(id: string, value: boolean) {
+    this.component.disableIcon(id, value);
+  }
+
+  hidden(id: string, value: boolean) {
+    this.component.hiddenIcon(id, value);
+  }
+*/
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-
-
   clickActionPanel($event: DevpavIconClickOutput) {
-    console.log($event);
+    this.clickIcon.emit($event);
   }
 
   ngAfterContentInit(): void {
-    console.log(this.component);
+
   }
 
-  disableAdd() {
-    this.component.changeValueDisableIcon(IconAction.ADD);
-  }
 
 }

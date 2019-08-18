@@ -9,6 +9,7 @@ export interface DevpavIconSetIcon {
   iconTitle: string;
   disable?: boolean;
   color?: string;
+  hidden?: boolean;
 }
 
 export interface DevpavIconClickOutput {
@@ -17,34 +18,50 @@ export interface DevpavIconClickOutput {
 }
 
 @Component({
-  selector: 'app-devpav-icon-set',
+  selector: 'devpav-icon-set',
   templateUrl: './devpav-icon-set.component.html',
   styleUrls: ['./devpav-icon-set.component.scss']
 })
 export class DevpavIconSetComponent implements OnInit {
 
+  // tslint:disable-next-line:variable-name
+  private _props: DevpavIconSetProps;
+
   @Input()
-  props: DevpavIconSetProps;
+  set props(props: DevpavIconSetProps) {
+    this._props = props;
+  }
 
   @Output()
   clickIcon: EventEmitter<DevpavIconClickOutput> = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  eventClickIcon($event: MouseEvent, icon: DevpavIconSetIcon) {
-    this.clickIcon.emit({ id: icon.id, event: $event });
+/*
+  disableIcon(idIcon: string | number, disable: boolean) {
+    this.changeValue(idIcon, 'disable', disable);
   }
 
-  changeValueDisableIcon(idIcon: string | number) {
-    if (this.props && this.props.icons) {
-      const icon = this.props.icons.find(it => idIcon === it.id);
+  hiddenIcon(idIcon: string | number, hidden: boolean) {
+    this.changeValue(idIcon, 'show', hidden);
+  }
+*/
+
+  eventClickIcon($event: MouseEvent, icon: DevpavIconSetIcon) {
+    this.clickIcon.emit({id: icon.id, event: $event});
+  }
+
+  changeValue(id: string | number, fieldName: string, value: boolean) {
+    if (this._props && this._props.icons) {
+      const icon = this._props.icons.find(it => id === it.id);
       if (icon) {
-        console.log('changeValueDisableIcon: ', icon);
-        icon.disable = !icon.disable;
+        icon[fieldName] = value;
       }
     }
   }
+
 }

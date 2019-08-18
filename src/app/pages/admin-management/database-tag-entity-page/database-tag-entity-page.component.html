@@ -1,0 +1,5 @@
+<form-group-data [items]="(tags$ | async)"
+                 (createEntity)="create($event)"
+                 (changeEntity)="change($event)"
+                 (deleteEntity)="delete($event)"
+></form-group-data>

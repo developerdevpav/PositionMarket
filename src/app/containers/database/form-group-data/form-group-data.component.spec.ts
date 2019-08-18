@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ItemSelectPanelComponent} from './item-select-panel.component';
+import {FormGroupDataComponent} from './form-group-data.component';
 
-describe('ItemSelectPanelComponent', () => {
-  let component: ItemSelectPanelComponent;
-  let fixture: ComponentFixture<ItemSelectPanelComponent>;
+describe('FormGroupDataComponent', () => {
+  let component: FormGroupDataComponent;
+  let fixture: ComponentFixture<FormGroupDataComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemSelectPanelComponent ]
+      declarations: [ FormGroupDataComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemSelectPanelComponent);
+    fixture = TestBed.createComponent(FormGroupDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
