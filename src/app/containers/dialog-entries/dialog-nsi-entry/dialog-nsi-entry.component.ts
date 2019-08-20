@@ -1,5 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DialogActionNsiComponent, DialogActionNsiProps} from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
+import {
+  DialogActionNsiComponent,
+  DialogActionNsiProps
+} from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
 import {Action, select, Store} from '@ngrx/store';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -85,6 +88,7 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy {
 
       this.subscription$.add(this.dialogRef.afterClosed().subscribe(() => {
         this.dialogRef = undefined;
+        this.router.navigate(['../../'], { relativeTo: this.route });
       }));
     }
   }

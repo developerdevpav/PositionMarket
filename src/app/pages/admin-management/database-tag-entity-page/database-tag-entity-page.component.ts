@@ -30,11 +30,21 @@ export class DatabaseTagEntityPageComponent implements OnInit {
   }
 
   change($event: string) {
-    const navigate = this.router.navigate(['edit', $event]);
+    const navigate = this.router.navigate(
+      ['edit', $event],
+      {relativeTo: this.route}
+    );
   }
 
   delete($event: string[]) {
 
+  }
+
+  view($event: string) {
+    const navigate = this.router.navigate(
+      ['view', $event],
+      {relativeTo: this.route}
+    );
   }
 
 }

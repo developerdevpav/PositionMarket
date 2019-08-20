@@ -10,9 +10,9 @@ import {EntityNsiActionGuard} from './helpers/guards/entity-nsi-action.guard';
 import {DatabaseTagEntityPageComponent} from './pages/admin-management/database-tag-entity-page/database-tag-entity-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent },
-  { path: 'catalog', component: CatalogPageComponent },
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomePageComponent},
+  {path: 'catalog', component: CatalogPageComponent},
   {
     path: 'settings',
     children: [
@@ -29,14 +29,15 @@ const routes: Routes = [
             children: [
               {
                 path: '',
-                pathMatch: 'full',
-                component: DatabaseTagEntityPageComponent
-              },
-              {
-                path: ':action/:id',
-                pathMatch: 'full',
-                component: DialogNsiEntryComponent,
-                canActivate: [EntityNsiActionGuard]
+                component: DatabaseTagEntityPageComponent,
+                children: [
+                  {
+                    path: ':action/:id',
+                    pathMatch: 'full',
+                    component: DialogNsiEntryComponent,
+                    canActivate: [EntityNsiActionGuard]
+                  }
+                ]
               }
             ]
           }
@@ -45,9 +46,9 @@ const routes: Routes = [
 
     ]
   },
-  { path: 'contacts', component: ContactsPageComponent },
-  { path: 'cart', component: UserShoppingCartComponent },
-  { path: '**', redirectTo: '/home' }
+  {path: 'contacts', component: ContactsPageComponent},
+  {path: 'cart', component: UserShoppingCartComponent},
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({
