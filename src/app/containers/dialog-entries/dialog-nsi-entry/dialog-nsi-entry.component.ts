@@ -3,18 +3,17 @@ import {
   DialogActionNsiComponent,
   DialogActionNsiProps
 } from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
-import {Action, select, Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {getById} from 'src/app/store/tag/tag.selectors';
 import {GetTagById} from 'src/app/store/tag/tag.actions';
 import {getEnumByStringValue} from 'src/app/helpers/util/guard.util';
-import {GetTypeById} from 'src/app/store/type/type.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {Location} from '@angular/common';
 
-export enum EntityNsiActionEnum { EDIT = 'edit', VIEW = 'view' }
+export enum EntityNsiActionEnum { EDIT = 'edit', VIEW = 'view', CREATE = 'create' }
 
 export enum EntityNsiTablesEnum { TAGS = 'tags', TYPES = 'types' }
 
@@ -40,19 +39,25 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy {
 
       const props = { id: params.id };
 
-      this.table = params.table;
+      switch (params.action) {
+        case EntityNsiActionEnum.EDIT: {
+         break;
+        }
+        case EntityNsiActionEnum.VIEW: {
+          break;
+        }
+      }
 
-      const thisIsTagTable = EntityNsiTablesEnum.TAGS === this.table;
-      const action: Action = thisIsTagTable ? new GetTagById(props) : new GetTypeById(props);
+      this.store.dispatch(new GetTagById(props));
 
-      this.store.dispatch(action);
+      const title = this.translate.get('ACTIONS.VIEWING');
 
       const enumAction = getEnumByStringValue(EntityNsiActionEnum, params.action) as unknown as EntityNsiActionEnum;
 
       const propsDialogAction: DialogActionNsiProps = {
         type: enumAction,
         entity: undefined,
-        titleWindow: this.translate.get('ACTIONS.VIEWING'),
+        titleWindow: title,
         btnTitle: this.translate.get(`ACTIONS.${(params.action as string).toUpperCase()}`),
       };
 
