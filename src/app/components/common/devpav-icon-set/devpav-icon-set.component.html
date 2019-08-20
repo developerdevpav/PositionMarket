@@ -2,8 +2,9 @@
   <button mat-icon-button *ngFor="let icon of _props?.icons"
           [disableRipple]="true" color="warn"
           [disabled]="icon.disable"
-          [ngStyle]="{'display': icon.hidden ? 'none' : 'block'}"
+          [ngStyle]="{'display': icon.hidden ? 'none' : 'block', 'color': icon.color}"
+          [ngClass]="icon.disable ? 'disable-icon' : ''"
           (click)="eventClickIcon($event, icon)">
-    <mat-icon [ngClass]="icon.disable ? 'disable-icon' : ''" [ngStyle]="{'color': icon.color}" color="primary">{{icon.iconTitle}}</mat-icon>
+    <mat-icon color="primary"> {{icon?.iconTitle}}</mat-icon>
   </button>
 </div>

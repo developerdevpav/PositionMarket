@@ -12,6 +12,7 @@ import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {GroupDataComponent} from './database/group-data/group-data.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormGroupDataComponent} from './database/form-group-data/form-group-data.component';
+import {DialogTypeEntityComponent} from './dialog-entries/dialog-type-entity/dialog-type-entity.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormGroupDataComponent} from './database/form-group-data/form-group-data
     PanelHeaderActionComponent,
     WrapperGroupDataComponent,
     GroupDataComponent,
-    FormGroupDataComponent
+    FormGroupDataComponent,
+    DialogTypeEntityComponent
   ],
   imports: [
     CommonModule,

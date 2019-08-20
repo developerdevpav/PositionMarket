@@ -78,7 +78,7 @@ export class TagEffects {
     map(it => it.payload),
     switchMap(( payload: { ids: string[] } ) => this.api.deleteAll('tags', payload.ids)
       .pipe(
-        map((objects: string[]) => new tagAction.DeleteTags({ ids: objects })),
+        map((objects: string[]) => new tagAction.DeleteTagsSuccess({ ids: objects })),
         catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
       )
     )

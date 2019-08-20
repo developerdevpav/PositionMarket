@@ -1,6 +1,5 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,8 @@ export class NsiAbstractService<T> {
   }
 
   public deleteAll(service: string, uuids: string[]) {
-    return this.http.delete(`${this.utl}/${service}/[${uuids}]`, {headers: this.headers});
+    const url = encodeURI(`${this.utl}/${service}/[${uuids}]`);
+    return this.http.delete(url, {headers: this.headers});
   }
 
 }

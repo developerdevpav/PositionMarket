@@ -8,5 +8,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{ (isView() ? 'ACTIONS.CLOSE' : 'ACTIONS.CANCEL') | translate }}</button>
-  <button mat-button cdkFocusInitial *ngIf="!isView()">{{ props?.btnTitle | async }}</button>
+  <button mat-button cdkFocusInitial *ngIf="!isView()" (click)="onAction()">{{ props?.btnTitle | async }}</button>
 </mat-dialog-actions>

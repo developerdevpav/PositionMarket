@@ -20,6 +20,7 @@
 </div>
 -->
 
+<!--
 <div style="margin: 10px 0 10px 0">
   <button mat-flat-button (click)="addTag()" style="float: right">Add</button>
   <div style="margin: 10px 0 10px 0">
@@ -38,3 +39,6 @@
   <mat-progress-bar *ngIf="loadingTag" mode="query"></mat-progress-bar>
   <ngx-json-viewer *ngIf="!loadingTag" [json]="tags" [expanded]="loadingTag"></ngx-json-viewer>
 </div>
+-->
+
+<button mat-raised-button routerLink="/settings/database">Database</button>

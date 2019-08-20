@@ -8,6 +8,8 @@ import {UserShoppingCartComponent} from './pages/user-shopping-cart/user-shoppin
 import {DialogNsiEntryComponent} from './containers/dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
 import {EntityNsiActionGuard} from './helpers/guards/entity-nsi-action.guard';
 import {DatabaseTagEntityPageComponent} from './pages/admin-management/database-tag-entity-page/database-tag-entity-page.component';
+import {DatabaseCommonPageComponent} from './pages/admin-management/database-common-page/database-common-page.component';
+import {DatabaseTypeEntityPageComponent} from './pages/admin-management/database-type-entity-page/database-type-entity-page.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -25,12 +27,44 @@ const routes: Routes = [
         path: 'database',
         children: [
           {
+            path: '',
+            pathMatch: 'full',
+            component: DatabaseCommonPageComponent
+          },
+          {
             path: 'tags',
             children: [
               {
                 path: '',
                 component: DatabaseTagEntityPageComponent,
                 children: [
+                  {
+                    path: ':action',
+                    pathMatch: 'full',
+                    component: DialogNsiEntryComponent
+                  },
+                  {
+                    path: ':action/:id',
+                    pathMatch: 'full',
+                    component: DialogNsiEntryComponent,
+                    canActivate: [EntityNsiActionGuard]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            path: 'types',
+            children: [
+              {
+                path: '',
+                component: DatabaseTypeEntityPageComponent,
+                children: [
+                  {
+                    path: ':action',
+                    pathMatch: 'full',
+                    component: DialogNsiEntryComponent
+                  },
                   {
                     path: ':action/:id',
                     pathMatch: 'full',
@@ -43,7 +77,6 @@ const routes: Routes = [
           }
         ]
       },
-
     ]
   },
   {path: 'contacts', component: ContactsPageComponent},

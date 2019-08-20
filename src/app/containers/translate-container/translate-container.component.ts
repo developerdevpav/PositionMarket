@@ -10,6 +10,10 @@ import {Language} from '../../store/language/language.model';
 })
 export class TranslateContainerComponent implements OnInit {
 
+  constructor(public formBuilder: FormBuilder) {
+
+  }
+
   formGroup: FormGroup;
 
   @Input()
@@ -18,16 +22,11 @@ export class TranslateContainerComponent implements OnInit {
   @Output()
   inputValues: EventEmitter<Value[]> = new EventEmitter();
 
-  constructor(public formBuilder: FormBuilder) {
-    
-  }
-
-  ngOnChanges(changes: any): void {
-    console.log(changes);
+  static buildValue(language: Language, value: string) {
+    return { language, value } as Value;
   }
 
   ngOnInit() {
-    console.log('values', this.values);
     this.formGroup = this.formBuilder.group({
       ru: this.formBuilder.control(this.findValueStringByLanguage(Language.RU, this.values)),
       en: this.formBuilder.control(this.findValueStringByLanguage(Language.EN, this.values))
@@ -35,8 +34,8 @@ export class TranslateContainerComponent implements OnInit {
 
     this.formGroup.valueChanges.subscribe(() => {
       this.inputValues.emit([
-        this.buildValue(Language.EN, this.formGroup.get('en').value),
-        this.buildValue(Language.RU, this.formGroup.get('ru').value)
+        TranslateContainerComponent.buildValue(Language.EN, this.formGroup.get('en').value),
+        TranslateContainerComponent.buildValue(Language.RU, this.formGroup.get('ru').value)
       ]);
     });
   }
@@ -54,12 +53,5 @@ export class TranslateContainerComponent implements OnInit {
     }
 
     return valueString.value;
-  }
-
-  private buildValue(language: Language, value: string) {
-    return {
-      language,
-      value
-    } as Value;
   }
 }

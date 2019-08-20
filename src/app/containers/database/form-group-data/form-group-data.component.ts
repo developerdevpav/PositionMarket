@@ -1,18 +1,6 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {GroupDataComponent, ItemSelect, ItemSelectIcon} from '../group-data/group-data.component';
-import {
-  DevpavIconClickOutput,
-  DevpavIconSetProps
-} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
+import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
 
 export enum IconType {
   ADD = 'ADD ICON',
@@ -48,6 +36,7 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
   viewEntity: EventEmitter<string> = new EventEmitter();
 
   @Input()
+
   items: ItemSelect[] = [];
 
   iconsProps: DevpavIconSetProps = {
@@ -85,18 +74,11 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
 
   selectedItems: string[] = [];
 
-  constructor() {
-    for (let i = 0; i < 100; i++) {
-      this.items.push({id: i, value: `#N${i}_VALUE`});
-    }
-  }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-
-  ngAfterContentInit(): void {
-  }
+  ngAfterContentInit(): void {}
 
   hiddenIcon(id: IconType, field: string, value: any) {
     const icon = this.iconsProps.icons.find(it => it.id === id);
@@ -113,10 +95,6 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
       }
       case IconType.CHANGE: {
         this.changeEntity.emit(this.selectedItems[0]);
-        break;
-      }
-      case IconType.VIEW: {
-        this.viewEntity.emit(this.selectedItems[0]);
         break;
       }
       case IconType.DELETE: {

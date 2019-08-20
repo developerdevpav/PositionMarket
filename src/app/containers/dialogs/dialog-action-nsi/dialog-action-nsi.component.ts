@@ -20,6 +20,7 @@ export class DialogActionNsiComponent implements OnInit {
   props: DialogActionNsiProps;
 
   actions: EventEmitter<Nsi> = new EventEmitter();
+  entity: Nsi = { id: undefined, values: [] };
 
   constructor(public dialogRef: MatDialogRef<DialogActionNsiComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) {
@@ -34,7 +35,11 @@ export class DialogActionNsiComponent implements OnInit {
   }
 
   changeValues($events: Value[]) {
-    this.actions.emit({ ...this.props.entity, values: $events });
+    this.entity = { ...this.props.entity, values: $events };
+    this.actions.emit(this.entity);
   }
 
+  onAction() {
+    this.dialogRef.close({ ...this.entity });
+  }
 }

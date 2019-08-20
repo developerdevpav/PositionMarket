@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { NsiAbstractService } from '../services/nsi.abstract.service';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { TypeEntity } from '../entities/type.entity';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {NsiAbstractService} from '../services/nsi.abstract.service';
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {TypeEntity} from '../entities/type.entity';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 import * as typeAction from './type.actions';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class TypeEffects {
   public getAll = this.actions$.pipe(
     ofType<typeAction.LoadTypes>(typeAction.TypeActionsEnum.LOAD_TYPES),
     startWith(new typeAction.LoadTypes()),
-    switchMap(() => this.api.getAll('tags')
+    switchMap(() => this.api.getAll('types')
       .pipe(
         map((objects: TypeEntity[]) => new typeAction.LoadTypesSuccess({ types: objects })),
         catchError(err => Observable.create(new typeAction.RequestTypeFailure(err)))

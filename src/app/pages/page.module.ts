@@ -13,6 +13,7 @@ import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {DevpavInputComponent} from '../components/common/devpav-input/devpav-input.component';
 import {ContainerModule} from '../containers/container.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {ContainerModule} from '../containers/container.module';
     AngularMaterialModule,
     ReactiveFormsModule,
     ContainerModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    RouterModule
   ],
   providers: [
     {

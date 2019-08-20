@@ -30,11 +30,21 @@
   "NAVIGATION": "Navigation",
   "SHOP_CART": "Shopping cart",
   "ACTIONS": {
+    "SAVE": "Save",
     "VIEWING": "View",
-    "CREATING": "Create",
-    "CHANGING": "Change",
+    "CREATE": "Create",
+    "CHANGE": "Change",
     "CANCEL": "Cancel",
     "CLOSE": "Close",
     "EDIT": "Change"
+  },
+  "ACTION_BTN": {
+    "CREATE": "Create",
+    "VIEW": "View",
+    "EDIT": "Change",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "CLOSE": "Close",
+    "SELECT_ALL": "Select all"
   }
 }

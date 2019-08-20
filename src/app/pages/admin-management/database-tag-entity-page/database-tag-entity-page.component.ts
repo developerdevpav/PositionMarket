@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {LoadTags} from '../../../store/tag/tag.actions';
+import {DeleteTags, LoadTags} from '../../../store/tag/tag.actions';
 import {selectByLanguage} from '../../../store/tag/tag.selectors';
-import {Observable} from 'rxjs';
 import {NsiLanguage} from '../../../store/entities/present.entities';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -13,7 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class DatabaseTagEntityPageComponent implements OnInit {
 
-  tags$: Observable<NsiLanguage[]>;
+  tags$: NsiLanguage[];
 
   constructor(private store: Store<any>,
               private router: Router,
@@ -22,26 +21,34 @@ export class DatabaseTagEntityPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tags$ = this.store.select(selectByLanguage);
+    this.store.select(selectByLanguage).subscribe(it => {
+      console.log('new entities: ', it);
+      this.tags$ = it;
+    });
   }
 
   create($event: boolean) {
-    console.log('create tag', $event);
+    this.router.navigate(
+      ['create'],
+      {relativeTo: this.route}
+    );
   }
 
   change($event: string) {
-    const navigate = this.router.navigate(
+    this.router.navigate(
       ['edit', $event],
       {relativeTo: this.route}
     );
   }
 
   delete($event: string[]) {
-
+    if ($event) {
+      this.store.dispatch(new DeleteTags({ids: $event}));
+    }
   }
 
   view($event: string) {
-    const navigate = this.router.navigate(
+    this.router.navigate(
       ['view', $event],
       {relativeTo: this.route}
     );

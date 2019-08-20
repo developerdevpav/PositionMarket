@@ -1,20 +1,19 @@
 import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {DialogActionNsiComponent, DialogActionNsiProps} from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
+import {Subscription} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {getById} from 'src/app/store/tag/tag.selectors';
-import {CreateTag, GetTagById, UpdateTag} from 'src/app/store/tag/tag.actions';
-import {getEnumByStringValue} from 'src/app/helpers/util/guard.util';
 import {TranslateService} from '@ngx-translate/core';
+import {DialogActionNsiComponent, DialogActionNsiProps} from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
+import {getEnumByStringValue} from '../../../helpers/util/guard.util';
+import {getById} from '../../../store/type/type.selectors';
+import {EntityNsiActionEnum} from '../dialog-nsi-entry/dialog-nsi-entry.component';
+import {CreateType, GetTypeById, UpdateType} from '../../../store/type/type.actions';
 
-export enum EntityNsiActionEnum { EDIT = 'edit', VIEW = 'view', CREATE = 'create' }
-
-export enum EntityNsiTablesEnum { TAGS = 'tags', TYPES = 'types' }
-
-@Component({template: ''})
-export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentInit {
+@Component({
+  template: '',
+})
+export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterContentInit {
 
   subscription$: Subscription = new Subscription();
 
@@ -47,32 +46,33 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
       default:
         return 'ACTIONS.CREATING';
     }
-  }
+  };
 
   openDialog(props: DialogActionNsiProps): void {
-    if (!this.dialogRef) {
-      this.dialogRef = this.dialog.open(DialogActionNsiComponent, {
-        width: '700px',
-        height: 'auto',
-        data: props
-      });
-
-      this.subscription$.add(this.dialogRef.afterClosed().subscribe((value) => {
-        this.dialogRef = undefined;
-        switch (props.type) {
-          case EntityNsiActionEnum.CREATE: {
-            this.store.dispatch(new CreateTag( { tag: value } ));
-            break;
-          }
-          case EntityNsiActionEnum.EDIT: {
-            this.store.dispatch(new UpdateTag({ tag: value }));
-            break;
-          }
-        }
-        const urlBack = props.type !== EntityNsiActionEnum.CREATE ? '../../' : '../';
-        this.router.navigate([urlBack], {relativeTo: this.route});
-      }));
+    if (this.dialogRef) {
+      return;
     }
+
+    this.dialogRef = this.dialog.open(DialogActionNsiComponent, {
+      width: '700px',
+      height: 'auto',
+      data: props
+    });
+    this.subscription$.add(this.dialogRef.afterClosed().subscribe((value) => {
+      this.dialogRef = undefined;
+      switch (props.type) {
+        case EntityNsiActionEnum.CREATE: {
+          this.store.dispatch(new CreateType({type: value}));
+          break;
+        }
+        case EntityNsiActionEnum.EDIT: {
+          this.store.dispatch(new UpdateType({type: value}));
+          break;
+        }
+      }
+      const urlBack = props.type !== EntityNsiActionEnum.CREATE ? '../../' : '../';
+      this.router.navigate([urlBack], {relativeTo: this.route});
+    }));
   }
 
   ngAfterContentInit(): void {
@@ -92,7 +92,7 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
       if (enumAction !== EntityNsiActionEnum.CREATE) {
         const props = {id: params.id};
 
-        this.store.dispatch(new GetTagById(props));
+        this.store.dispatch(new GetTypeById(props));
 
         const getEntity = this.store.pipe(select(getById, {id: params.id})).subscribe(entity => {
           if (entity) {
@@ -109,5 +109,6 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
 
     this.subscription$.add(paramSubscriber);
   }
+
 
 }
