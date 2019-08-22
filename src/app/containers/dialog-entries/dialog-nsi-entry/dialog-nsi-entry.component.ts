@@ -30,6 +30,7 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
   }
 
   ngOnInit() {
+    console.log('DialogNsiEntryComponent');
   }
 
   ngOnDestroy() {

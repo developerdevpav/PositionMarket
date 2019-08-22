@@ -36,7 +36,6 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
   viewEntity: EventEmitter<string> = new EventEmitter();
 
   @Input()
-
   items: ItemSelect[] = [];
 
   iconsProps: DevpavIconSetProps = {
@@ -76,7 +75,9 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.items);
+  }
 
   ngAfterContentInit(): void {}
 

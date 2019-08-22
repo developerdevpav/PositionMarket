@@ -29,6 +29,7 @@ export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterConten
   }
 
   ngOnInit() {
+    console.log('DialogTypeEntityComponent');
   }
 
   ngOnDestroy() {

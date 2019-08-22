@@ -10,7 +10,6 @@ export class NsiAbstractService<T> {
 
   utl = '/api';
 
-
   constructor(protected http: HttpClient) {}
 
   getAll(service: string) {

@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { TypeEntity } from '../entities/type.entity';
+import {Action} from '@ngrx/store';
+import {TypeEntity} from '../entities/type.entity';
 
 export enum TypeActionsEnum {
   LOAD_TYPES = '[TYPE] Load TYPEs',
@@ -7,7 +7,7 @@ export enum TypeActionsEnum {
   REQUEST_TYPE_FAILURE = '[TYPE] FAILURE',
 
   GET_TYPE_BY_ID = '[TYPE] Get TYPE by id',
-  GET_TYPE_BY_ID_SUCCESS = '[Tag] Get TYPE by id SUCCESS',
+  GET_TYPE_BY_ID_SUCCESS = '[TYPE] Get TYPE by id SUCCESS',
 
   CREATE_TYPE = '[TYPE] Add TYPE',
   CREATE_TYPE_SUCCESS = '[TYPE] Add TYPE SUCCESS',
