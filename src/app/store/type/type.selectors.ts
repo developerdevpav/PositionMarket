@@ -1,9 +1,12 @@
 import {IRootStore} from '../index';
 import {createSelector} from '@ngrx/store';
-import * as type from '../type/type.feature.store';
+import * as type from './type.feature.store';
 import {TypeEntity} from '../entities/type.entity';
-import {selectEntities} from '../tag/tag.reducer';
 import {Dictionary} from '@ngrx/entity';
+import * as converter from '../services/utils/converter';
+import {TagEntity} from '../entities/tag.entity';
+import * as languageSelector from '../language/language.selector';
+import {Language} from '../language/language.model';
 
 export const getError = (state: IRootStore): boolean => state.typeState.error;
 
@@ -13,6 +16,11 @@ export const selectIsLoading = createSelector(getIsLoading, (loading: boolean) =
 
 export const selectTypes = createSelector(type.selectAll, (productTypes: TypeEntity[]) => productTypes);
 
-export const getById = createSelector(selectEntities, (dictionary: Dictionary<TypeEntity>, props: { id: string }) => {
+export const getById = createSelector(type.selectEntities, (dictionary: Dictionary<TypeEntity>, props: { id: string }) => {
   return dictionary[props.id];
 });
+
+export const selectTypesByLanguage = createSelector(type.selectAll, languageSelector.getCurrentLanguage,
+  (entities: TagEntity[], language: Language) => {
+    return converter.convertArrayNsi(entities, language);
+  });

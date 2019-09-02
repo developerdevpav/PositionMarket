@@ -34,6 +34,7 @@ export class NsiAbstractService<T> {
 
   public deleteAll(service: string, uuids: string[]) {
     const url = encodeURI(`${this.utl}/${service}/[${uuids}]`);
+    console.log(`method delete: ${url}`);
     return this.http.delete(url, {headers: this.headers});
   }
 

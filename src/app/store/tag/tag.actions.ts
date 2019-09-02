@@ -25,8 +25,7 @@ export enum TagActionTypes {
 export class RequestTagFailure implements Action {
   readonly type = TagActionTypes.REQUEST_TAG_FAILURE;
 
-  constructor(public error?: string) {
-  }
+  constructor(public error?: any) {}
 }
 
 
@@ -37,8 +36,7 @@ export class LoadTags implements Action {
 export class LoadTagsSuccess implements Action {
   readonly type = TagActionTypes.LOAD_TAGS_SUCCESS;
 
-  constructor(public payload: { tags: TagEntity[] }) {
-  }
+  constructor(public payload: { tags: TagEntity[] }) {}
 }
 
 export class GetTagById implements Action {
@@ -109,7 +107,6 @@ export class DeleteTagsSuccess implements Action {
 
   constructor(public payload: { ids: string[] } ) {}
 }
-
 
 export type TagActions =
   LoadTags

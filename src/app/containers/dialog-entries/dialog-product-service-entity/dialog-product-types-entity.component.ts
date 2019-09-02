@@ -1,19 +1,23 @@
-import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {select, Store} from '@ngrx/store';
-import {MatDialog} from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {DialogActionNsiComponent, DialogActionNsiProps} from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
+import {DialogActionNsiProps} from '../../dialogs/dialog-action-nsi/dialog-action-nsi.component';
+import {CreateType, UpdateType} from '../../../store/type/type.actions';
 import {getEnumByStringValue} from '../../../helpers/util/guard.util';
-import {getById} from '../../../store/type/type.selectors';
-import {EntityNsiActionEnum} from '../dialog-nsi-entry/dialog-tag-entry.component';
-import {CreateType, GetTypeById, UpdateType} from '../../../store/type/type.actions';
+import {select, Store} from '@ngrx/store';
+import {getById} from '../../../store/product-type/product.type.selectors';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
+import {dispatchAfterClosed} from '../dialog.entity.util';
+import {DialogProductTypeNsiComponent} from '../../dialogs/dialog-product-type-nsi/dialog-product-type-nsi.component';
+import {LoadProductType} from '../../../store/product-type/product.type.actions';
 
-@Component({
-  template: '',
-})
-export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterContentInit {
+export enum EntityNsiActionEnum { EDIT = 'edit', VIEW = 'view', CREATE = 'create' }
+
+export enum EntityNsiTablesEnum { TAGS = 'tags', TYPES = 'types' }
+
+@Component({ template: '' })
+export class DialogProductTypesEntityComponent implements AfterContentInit {
 
   subscription$: Subscription = new Subscription();
 
@@ -21,19 +25,11 @@ export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterConten
 
   dialogRef: any;
 
-  constructor(private store: Store<any>,
-              public dialog: MatDialog,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
-              private translate: TranslateService) {
-  }
-
-  ngOnInit() {
-    console.log('DialogTypeEntityComponent');
-  }
-
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
+              private dialog: MatDialog,
+              private translate: TranslateService,
+              private store: Store<any>) {
   }
 
   private getTitleWindow = (enumAction: EntityNsiActionEnum) => {
@@ -47,34 +43,30 @@ export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterConten
       default:
         return 'ACTIONS.CREATING';
     }
-  };
+  }
 
   openDialog(props: DialogActionNsiProps): void {
     if (this.dialogRef) {
       return;
     }
 
-    this.dialogRef = this.dialog.open(DialogActionNsiComponent, {
+    const matDialogConfig: MatDialogConfig = {
       width: '700px',
       height: 'auto',
       data: props
-    });
-    this.subscription$.add(this.dialogRef.afterClosed().subscribe((value) => {
+    };
+
+    this.dialogRef = this.dialog.open(DialogProductTypeNsiComponent, matDialogConfig);
+
+    const subscriberCloseDialog = this.dialogRef.afterClosed().subscribe((value) => {
       this.dialogRef = undefined;
-      switch (props.type) {
-        case EntityNsiActionEnum.CREATE: {
-          this.store.dispatch(new CreateType({type: value}));
-          break;
-        }
-        case EntityNsiActionEnum.EDIT: {
-          console.log('value: ', value);
-          this.store.dispatch(new UpdateType({type: value}));
-          break;
-        }
-      }
-      const urlBack = props.type !== EntityNsiActionEnum.CREATE ? '../../' : '../';
-      this.router.navigate([urlBack], {relativeTo: this.route});
-    }));
+
+      dispatchAfterClosed(props.type)
+        (this.store, this.route, this.router)
+          (new CreateType({type: value}), new UpdateType({type: value}));
+    });
+
+    this.subscription$.add(subscriberCloseDialog);
   }
 
   ngAfterContentInit(): void {
@@ -94,13 +86,12 @@ export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterConten
       if (enumAction !== EntityNsiActionEnum.CREATE) {
         const props = {id: params.id};
 
-        this.store.dispatch(new GetTypeById(props));
+        this.store.dispatch(new LoadProductType(props));
 
         const getEntity = this.store.pipe(select(getById, {id: params.id})).subscribe(entity => {
           if (entity) {
-            setTimeout(() =>
-                this.openDialog({...propsDialogAction, entity} as DialogActionNsiProps),
-              100);
+            console.log('entity: ', entity);
+            setTimeout(() => this.openDialog({...propsDialogAction, entity} as DialogActionNsiProps), 100);
           }
         });
         this.subscription$.add(getEntity);
@@ -111,6 +102,4 @@ export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterConten
 
     this.subscription$.add(paramSubscriber);
   }
-
-
 }

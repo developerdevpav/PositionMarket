@@ -23,7 +23,7 @@ export class DialogActionNsiComponent implements OnInit {
   entity: Nsi = { id: undefined, values: [] };
 
   constructor(public dialogRef: MatDialogRef<DialogActionNsiComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) {
+              @Inject(MAT_DIALOG_DATA) public data: DialogActionNsiProps) {
   }
 
   ngOnInit() {

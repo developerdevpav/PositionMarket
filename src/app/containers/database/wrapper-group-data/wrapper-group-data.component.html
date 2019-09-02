@@ -1,6 +1,6 @@
 <div class="row data-form">
   <div class="col-12 data-form-panel-header">
-    <panel-header-action [iconSetProps]="iconProps" (clickIcon)="eventClickIcon($event)"></panel-header-action>
+    <panel-header-action [title]="titleHeader" [iconSetProps]="iconProps" (clickIcon)="eventClickIcon($event)"></panel-header-action>
   </div>
   <div class="col-12 data-form-content" #template>
     <ng-content></ng-content>

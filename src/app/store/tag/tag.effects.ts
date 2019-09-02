@@ -61,24 +61,14 @@ export class TagEffects {
   );
 
   @Effect()
-  public delete = this.actions$.pipe(
-    ofType<tagAction.DeleteTag>(TagActionTypes.DELETE_TAG),
-    map(it => it.payload),
-    switchMap((payload: { id: string } ) => this.api.delete('tags', payload.id)
-      .pipe(
-        map((object: string) => new tagAction.DeleteTag({ id: object })),
-        catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
-      )
-    )
-  );
-
-  @Effect()
   public deleteArray = this.actions$.pipe(
     ofType<tagAction.DeleteTags>(TagActionTypes.DELETE_TAGS),
     map(it => it.payload),
     switchMap(( payload: { ids: string[] } ) => this.api.deleteAll('tags', payload.ids)
       .pipe(
-        map((objects: string[]) => new tagAction.DeleteTagsSuccess({ ids: objects })),
+        map(() => {
+          return new tagAction.DeleteTagsSuccess({ ids: payload.ids });
+        }),
         catchError(err => Observable.create(new tagAction.RequestTagFailure(err)))
       )
     )

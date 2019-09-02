@@ -15,6 +15,9 @@ enum IconAction {
 export class PanelHeaderActionComponent implements OnInit, AfterContentInit {
 
   @Input()
+  title = '';
+
+  @Input()
   iconSetProps: DevpavIconSetProps;
 
   @Output()

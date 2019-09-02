@@ -6,12 +6,14 @@ import {DatabaseCommonPageComponent} from './database-common-page/database-commo
 import {MatButtonModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {DatabaseTypeEntityPageComponent} from './database-type-entity-page/database-type-entity-page.component';
+import {DatabaseProductTypeEntityPageComponent} from './database-product-type-entity-page/database-product-type-entity-page.component';
 
 @NgModule({
   declarations: [
     DatabaseTagEntityPageComponent,
     DatabaseCommonPageComponent,
-    DatabaseTypeEntityPageComponent
+    DatabaseTypeEntityPageComponent,
+    DatabaseProductTypeEntityPageComponent
   ],
   imports: [
     CommonModule,

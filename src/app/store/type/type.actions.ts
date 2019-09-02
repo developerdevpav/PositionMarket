@@ -25,8 +25,7 @@ export enum TypeActionsEnum {
 export class RequestTypeFailure implements Action {
   readonly type = TypeActionsEnum.REQUEST_TYPE_FAILURE;
 
-  constructor(public error?: string) {
-  }
+  constructor(public error?: any) {}
 }
 
 

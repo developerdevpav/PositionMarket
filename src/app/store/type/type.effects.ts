@@ -60,24 +60,12 @@ export class TypeEffects {
   );
 
   @Effect()
-  public delete = this.actions$.pipe(
-    ofType<typeAction.DeleteType>(typeAction.TypeActionsEnum.DELETE_TYPE),
-    map(it => it.payload),
-    switchMap((payload: { id: string }) => this.api.delete('types', payload.id)
-      .pipe(
-        map((object: string) => new typeAction.DeleteTypeSuccess({ id: object })),
-        catchError(err => Observable.create(new typeAction.RequestTypeFailure(err)))
-      )
-    )
-  );
-
-  @Effect()
   public deleteArray = this.actions$.pipe(
     ofType<typeAction.DeleteTypes>(typeAction.TypeActionsEnum.DELETE_TYPES),
     map(it => it.payload),
     switchMap((payload: { ids: string[] }) => this.api.deleteAll('types', payload.ids)
       .pipe(
-        map((objects: string[]) => new typeAction.DeleteTypesSuccess({ ids: objects })),
+        map(() => new typeAction.DeleteTypesSuccess({ ids: payload.ids })),
         catchError(err => Observable.create(new typeAction.RequestTypeFailure(err)))
       )
     )

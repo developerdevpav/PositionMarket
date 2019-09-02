@@ -8,13 +8,14 @@ import {getById} from 'src/app/store/tag/tag.selectors';
 import {CreateTag, GetTagById, UpdateTag} from 'src/app/store/tag/tag.actions';
 import {getEnumByStringValue} from 'src/app/helpers/util/guard.util';
 import {TranslateService} from '@ngx-translate/core';
+import {dispatchAfterClosed} from '../dialog.entity.util';
 
 export enum EntityNsiActionEnum { EDIT = 'edit', VIEW = 'view', CREATE = 'create' }
 
 export enum EntityNsiTablesEnum { TAGS = 'tags', TYPES = 'types' }
 
 @Component({template: ''})
-export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentInit {
+export class DialogTagEntryComponent implements OnInit, OnDestroy, AfterContentInit {
 
   subscription$: Subscription = new Subscription();
 
@@ -58,21 +59,15 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
         data: props
       });
 
-      this.subscription$.add(this.dialogRef.afterClosed().subscribe((value) => {
+      const subscriberAfterClosed = this.dialogRef.afterClosed().subscribe((value) => {
         this.dialogRef = undefined;
-        switch (props.type) {
-          case EntityNsiActionEnum.CREATE: {
-            this.store.dispatch(new CreateTag( { tag: value } ));
-            break;
-          }
-          case EntityNsiActionEnum.EDIT: {
-            this.store.dispatch(new UpdateTag({ tag: value }));
-            break;
-          }
-        }
-        const urlBack = props.type !== EntityNsiActionEnum.CREATE ? '../../' : '../';
-        this.router.navigate([urlBack], {relativeTo: this.route});
-      }));
+
+        dispatchAfterClosed(props.type)
+          (this.store, this.route, this.router)
+            (new CreateTag({tag: value}), new UpdateTag({tag: value}));
+      });
+
+      this.subscription$.add(subscriberAfterClosed);
     }
   }
 
@@ -82,12 +77,13 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
       const enumAction = getEnumByStringValue(EntityNsiActionEnum, params.action) as unknown as EntityNsiActionEnum;
 
       const title = this.translate.get(this.getTitleWindow(enumAction));
+      const buttonTitle = this.translate.get(`ACTIONS.${(params.action as string).toUpperCase()}`);
 
       const propsDialogAction: DialogActionNsiProps = {
-        type: enumAction,
+        type: params.action,
         entity: undefined,
         titleWindow: title,
-        btnTitle: this.translate.get(`ACTIONS.${(params.action as string).toUpperCase()}`),
+        btnTitle: buttonTitle
       };
 
       if (enumAction !== EntityNsiActionEnum.CREATE) {
@@ -97,9 +93,7 @@ export class DialogNsiEntryComponent implements OnInit, OnDestroy, AfterContentI
 
         const getEntity = this.store.pipe(select(getById, {id: params.id})).subscribe(entity => {
           if (entity) {
-            setTimeout(() =>
-                this.openDialog({...propsDialogAction, entity} as DialogActionNsiProps),
-              100);
+            setTimeout(() => this.openDialog({...propsDialogAction, entity} as DialogActionNsiProps), 100);
           }
         });
         this.subscription$.add(getEntity);

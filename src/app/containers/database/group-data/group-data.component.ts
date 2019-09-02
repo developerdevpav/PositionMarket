@@ -1,5 +1,17 @@
-import {AfterContentInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {MatListOption, MatSelectionList} from '@angular/material';
+import {
+  AfterContentInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+import {MatListOption} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 
 export interface ItemSelectIcon {
@@ -18,10 +30,9 @@ export interface ItemSelect {
   styleUrls: ['./group-data.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GroupDataComponent implements OnInit, AfterContentInit {
-  @ViewChild('shoes') template: ElementRef<HTMLElement>;
+export class GroupDataComponent implements OnInit, AfterContentInit, OnChanges {
 
-  listItems: MatSelectionList;
+  @ViewChild('shoes') template: ElementRef<HTMLElement>;
 
   @Input()
   icon: ItemSelectIcon;
@@ -47,6 +58,10 @@ export class GroupDataComponent implements OnInit, AfterContentInit {
 
   getClassTitle(): string {
     return this.icon.showIcon ? '' : 'title-icon';
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
 }

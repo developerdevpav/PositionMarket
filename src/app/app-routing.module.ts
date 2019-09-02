@@ -5,11 +5,14 @@ import {CatalogPageComponent} from './pages/catalog-page/catalog-page.component'
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
 import {SettingPageComponent} from './pages/setting-page/setting-page.component';
 import {UserShoppingCartComponent} from './pages/user-shopping-cart/user-shopping-cart.component';
-import {DialogNsiEntryComponent} from './containers/dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
+import {DialogTagEntryComponent} from './containers/dialog-entries/dialog-nsi-entry/dialog-tag-entry.component';
 import {EntityNsiActionGuard} from './helpers/guards/entity-nsi-action.guard';
 import {DatabaseTagEntityPageComponent} from './pages/admin-management/database-tag-entity-page/database-tag-entity-page.component';
 import {DatabaseCommonPageComponent} from './pages/admin-management/database-common-page/database-common-page.component';
 import {DatabaseTypeEntityPageComponent} from './pages/admin-management/database-type-entity-page/database-type-entity-page.component';
+import {DialogTypeEntityComponent} from './containers/dialog-entries/dialog-type-entity/dialog-type-entity.component';
+import {DatabaseProductTypeEntityPageComponent} from './pages/admin-management/database-product-type-entity-page/database-product-type-entity-page.component';
+import {DialogProductTypesEntityComponent} from './containers/dialog-entries/dialog-product-service-entity/dialog-product-types-entity.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -41,12 +44,12 @@ const routes: Routes = [
                   {
                     path: ':action',
                     pathMatch: 'full',
-                    component: DialogNsiEntryComponent
+                    component: DialogTagEntryComponent
                   },
                   {
                     path: ':action/:id',
                     pathMatch: 'full',
-                    component: DialogNsiEntryComponent,
+                    component: DialogTagEntryComponent,
                     canActivate: [EntityNsiActionGuard]
                   }
                 ]
@@ -63,12 +66,34 @@ const routes: Routes = [
                   {
                     path: ':action',
                     pathMatch: 'full',
-                    component: DialogNsiEntryComponent
+                    component: DialogTypeEntityComponent
                   },
                   {
                     path: ':action/:id',
                     pathMatch: 'full',
-                    component: DialogNsiEntryComponent,
+                    component: DialogTypeEntityComponent,
+                    canActivate: [EntityNsiActionGuard]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            path: 'product-types',
+            children: [
+              {
+                path: '',
+                component: DatabaseProductTypeEntityPageComponent,
+                children: [
+                  {
+                    path: ':action',
+                    pathMatch: 'full',
+                    component: DialogProductTypesEntityComponent
+                  },
+                  {
+                    path: ':action/:id',
+                    pathMatch: 'full',
+                    component: DialogProductTypesEntityComponent,
                     canActivate: [EntityNsiActionGuard]
                   }
                 ]

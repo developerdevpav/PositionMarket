@@ -58,14 +58,9 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
         hidden: true
       },
       {
-        id: IconType.SELECT_ALL,
-        iconTitle: 'playlist_add_check',
-        color: '#bdbdbd'
-      },
-      {
         id: IconType.DELETE,
         iconTitle: 'delete_forever',
-        color: 'red',
+        color: '',
         hidden: true
       }
     ]
@@ -73,10 +68,12 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
 
   selectedItems: string[] = [];
 
+  @Input()
+  titleHeader: string;
+
   constructor() {}
 
   ngOnInit() {
-    console.log(this.items);
   }
 
   ngAfterContentInit(): void {}
@@ -102,7 +99,8 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
         this.deleteEntity.emit(this.selectedItems);
         break;
       }
-      case IconType.SELECT_ALL: {
+      case IconType.VIEW: {
+        this.viewEntity.emit(this.selectedItems[0]);
         break;
       }
       default: {

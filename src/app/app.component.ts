@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
               private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
               private router: Router) {
-    this.router.events.subscribe(console.log);
     this.matIconRegistry
       .addSvgIcon(
         'success',

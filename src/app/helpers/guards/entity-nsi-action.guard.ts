@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {isExistInEnum, isUUID} from '../util/guard.util';
-import {EntityNsiActionEnum} from 'src/app/containers/dialog-entries/dialog-nsi-entry/dialog-nsi-entry.component';
+import {EntityNsiActionEnum} from 'src/app/containers/dialog-entries/dialog-nsi-entry/dialog-tag-entry.component';
 
 @Injectable({
   providedIn: 'root'

@@ -8,8 +8,12 @@ import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/com
   encapsulation: ViewEncapsulation.None
 })
 export class WrapperGroupDataComponent implements OnInit, AfterContentInit {
+
   @Output()
   clickIcon: EventEmitter<DevpavIconClickOutput> = new EventEmitter();
+
+  @Input()
+  titleHeader: string;
 
   @Input()
   iconProps: DevpavIconSetProps;
