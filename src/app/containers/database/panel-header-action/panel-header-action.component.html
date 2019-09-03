@@ -3,6 +3,21 @@
     <span>{{title}}</span>
   </div>
   <div class="col-4 row justify-content-end action-icon">
-    <devpav-icon-set [props]="iconSetProps" (clickIcon)="clickActionPanel($event)"></devpav-icon-set>
+    <button mat-icon-button [matTooltip]="'TOOLTIP.CREATE_ITEM' | translate"
+            matTooltipPosition="below"
+            (click)="eventCreate.emit(true)"><mat-icon>playlist_add</mat-icon>
+    </button>
+    <button mat-icon-button [matTooltip]="'TOOLTIP.SELECT_ALL' | translate"
+            matTooltipPosition="below"
+            color="primary"
+            (click)="eventSelectAll.emit(true)">
+      <mat-icon>playlist_add_check</mat-icon>
+    </button>
+    <button mat-icon-button [matTooltip]="'TOOLTIP.DELETE_SELECTED' | translate"
+            matTooltipPosition="below"
+            color="warn"
+            (click)="eventDeleteSelected.emit(true)">
+      <mat-icon>delete_sweep</mat-icon>
+    </button>
   </div>
 </div>

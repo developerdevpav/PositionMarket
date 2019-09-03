@@ -1,18 +1,6 @@
-import {
-  AfterContentInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
-import {MatListOption} from '@angular/material';
+import {AfterContentInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
+import {ItemDataSelect} from '../item-data/item-data.component';
 
 export interface ItemSelectIcon {
   showIcon: boolean;
@@ -32,36 +20,53 @@ export interface ItemSelect {
 })
 export class GroupDataComponent implements OnInit, AfterContentInit, OnChanges {
 
-  @ViewChild('shoes') template: ElementRef<HTMLElement>;
-
-  @Input()
-  icon: ItemSelectIcon;
-
   @Input()
   items: ItemSelect[] = [];
 
   @Output()
+  eventDelete = new EventEmitter<string>();
+  @Output()
+  eventChange = new EventEmitter<string>();
+  @Output()
+  eventView = new EventEmitter<string>();
+
+  @Output()
   selected: EventEmitter<string[]> = new EventEmitter();
 
-  constructor() { }
+  selector: SelectionModel<string>;
+
+  constructor() {
+    this.selector = new SelectionModel<string>(true, []);
+  }
 
   ngOnInit() {
+    this.selector.changed.subscribe(value => {
+      this.selected.emit(this.selector.selected);
+      console.log(this.selector.selected);
+    });
   }
 
   ngAfterContentInit() {
   }
 
-  eventSelectItems($event: SelectionModel<MatListOption>) {
-    const selectIds: string[] = $event.selected.map(matOption => matOption.value);
-    this.selected.emit(selectIds);
+  eventChangeItem($event: string) {
+    this.eventChange.emit($event);
   }
 
-  getClassTitle(): string {
-    return this.icon.showIcon ? '' : 'title-icon';
+  eventViewItem($event: string) {
+    this.eventView.emit($event);
+  }
+
+  eventDeleteItem($event: string) {
+    this.selector.deselect($event);
+    this.eventDelete.emit($event);
+  }
+
+  eventToggleItem($event: ItemDataSelect) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+
   }
 
 }

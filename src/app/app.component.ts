@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   currentLanguage = 'ru';
 
-  constructor(private translate: TranslateService,
+  constructor(public translate: TranslateService,
               private store: Store<any>,
               private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,

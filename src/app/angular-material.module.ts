@@ -14,10 +14,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {
-  TranslateLoader, 
-  TranslateModule
-} from '@ngx-translate/core';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpLoaderFactory} from './util/translate.service';
 import {HttpClient} from '@angular/common/http';
 
@@ -27,6 +27,7 @@ import {HttpClient} from '@angular/common/http';
     MatProgressBarModule,
     MatButtonModule,
     MatExpansionModule,
+    MatTooltipModule,
     MatSelectModule,
     MatDialogModule,
     MatTabsModule,
@@ -39,6 +40,7 @@ import {HttpClient} from '@angular/common/http';
     MatSnackBarModule,
     AngularSvgIconModule,
     MatTableModule,
+    MatMenuModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -57,13 +59,15 @@ import {HttpClient} from '@angular/common/http';
     AngularSvgIconModule,
     MatListModule,
     MatIconModule,
+    MatTooltipModule,
     MatCheckboxModule,
     MatChipsModule,
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
     MatTableModule,
-    TranslateModule
+    TranslateModule,
+    MatMenuModule
   ]
 })
 export class AngularMaterialModule {

@@ -1,6 +1,5 @@
-import {AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {GroupDataComponent, ItemSelect, ItemSelectIcon} from '../group-data/group-data.component';
-import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
 
 export enum IconType {
   ADD = 'ADD ICON',
@@ -15,7 +14,7 @@ export enum IconType {
   templateUrl: './form-group-data.component.html',
   styleUrls: ['./form-group-data.component.scss']
 })
-export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterViewInit {
+export class FormGroupDataComponent implements OnInit, AfterContentInit {
   @ViewChild(GroupDataComponent) groupData: GroupDataComponent;
 
   settingPanelIcon: ItemSelectIcon = {
@@ -38,36 +37,6 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
   @Input()
   items: ItemSelect[] = [];
 
-  iconsProps: DevpavIconSetProps = {
-    icons: [
-      {
-        id: IconType.ADD,
-        iconTitle: 'add_circle_outline',
-        color: '#bdbdbd'
-      },
-      {
-        id: IconType.CHANGE,
-        iconTitle: 'create',
-        color: '#bdbdbd',
-        hidden: true
-      },
-      {
-        id: IconType.VIEW,
-        iconTitle: 'remove_red_eye',
-        color: '#bdbdbd',
-        hidden: true
-      },
-      {
-        id: IconType.DELETE,
-        iconTitle: 'delete_forever',
-        color: '',
-        hidden: true
-      }
-    ]
-  };
-
-  selectedItems: string[] = [];
-
   @Input()
   titleHeader: string;
 
@@ -76,47 +45,11 @@ export class FormGroupDataComponent implements OnInit, AfterContentInit, AfterVi
   ngOnInit() {
   }
 
-  ngAfterContentInit(): void {}
-
-  hiddenIcon(id: IconType, field: string, value: any) {
-    const icon = this.iconsProps.icons.find(it => it.id === id);
-    if (icon) {
-      icon[field] = value;
-    }
+  ngAfterContentInit(): void {
   }
 
-  eventClickIcon($event: DevpavIconClickOutput) {
-    switch ($event.id) {
-      case IconType.ADD: {
-        this.createEntity.emit(true);
-        break;
-      }
-      case IconType.CHANGE: {
-        this.changeEntity.emit(this.selectedItems[0]);
-        break;
-      }
-      case IconType.DELETE: {
-        this.deleteEntity.emit(this.selectedItems);
-        break;
-      }
-      case IconType.VIEW: {
-        this.viewEntity.emit(this.selectedItems[0]);
-        break;
-      }
-      default: {
-        console.log($event);
-      }
-    }
-  }
-
-  eventSelectValue($event: string[]) {
-    this.selectedItems = $event;
-    this.hiddenIcon(IconType.VIEW, 'hidden', this.selectedItems.length !== 1);
-    this.hiddenIcon(IconType.CHANGE, 'hidden', this.selectedItems.length !== 1);
-    this.hiddenIcon(IconType.DELETE, 'hidden', !this.selectedItems.length);
-  }
-
-  ngAfterViewInit(): void {
+  eventSelectAll() {
+    this.items.forEach(it => this.groupData.selector.toggle(it.id as string));
   }
 
 }

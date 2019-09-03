@@ -1,0 +1,9 @@
+<div class="row">
+  <label class="col-12">
+    <textarea class="form-control" (blur)="blurInput($event.returnValue)"
+              (focus)="focusInput($event.returnValue)"
+              [placeholder]="ph"
+              (input)="setValue()"
+              [(ngModel)]="value"></textarea>
+  </label>
+</div>

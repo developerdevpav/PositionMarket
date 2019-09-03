@@ -1,5 +1,4 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
 
 @Component({
   selector: 'wrapper-group-data',
@@ -9,14 +8,15 @@ import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/com
 })
 export class WrapperGroupDataComponent implements OnInit, AfterContentInit {
 
-  @Output()
-  clickIcon: EventEmitter<DevpavIconClickOutput> = new EventEmitter();
-
   @Input()
   titleHeader: string;
 
-  @Input()
-  iconProps: DevpavIconSetProps;
+  @Output()
+  eventCreate = new EventEmitter<boolean>();
+  @Output()
+  eventSelectAll = new EventEmitter<boolean>();
+  @Output()
+  eventDeleteSelected = new EventEmitter<boolean>();
 
   constructor() {
   }
@@ -27,15 +27,4 @@ export class WrapperGroupDataComponent implements OnInit, AfterContentInit {
   ngAfterContentInit(): void {
   }
 
-  disable(id: string, value: boolean) {
-    // this.panel.disable(id, value);
-  }
-
-  hidden(id: string, value: boolean) {
-    /*this.panel.hidden(id, value);*/
-  }
-
-  eventClickIcon($event: DevpavIconClickOutput) {
-    this.clickIcon.emit($event);
-  }
 }

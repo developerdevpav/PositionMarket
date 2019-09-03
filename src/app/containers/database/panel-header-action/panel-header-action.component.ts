@@ -1,5 +1,4 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {DevpavIconClickOutput, DevpavIconSetProps} from '../../../components/common/devpav-icon-set/devpav-icon-set.component';
 
 enum IconAction {
   ADD = 'ADD_VALUE',
@@ -17,21 +16,12 @@ export class PanelHeaderActionComponent implements OnInit, AfterContentInit {
   @Input()
   title = '';
 
-  @Input()
-  iconSetProps: DevpavIconSetProps;
-
   @Output()
-  private clickIcon: EventEmitter<DevpavIconClickOutput> = new EventEmitter();
-
-/*
-  disable(id: string, value: boolean) {
-    this.component.disableIcon(id, value);
-  }
-
-  hidden(id: string, value: boolean) {
-    this.component.hiddenIcon(id, value);
-  }
-*/
+  eventCreate = new EventEmitter<boolean>();
+  @Output()
+  eventSelectAll = new EventEmitter<boolean>();
+  @Output()
+  eventDeleteSelected = new EventEmitter<boolean>();
 
   constructor() {
   }
@@ -39,13 +29,8 @@ export class PanelHeaderActionComponent implements OnInit, AfterContentInit {
   ngOnInit() {
   }
 
-  clickActionPanel($event: DevpavIconClickOutput) {
-    this.clickIcon.emit($event);
-  }
-
   ngAfterContentInit(): void {
 
   }
-
 
 }

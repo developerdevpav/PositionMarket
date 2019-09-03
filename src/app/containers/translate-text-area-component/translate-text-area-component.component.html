@@ -1,16 +1,16 @@
 <form [formGroup]="formGroup" novalidate>
   <div class="row">
     <div class="col-lg-12 col-12 mb-lg-2 mb-2">
-      <devpav-input ph="{{'PLACEHOLDER.TITLE_RU' | translate}}"
+      <devpav-input-textarea ph="{{'PLACEHOLDER.DESCRIPTION_RU' | translate}}"
                     [value]="formGroup.get('ru').value"
                     (inputValue)="formGroup.get('ru').setValue($event)">
-      </devpav-input>
+      </devpav-input-textarea>
     </div>
     <div class="col-lg-12 col-12">
-      <devpav-input ph="{{'PLACEHOLDER.TITLE_EN' | translate}}"
+      <devpav-input-textarea ph="{{'PLACEHOLDER.DESCRIPTION_EN' | translate}}"
                     [value]="formGroup.get('en').value"
                     (inputValue)="formGroup.get('en').setValue($event)">
-      </devpav-input>
+      </devpav-input-textarea>
     </div>
   </div>
 </form>

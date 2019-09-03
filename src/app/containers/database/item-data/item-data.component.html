@@ -1,0 +1,30 @@
+<div class="panel-item">
+  <div class="panel-item__title">{{props?.value}}</div>
+  <div class="panel-item__action">
+    <div class="panel-item__checkbox">
+      <mat-checkbox [disableRipple]="true" [checked]="checked"
+                    [matTooltip]="'TOOLTIP.SELECT_ITEM' | translate"
+                    (change)="changeSelectItem($event)" color="primary"></mat-checkbox>
+    </div>
+    <div class="panel-item__menu">
+      <button mat-icon-button [matTooltip]="'TOOLTIP.SELECT_ACTION' | translate"
+              [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="handleChange()">
+          <mat-icon>edit</mat-icon>
+          <span>Редактировать</span>
+        </button>
+        <button mat-menu-item (click)="handleView()">
+          <mat-icon>remove_red_eye</mat-icon>
+          <span>Просмотреть</span>
+        </button>
+        <button mat-menu-item (click)="handleDelete()">
+          <mat-icon>delete</mat-icon>
+          <span>Удалить</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,10 @@
-<mat-selection-list #shoes (selectionChange)="eventSelectItems(shoes.selectedOptions)">
-  <mat-list-option *ngFor="let item of items" class="item-panel" [disableRipple]="true" checkboxPosition="after"
-                   [value]="item.id">
-    <div class="item-panel-body">
-      <mat-icon matListIcon color="primary" *ngIf="icon?.showIcon">{{icon?.title}}</mat-icon>
-      <span [ngClass]="this.icon.showIcon ? '' : 'title-icon'">{{item?.value}}</span>
-    </div>
-  </mat-list-option>
-</mat-selection-list>
-
-<ngx-json-viewer [json]="items" [expanded]="false"></ngx-json-viewer>
+<div class="row">
+  <div *ngFor="let item of items" class="col-12 mt-2">
+    <item-data (ngChange)="eventChangeItem($event)"
+               (ngDelete)="eventDeleteItem($event)"
+               (ngView)="eventViewItem($event)"
+               (ngChangeSelect)="selector.toggle($event.id)"
+               [checked]="selector.isSelected(item.id)"
+               [props]="{ id: item.id, value: item.value }"></item-data>
+  </div>
+</div>

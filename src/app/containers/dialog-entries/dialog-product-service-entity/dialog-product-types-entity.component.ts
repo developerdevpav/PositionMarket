@@ -16,7 +16,7 @@ export enum EntityNsiActionEnum { EDIT = 'edit', VIEW = 'view', CREATE = 'create
 
 export enum EntityNsiTablesEnum { TAGS = 'tags', TYPES = 'types' }
 
-@Component({ template: '' })
+@Component({template: ''})
 export class DialogProductTypesEntityComponent implements AfterContentInit {
 
   subscription$: Subscription = new Subscription();
@@ -43,7 +43,7 @@ export class DialogProductTypesEntityComponent implements AfterContentInit {
       default:
         return 'ACTIONS.CREATING';
     }
-  }
+  };
 
   openDialog(props: DialogActionNsiProps): void {
     if (this.dialogRef) {
@@ -62,8 +62,8 @@ export class DialogProductTypesEntityComponent implements AfterContentInit {
       this.dialogRef = undefined;
 
       dispatchAfterClosed(props.type)
-        (this.store, this.route, this.router)
-          (new CreateType({type: value}), new UpdateType({type: value}));
+      (this.store, this.route, this.router)
+      (new CreateType({type: value}), new UpdateType({type: value}));
     });
 
     this.subscription$.add(subscriberCloseDialog);
@@ -84,17 +84,14 @@ export class DialogProductTypesEntityComponent implements AfterContentInit {
       };
 
       if (enumAction !== EntityNsiActionEnum.CREATE) {
-        const props = {id: params.id};
+        this.store.dispatch(new LoadProductType( {id: params.id} ));
 
-        this.store.dispatch(new LoadProductType(props));
-
-        const getEntity = this.store.pipe(select(getById, {id: params.id})).subscribe(entity => {
+        const subscriberGetEntity = this.store.pipe(select(getById, {id: params.id})).subscribe(entity => {
           if (entity) {
-            console.log('entity: ', entity);
             setTimeout(() => this.openDialog({...propsDialogAction, entity} as DialogActionNsiProps), 100);
           }
         });
-        this.subscription$.add(getEntity);
+        this.subscription$.add(subscriberGetEntity);
       } else {
         setTimeout(() => this.openDialog(propsDialogAction), 100);
       }

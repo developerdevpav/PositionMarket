@@ -9,6 +9,7 @@ import {getEnumByStringValue} from '../../../helpers/util/guard.util';
 import {getById} from '../../../store/type/type.selectors';
 import {EntityNsiActionEnum} from '../dialog-nsi-entry/dialog-tag-entry.component';
 import {CreateType, GetTypeById, UpdateType} from '../../../store/type/type.actions';
+import {dispatchAfterClosed} from '../dialog.entity.util';
 
 @Component({
   template: '',
@@ -61,19 +62,9 @@ export class DialogTypeEntityComponent implements OnInit, OnDestroy, AfterConten
     });
     this.subscription$.add(this.dialogRef.afterClosed().subscribe((value) => {
       this.dialogRef = undefined;
-      switch (props.type) {
-        case EntityNsiActionEnum.CREATE: {
-          this.store.dispatch(new CreateType({type: value}));
-          break;
-        }
-        case EntityNsiActionEnum.EDIT: {
-          console.log('value: ', value);
-          this.store.dispatch(new UpdateType({type: value}));
-          break;
-        }
-      }
-      const urlBack = props.type !== EntityNsiActionEnum.CREATE ? '../../' : '../';
-      this.router.navigate([urlBack], {relativeTo: this.route});
+      dispatchAfterClosed(props.type)
+        (this.store, this.route, this.router)
+          (new CreateType({type: value}), new UpdateType({type: value}));
     }));
   }
 

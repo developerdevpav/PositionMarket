@@ -1,8 +1,16 @@
-<mat-dialog-content>
-  dialog-product-type-nsi works!
+<h2 mat-dialog-title>{{ 'ACTIONS.VIEWING' | translate }}</h2>
+
+<mat-dialog-content class="mb-2 mt-2">
+  <div class="mt-2">
+    <translate-container></translate-container>
+  </div>
+  <div class="mt-4">
+    <translate-text-area-component></translate-text-area-component>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>{{ 'mat-dialog-close' }}</button>
+  <button mat-button mat-dialog-close>{{ 'mat-dialog-close'}}</button>
   <button mat-button cdkFocusInitial>{{'mat-dialog-close'}}</button>
 </mat-dialog-actions>
+

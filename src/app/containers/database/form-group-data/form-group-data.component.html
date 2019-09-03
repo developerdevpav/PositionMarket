@@ -1,3 +1,10 @@
-<wrapper-group-data [titleHeader]="titleHeader" [iconProps]="iconsProps" (clickIcon)="eventClickIcon($event)">
-  <group-data [icon]="settingPanelIcon" [items]="items" (selected)="eventSelectValue($event)"></group-data>
+<wrapper-group-data [titleHeader]="titleHeader"
+                    (eventCreate)="createEntity.emit(true)"
+                    (eventDeleteSelected)="deleteEntity.emit(groupData.selector.selected)"
+                    (eventSelectAll)="eventSelectAll()">
+  <group-data [items]="items"
+              (eventDelete)="deleteEntity.emit([$event])"
+              (eventChange)="changeEntity.emit($event)"
+              (eventView)="viewEntity.emit($event)">
+  </group-data>
 </wrapper-group-data>

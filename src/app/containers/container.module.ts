@@ -15,6 +15,8 @@ import {FormGroupDataComponent} from './database/form-group-data/form-group-data
 import {DialogTypeEntityComponent} from './dialog-entries/dialog-type-entity/dialog-type-entity.component';
 import {DialogProductTypesEntityComponent} from './dialog-entries/dialog-product-service-entity/dialog-product-types-entity.component';
 import {DialogProductTypeNsiComponent} from './dialogs/dialog-product-type-nsi/dialog-product-type-nsi.component';
+import {ItemDataComponent} from './database/item-data/item-data.component';
+import {TranslateTextAreaComponentComponent} from './translate-text-area-component/translate-text-area-component.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {DialogProductTypeNsiComponent} from './dialogs/dialog-product-type-nsi/d
     FormGroupDataComponent,
     DialogTypeEntityComponent,
     DialogProductTypesEntityComponent,
-    DialogProductTypeNsiComponent
+    DialogProductTypeNsiComponent,
+    ItemDataComponent,
+    TranslateTextAreaComponentComponent
   ],
   imports: [
     CommonModule,

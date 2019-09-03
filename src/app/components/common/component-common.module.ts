@@ -9,6 +9,7 @@ import {DevpavRefPanelComponent} from './devpav-ref-panel/devpav-ref-panel.compo
 import {DevpavInformationPanelComponent} from './devpav-information-panel/devpav-information-panel.component';
 import {AngularMaterialModule} from '../../angular-material.module';
 import {DevpavIconSetComponent} from './devpav-icon-set/devpav-icon-set.component';
+import {DevpavInputTextareaComponent} from './devpav-input-textarea/devpav-input-textarea.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {DevpavIconSetComponent} from './devpav-icon-set/devpav-icon-set.componen
     DevpavButtonComponent,
     DevpavRefPanelComponent,
     DevpavInformationPanelComponent,
-    DevpavIconSetComponent
+    DevpavIconSetComponent,
+    DevpavInputTextareaComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import {DevpavIconSetComponent} from './devpav-icon-set/devpav-icon-set.componen
     DevpavButtonComponent,
     DevpavRefPanelComponent,
     DevpavInformationPanelComponent,
-    DevpavIconSetComponent
+    DevpavIconSetComponent,
+    DevpavInputTextareaComponent
   ],
   providers: [],
   schemas: [

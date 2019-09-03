@@ -1,6 +1,6 @@
 {
-  "ru": "ру",
-  "en": "en",
+  "ru": "Русский",
+  "en": "English",
   "Home": "Home",
   "Catalog": "Catalog",
   "SELECT_ALL": "Select All",
@@ -25,8 +25,7 @@
   "CONTACT_OWNER": "Contact owner",
   "DETAIL": "Detail",
   "VALUE_RENT": "Services and prices of rent",
-  "PLACEHOLDER_TITLE_RU": "Name in Russian",
-  "PLACEHOLDER_TITLE_EN": "Name in English",
+
   "NAVIGATION": "Navigation",
   "SHOP_CART": "Shopping cart",
   "ACTIONS": {
@@ -46,5 +45,19 @@
     "DELETE": "Delete",
     "CLOSE": "Close",
     "SELECT_ALL": "Select all"
+  },
+
+  "TOOLTIP": {
+    "CREATE_ITEM": "Create item",
+    "SELECT_ALL": "Select all",
+    "DELETE_SELECTED": "Delete selected",
+    "SELECT_ACTION": "Choose action",
+    "SELECT_ITEM": "Select item"
+  },
+  "PLACEHOLDER": {
+    "TITLE_RU": "Name in Russian",
+    "TITLE_EN": "Name in English",
+    "DESCRIPTION_RU": "Description in Russian",
+    "DESCRIPTION_EN": "Description in English"
   }
 }
