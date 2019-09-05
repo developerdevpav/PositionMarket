@@ -4,12 +4,12 @@ import {ProductTypeActions, ProductTypeActionsType} from './product.type.actions
 import {createSelector, MemoizedSelector} from '@ngrx/store';
 import {IRootStore} from '../index';
 import {TypeEntity} from '../entities/type.entity';
-import IStoreEntity from '../IStoreEntity';
-import {generateError, transformState} from '../transform';
+import StoreEntity from '../entities/store.entity';
+import {generateError, transformState} from '../converters/transform';
 
 export const adapter: EntityAdapter<ProductTypeEntity> = createEntityAdapter<ProductTypeEntity>();
 
-export interface ProductTypeFeatureStore extends EntityState<ProductTypeEntity>, IStoreEntity {
+export interface ProductTypeFeatureStore extends EntityState<ProductTypeEntity>, StoreEntity {
 }
 
 export const initialProductTypeState: ProductTypeFeatureStore = adapter.getInitialState(

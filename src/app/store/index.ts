@@ -6,7 +6,6 @@ import {ProductTypeFeatureStore, reducerProductType} from './product-type/produc
 import {reducerType, TypeFeatureState} from './type/type.feature.store';
 import {tagReducer, TagState} from './tag/tag.reducer';
 
-
 export interface IRootStore {
   positionState: PositionFeatureStore;
   languageState: Language;

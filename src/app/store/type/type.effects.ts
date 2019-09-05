@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {NsiAbstractService} from '../services/nsi.abstract.service';
+import {NsiApi} from '../services/nsi.api';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {TypeEntity} from '../entities/type.entity';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
@@ -9,7 +9,7 @@ import * as typeAction from './type.actions';
 @Injectable()
 export class TypeEffects {
 
-  constructor(private actions$: Actions, private api: NsiAbstractService<TypeEntity>) { }
+  constructor(private actions$: Actions, private api: NsiApi<TypeEntity>) { }
 
   @Effect()
   public getAll = this.actions$.pipe(

@@ -4,7 +4,7 @@ import * as productType from './product.type.feature.store';
 import {ProductTypeEntity} from '../entities/product.type.entity';
 import * as languageSelector from '../language/language.selector';
 import {Language} from '../language/language.model';
-import {convertArrayNsi} from '../services/utils/converter';
+import {convertArrayNsi} from '../converters/converter';
 import {Dictionary} from '@ngrx/entity';
 
 export const getError = (state: IRootStore): boolean => state.productTypeState.error;

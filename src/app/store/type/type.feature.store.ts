@@ -3,12 +3,12 @@ import {TypeEntity} from '../entities/type.entity';
 import {TypeActions, TypeActionsEnum} from './type.actions';
 import {createSelector, MemoizedSelector} from '@ngrx/store';
 import {IRootStore} from '../index';
-import IStoreEntity from '../IStoreEntity';
-import {transformState} from '../transform';
+import StoreEntity from '../entities/store.entity';
+import {transformState} from '../converters/transform';
 
 export const adapter: EntityAdapter<TypeEntity> = createEntityAdapter<TypeEntity>();
 
-export interface TypeFeatureState extends EntityState<TypeEntity>, IStoreEntity {}
+export interface TypeFeatureState extends EntityState<TypeEntity>, StoreEntity {}
 
 export const initialProductTypeState: TypeFeatureState = adapter.getInitialState(
   {

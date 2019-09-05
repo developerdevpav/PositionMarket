@@ -3,7 +3,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
-import {PositionService} from '../services/position.service';
+import {PositionApi} from '../services/position.api';
 import * as positionAction from './position.actions';
 import {PositionEntity} from '../entities/position.entity';
 
@@ -11,12 +11,12 @@ import {PositionEntity} from '../entities/position.entity';
 @Injectable()
 export class PositionEffects {
 
-  constructor(private actions$: Actions, private api: PositionService) { }
+  constructor(private actions$: Actions, private api: PositionApi) { }
 
   @Effect()
   loadProductTypesEffect$ = this.actions$.pipe(
     ofType<positionAction.LoadPositions>(positionAction.PositionActionEnum.LOAD_POSITIONS),
-    startWith(new positionAction.LoadPositions),
+    startWith(new positionAction.LoadPositions()),
     switchMap(() => this.api.getAll('positions')
       .pipe(
         map((objects: PositionEntity[]) => new positionAction.LoadPositionsSuccess({ positions: objects })),

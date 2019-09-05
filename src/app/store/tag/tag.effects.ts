@@ -3,14 +3,14 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import * as tagAction from './tag.actions';
 import {TagActionTypes} from './tag.actions';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import {NsiAbstractService} from '../services/nsi.abstract.service';
+import {NsiApi} from '../services/nsi.api';
 import {TagEntity} from '../entities/tag.entity';
 import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class TagEffects {
 
-  constructor(private actions$: Actions, private api: NsiAbstractService<TagEntity>) {}
+  constructor(private actions$: Actions, private api: NsiApi<TagEntity>) {}
 
   @Effect()
   public getAll = this.actions$.pipe(

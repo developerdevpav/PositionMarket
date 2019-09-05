@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {NsiAbstractService} from '../services/nsi.abstract.service';
+import {NsiApi} from '../services/nsi.api';
 import {ProductTypeEntity} from '../entities/product.type.entity';
 import {ProductTypeActions} from './product.type.actions';
 import * as productTypeAction from '../product-type/product.type.actions';
@@ -10,12 +10,12 @@ import * as productTypeAction from '../product-type/product.type.actions';
 @Injectable()
 export class ProductTypeEffects {
 
-  constructor(private actions$: Actions, private api: NsiAbstractService<ProductTypeEntity>) { }
+  constructor(private actions$: Actions, private api: NsiApi<ProductTypeEntity>) { }
 
   @Effect()
   loadProductTypesEffect$ = this.actions$.pipe(
     ofType<productTypeAction.LoadProductTypes>(ProductTypeActions.LOAD_PRODUCT_TYPES),
-    startWith(new productTypeAction.LoadProductTypes),
+    startWith(new productTypeAction.LoadProductTypes()),
     switchMap(() => this.api.getAll('product-types')
       .pipe(
         map((values: ProductTypeEntity[]) => new productTypeAction.LoadProductTypesSuccess({ productTypes: values })),

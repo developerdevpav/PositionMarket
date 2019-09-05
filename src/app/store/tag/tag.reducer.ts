@@ -3,10 +3,10 @@ import {TagActions, TagActionTypes} from './tag.actions';
 import {TagEntity} from '../entities/tag.entity';
 import {createSelector} from '@ngrx/store';
 import {IRootStore} from '../index';
-import IStoreEntity from '../IStoreEntity';
-import {generateError, transformState} from '../transform';
+import StoreEntity from '../entities/store.entity';
+import {generateError, transformState} from '../converters/transform';
 
-export interface TagState extends EntityState<TagEntity>, IStoreEntity {}
+export interface TagState extends EntityState<TagEntity>, StoreEntity {}
 
 
 export const adapter: EntityAdapter<TagEntity> = createEntityAdapter<TagEntity>();

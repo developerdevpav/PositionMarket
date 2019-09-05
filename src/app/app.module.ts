@@ -2,28 +2,22 @@ import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {NsiModule} from './components/nsi.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import * as storeReducers from './store';
 import {EffectsModule} from '@ngrx/effects';
-import {TypeEffects} from './store/effects/type.effects';
-import {NsiAbstractService} from './store/services/nsi.abstract.service';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpLoaderFactory} from './ui/translate.service';
-import {TagEffects} from './store/effects/tag.effects';
+import {httpLoaderFactory} from './config/translate.config';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TypeServiceEffects} from './store/effects/type-service.effects';
-import {AttractionService} from './store/services/attraction.service';
-import {AttractionEffects} from './store/effects/attraction.effects';
 import {AngularMaterialModule} from './angular-material.module';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
-import {ImageEffects} from './store/effects/image.effects';
-import {ImageUtilService} from './store/services/utils/image-util.service';
-import {TranslatorYandexService} from './store/services/translator-yandex.service';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './store';
+import {PositionEffects} from './store/position/position.effects';
+import {ProductTypeEffects} from './store/product-type/product-type.effects';
+import {TagEffects} from './store/tag/tag.effects';
+import {TypeEffects} from './store/type/type.effects';
 
 @NgModule({
   declarations: [
@@ -35,30 +29,25 @@ import {TranslatorYandexService} from './store/services/translator-yandex.servic
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(storeReducers.reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25
-    }),
     AngularSvgIconModule,
     AngularMultiSelectModule,
     EffectsModule.forRoot([
-      TypeEffects,
+      PositionEffects,
+      ProductTypeEffects,
       TagEffects,
-      TypeServiceEffects,
-      AttractionEffects,
-      ImageEffects
+      TypeEffects
     ]),
-    NsiModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: httpLoaderFactory,
         deps: [HttpClient]
       }
     }),
-    BrowserAnimationsModule,
-
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   bootstrap: [AppComponent],
   schemas: [
@@ -66,10 +55,6 @@ import {TranslatorYandexService} from './store/services/translator-yandex.servic
     NO_ERRORS_SCHEMA
   ],
   providers: [
-    NsiAbstractService,
-    AttractionService,
-    ImageUtilService,
-    TranslatorYandexService
   ],
   exports: [
     AppRoutingModule,

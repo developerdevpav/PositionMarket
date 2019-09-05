@@ -5,7 +5,7 @@ import * as tagSelector from '../tag/tag.reducer';
 import * as languageSelector from '../language/language.selector';
 import {IRootStore} from '../index';
 import {Dictionary} from '@ngrx/entity';
-import {convertArrayNsi} from '../services/utils/converter';
+import {convertArrayNsi} from '../converters/converter';
 import {Language} from '../language/language.model';
 
 export const selectTags = createSelector(selectAll, (tags: TagEntity[]) => tags);

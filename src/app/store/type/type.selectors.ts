@@ -3,7 +3,7 @@ import {createSelector} from '@ngrx/store';
 import * as type from './type.feature.store';
 import {TypeEntity} from '../entities/type.entity';
 import {Dictionary} from '@ngrx/entity';
-import * as converter from '../services/utils/converter';
+import * as converter from '../converters/converter';
 import {TagEntity} from '../entities/tag.entity';
 import * as languageSelector from '../language/language.selector';
 import {Language} from '../language/language.model';
