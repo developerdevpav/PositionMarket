@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {PositionImageModel} from '../../models/position.image.model';
 import {HttpEventType} from '@angular/common/http';
-import {ImageModel} from '../../models/image.model';
 import {ApiImageService} from '../api-image.service';
 
 @Injectable({
@@ -16,7 +14,7 @@ export class ImageUtilService {
   * This method set main image from list images
   * If the list doesn't have the main image, first found image is set
   * */
-  public setMainImage(positionImages: Array<PositionImageModel>, imageId: string): Array<PositionImageModel> {
+  public setMainImage(positionImages: Array<any>, imageId: string): Array<any> {
     if (positionImages && positionImages.length > 0) {
       const isExistsMainImage = positionImages.find(it => it.mainImage);
 
@@ -30,7 +28,6 @@ export class ImageUtilService {
             );
         }
       } else {
-        positionImages.forEach(it => it.mainImage = false);
         positionImages[0].mainImage = true;
       }
     }
@@ -49,7 +46,7 @@ export class ImageUtilService {
     return formData;
   }
 
-  public uploadImages(fileList: FileList, uploadProgress: (percent: number) => void, response: (images: PositionImageModel[]) => void) {
+  public uploadImages(fileList: FileList, uploadProgress: (percent: number) => void, response: (images: any[]) => void) {
     return this.imageService.upload(this.getFormData(fileList)).subscribe(event => {
       switch (event.type) {
         case HttpEventType.UploadProgress: {
@@ -57,7 +54,7 @@ export class ImageUtilService {
           break;
         }
         case HttpEventType.Response: {
-          const selectedImage: ImageModel[] = JSON.parse(event.body);
+          const selectedImage: any[] = JSON.parse(event.body);
           if (selectedImage && selectedImage.length > 0) {
             response(selectedImage.map(this.convertImageToPositionImage));
           }
@@ -68,7 +65,7 @@ export class ImageUtilService {
   }
 
 
-  public convertImageToPositionImage(image: ImageModel): PositionImageModel {
+  public convertImageToPositionImage(image: any): any {
     return {
       id: null,
       image: image.id,

@@ -1,19 +1,24 @@
 import {ActionReducerMap} from '@ngrx/store';
+import {PositionFeatureStore, reducerPosition} from './position/position.feature.store';
+import {reducerLanguage} from './language/language.reducer';
+import {Language} from './language/language.model';
+import {ProductTypeFeatureStore, reducerProductType} from './product-type/product.type.feature.store';
+import {reducerType, TypeFeatureState} from './type/type.feature.store';
+import {tagReducer, TagState} from './tag/tag.reducer';
 
-import * as type from './reducers/type.reducer';
-import * as tag from './reducers/tag.reducer';
-import * as language from './reducers/language.reducer';
-import {typeServiceReducer} from './reducers/type-service.reducer';
-import * as attraction from './reducers/attraction.reducer';
-import * as image from './reducers/image.reducer';
-import * as selectedProduct from './reducers/selected-product.reducer';
 
-export const reducers: ActionReducerMap<any> = {
-  types: type.typeReducer,
-  tags: tag.tagReducer,
-  typeservises: typeServiceReducer,
-  language: language.languageReducer,
-  attractions: attraction.attractionReducer,
-  images: image.imageReducer,
-  selectedProducts: selectedProduct.selectedProductReducer
+export interface IRootStore {
+  positionState: PositionFeatureStore;
+  languageState: Language;
+  productTypeState: ProductTypeFeatureStore;
+  typeState: TypeFeatureState;
+  tagState: TagState;
+}
+
+export const reducers: ActionReducerMap<IRootStore> = {
+  positionState: reducerPosition,
+  languageState: reducerLanguage,
+  productTypeState: reducerProductType,
+  typeState: reducerType,
+  tagState: tagReducer
 };

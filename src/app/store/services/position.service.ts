@@ -1,18 +1,21 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {PositionEntity} from '../entities/position.entity';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NsiAbstractService<T> {
+export class PositionService {
 
   protected headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
 
   utl = '/api';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient) {
+  }
 
-  getAll(service: string) {
+  getAll(service: string): Observable<any> {
     return this.http.get(`${this.utl}/${service}`, {headers: this.headers});
   }
 
@@ -20,11 +23,11 @@ export class NsiAbstractService<T> {
     return this.http.get(`${this.utl}/${service}/${uuid}`, {headers: this.headers});
   }
 
-  create(service: string, obj: T) {
+  create(service: string, obj: PositionEntity) {
     return this.http.post(`${this.utl}/${service}`, obj, {headers: this.headers});
   }
 
-  public update(service: string, obj: T) {
+  public update(service: string, obj: PositionEntity) {
     return this.http.put(`${this.utl}/${service}`, obj, {headers: this.headers});
   }
 
@@ -32,12 +35,8 @@ export class NsiAbstractService<T> {
     return this.http.delete(`${this.utl}/${service}/${uuid}`, {headers: this.headers});
   }
 
-  public deleteAll(service: string, uuids: string[]) {
-    const url = encodeURI(`${this.utl}/${service}/[${uuids}]`);
-    console.log(`method delete: ${url}`);
-    return this.http.delete(url, {headers: this.headers});
+  public deleteArray(service: string, uuids: string[]) {
+    return this.http.delete(encodeURI(`${this.utl}/${service}/[${uuids}]`), { headers: this.headers });
   }
 
 }
-
-
