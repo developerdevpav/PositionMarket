@@ -1,0 +1,52 @@
+.box-textarea {
+  display: flex;
+  flex-wrap: wrap;
+  height: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  flex-basis: 100%;
+}
+
+textarea {
+  height: inherit;
+  width: 100%;
+  padding: 15px;
+  resize: vertical;
+  border-top: none;
+  min-height: 100px;
+  outline: none;
+}
+
+.box-textarea__label-textarea {
+  height: 50px;
+  flex-basis: 100%;
+}
+
+.box-textarea__prefix {
+  padding: 0 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  background: #f9f9f9;
+  height: inherit;
+  min-width: 110px;
+  flex-basis: 100%;
+  border: 1px solid #a9a9a9;
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.box-textarea__prefix mat-icon {
+  cursor: pointer;
+}
+
+.box-textarea__prefix {
+  color: initial;
+}
+
+.box-textarea_language-name {
+  color: black;
+  font-weight: 500;
+}

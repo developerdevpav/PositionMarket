@@ -18,10 +18,15 @@ import {PositionEffects} from './store/position/position.effects';
 import {ProductTypeEffects} from './store/product-type/product-type.effects';
 import {TagEffects} from './store/tag/tag.effects';
 import {TypeEffects} from './store/type/type.effects';
+import {DevpavMultiLanguageInputComponent} from './shared/components/devpav-multi-language-input/devpav-multi-language-input.component';
+// tslint:disable-next-line:max-line-length
+import {DevpavMultiLanguageTextareaComponent} from './shared/components/devpav-multi-language-textarea/devpav-multi-language-textarea.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DevpavMultiLanguageInputComponent,
+    DevpavMultiLanguageTextareaComponent
   ],
   imports: [
     BrowserModule,
@@ -47,15 +52,14 @@ import {TypeEffects} from './store/type/type.effects';
       }
     }),
     StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument({ maxAge: 25 })
+    StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [
-  ],
+  providers: [],
   exports: [
     AppRoutingModule,
     BrowserModule

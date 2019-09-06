@@ -1,0 +1,49 @@
+.box-input {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 40px;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  flex-basis: 100%;
+}
+
+input {
+  height: inherit;
+  width: 100%;
+  padding: 15px;
+  outline: none !important;
+}
+
+.box-input__label-input {
+  height: 100%;
+  flex-basis: 90%;
+  border-right: none;
+}
+
+.box-input__postfix {
+  padding: 0 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9f9;
+  height: inherit;
+  min-width: 110px;
+  border: 1px solid #a9a9a9;
+  border-left: none;
+  cursor: pointer;
+}
+
+.box-input__postfix mat-icon {
+  cursor: pointer;
+}
+
+.box-input__postfix {
+  color: initial;
+}
+
+.box-input_language-name {
+  color: black;
+  font-weight: 500;
+}
