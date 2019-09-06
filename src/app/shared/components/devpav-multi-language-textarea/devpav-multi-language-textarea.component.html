@@ -1,8 +1,4 @@
 <div class="box-textarea">
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="switchLanguage('ru')">Русский</button>
-    <button mat-menu-item (click)="switchLanguage('en')">English</button>
-  </mat-menu>
   <div class="box-textarea__prefix" [matMenuTriggerFor]="menu">
     <mat-icon>translate</mat-icon>
     <span class="box-textarea_language-name">&emsp;{{ currentInputLanguage === mapLanguage.get('ru') ? 'RU' : 'EN' }}</span>
@@ -15,6 +11,10 @@
               *ngIf="currentInputLanguage === mapLanguage.get('ru')"
               placeholder="Value default"></textarea>
   </label>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="switchLanguage('ru')">Русский</button>
+    <button mat-menu-item (click)="switchLanguage('en')">English</button>
+  </mat-menu>
 </div>
 
 
