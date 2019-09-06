@@ -6,7 +6,28 @@
     <button mat-button (click)="loadPositions()">Get positions</button>
   </header>
 
-  <section>
+  <section class="container">
+    <mat-card style="margin-bottom: 20px">
+      <mat-card-header>
+        <mat-card-title>
+          Название позиции
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="margin-left: 17px; margin-right: 17px">
+        <devpav-multi-language-input></devpav-multi-language-input>
+      </mat-card-content>
+    </mat-card>
+    <mat-card style="margin-bottom: 20px">
+      <mat-card-header>
+        <mat-card-title>
+          Описание позиции
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="margin-left: 17px; margin-right: 17px; height: auto">
+        <devpav-multi-language-textarea></devpav-multi-language-textarea>
+      </mat-card-content>
+    </mat-card>
+
     <router-outlet></router-outlet>
   </section>
 
