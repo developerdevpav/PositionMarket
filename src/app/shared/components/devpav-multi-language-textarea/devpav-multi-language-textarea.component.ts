@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Language} from '../../../store/language/language.model';
 
@@ -10,6 +10,9 @@ import {Language} from '../../../store/language/language.model';
 export class DevpavMultiLanguageTextareaComponent implements OnInit {
 
   formGroup: FormGroup;
+
+  @Input()
+  prefix = false;
 
   currentInputLanguage: Language = Language.RU;
 
@@ -26,6 +29,8 @@ export class DevpavMultiLanguageTextareaComponent implements OnInit {
       [Language.RU]: new FormControl('')
     });
   }
+
+  isCurrentMultiLanguageInput = (language: string): boolean => this.currentInputLanguage === this.mapLanguage.get(language);
 
   getFormControl = () => this.currentInputLanguage.toString();
 

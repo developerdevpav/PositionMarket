@@ -1,20 +1,18 @@
 <div class="box-textarea">
-  <div class="box-textarea__prefix" [matMenuTriggerFor]="menu">
+  <div class="box-textarea__prefix" *ngIf="prefix" [matMenuTriggerFor]="menu">
     <mat-icon>translate</mat-icon>
-    <span class="box-textarea_language-name">&emsp;{{ currentInputLanguage === mapLanguage.get('ru') ? 'RU' : 'EN' }}</span>
+    <span class="box-textarea_language-name">&emsp;{{ isCurrentMultiLanguageInput('ru') ? 'RU' : 'EN' }}</span>
   </div>
   <label [formGroup]="formGroup" class="box-textarea__label-textarea">
     <textarea [formControlName]="mapLanguage.get('en')"
-              *ngIf="currentInputLanguage === mapLanguage.get('en')"
+              *ngIf="isCurrentMultiLanguageInput('en')"
               placeholder="Value default"></textarea>
     <textarea [formControlName]="mapLanguage.get('ru')"
-              *ngIf="currentInputLanguage === mapLanguage.get('ru')"
+              *ngIf="isCurrentMultiLanguageInput('ru')"
               placeholder="Value default"></textarea>
   </label>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="switchLanguage('ru')">Русский</button>
-    <button mat-menu-item (click)="switchLanguage('en')">English</button>
+    <button mat-menu-item (click)="switchLanguage('ru')">{{'LANGUAGE.RU' | translate}}</button>
+    <button mat-menu-item (click)="switchLanguage('en')">{{'LANGUAGE.EN' | translate}}</button>
   </mat-menu>
 </div>
-
-

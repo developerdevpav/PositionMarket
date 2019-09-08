@@ -1,0 +1,9 @@
+<label>
+  <textarea class="devpav-textarea"
+         (blur)="blurInput($event.returnValue)"
+         (focus)="focusInput($event.returnValue)"
+         [placeholder]="ph"
+         (input)="setValue()"
+         [(ngModel)]="value">
+  </textarea>
+</label>

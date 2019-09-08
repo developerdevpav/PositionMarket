@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Language} from '../../../store/language/language.model';
 
@@ -11,6 +11,10 @@ export class DevpavMultiLanguageInputComponent implements OnInit {
 
   formGroup: FormGroup;
 
+  @Input()
+  postfix = false;
+
+  @Input()
   currentInputLanguage: Language = Language.RU;
 
   mapLanguage = new Map();
@@ -27,9 +31,9 @@ export class DevpavMultiLanguageInputComponent implements OnInit {
     });
   }
 
-  getFormControl = () => this.currentInputLanguage.toString();
+  isCurrentMultiLanguageInput = (language: string): boolean => this.currentInputLanguage === this.mapLanguage.get(language);
 
-  switchLanguage = (language: string) => {
-    this.currentInputLanguage = this.mapLanguage.get(language);
-  }
+  getFormControlName = (language: string): string => this.mapLanguage.get(language);
+
+  switchLanguage = (language: string) => this.currentInputLanguage = this.mapLanguage.get(language);
 }

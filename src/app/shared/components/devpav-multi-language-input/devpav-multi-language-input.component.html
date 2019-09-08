@@ -3,14 +3,15 @@
     <button mat-menu-item (click)="switchLanguage('ru')">Русский</button>
     <button mat-menu-item (click)="switchLanguage('en')">English</button>
   </mat-menu>
-  <label [formGroup]="formGroup" class="box-input__label-input">
-    <input [formControlName]="mapLanguage.get('en')"
-           *ngIf="currentInputLanguage === mapLanguage.get('en')" type="text" placeholder="value language"/>
-    <input [formControlName]="mapLanguage.get('ru')"
-           *ngIf="currentInputLanguage === mapLanguage.get('ru')" type="text" placeholder="value language"/>
+  <label [formGroup]="formGroup" [ngStyle]="{'flex-basis': postfix ? '90%' : '100%'}" class="box-input__label-input">
+    <input type="text" placeholder="value language" [formControlName]="getFormControlName('en')"
+      *ngIf="isCurrentMultiLanguageInput('en')" />
+    <input type="text" placeholder="value language" [formControlName]="getFormControlName('ru')"
+           *ngIf="isCurrentMultiLanguageInput('ru')" />
   </label>
-  <div class="box-input__postfix" [matMenuTriggerFor]="menu">
+  <div *ngIf="postfix" class="box-input__postfix" [matMenuTriggerFor]="menu">
     <mat-icon>translate</mat-icon>
-    <span class="box-input_language-name">&emsp;{{ currentInputLanguage === mapLanguage.get('ru') ? 'RU' : 'EN' }}</span>
+    <span
+      class="box-input_language-name">&emsp;{{ isCurrentMultiLanguageInput('ru') ? 'RU' : 'EN' }}</span>
   </div>
 </div>

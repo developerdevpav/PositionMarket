@@ -21,12 +21,16 @@ import {TypeEffects} from './store/type/type.effects';
 import {DevpavMultiLanguageInputComponent} from './shared/components/devpav-multi-language-input/devpav-multi-language-input.component';
 // tslint:disable-next-line:max-line-length
 import {DevpavMultiLanguageTextareaComponent} from './shared/components/devpav-multi-language-textarea/devpav-multi-language-textarea.component';
+import {DevpavInputComponent} from './shared/components/depav-input/devpav-input.component';
+import {DevpavTextareaComponent} from './shared/components/devpav-textarea/devpav-textarea.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DevpavMultiLanguageInputComponent,
-    DevpavMultiLanguageTextareaComponent
+    DevpavMultiLanguageTextareaComponent,
+    DevpavInputComponent,
+    DevpavTextareaComponent
   ],
   imports: [
     BrowserModule,
