@@ -23,6 +23,7 @@ import {DevpavMultiLanguageInputComponent} from './shared/components/devpav-mult
 import {DevpavMultiLanguageTextareaComponent} from './shared/components/devpav-multi-language-textarea/devpav-multi-language-textarea.component';
 import {DevpavInputComponent} from './shared/components/depav-input/devpav-input.component';
 import {DevpavTextareaComponent} from './shared/components/devpav-textarea/devpav-textarea.component';
+import {DevpavChipComponent} from './shared/components/devpav-chip/devpav-chip.component';
 
 @NgModule({
   declarations: [
@@ -30,24 +31,25 @@ import {DevpavTextareaComponent} from './shared/components/devpav-textarea/devpa
     DevpavMultiLanguageInputComponent,
     DevpavMultiLanguageTextareaComponent,
     DevpavInputComponent,
-    DevpavTextareaComponent
+    DevpavTextareaComponent,
+    DevpavChipComponent
   ],
   imports: [
     BrowserModule,
-    AngularMaterialModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMaterialModule,
+    AppRoutingModule,
     AngularSvgIconModule,
     AngularMultiSelectModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     EffectsModule.forRoot([
       PositionEffects,
       ProductTypeEffects,
       TagEffects,
       TypeEffects
     ]),
-    HttpClientModule,
-    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

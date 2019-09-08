@@ -1,0 +1,18 @@
+@import '~src/styles';
+
+.devpav-chip {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: white;
+  height: 40px;
+  width: fit-content;
+  background: $defaultColorComponent;
+}
+
+.devpav-chip mat-icon {
+  margin-left: 10px;
+}

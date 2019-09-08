@@ -1,3 +1,5 @@
+@import '~src/styles';
+
 .box-textarea {
   display: flex;
   flex-wrap: wrap;
@@ -33,7 +35,7 @@ textarea {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  background: #008672;
+  background: $defaultColorComponent;
   height: 45px;
   // box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
   z-index: 100;

@@ -1,0 +1,5 @@
+<div class="devpav-chip" (click)="handlerClickChip($event)" (mouseover)="mouseover($event)" (mouseleave)="mouseout($event)">
+  <span >{{value}}</span>
+  <mat-icon [@activeAnimation]="stateVisible"
+            (click)="handlerClickIcon($event)">{{icon}}</mat-icon>
+</div>

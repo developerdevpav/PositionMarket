@@ -1,3 +1,5 @@
+@import '~src/styles';
+
 .box-input {
   display: flex;
   flex-wrap: nowrap;
@@ -31,7 +33,7 @@ input {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  background: #008672;
+  background: $defaultColorComponent;
   height: inherit;
   min-width: 110px;
   // border: 1px solid #a9a9a9;
