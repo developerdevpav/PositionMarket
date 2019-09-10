@@ -24,6 +24,7 @@ import {DevpavMultiLanguageTextareaComponent} from './shared/components/devpav-m
 import {DevpavInputComponent} from './shared/components/depav-input/devpav-input.component';
 import {DevpavTextareaComponent} from './shared/components/devpav-textarea/devpav-textarea.component';
 import {DevpavChipComponent} from './shared/components/devpav-chip/devpav-chip.component';
+import {ThemeService} from './shared/services/theme.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,9 @@ import {DevpavChipComponent} from './shared/components/devpav-chip/devpav-chip.c
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    ThemeService
+  ],
   exports: [
     AppRoutingModule,
     BrowserModule

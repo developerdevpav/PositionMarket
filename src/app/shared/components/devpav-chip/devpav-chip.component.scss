@@ -7,10 +7,11 @@
   align-items: center;
   padding: 10px 15px;
   cursor: pointer;
-  color: white;
   height: 40px;
   width: fit-content;
-  background: $defaultColorComponent;
+  border: var(--devpav-chip-border);
+  color: var(--devpav-chip-font-color);
+  background: var(--devpav-chip-background-color);
 }
 
 .devpav-chip mat-icon {
