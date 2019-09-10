@@ -1,3 +1,50 @@
-.btn-warning {
-  background: red;
+.mat-dialog-container {
+  padding: 0;
+  position: relative;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.content-dialog {
+  padding: 10px 0 15px 20px;
+  height: inherit;
+}
+
+.title-dialog {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0 15px 20px;
+  background: var(--element-background-color);
+  color: var(--element-text-color);
+  border-bottom: var(--form-input-border);
+}
+
+.title-dialog > span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.action-dialog {
+  position: absolute;
+  padding: 20px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-basis: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.action-dialog > devpav-button {
+  margin-right: 20px;
+}
+
+.action-dialog > devpav-button:last-child {
+  margin-right: 0;
 }

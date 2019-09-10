@@ -7,6 +7,9 @@
   /* Colors */
   --primary-color: '#ffffff';
 
+  --warning-color: rgb(255, 0, 0);
+  --warning-font-color: rgb(255, 0, 0);
+
   --background-color: '#ffffff';
 
   --text-color: #2d2d2d;
@@ -63,20 +66,34 @@ textarea.devpav-textarea {
 }
 
 button.devpav-button {
-  height: inherit;
+  min-height: 40px;
   width: max-content;
   cursor: pointer;
-  padding: 12px;
+  padding: 10px;
   font-size: 14px;
+  font-weight: 500;
+  min-width: 120px;
   outline: none;
   display: flex;
   text-decoration: none;
   flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
+  transition-duration: 0.4s;
   color: var(--text-input-color);
   background: var(--form-input-background-color);
   border: var(--form-input-border);
-  transition-duration: 0.4s;
+}
+
+button.devpav-button.devpav-btn-warning {
+  font-weight: 600;
+  color: var(--warning-font-color);
+  background: var(--warning-color);
+}
+
+button.devpav-button.devpav-btn-warning:hover {
+  color: var(--warning-font-color);
+  background: var(--warning-color);
 }
 
 button.devpav-button:hover {

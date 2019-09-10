@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {DialogAlertWarningComponent} from '../../shared/dialog-alert-warning/dialog-alert-warning.component';
@@ -8,9 +8,7 @@ import {DialogAlertWarningComponent} from '../../shared/dialog-alert-warning/dia
   templateUrl: './devpav-stand-page.component.html',
   styleUrls: ['./devpav-stand-page.component.scss']
 })
-export class DevpavStandPageComponent implements OnInit, OnChanges {
-
-  firstLoading = true;
+export class DevpavStandPageComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -27,14 +25,10 @@ export class DevpavStandPageComponent implements OnInit, OnChanges {
 
   scrollToFragment = (fragment: string) => this.router.navigate(['components'], { fragment });
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
   openWarningAlert() {
     const dialogRef = this.dialog.open(DialogAlertWarningComponent, {
-      width: '350px',
-      height: '400px',
+      width: '700px',
+      height: '200px',
       data: {
         message: 'Are you sure you want to delete the entry?',
         title: 'Deleting',

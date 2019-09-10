@@ -4,6 +4,9 @@ import {light, Theme} from '../../config/theme.config';
 export const darkTheme = {
   'primary-color': '#455363',
 
+  'warning-font-color': '#fff',
+  'warning-color': '#ce3e3e',
+
   'background-color': '#1f2935',
 
   'text-color': '#fff',
@@ -27,6 +30,9 @@ export const darkTheme = {
 
 export const lightTheme = {
   'primary-color': '#fff',
+
+  'warning-font-color': '#fff',
+  'warning-color': '#ce3e3e',
 
   'background-color': '#fff',
 

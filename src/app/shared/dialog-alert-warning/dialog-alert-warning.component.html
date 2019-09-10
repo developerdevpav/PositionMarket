@@ -1,14 +1,12 @@
-<div mat-dialog-title>
-  <h5>{{data?.title}}</h5>
+<div class="title-dialog">
+  <span>{{data?.title}}</span>
 </div>
-<div mat-dialog-content>
+
+<div class="content-dialog">
   {{data?.message}}
 </div>
-<div mat-dialog-actions>
-  <devpav-button [title]="data?.titleBtn" (click)="dialogRef.close(true)" class="btn-warning"></devpav-button>
-  <devpav-button title="Cancel" cdkFocusInitial (click)="dialogRef.close(false)"></devpav-button>
-</div>
 
-<div>
-
+<div class="action-dialog">
+  <devpav-button [title]="data?.titleBtn" color="war" (click)="dialogRef.close(true)"></devpav-button>
+  <devpav-button title="Cancel" (click)="dialogRef.close(false)"></devpav-button>
 </div>
