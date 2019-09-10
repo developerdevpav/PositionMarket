@@ -7,8 +7,8 @@
   align-items: center;
   position: relative;
   flex-basis: 100%;
-  background: white;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+  background: var(--background-color);
+  border: var(--form-input-border);
 }
 
 textarea {
@@ -17,11 +17,12 @@ textarea {
   padding: 15px;
   font-size: 14px;
   resize: vertical;
-  border: none;
   min-height: 180px;
   outline: none;
   z-index: 10;
-  // box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  color: var(--text-input-color);
+  background: var(--form-input-background-color);
 }
 
 .box-textarea__label-textarea {
@@ -35,15 +36,14 @@ textarea {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  background: $defaultColorComponent;
   height: 45px;
-  // box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
   z-index: 100;
   min-width: 110px;
   flex-basis: 100%;
-  // border: 1px solid #a9a9a9;
-  border-bottom: none;
+  border: none;
   cursor: pointer;
+  border-bottom: var(--form-input-border);
+  background: var(--element-background-color);
 }
 
 .box-textarea__prefix mat-icon {
@@ -51,10 +51,10 @@ textarea {
 }
 
 .box-textarea__prefix {
-  color: white;
+  color: var(--element-text-color);
 }
 
 .box-textarea_language-name {
-  color: white;
+  color: var(--element-text-color);
   font-weight: 500;
 }

@@ -4,6 +4,8 @@
     <button mat-button (click)="loadTypes()">Get types</button>
     <button mat-button (click)="loadProductTypes()">Get product types</button>
     <button mat-button (click)="loadPositions()">Get positions</button>
+    <button mat-button (click)="toggleTheme('dark')">Theme Dark</button>
+    <button mat-button (click)="toggleTheme('light')">Theme Light</button>
   </header>
 
   <section class="container" style="margin-top: 50px">
@@ -17,7 +19,7 @@
     </div>
     <div style="margin-bottom: 30px">
       <div style="margin-bottom: 10px">
-        <h5>MultiLanguage input  without postfix</h5>
+        <h5>MultiLanguage input without postfix</h5>
       </div>
       <devpav-multi-language-input></devpav-multi-language-input>
     </div>
@@ -27,7 +29,7 @@
       </div>
       <devpav-multi-language-input [postfix]="true"></devpav-multi-language-input>
     </div>
-
+    <h2 style="margin-top: 20px">Textareas</h2>
     <div style="margin-bottom: 30px">
       <div style="margin-bottom: 10px">
         <h5>Default textarea</h5>
@@ -51,21 +53,18 @@
       <div style="margin-bottom: 10px">
         <h5>default chips</h5>
       </div>
-      <div style="margin: 5px">
-        <devpav-chip id="1" value="default chip"></devpav-chip>
+      <div style="display: flex; flex-wrap: wrap; flex-basis: 100%;">
+        <div style="margin: 0 5px 5px 0">
+          <devpav-chip id="1" value="default remove chip"></devpav-chip>
+        </div>
+        <div style="margin: 0 5px 5px 0">
+          <devpav-chip id="2" icon="check_circle" value="select chip 2"></devpav-chip>
+        </div>
+        <div style="margin: 0 5px 5px 0">
+          <devpav-chip id="3" icon="done_all" value="select all chip 3"></devpav-chip>
+        </div>
       </div>
-      <div style="margin: 5px">
-        <devpav-chip id="2" icon="check_circle" value="default chip"></devpav-chip>
-      </div>
-      <div style="margin: 5px">
-        <devpav-chip id="3" icon="done_all" value="default chip"></devpav-chip>
-      </div>
-      <div style="margin: 5px">
-        <devpav-chip id="4" value="default chip"></devpav-chip>
-      </div>
-
     </div>
-
     <router-outlet></router-outlet>
   </section>
 

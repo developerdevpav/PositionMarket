@@ -31,6 +31,8 @@ export class DevpavMultiLanguageInputComponent implements OnInit {
     });
   }
 
+  getStyleInput = () => ({'flex-basis': this.postfix ? '90%' : '100%'});
+
   isCurrentMultiLanguageInput = (language: string): boolean => this.currentInputLanguage === this.mapLanguage.get(language);
 
   getFormControlName = (language: string): string => this.mapLanguage.get(language);

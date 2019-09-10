@@ -3,25 +3,46 @@
 @import "~angular2-multiselect-dropdown/themes/default.theme.css";
 @import '~bootstrap/scss/bootstrap-grid';
 
-$mainColorBackgroundBack: #551a8be8;
-$mainColorBackground: #551a8be8;
-$mainColorFont: #f0f0f0;
-$defaultColorComponent: #008672;
+:root {
+  /* Colors */
+  --primary-color: '#ffffff';
+
+  --background-color: '#ffffff';
+
+  --text-color: #2d2d2d;
+  --text-input-color: #2d2d2d;
+
+  --form-input-border: 1px solid #ececec;
+  --form-input-border-color: #ececec;
+  --form-input-background-color: #191c20;
+
+  --devpav-chip-background-color: #26303e;
+  --devpav-chip-font-color: #26303e;
+  --devpav-chip-border: 1px solid #e8e8e8;
+
+  --element-background-color: #26303e;
+  --element-text-color: #26303e;
+
+  /* Shadows */
+  --shadow-color: rgba(0, 0, 0, 0.09);
+}
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: $mainColorFont;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 input.devpav-input {
   height: 40px;
   font-size: 14px;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
   padding: 15px;
-  border: #d2d2d2;
   outline: none !important;
+  color: var(--text-input-color);
+  background: var(--form-input-background-color);
+  border: var(--form-input-border);
 }
 
 textarea.devpav-textarea {
@@ -30,9 +51,24 @@ textarea.devpav-textarea {
   padding: 15px;
   font-size: 14px;
   resize: vertical;
-  border: none;
   min-height: 180px;
   outline: none;
   z-index: 10;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+  color: var(--text-input-color);
+  background: var(--form-input-background-color);
+  border: var(--form-input-border);
 }
+
+h5 {
+  font-weight: 400;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+
+h1 {
+  font-weight: 500;
+}
+

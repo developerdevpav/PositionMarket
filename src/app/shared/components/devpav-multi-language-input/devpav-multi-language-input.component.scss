@@ -4,12 +4,13 @@
   display: flex;
   flex-wrap: nowrap;
   height: 40px;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   flex-basis: 100%;
-  background: #008672;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+  border: var(--form-input-border);
+  background: var(--background-color);
+  box-shadow: var(--background-form-input-shadow);
 }
 
 input {
@@ -17,14 +18,15 @@ input {
   font-size: 14px;
   width: 100%;
   padding: 15px;
-  border: #d2d2d2;
   outline: none !important;
+  color: var(--text-color);
+  background: var(--form-input-background-color);
+  border: none;
 }
 
 .box-input__label-input {
   height: 100%;
   flex-basis: 90%;
-  border-right: none;
 }
 
 .box-input__postfix {
@@ -33,12 +35,12 @@ input {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  background: $defaultColorComponent;
   height: inherit;
   min-width: 110px;
-  // border: 1px solid #a9a9a9;
-  border: none;
   cursor: pointer;
+  border: inherit;
+  border-right: none;
+  background: var(--element-background-color);
 }
 
 .box-input__postfix mat-icon {
@@ -46,10 +48,10 @@ input {
 }
 
 .box-input__postfix {
-  color: white;
+  color: var(--element-text-color);
 }
 
 .box-input_language-name {
-  color: white;
+  color: var(--element-text-color);
   font-weight: 500;
 }
