@@ -1,0 +1,32 @@
+.container-wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.left-content {
+  flex-basis: 20%;
+  margin-right: 50px;
+  border-right: 1px solid var(--form-input-border-color);
+}
+
+.left-content .menu {
+  position: sticky;
+  height: max-content;
+  margin-right: 10px;
+  top: 15px;
+  left: 0;
+}
+
+.right-content {
+  flex-basis: 80%;
+}
+
+:host mat-list-item {
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+:host mat-divider {
+  border-top-color: var(--form-input-border-color);
+}

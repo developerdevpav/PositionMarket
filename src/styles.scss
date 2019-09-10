@@ -20,6 +20,9 @@
   --devpav-chip-font-color: #26303e;
   --devpav-chip-border: 1px solid #e8e8e8;
 
+
+  --devpav-button-hover-color: 1px solid #e8e8e8;
+
   --element-background-color: #26303e;
   --element-text-color: #26303e;
 
@@ -59,16 +62,28 @@ textarea.devpav-textarea {
   border: var(--form-input-border);
 }
 
-h5 {
-  font-weight: 400;
+button.devpav-button {
+  height: inherit;
+  width: max-content;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 14px;
+  outline: none;
+  display: flex;
+  text-decoration: none;
+  flex-wrap: nowrap;
+  align-items: center;
+  color: var(--text-input-color);
+  background: var(--form-input-background-color);
+  border: var(--form-input-border);
+  transition-duration: 0.4s;
 }
 
-h2 {
-  font-weight: 500;
+button.devpav-button:hover {
+  background: var(--devpav-button-hover-color);
 }
 
-
-h1 {
+h5, h1, h2, h3, h4 {
   font-weight: 500;
 }
 

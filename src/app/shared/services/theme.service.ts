@@ -17,6 +17,8 @@ export const darkTheme = {
   'devpav-chip-font-color': '#f9f9f9',
   'devpav-chip-border': 'none',
 
+  'devpav-button-hover-color': '#2a3748',
+
   'element-background-color': '#283240',
   'element-text-color': '#f9f9f9',
 
@@ -38,6 +40,8 @@ export const lightTheme = {
   'devpav-chip-background-color': '#ffffff',
   'devpav-chip-font-color': '#000000',
   'devpav-chip-border': '1px solid ' + '#e8e8e8',
+
+  'devpav-button-hover-color': 'rgba(143,143,143,0.3)',
 
   'element-background-color': '#ffffff',
   'element-text-color': '#000000',

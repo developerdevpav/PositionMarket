@@ -1,0 +1,62 @@
+<div class="container-fluid container-wrapper">
+  <div class="left-content">
+    <div class="menu">
+      <h1>Navigation</h1>
+      <mat-list>
+        <mat-list-item (click)="scrollToFragment('inputs')">Input</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="scrollToFragment('textareas')">Textarea</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="scrollToFragment('buttons')">Buttons</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="scrollToFragment('chips')">Chip</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="scrollToFragment('alerts')">Alert</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div class="right-content">
+    <section-topic class="section-component" toc="Components">
+      <paragraph id="inputs" class="paragraph-component" toc="Input">
+        <subparagraph class="subparagraph-component" toc="Default input">
+          <devpav-input ph="default value"></devpav-input>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="MultiLanguage input without postfix">
+          <devpav-input ph="default value"></devpav-input>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="MultiLanguage input">
+          <devpav-multi-language-input [postfix]="true"></devpav-multi-language-input>
+        </subparagraph>
+      </paragraph>
+      <paragraph id="textareas" class="paragraph-component" toc="Textarea">
+        <subparagraph class="subparagraph-component" toc="Default textarea">
+          <devpav-textarea ph="Default textarea"></devpav-textarea>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="MultiLanguage textarea without prefix">
+          <devpav-input ph="default value"></devpav-input>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="MultiLanguage textarea">
+          <devpav-multi-language-textarea [prefix]="true"></devpav-multi-language-textarea>
+        </subparagraph>
+      </paragraph>
+      <paragraph id="chips" class="paragraph-component" toc="Chips">
+        <subparagraph class="subparagraph-component" toc="Default chip">
+          <devpav-chip value="Default chip with delete icon"></devpav-chip>
+        </subparagraph>
+      </paragraph>
+      <paragraph id="buttons" class="paragraph-component" toc="Buttons">
+        <subparagraph class="subparagraph-component" toc="Default button">
+          <devpav-button title="Default button"></devpav-button>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="Default button with icon">
+          <devpav-button title="Default button with icon" icon="done_all"></devpav-button>
+        </subparagraph>
+      </paragraph>
+      <paragraph id="alerts" class="paragraph-component" toc="Alerts">
+        <subparagraph class="subparagraph-component" toc="Alert warning">
+          <devpav-button (click)="openWarningAlert()" title="Open alert warning"></devpav-button>
+        </subparagraph>
+      </paragraph>
+    </section-topic>
+  </div>
+</div>

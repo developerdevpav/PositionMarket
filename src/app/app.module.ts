@@ -18,22 +18,10 @@ import {PositionEffects} from './store/position/position.effects';
 import {ProductTypeEffects} from './store/product-type/product-type.effects';
 import {TagEffects} from './store/tag/tag.effects';
 import {TypeEffects} from './store/type/type.effects';
-import {DevpavMultiLanguageInputComponent} from './shared/components/devpav-multi-language-input/devpav-multi-language-input.component';
-// tslint:disable-next-line:max-line-length
-import {DevpavMultiLanguageTextareaComponent} from './shared/components/devpav-multi-language-textarea/devpav-multi-language-textarea.component';
-import {DevpavInputComponent} from './shared/components/depav-input/devpav-input.component';
-import {DevpavTextareaComponent} from './shared/components/devpav-textarea/devpav-textarea.component';
-import {DevpavChipComponent} from './shared/components/devpav-chip/devpav-chip.component';
-import {ThemeService} from './shared/services/theme.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DevpavMultiLanguageInputComponent,
-    DevpavMultiLanguageTextareaComponent,
-    DevpavInputComponent,
-    DevpavTextareaComponent,
-    DevpavChipComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -66,12 +54,13 @@ import {ThemeService} from './shared/services/theme.service';
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [
-    ThemeService
-  ],
+  providers: [],
   exports: [
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularMaterialModule
   ]
 })
 export class AppModule {

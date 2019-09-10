@@ -77,6 +77,5 @@ export class DevpavChipComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
   }
 }
