@@ -22,7 +22,7 @@ export class DevpavButtonComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const color = changes.color;
-    if (color && color.currentValue) {
+    if (color) {
       this.classes = 'war' === color.currentValue ? 'devpav-btn-warning' : '';
     }
   }
