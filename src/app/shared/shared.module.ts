@@ -11,6 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {DevpavButtonComponent} from './components/devpav-button/devpav-button.component';
 import {DialogAlertWarningComponent} from './dialog-alert-warning/dialog-alert-warning.component';
+import { DevpavSelectComponent } from './components/devpav-select/devpav-select.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {DialogAlertWarningComponent} from './dialog-alert-warning/dialog-alert-w
     DevpavTextareaComponent,
     DevpavChipComponent,
     DevpavButtonComponent,
-    DialogAlertWarningComponent
+    DialogAlertWarningComponent,
+    DevpavSelectComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import {DialogAlertWarningComponent} from './dialog-alert-warning/dialog-alert-w
     DevpavInputComponent,
     DevpavTextareaComponent,
     DevpavChipComponent,
-    DevpavButtonComponent
+    DevpavButtonComponent,
+    DevpavSelectComponent
   ]
 })
 export class SharedModule { }

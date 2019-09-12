@@ -23,6 +23,9 @@
   --devpav-chip-font-color: #26303e;
   --devpav-chip-border: 1px solid #e8e8e8;
 
+  --devpav-btn-primary: white;
+  --devpav-btn-warning: #f00;
+  --devpav-btn-accent: #f00;
 
   --devpav-button-hover-color: 1px solid #e8e8e8;
 
@@ -65,7 +68,7 @@ textarea.devpav-textarea {
   border: var(--form-input-border);
 }
 
-button.devpav-button {
+button.devpav-btn {
   min-height: 40px;
   width: max-content;
   cursor: pointer;
@@ -103,4 +106,3 @@ button.devpav-button:hover {
 h5, h1, h2, h3, h4 {
   font-weight: 500;
 }
-

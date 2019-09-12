@@ -39,7 +39,7 @@ export class DevpavChipComponent implements OnChanges {
   stateVisible = 'inactive';
 
   @Input()
-  icon = 'delete_forever';
+  icon: string;
 
   @Input()
   hiddenIcon = false;

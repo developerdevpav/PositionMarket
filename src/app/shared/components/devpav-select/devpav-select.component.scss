@@ -1,0 +1,18 @@
+.devpav-selector-wrapper {
+    width: 100%;
+}
+
+.devpav-selector-wrapper > .devpav-selector-wrapper__box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.devpav-selector-wrapper > .devpav-selector-wrapper__box {
+    margin-top: 10px;
+    height: 100px;
+}
+
+.devpav-selector-wrapper__box devpav-chip {
+    margin: 10px;
+}

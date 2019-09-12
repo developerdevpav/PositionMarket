@@ -5,7 +5,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
   templateUrl: './devpav-button.component.html',
   styleUrls: ['./devpav-button.component.scss']
 })
-export class DevpavButtonComponent implements OnInit, OnChanges {
+export class DevpavButtonComponent implements OnInit {
 
   @Input()
   title: string;
@@ -16,16 +16,7 @@ export class DevpavButtonComponent implements OnInit, OnChanges {
   @Input()
   color: string;
 
-  classes = '';
-
   constructor() { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const color = changes.color;
-    if (color) {
-      this.classes = 'war' === color.currentValue ? 'devpav-btn-warning' : '';
-    }
-  }
 
   ngOnInit() {
   }
