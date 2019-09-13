@@ -1,14 +1,13 @@
 <div class="devpav-selector-wrapper">
+  <div class="devpav-selector-wrapper-header">
+  </div>
   <devpav-input class="devpav-selector-wrapper__input" ph="devpav-input"></devpav-input>
   <div class="devpav-selector-wrapper__box">
-    <devpav-chip value="value-chip" id="value"></devpav-chip>
-    <devpav-chip value="value-chip1" id="value"></devpav-chip>
-    <devpav-chip value="value-chip2" id="value"></devpav-chip>
-    <devpav-chip value="value-chip3" id="value"></devpav-chip>
-    <devpav-chip value="value-chip4" id="value"></devpav-chip>
-    <devpav-chip value="value-chip5" id="value"></devpav-chip>
-    <devpav-chip value="value-chip6" id="value"></devpav-chip>
-    <devpav-chip value="value-chip7" id="value"></devpav-chip>
-    <devpav-chip value="value-chip8" id="value"></devpav-chip>
+    <devpav-chip *ngFor="let item of items"
+                 [value]="item.value"
+                 [idChip]="item.id"
+                 (click)="toggleChip(item)"
+                 [color]="selector.isSelected(item) ? 'primary' : 'undefined'">
+    </devpav-chip>
   </div>
 </div>

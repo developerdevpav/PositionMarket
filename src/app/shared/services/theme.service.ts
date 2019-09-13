@@ -2,10 +2,17 @@ import {Injectable} from '@angular/core';
 import {light, Theme} from '../../config/theme.config';
 
 export const darkTheme = {
-  'primary-color': '#455363',
+  'default-background': '#ffffff',
+  'default-color': '#1d1d1d',
 
-  'warning-font-color': '#fff',
-  'warning-color': '#ce3e3e',
+  'primary-background': '#295aff91',
+  'primary-color': '#ffffff',
+
+  'warning-background': '#6b191978',
+  'warning-color': '#ffffff',
+
+  'accent-background': '#6a1b9a',
+  'accent-color': '#ffffff',
 
   'background-color': '#1f2935',
 
@@ -29,10 +36,17 @@ export const darkTheme = {
 };
 
 export const lightTheme = {
-  'primary-color': '#fff',
+  'default-background': '#ffffff',
+  'default-color': '#1d1d1d',
 
-  'warning-font-color': '#fff',
-  'warning-color': '#ce3e3e',
+  'primary-background': '#295aff',
+  'primary-color': '#ffffff',
+
+  'warning-background': '#c60000',
+  'warning-color': '#ffffff',
+
+  'accent-background': '#6a1b9a',
+  'accent-color': '#ffffff',
 
   'background-color': '#fff',
 

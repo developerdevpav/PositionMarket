@@ -5,9 +5,18 @@
 
 :root {
   /* Colors */
-  --primary-color: '#ffffff';
+  --default-background: #ffffff;
+  --default-color: #1d1d1d;
 
-  --warning-color: rgb(255, 0, 0);
+  --primary-background: #ffffff;
+  --primary-color: #1d1d1d;
+
+  --warning-background: #960000;
+  --warning-color: #ffffff;
+
+  --accent-background: #1d42ca;
+  --accent-color: #ffffff;
+
   --warning-font-color: rgb(255, 0, 0);
 
   --background-color: '#ffffff';
@@ -19,13 +28,14 @@
   --form-input-border-color: #ececec;
   --form-input-background-color: #191c20;
 
+
+  // devpav-chip variables
   --devpav-chip-background-color: #26303e;
   --devpav-chip-font-color: #26303e;
   --devpav-chip-border: 1px solid #e8e8e8;
 
-  --devpav-btn-primary: white;
-  --devpav-btn-warning: #f00;
-  --devpav-btn-accent: #f00;
+  --devpav-chip-background-warning: #960000;
+  --devpav-chip-color-warning: #ffffff;
 
   --devpav-button-hover-color: 1px solid #e8e8e8;
 

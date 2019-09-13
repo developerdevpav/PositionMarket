@@ -1,6 +1,6 @@
 import {Nsi, Value} from '../entities/abstract.entity';
 import {Language} from '../language/language.model';
-import {NsiLanguage} from '../entities/present.entities';
+import {INsiLanguage} from '../entities/present.entities';
 import Optional from '../../shared/utils/common/optional';
 import {isEquals, isNonPresent, isPresent} from '../../shared/utils/common/common';
 
@@ -23,7 +23,7 @@ export const convertValues = (values: Value[], language: Language): Optional<str
   return optionalFoundValue.map(value => value.value);
 };
 
-export const convertNsi = <T extends Nsi>(entity: T, language: Language): Optional<NsiLanguage> => {
+export const convertNsi = <T extends Nsi>(entity: T, language: Language): Optional<INsiLanguage> => {
   const optionalEntity = Optional.ofNullable(entity);
 
   if (optionalEntity.isNonPresent()) {
@@ -36,7 +36,7 @@ export const convertNsi = <T extends Nsi>(entity: T, language: Language): Option
   return Optional.of({ id, value });
 };
 
-export const convertArrayNsi = <T extends Nsi>(entities: T[], language: Language): NsiLanguage[] => {
+export const convertArrayNsi = <T extends Nsi>(entities: T[], language: Language): INsiLanguage[] => {
   if (isNonPresent(entities)) {
     return [];
   }

@@ -17,3 +17,32 @@
 .devpav-chip mat-icon {
   margin-left: 10px;
 }
+
+.devpav-chip.devpav-chip-warning {
+  background: var(--dev);
+}
+
+.devpav-chip.devpav-chip-warning mat-icon {
+  color: var(--text-color);
+}
+
+.devpav-chip-default {
+  background: var(--default-background);
+  color: var(--default-color);
+}
+
+.devpav-chip-warn {
+  background: var(--warning-background);
+  color: var(--warning-color);
+}
+
+.devpav-chip-primary {
+  background: var(--primary-background);
+  color: var(--primary-color);
+}
+
+.devpav-chip-accent {
+  background: var(--accent-background);
+  color: var(--accent-color);
+}
+

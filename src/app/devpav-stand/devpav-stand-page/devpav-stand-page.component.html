@@ -3,15 +3,17 @@
     <div class="menu">
       <h1>Navigation</h1>
       <mat-list>
-        <mat-list-item (click)="scrollToFragment('inputs')">Input</mat-list-item>
+        <mat-list-item (click)="scrollToFragment('inputs')">Inputs</mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item (click)="scrollToFragment('textareas')">Textarea</mat-list-item>
+        <mat-list-item (click)="scrollToFragment('textareas')">Textareas</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item (click)="scrollToFragment('chips')">Chips</mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item (click)="scrollToFragment('buttons')">Buttons</mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item (click)="scrollToFragment('chips')">Chip</mat-list-item>
+        <mat-list-item (click)="scrollToFragment('alerts')">Alerts</mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item (click)="scrollToFragment('alerts')">Alert</mat-list-item>
+        <mat-list-item (click)="scrollToFragment('selectors')">Selectors</mat-list-item>
       </mat-list>
     </div>
   </div>
@@ -41,7 +43,19 @@
       </paragraph>
       <paragraph id="chips" class="paragraph-component" toc="Chips">
         <subparagraph class="subparagraph-component" toc="Default chip">
-          <devpav-chip value="Default chip with delete icon"></devpav-chip>
+          <devpav-chip value="Default chip"></devpav-chip>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="Warning chip">
+          <devpav-chip value="Warn chip" color="warn"></devpav-chip>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="Primary chip">
+          <devpav-chip value="Primary chip" color="primary"></devpav-chip>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="Accent chip">
+          <devpav-chip value="Accent chip" color="accent"></devpav-chip>
+        </subparagraph>
+        <subparagraph class="subparagraph-component" toc="Warning chip with icon">
+          <devpav-chip value="Warning chip" color="warn" icon="delete_forever"></devpav-chip>
         </subparagraph>
       </paragraph>
       <paragraph id="buttons" class="paragraph-component" toc="Buttons">

@@ -54,3 +54,20 @@ export const dark: Theme = {
     '--background-tertiary-shadow': '0 1px 3px 0 rgba(8, 9, 10, 0.5)'
   }
 };
+
+export declare type ThemePalette = 'primary' | 'accent' | 'warn' | undefined;
+
+export interface ThemeColorClassConfig {
+  accent: string;
+  primary: string;
+  warn: string;
+  undefined: string;
+}
+
+export const themePaletteObject =
+  (accent: string, primary: string, warn: string, def?: string): ThemeColorClassConfig => ({
+    accent,
+    primary,
+    warn,
+    undefined: def
+  });

@@ -5,14 +5,15 @@
 .devpav-selector-wrapper > .devpav-selector-wrapper__box {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .devpav-selector-wrapper > .devpav-selector-wrapper__box {
     margin-top: 10px;
-    height: 100px;
+    height: auto;
 }
 
 .devpav-selector-wrapper__box devpav-chip {
-    margin: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
